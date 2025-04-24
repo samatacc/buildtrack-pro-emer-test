@@ -186,7 +186,7 @@
   - Realtime: Supabase Realtime, Server-Sent Events, Broadcast Channel API.
 - **DevOps**:
   - Hosting: Vercel, Supabase, Cloudflare.
-  - CI/CD: GitHub Actions, Husky, ESLint/Prettier.
+  - CI/CD: Hub Actions, Husky, ESLint/Prettier.
   - Monitoring: Sentry, Axiom, PostHog.
   - Testing: Vitest, Playwright, MSW, Testing Library.
 - **Marketing Site**:

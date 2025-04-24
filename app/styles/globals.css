@@ -15,3 +15,21 @@ body {
   color: var(--foreground);
   background-color: var(--background);
 }
+
+/* Animation Delays */
+.animation-delay-200 {
+  animation-delay: 200ms;
+}
+
+.animation-delay-400 {
+  animation-delay: 400ms;
+}
+
+.animation-delay-600 {
+  animation-delay: 600ms;
+}
+
+/* Dynamic Animation Delays */
+.animation-delay-\[calc\(200ms\*var\(--index\)\)\] {
+  animation-delay: calc(200ms * var(--index));
+}
