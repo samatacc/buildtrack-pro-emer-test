@@ -1,5 +1,7 @@
 # BuildTrack Pro
 
+[![CI/CD](https://github.com/samatacc/buildtrack-pro/actions/workflows/ci.yml/badge.svg)](https://github.com/samatacc/buildtrack-pro/actions/workflows/ci.yml)
+
 A comprehensive construction management solution with advanced project management, materials tracking, and AI-powered features.
 
 ## Project Structure
