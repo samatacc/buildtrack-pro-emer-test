@@ -1,0 +1,171 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+ ---
+description: Homepage design and structure specifications for marketing website
+globs: app/(marketing)/home/**/*
+alwaysApply: false
+---
+# BuildTrack Pro Marketing Website: Homepage Design & Structure
+
+## 1.1 Hero Section
+
+### Main Hero Component:
+- High-impact construction imagery with overlay text
+- Primary headline emphasizing construction management solution
+- Subheadline highlighting key value proposition (time savings, efficiency, complete solution)
+- Primary CTA button for free trial signup with contrasting color
+- Secondary CTA for product demo or feature tour
+- Optional announcement banner for new features/special offers
+- Mobile-responsive layout with text prioritization
+- Background image lazy loading for performance
+
+### Social Proof Strip:
+- Logo showcase of notable construction clients
+- Scrolling testimonial ticker with avatar, name, company
+- Key metrics display (e.g., "X projects managed," "Y hours saved")
+- Industry certification and partnership logos
+- Trust indicators (uptime, security, compliance)
+- Animated counter for impressive statistics
+- Click behavior opening detailed case studies
+- Mobile collapsible design
+
+### Value Proposition Blocks:
+- 3-4 key benefit cards with icons
+- Brief benefit statements with supporting text
+- Visual indicators of unique selling points
+- Micro-animations on icon hover
+- Card elevation on interaction
+- Mobile stacking with preserved hierarchy
+- Optional "Learn more" links to detailed pages
+- A/B testing capability for different value propositions
+
+## 1.2 Feature Showcase
+
+### Feature Category Tabs:
+- Tab navigation for feature categories
+- Visual indicator of current selection
+- Smooth transition animation between tabs
+- Touch-friendly tap targets for mobile
+- Persistent tab visibility during scroll
+- URL hash updates for direct linking
+- Analytics tracking for tab engagement
+- Category-specific CTAs
+
+### Feature Highlight Cards:
+- Visual feature display with screenshot or illustration
+- Feature name and concise description
+- Benefits-focused supporting text
+- "See in action" link to video demonstration
+- Consistent card dimensions with variable content
+- Hover state with additional information
+- Mobile-optimized image sizing
+- Lazy loading for performance
+
+### Interactive Demo Preview:
+- Embedded interactive product preview
+- Guided hotspots highlighting key features
+- Limited functionality demonstration
+- User-controlled navigation through demo
+- Mobile-adaptive interface
+- Fallback static images for low-bandwidth
+- Session tracking for completion rates
+- Lead capture integration for engaged users
+
+## 1.3 Testimonials & Case Studies
+
+### Featured Testimonial Carousel:
+- Rotating customer success stories
+- Quote, name, position, company, photo format
+- Industry and project type indicators
+- Star rating or satisfaction metric
+- Manual and automatic rotation controls
+- Progress indicator for carousel position
+- Swipe navigation on mobile devices
+- Pause on hover/interaction
+
+### ROI Calculator Widget:
+- Interactive form with industry presets
+- Input fields for company size, projects, current tools
+- Real-time calculation of potential savings
+- Visual results display with comparison charts
+- Detailed breakdown of time and cost savings
+- Email results functionality
+- Form data capture for leads
+- Mobile-friendly input methods
+
+### Success Metrics Display:
+- Visual data representation of customer results
+- Before/after comparisons with animation
+- Industry-specific benchmark comparisons
+- Progressive counting animation on scroll
+- Source attribution for credibility
+- Segmentation by company size/type
+- Mobile-optimized data visualization
+- Print-friendly version for sales materials
+
+## 1.4 Pricing Section
+
+### Plan Comparison Table:
+- Clear Freemium vs. Pro plan comparison
+- Feature availability indicators by plan
+- Pricing display with monthly/annual toggle
+- Highlight for recommended/popular option
+- Volume discount mention with "Contact Sales" link
+- FAQ accordion for common pricing questions
+- Sticky header on scroll for long tables
+- Responsive design with horizontal scroll on mobile
+
+### Pricing Calculator:
+- Seat quantity adjustment controls
+- Real-time price calculation
+- Storage requirement estimator
+- Optional add-ons selection
+- Total cost summary with breakdown
+- Savings display for annual commitment
+- Currency selection dropdown
+- Tax estimation based on location
+
+### Special Offer Banner:
+- Limited-time promotion display
+- Countdown timer for expiring offers
+- Promo code display with copy functionality
+- Terms and conditions expandable section
+- Dismissible design with cookie persistence
+- High visibility color scheme
+- Mobile-optimized compact version
+- UTM parameter support for campaign tracking
+
+## 1.5 Bottom Conversion Section
+
+### Final Call-to-Action Block:
+- Compelling headline summarizing value
+- Reinforcing subheadline addressing objections
+- Primary CTA button with action-oriented text
+- Secondary "Learn More" option
+- Visual background supporting construction theme
+- Urgent but professional tone
+- Mobile-optimized button sizing
+- A/B testing for CTA variations
+
+### Newsletter Signup:
+- Email capture form with GDPR-compliant checkbox
+- Clear value proposition for subscription
+- Content preview of newsletter material
+- Submission confirmation feedback
+- Error handling with specific messages
+- Submit button with loading state
+- Double opt-in process initiation
+- Mobile-optimized touch targets
+
+### Contact Options:
+- Multiple contact method display
+- Click-to-call phone number
+- Email contact with subject pre-filling
+- Chat widget launcher
+- Schedule call option with calendar integration
+- Social media direct message links
+- Operating hours with time zone detection
+- Location-based contact routing

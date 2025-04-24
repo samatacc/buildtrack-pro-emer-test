@@ -1,0 +1,107 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+ ---
+description: About and company page specifications for marketing website
+globs: app/(marketing)/about/**/*,app/(marketing)/company/**/*
+alwaysApply: false
+---
+# BuildTrack Pro Marketing Website: About & Company Pages
+
+## 5.1 Company Overview
+
+### Company Story Section:
+- Founding narrative with timeline
+- Mission and vision statements
+- Core values with visual representations
+- Growth milestones visualization
+- Leadership team introduction
+- Company culture highlights
+- Office location information
+- Mobile-friendly story progression
+
+### Team Showcase:
+- Leadership team profiles with photos
+- Role and responsibility descriptions
+- Professional background summaries
+- Construction industry expertise highlights
+- Contact options for key personnel
+- Department structure visualization
+- Culture and teamwork imagery
+- Mobile-optimized team grid
+
+### Investor Relations:
+- Company performance highlights
+- Growth trajectory visualization
+- Market position and differentiation
+- Future roadmap summary
+- Funding history if applicable
+- Board of directors information
+- Annual report access
+- Investor contact details
+
+## 5.2 Career & Culture
+
+### Career Opportunities:
+- Current opening listings by department
+- Role description and requirements
+- Application process explanation
+- Benefits package highlights
+- Remote work policy information
+- Career development paths
+- Employee testimonial features
+- Mobile application process support
+
+### Company Culture Showcase:
+- Value and mission reinforcement
+- Team event and activity highlights
+- Office environment imagery
+- Employee spotlight stories
+- Diversity and inclusion commitment
+- Work-life balance philosophy
+- Community involvement initiatives
+- Instagram-style culture feed
+
+### Corporate Responsibility:
+- Sustainability initiatives description
+- Community engagement programs
+- Ethical business practice commitments
+- Industry leadership activities
+- Environmental impact reduction efforts
+- Charitable partnership highlights
+- Volunteer program information
+- Impact measurement and reporting
+
+## 5.3 Press & News
+
+### Press Release Archive:
+- Chronological news release listings
+- Category filtering options
+- Headline and excerpt display
+- Publication date and source
+- Featured image incorporation
+- Media contact information
+- Press kit download option
+- Mobile-optimized release format
+
+### Media Resources:
+- Company logo package downloads
+- Executive headshots gallery
+- Product screenshot library
+- Brand guidelines summary
+- Approved company boilerplate
+- Fact sheet with key statistics
+- Media contact directory
+- Interview request process
+
+### Industry Recognition:
+- Award and certification showcase
+- Industry ranking highlights
+- Analyst report mentions
+- Customer satisfaction metrics
+- Testimonial highlight reel
+- Independent review aggregation
+- Trust and security certifications
+- Mobile-friendly award carousel

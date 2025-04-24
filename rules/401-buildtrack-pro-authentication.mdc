@@ -1,0 +1,51 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+ # BuildTrack Pro: Authentication & User Onboarding
+
+## 1.1 Login System
+
+### Login Screen:
+- Email/password form with validation
+- "Remember me" checkbox functionality
+- Forgot password link with email-based reset flow
+- OAuth options (Google, Microsoft, Apple) with icon buttons
+- Error handling with specific messages for different failure cases
+- Automatic redirect to last viewed page after successful login
+- Session timeout handling with refresh token mechanism
+- Brute force protection with rate limiting
+
+### Registration Flow:
+- Progressive form with step indicators (1. Account, 2. Organization, 3. Confirmation)
+- Email validation with confirmation code
+- Password strength requirements (visual indicator)
+- Organization name, size, industry type selection
+- Role selection within organization
+- Terms of service and privacy policy acceptance checkboxes
+- Plan selection (Freemium vs. Pro) with feature comparison
+
+### Multi-factor Authentication:
+- Optional 2FA setup during registration or later
+- SMS or authenticator app options
+- Backup code generation and management
+- Remember device option for 30 days
+
+## 1.2 User Onboarding Experience
+
+### First-time User Flow:
+- Welcome screen with personalized greeting
+- Guided tour modal sequence highlighting key features
+- Progress tracker showing onboarding completion percentage
+- Interactive tutorial tasks with checkmarks upon completion
+- Contextual help bubbles appearing next to relevant UI elements
+- "Skip tour" option that remains accessible from help menu
+- Sample demo project option with pre-populated data
+
+### Profile Completion:
+- Profile completion percentage indicator
+- Suggested next steps cards on dashboard
+- Required vs. optional field distinction
+- Reminder notifications for incomplete profiles
+- Role-specific field requirements

@@ -1,0 +1,102 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+ # BuildTrack Pro CMS: Asset & Media Management
+
+## 4.1 Digital Asset Management
+
+### Asset Organization:
+- Folder structure configuration
+- Tag-based organization
+- Asset collections creation
+- Search filters and saved searches
+- Recent uploads quick access
+- Favorite assets marking
+- Usage tracking across site
+- Unused asset identification
+
+### Asset Metadata:
+- Core metadata field configuration
+- Custom metadata field creation
+- Batch metadata editing
+- Metadata extraction from files
+- Required metadata enforcement
+- Metadata inheritance rules
+- Metadata-based search
+- Metadata template application
+
+### Version Control:
+- Asset version history tracking
+- File replacement with versioning
+- Version comparison for images
+- Restore previous version capability
+- Version annotation support
+- Usage tracking by version
+- Version promotion workflow
+- Archive older versions option
+
+## 4.2 Image Processing
+
+### Image Editing:
+- Basic crop, resize, rotate tools
+- Brightness, contrast, saturation adjustment
+- Filter application options
+- Background removal capability
+- Text overlay addition
+- Image composition tools
+- Non-destructive editing
+- Edit history and reversion
+
+### Responsive Image Generation:
+- Automatic size variant creation
+- Art direction cropping by breakpoint
+- Format conversion (WebP, AVIF)
+- Quality optimization presets
+- Device-specific resolution
+- Image transformation API
+- Lazy loading configuration
+- Bandwidth consideration settings
+
+### Image Enhancement:
+- Automatic image optimization
+- Compression level control
+- Image sharpening options
+- Color profile management
+- Metadata stripping options
+- Watermarking capabilities
+- Batch processing tools
+- Enhancement preview comparison
+
+## 4.3 Video & Document Management
+
+### Video Management:
+- Upload and encoding configuration
+- Video thumbnailing tools
+- Preview generation
+- Streaming quality settings
+- Caption and subtitle management
+- Video clipping capabilities
+- Player configuration controls
+- Analytics integration
+
+### Document Processing:
+- PDF preview generation
+- Document text extraction
+- Searchable document repository
+- Document metadata extraction
+- Version comparison for documents
+- Page thumbnail generation
+- Document conversion options
+- Password protection handling
+
+### Asset Usage Tracking:
+- Content reference listing
+- Usage location identification
+- Impact analysis for changes
+- Broken reference detection
+- Download/view statistics
+- Popular asset identification
+- Licensing and rights tracking
+- Expiration date monitoring

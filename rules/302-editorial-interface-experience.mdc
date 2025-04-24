@@ -1,0 +1,102 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+ # BuildTrack Pro CMS: Editorial Interface & Experience
+
+## 2.1 Content Creation Environment
+
+### Content Editor Interface:
+- WYSIWYG rich text editing
+- Field grouping and organization
+- Form-based data entry
+- Live preview capability
+- Split-screen editing/preview
+- Reference selection interfaces
+- Media browser integration
+- Field validation feedback
+
+### Rich Text Editor:
+- Formatting toolbar configuration
+- Heading level controls
+- List formatting options
+- Table creation and editing
+- Inline image insertion
+- Link creation with validation
+- Paste from Word/HTML cleaning
+- Keyboard shortcut configuration
+
+### Media Handling:
+- Image upload and cropping tools
+- Gallery creation interface
+- Video embedding options
+- Document upload and management
+- Asset metadata editing
+- Image editing capabilities
+- Alt text management
+- Digital asset search functionality
+
+## 2.2 Content Organization
+
+### Content List Views:
+- Customizable column configuration
+- Sorting and filtering options
+- Bulk action capabilities
+- Status visualization
+- Quick edit functionality
+- List view saving and sharing
+- Pagination and view options
+- Search within results
+
+### Search & Discovery:
+- Full-text search implementation
+- Advanced search criteria building
+- Recent content quick access
+- Saved search functionality
+- Search result organization
+- Filter combination interface
+- Search history tracking
+- Relevance ranking configuration
+
+### Workspace Organization:
+- Personal dashboard customization
+- Recent item tracking
+- Favorites/bookmarking system
+- Custom workspace views
+- Content grouping tools
+- Task list integration
+- Editorial calendar view
+- Work-in-progress tracking
+
+## 2.3 Collaboration Tools
+
+### Multi-user Editing:
+- Concurrent editing support
+- User presence indication
+- Edit collision prevention
+- Change merging capabilities
+- Lock/unlock content functionality
+- Edit ownership transfer
+- Collaborative commenting
+- Real-time update broadcasting
+
+### Commenting & Feedback:
+- Inline document commenting
+- Comment resolution workflow
+- @mention notification system
+- Comment threading support
+- Feedback request mechanism
+- Comment export for external review
+- Attachment to comments
+- Comment notification management
+
+### Version Comparison:
+- Side-by-side version comparison
+- Change highlighting visualization
+- Revision history timeline
+- Restore to version capability
+- Diff view for structured content
+- Author attribution by change
+- Version annotation support
+- Scheduled version publication

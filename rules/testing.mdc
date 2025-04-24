@@ -1,0 +1,31 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+// .cursorrules extensions or CI gates:
+- No ESLint warnings allowed in CI
+- `npx tsc --noEmit` must pass with 0 errors
+- `npx vitest run --coverage` must pass with 80%+ coverage for core logic
+
+"ciPolicy": {
+  "lint": {
+    "eslintMustPass": true,
+    "noWarnings": true
+  },
+  "typeChecking": {
+    "tscNoEmitMustPass": true
+  },
+  "testing": {
+    "mustRunVitest": true,
+    "minCoveragePercent": 90,
+    "coverageScope": ["lib", "utils", "components", "features"]
+  }
+},
+"devRules": {
+  "noAnyTypes": true,
+  "allComponentsTyped": true,
+  "testMocksMustMatchRealPaths": true,
+  "allNewHelpersMustHaveTests": true,
+  "coverageReportsRequiredForAllCIChanges": true
+}

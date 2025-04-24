@@ -1,0 +1,36 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+ ---
+description: Overview and main architecture for BuildTrack Pro marketing website
+globs: app/(marketing)/**/*
+alwaysApply: false
+---
+# BuildTrack Pro Marketing Website: Overview
+
+This is the master file for BuildTrack Pro marketing website specifications. It provides a high-level overview of all website components with references to detailed specification files.
+
+## Main Sections
+The marketing website consists of these primary sections, each with detailed specifications in their own files:
+
+1. Homepage Design (@101-homepage-design.mdc)
+2. Feature Pages (@102-feature-pages.mdc)
+3. Industry Solutions (@103-industry-solutions.mdc)
+4. Resources & Content Hub (@104-resources-content.mdc)
+5. About & Company (@105-about-company.mdc)
+6. Contact & Support (@106-contact-support.mdc)
+7. Conversion & Lead Generation (@107-conversion-leads.mdc)
+8. Mobile Experience (@108-mobile-experience.mdc)
+9. Technical Implementation (@109-technical-implementation.mdc)
+10. International & Localization (@110-international-localization.mdc)
+11. SEO & Discoverability (@111-seo-discoverability.mdc)
+12. Website Management (@112-website-management.mdc)
+
+## Global Design Principles
+- Consistent branding across all pages following BuildTrack Pro style guide
+- Responsive design prioritizing mobile-first approach
+- Accessibility compliance with WCAG 2.1 AA standards
+- Performance optimization for Core Web Vitals
+- Consistent navigation and footer across all pages

@@ -1,0 +1,102 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+ # BuildTrack Pro CMS: Integration & API Management
+
+## 7.1 GraphQL API
+
+### API Schema Definition:
+- Type definition configuration
+- Query field exposure control
+- Mutation capability configuration
+- Filter argument customization
+- Sort option definition
+- Pagination implementation
+- Field selection limitation
+- Nested query depth control
+
+### Authentication & Authorization:
+- API token management
+- JWT authentication configuration
+- CORS policy definition
+- Rate limiting per token
+- Permission scoping for API
+- IP restriction capabilities
+- Webhook signature verification
+- Audit logging for API access
+
+### API Versioning:
+- Version strategy implementation
+- Backward compatibility management
+- Deprecation notice configuration
+- Breaking vs. non-breaking changes
+- Transition period settings
+- API changelog generation
+- Client impact assessment
+- Version sunset planning
+
+## 7.2 Webhooks & Event System
+
+### Webhook Configuration:
+- Event type subscription options
+- Destination URL management
+- HTTP method selection
+- Custom header configuration
+- Payload format customization
+- Secret token authentication
+- Retry policy configuration
+- Webhook testing tools
+
+### Event Types:
+- Content creation events
+- Update and deletion triggers
+- Publication state changes
+- User action events
+- Asset management events
+- Workflow state transitions
+- Schedule-based events
+- Custom event definition
+
+### Event Processing:
+- Event filtering rules
+- Event payload customization
+- Event batching configuration
+- Event queue management
+- Failure handling rules
+- Event history logging
+- Performance monitoring
+- Maximum payload size control
+
+## 7.3 Third-Party Integrations
+
+### Marketing Automation:
+- CRM data synchronization
+- Email marketing platform connection
+- Marketing automation triggers
+- Lead scoring integration
+- Campaign content distribution
+- Analytics data consolidation
+- Personalization token mapping
+- Audience segment synchronization
+
+### Analytics Integration:
+- Google Analytics event tracking
+- Custom dimension mapping
+- Conversion goal configuration
+- User journey tracking
+- Content performance metrics
+- A/B test result collection
+- Cross-platform attribution
+- ROI calculation data feeds
+
+### External Services:
+- Social media platform APIs
+- CDN configuration
+- Search engine integration
+- Payment processor connection
+- Chat service integration
+- Video platform connection
+- Translation service API
+- Notification delivery services

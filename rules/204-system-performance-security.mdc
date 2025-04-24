@@ -1,0 +1,69 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+ # BuildTrack Pro Admin Console: System Performance & Security
+
+## 4.1 System Monitoring
+
+### Performance Dashboard:
+- Real-time server performance metrics
+- Response time monitoring
+- Error rate tracking by endpoint
+- Database performance indicators
+- Cache hit/miss ratios
+- Storage I/O performance
+- Network latency visualization
+- Resource utilization graphs
+
+### Load Analysis:
+- Peak usage period identification
+- Concurrent user tracking
+- Resource consumption patterns
+- Bottleneck identification
+- Capacity planning tools
+- Predictive scaling recommendations
+- Traffic pattern visualization
+- Resource allocation optimization
+
+### Error Tracking:
+- Real-time error monitoring
+- Error categorization and grouping
+- Occurrence frequency analysis
+- Impact assessment by user count
+- Resolution status tracking
+- Root cause analysis tools
+- Fix verification monitoring
+- Historical error trend analysis
+
+## 4.2 Security Operations
+
+### Security Dashboard:
+- Threat detection alerts
+- Vulnerability assessment status
+- Security patch compliance
+- Authentication attempt monitoring
+- Data access pattern analysis
+- Encryption status verification
+- Compliance status indicators
+- Security incident tracking
+
+### Access Control Management:
+- Admin role definition and assignment
+- Permission template management
+- Security policy configuration
+- IP restriction management
+- Session control settings
+- Authentication method configuration
+- Password policy management
+- Secure access log monitoring
+
+### Audit & Compliance:
+- Comprehensive audit logging
+- Admin action tracking
+- Sensitive data access monitoring
+- Compliance reporting automation
+- Regulatory requirement mapping
+- Certification evidence collection
+- Vulnerability

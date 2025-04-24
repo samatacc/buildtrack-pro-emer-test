@@ -1,0 +1,166 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+ # BuildTrack Pro: Document & File Management
+
+## 5.1 Document Dashboard
+
+### Document Library Overview:
+- Recently accessed files with preview thumbnails
+- Category-based organization with folder visualization
+- Filter tabs for document types (drawings, permits, photos, etc.)
+- Search functionality with content indexing
+- Upload progress for active uploads
+- Storage usage visualization
+- Quick access to favorited documents
+- Bulk operation tools
+
+### Drawing Sets Management:
+- Drawing sheet organization by discipline
+- Revision tracking with version comparison
+- Sheet index with interactive links
+- Thumbnail grid for visual browsing
+- Status indicators for review/approval
+- Relationship mapping between sheets
+- Distribution record tracking
+- Sheet history with modification tracking
+
+### Document Analytics:
+- Most viewed/downloaded documents
+- User access patterns
+- Version update frequency
+- Storage utilization by category
+- Document completion status metrics
+- Review bottleneck identification
+- Integration gaps in documentation
+- Compliance status for required documents
+
+## 5.2 File Upload & Organization
+
+### Upload Interface:
+- Multi-file drag-and-drop zone
+- Progress indicators with cancel option
+- Batch metadata application
+- Folder selection/creation during upload
+- Automatic file type detection
+- Duplicate file detection with resolution options
+- Virus scanning integration
+- Post-upload processing options
+
+### File Organization System:
+- Hierarchical folder structure with permissions
+- Custom metadata fields by document type
+- Tag-based organization system
+- Smart folders based on search criteria
+- Favorite/pinning capability
+- Bulk organization tools
+- Automatic organization suggestions
+- Folder templates for consistent structure
+
+### Version Control:
+- Clear version numbering system
+- Side-by-side version comparison
+- Change notes for each version
+- Restore previous version capability
+- Automatic version creation on edit
+- Version approval workflow
+- Notification system for updates
+- Difference highlighting between versions
+
+## 5.3 Document Viewing & Markup
+
+### Universal Document Viewer:
+- Support for multiple formats (PDF, CAD, images, Office)
+- Zoom and pan controls with responsive performance
+- Measurement tools with scale setting
+- Layers control for complex drawings
+- Rotate, crop, and adjust tools
+- Side-by-side comparison mode
+- Dark mode support for field usage
+- Print/download options with watermarking
+
+### Markup & Annotation:
+- Drawing tools (line, arrow, circle, rectangle)
+- Text annotation with font control
+- Cloud markup for revision indicators
+- Dimension lines with automatic measurement
+- Custom stamp library (Approved, Rejected, etc.)
+- Markup layers by user/review round
+- Comment attachment to specific markups
+- Markup summary report generation
+
+### Collaboration Tools:
+- Real-time collaborative viewing
+- User presence indicators
+- Markup attribution by user
+- Comment threads on documents
+- Review status tracking
+- Markup notification system
+- Task creation from document comments
+- @mention capability within comments
+
+## 5.4 Photo Documentation
+
+### Photo Management:
+- Photo grid with filter/sort options
+- Album organization by date/location/category
+- Batch editing of metadata
+- Timeline view showing progression
+- Map view for geotagged photos
+- Facial blurring tools for privacy
+- Rating/flagging system for important images
+- AI-suggested organization
+
+### Photo Capture Interface:
+- In-app camera access with gridlines
+- Required field prompts (location, category, notes)
+- Automatic project/task association
+- Before/after photo pairing
+- Multiple shot mode with count
+- GPS location capture
+- Orientation correction
+- Offline capture with upload queue
+
+### AI Photo Analysis:
+- Automatic tagging of photo content
+- Progress estimation based on visual analysis
+- Safety issue detection with alerts
+- Object recognition and counting
+- Comparison against reference images
+- Quality assessment (blur, exposure)
+- Text recognition from signage/documents
+- Site condition classification
+
+## 5.5 Document Workflows
+
+### Approval Processes:
+- Configurable approval workflows by document type
+- Sequential or parallel approval paths
+- Role-based approval requirements
+- Deadline setting with reminder system
+- Approval status tracking dashboard
+- Electronic signature integration
+- Approval history audit trail
+- Escalation paths for delayed approvals
+
+### Document Distribution:
+- Controlled sharing with internal/external users
+- Permission level selection for recipients
+- Watermarking options for sensitive documents
+- Access expiration settings
+- Notification when documents are viewed
+- Download tracking and statistics
+- Bulk distribution with transmittal generation
+- Revoke access capability
+
+### Integration with Project Lifecycle:
+- Document requirements by project phase
+- Milestone-based document collection
+- Automatic task creation for missing documents
+- Compliance checking against requirements
+- Document readiness reporting
+- Historical reference linking
+- Closeout package preparation
+- Archival process automation

@@ -1,0 +1,32 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+ # BuildTrack Pro CMS: Overview
+
+This is the master file for BuildTrack Pro Content Management System (CMS) specifications. It provides a high-level overview of all CMS components with references to detailed specification files.
+
+## Main Sections
+The CMS consists of these primary sections, each with detailed specifications in their own files:
+
+1. CMS Architecture & Core Structure (@301-cms-architecture-core.mdc)
+2. Editorial Interface & Experience (@302-editorial-interface-experience.mdc)
+3. Workflow & Publishing (@303-workflow-publishing.mdc)
+4. Asset & Media Management (@304-asset-media-management.mdc)
+5. User & Permission Management (@305-user-permission-management.mdc)
+6. Localization & Multi-language (@306-localization-multi-language.mdc)
+7. Integration & API Management (@307-integration-api-management.mdc)
+8. Customization & Development (@308-customization-development.mdc)
+9. Deployment & Environment Management (@309-deployment-environment-management.mdc)
+10. Security & Compliance (@310-security-compliance.mdc)
+
+## Global Design Principles
+- Content-first approach across all components
+- Intuitive user interface with minimal learning curve
+- Separation of content from presentation
+- Flexible content modeling to support diverse needs
+- Extensible architecture for future growth
+- Built-in workflow and collaboration tools
+- Comprehensive versioning and audit capabilities
+- Performance optimization for large content repositories

@@ -1,0 +1,102 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+ # BuildTrack Pro Admin Console: Compliance & Governance
+
+## 13.1 Compliance Management
+
+### Regulatory Framework:
+- Compliance requirement tracking
+- Regulation mapping to features
+- Control implementation status
+- Certification management
+- Compliance calendar maintenance
+- Regulatory update monitoring
+- Gap analysis tools
+- Remediation planning interface
+
+### Audit Management:
+- Audit scope definition
+- Evidence collection automation
+- Control testing scheduling
+- Finding documentation system
+- Remediation tracking
+- Attestation management
+- External auditor portal
+- Audit history maintenance
+
+### Policy Administration:
+- Policy document management
+- Version control and history
+- Approval workflow for policies
+- Distribution and acknowledgment tracking
+- Exception request handling
+- Policy effectiveness monitoring
+- Compliance mapping to policies
+- Policy review scheduling
+
+## 13.2 Data Protection
+
+### Privacy Controls:
+- Data subject rights management
+- Consent management system
+- Privacy preference center
+- Data processing register
+- Purpose limitation controls
+- Retention period enforcement
+- Cross-border transfer tracking
+- Privacy impact assessment tools
+
+### Data Security Configuration:
+- Encryption settings management
+- Data classification configuration
+- Access control rules
+- Data masking settings
+- Sensitive data discovery
+- Security monitoring rules
+- Breach detection configuration
+- Incident response automation
+
+### Records Management:
+- Retention schedule configuration
+- Legal hold implementation
+- Disposal workflow automation
+- Records classification system
+- Metadata management for records
+- Chain of custody tracking
+- Records search and retrieval
+- Destruction certificate generation
+
+## 13.3 Risk Management
+
+### Risk Register:
+- Risk identification and documentation
+- Risk categorization system
+- Impact and likelihood assessment
+- Control mapping to risks
+- Risk owner assignment
+- Treatment plan tracking
+- Residual risk calculation
+- Risk visualization dashboard
+
+### Threat Monitoring:
+- Threat intelligence integration
+- Vulnerability tracking
+- Exploit potential assessment
+- Patch management status
+- Vendor security monitoring
+- Emerging threat alerting
+- Security posture scoring
+- Mitigation priority calculation
+
+### Incident Management:
+- Incident response workflow
+- Severity classification system
+- Escalation path configuration
+- Containment action tracking
+- Root cause analysis tools
+- Corrective action management
+- Recovery time monitoring
+- Post-incident review automation

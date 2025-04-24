@@ -1,0 +1,107 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+ ---
+description: Contact and support page specifications for marketing website
+globs: app/(marketing)/contact/**/*,app/(marketing)/support/**/*
+alwaysApply: false
+---
+# BuildTrack Pro Marketing Website: Contact & Support Pages
+
+## 6.1 Contact Options
+
+### Contact Information Display:
+- Department-specific contact details
+- Interactive global office map
+- Direct dial phone numbers
+- Email address display with mailto links
+- Operating hours with timezone detection
+- Live chat availability indicator
+- Social media direct message options
+- Mobile tap-to-call functionality
+
+### Contact Form:
+- Purpose selection dropdown
+- Adaptive field display based on purpose
+- Required field indicators
+- Input validation with error messages
+- File attachment capabilities
+- CAPTCHA protection
+- Submission confirmation
+- Mobile-optimized input experience
+
+### Call Scheduling:
+- Calendar integration for meeting booking
+- Purpose and agenda setting fields
+- Duration options for different meeting types
+- Team member selection if applicable
+- Time zone automatic detection
+- Availability visualization
+- Confirmation and reminder system
+- Mobile booking optimization
+
+## 6.2 Support Resources
+
+### Help Center Portal:
+- Knowledge base search functionality
+- Category browsing structure
+- Popular article highlights
+- Recently updated content indicators
+- Quick start guide access
+- Video tutorial integration
+- Community forum links
+- Mobile-responsive help navigation
+
+### FAQ System:
+- Question categorization by topic
+- Expandable answer accordion design
+- Search functionality within FAQs
+- Related question suggestions
+- Helpfulness rating option
+- Print-friendly version
+- Feedback mechanism for improvement
+- Mobile-optimized question exploration
+
+### Troubleshooting Guides:
+- Step-by-step problem resolution
+- Visual aids and screenshots
+- Common error message explanations
+- Severity and impact indicators
+- Alternative solution paths
+- Escalation process explanation
+- Success verification steps
+- Mobile-friendly guide format
+
+## 6.3 Partner Program
+
+### Partner Program Overview:
+- Partnership tier explanation
+- Benefits and requirements by level
+- Application process description
+- Success story showcase
+- Partner testimonial features
+- Co-marketing opportunity details
+- Revenue sharing model explanation
+- Mobile-optimized program layout
+
+### Partner Application:
+- Multi-step application form
+- Company qualification questions
+- Business model compatibility assessment
+- Market focus and customer base inputs
+- Experience and certification fields
+- Reference request section
+- Terms acceptance checkbox
+- Mobile-friendly form progression
+
+### Partner Resources:
+- Marketing material access
+- Training program information
+- Certification path explanation
+- Deal registration process
+- Lead sharing program details
+- Partner portal preview
+- Support dedicated to partners
+- Mobile partner resource access

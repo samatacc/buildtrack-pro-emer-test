@@ -1,0 +1,63 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+ # BuildTrack Pro Admin Console: User Administration
+
+## 8.1 Admin User Management
+
+### Admin Account Control:
+- Admin user creation interface
+- Role-based admin permission assignment
+- Multi-factor authentication enforcement
+- Session management and limitations
+- Access history monitoring
+- Permission audit logging
+- Password policy enforcement
+- Admin user deactivation workflow
+
+### Admin Role Configuration:
+- Role definition and customization
+- Permission group creation
+- Access level granularity control
+- Feature-specific permission mapping
+- Data access limitation settings
+- Administrative hierarchy definition
+- Role cloning and modification tools
+- Permission inheritance configuration
+
+### Activity Monitoring:
+- Admin action audit trail
+- Sensitive operation logging
+- Search and filter capabilities
+- Alert configuration for suspect activities
+- Session recording for critical functions
+- Export and reporting capabilities
+- Retention period configuration
+- Investigation tools for incidents
+
+## 8.2 System User Management
+
+### Bulk User Operations:
+- Mass user creation interface
+- CSV import functionality
+- Bulk role assignment
+- Organization transfer tools
+- Status change for multiple users
+- Permission update deployment
+- Email communication to selection
+- Export user data functionality
+
+### User Search & Filtering:
+- Advanced search criteria definition
+- Saved search creation
+- Filter by status, role, organization
+- Activity-based filtering
+- Date range selection
+- Feature usage filtering
+- Login history criteria
+- Custom attribute search
+
+### Impersonation & Troubleshooting:
+- Secure impersonation functionality

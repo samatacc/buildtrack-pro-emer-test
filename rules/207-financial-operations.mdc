@@ -1,0 +1,102 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+ # BuildTrack Pro Admin Console: Financial Operations
+
+## 7.1 Revenue Management
+
+### Subscription Analytics:
+- MRR/ARR tracking dashboard
+- Revenue forecasting tools
+- Expansion revenue analysis
+- Contraction and churn impact
+- Plan distribution breakdown
+- Revenue source attribution
+- Seasonality pattern detection
+- Renewal probability modeling
+
+### Pricing Management:
+- Price point configuration
+- Plan feature association
+- Discount management
+- Promotional pricing control
+- Price change scheduling
+- Grandfathering rule definition
+- Regional pricing adjustment
+- Price testing framework
+
+### Billing Cycle Management:
+- Billing date configuration
+- Proration rule definition
+- Invoice generation scheduling
+- Billing cycle synchronization
+- Advance billing settings
+- Renewal notification timing
+- Payment retry configuration
+- Grace period settings
+
+## 7.2 Payment Processing
+
+### Payment Gateway Management:
+- Gateway integration configuration
+- Payment method acceptance settings
+- Transaction fee optimization
+- Currency support management
+- Security compliance settings
+- Checkout experience customization
+- Receipt and invoice templates
+- Tax calculation configuration
+
+### Failed Payment Handling:
+- Dunning process configuration
+- Retry schedule definition
+- Communication template creation
+- Payment update workflow
+- Account suspension rules
+- Recovery analytics dashboard
+- Manual intervention flagging
+- Success rate optimization tools
+
+### Refund & Credit Management:
+- Refund approval workflow
+- Credit issuance controls
+- Partial refund calculation
+- Refund reason categorization
+- Credit application rules
+- Payment method refund routing
+- Accounting integration for refunds
+- Customer communication templates
+
+## 7.3 Financial Reporting
+
+### Revenue Recognition:
+- Recognition rule configuration
+- Deferred revenue tracking
+- Multi-period allocation
+- Contract modification handling
+- Variable consideration rules
+- Performance obligation mapping
+- Audit trail for revenue recognition
+- Compliance reporting automation
+
+### Financial Statement Preparation:
+- Chart of accounts management
+- Financial statement templates
+- Accounting period configuration
+- Accrual and adjustment entries
+- Intercompany transaction handling
+- Currency translation settings
+- Consolidation rule definition
+- External reporting automation
+
+### Tax Management:
+- Tax jurisdiction configuration
+- Rate management by location
+- Tax exemption handling
+- Digital service tax compliance
+- VAT/GST calculation rules
+- Tax report generation
+- Filing schedule management
+- Tax authority remittance tracking

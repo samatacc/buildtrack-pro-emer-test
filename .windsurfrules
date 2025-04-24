@@ -1,0 +1,287 @@
+# BuildTrack Pro Project Rules
+
+## Last Updated
+- Date: April 23, 2025
+
+## Project Overview
+- **Name**: BuildTrack Pro
+- **Purpose**: A comprehensive construction management solution with a Dashboard for project management, an Admin Console for oversight, a Marketing Website for user acquisition, and a CMS for content management.
+- **Primary Focus**:
+  - Start with the **Dashboard** (Features & Workflow) for project management.
+  - Use the **Admin Console** to control the Dashboard and manage subscribers.
+  - Integrate the **Marketing Website** for user acquisition, managed by the **CMS**.
+- **Tech Stack**: Defined in the Tech Stack section below.
+- **Coding Standards**: Follow the coding preferences outlined in the Coding Standards section.
+
+## Project Structure
+- **Dashboard (Features & Workflow)**:
+  - Core user-facing application for managing construction projects.
+  - Includes Authentication, Dashboard Home, Project Management, Materials Management, Document Management, Financial Management, Floorplan Management, Reporting, Communication, Mobile Features, AI Features, Settings, Help, and Integrations.
+- **Admin Console**:
+  - Administrative interface to control the Dashboard and manage subscribers.
+  - Features: Dashboard (executive overview, quick actions), Customer & Organization Management, Feature Management, System Performance, Data & Analytics, Marketing Tools, Financial Operations, User Administration, Content Management, Integration Management, System Configuration, Analytics, Compliance, Maintenance, and Developer Tools.
+- **Marketing Website**:
+  - Public-facing site for user acquisition and marketing.
+  - Features: Homepage, Feature Pages, Industry Solutions, Resources, About Pages, Contact Pages, Conversion Tools, Mobile Experience, Technical Implementation, Internationalization, SEO, and Website Management.
+- **CMS**:
+  - Content Management System to manage the Marketing Website content.
+  - Features: Architecture, Editorial Interface, Workflow, Asset Management, User Management, Localization, Integrations, Customization, Deployment, and Security.
+- **Directory Structure**:
+  - Group files by feature, not type (e.g., `dashboard/auth/`, `admin-console/customer-management/`).
+  - Co-locate related components (e.g., `dashboard/project-management/components/`).
+  - Use barrel exports (`index.ts`) for feature modules.
+
+## Feature Details
+
+### Dashboard (Features & Workflow)
+- **Authentication & User Onboarding**:
+  - Login with email/password, OAuth (Google, Microsoft, Apple), and 2FA.
+  - Registration with progressive form, plan selection (Freemium/Pro), and email validation.
+  - Onboarding with guided tours, profile completion, and sample projects.
+- **Dashboard Home**:
+  - Responsive grid layout with widgets (Projects, Tasks, Analytics, Notifications).
+  - Customizable widgets with drag-and-drop, role-based defaults.
+  - Project overview, tasks, team performance, and financial metrics.
+- **Project Management**:
+  - Creation wizard with templates, AI-assisted setup, and weather forecasting.
+  - Views: List, Kanban, Gantt, Calendar.
+  - Task details with subtasks, dependencies, comments, and team collaboration.
+- **Materials Management**:
+  - Overview with low stock alerts, inventory valuation, and category management.
+  - Procurement with vendor management, order tracking, and mobile QR scanning.
+- **Document & File Management**:
+  - Library with categories, drawing sets, and analytics.
+  - Upload, organization, viewing, markup, photo documentation, and workflows.
+- **Financial Management**:
+  - Budget overview, expense tracking, invoicing, reporting, and payment processing.
+  - Client billing portal and financial data export.
+- **Floor & Spatial Management**:
+  - Interactive floorplan viewer with zones, hotspots, 360° photos, and proximity features.
+  - Progress visualization and annotation system.
+- **Reporting & Analytics**:
+  - Report center with templates, scheduling, and visualization options.
+  - Analytics for projects, teams, and business intelligence.
+- **Communication & Notification**:
+  - Messaging (direct, group), notifications, announcements, and weather integration.
+- **Mobile & Field Features**:
+  - Mobile dashboard, field data capture, offline capabilities, QR scanning, and safety checklists.
+- **AI Assistant & Intelligence**:
+  - Virtual assistant, document processing, photo analysis, predictive intelligence, and NLP.
+- **Settings & User Preferences**:
+  - Profile management, workspace customization, organization settings, and billing.
+- **Help & Support**:
+  - In-app help, interactive guidance, training, and feedback collection.
+- **Integration Ecosystem**:
+  - Accounting (QuickBooks, Sage), calendar (Google, Microsoft), document management, weather, and equipment integrations.
+
+### Admin Console
+- **Dashboard**:
+  - Executive overview with business health, KPIs, and alerts.
+  - Quick actions for user management, feature toggles, and system status.
+- **Customer & Organization Management**:
+  - Organization directory, customer insights, account management, and support operations.
+  - Health score system and customer journey visualization.
+- **Feature & Product Management**:
+  - Feature toggles, configuration, analytics, onboarding experience, beta programs, and release management.
+- **System Performance & Security**:
+  - Performance monitoring, security dashboard, access control, audit, and infrastructure management.
+- **Data & Analytics**:
+  - Data governance, business intelligence, and data integration (ETL, API).
+- **Marketing & Growth Tools**:
+  - Conversion optimization, campaign management, and referral programs.
+- **Financial Operations**:
+  - Revenue management, payment processing, and financial reporting.
+- **User Administration**:
+  - Admin and system user management, authentication, and activity monitoring.
+- **Content & Documentation**:
+  - Knowledge base, help content, and marketing content management.
+- **Integration & API**:
+  - API administration, third-party integrations, and webhook management.
+- **System Configuration**:
+  - Global settings, workflow configuration, and custom fields.
+- **Analytics & Reporting**:
+  - System analytics, business metrics, and custom report builder.
+- **Compliance & Governance**:
+  - Compliance management, data protection, and risk management.
+- **System Maintenance**:
+  - Database management, infrastructure operations, and service health.
+- **Developer Tools**:
+  - Developer portal, API testing, and lifecycle management.
+
+  - **Feature & Product Management**:
+  - Complete feature availability philosophy (no feature-gating)
+  - Global feature toggle system for all features
+  - Two-tier plan management (Freemium/Pro)
+  - Feature toggles and configuration at global and organization levels
+  - Usage analytics and monitoring for all features
+  - Parameter adjustment and threshold configuration
+  - Feature dependency management
+  - Performance and adoption tracking
+  - Cost-to-serve analysis
+  - Beta program management
+
+### Marketing Website
+- **Homepage**:
+  - Hero with CTAs, social proof, feature showcase, testimonials, pricing, and conversion sections.
+- **Feature Pages**:
+  - Category landing pages, individual feature details, and comparisons.
+- **Industry Solutions**:
+  - Industry-specific pages, case studies, and resources.
+- **Resources & Content Hub**:
+  - Blog, resource library, and webinar/event system.
+- **About & Company**:
+  - Company story, careers, culture, press, and news.
+- **Contact & Support**:
+  - Contact options, support resources, and partner program.
+- **Conversion & Lead Generation**:
+  - Trial signup, demo requests, and lead nurturing.
+- **Mobile Experience**:
+  - Mobile-specific design, responsive content, and conversion paths.
+- **Technical Implementation**:
+  - CMS integration (Sanity.io), performance optimization, and integrations.
+- **International & Localization**:
+  - Multi-language support, regional content, and SEO.
+- **SEO & Discoverability**:
+  - Technical SEO, content SEO, and analytics.
+- **Website Management**:
+  - Content governance, A/B testing, feedback, and technical maintenance.
+
+### CMS (Content Management System)
+- **Architecture**:
+  - Schema design, content types (pages, components, global), and relationships.
+- **Editorial Interface**:
+  - Content creation, organization, and collaboration tools.
+- **Workflow & Publishing**:
+  - Editorial workflows, scheduling, and distribution.
+- **Asset & Media Management**:
+  - Digital asset organization, image processing, and video/document management.
+- **User & Permission Management**:
+  - User administration, role-based permissions, and activity monitoring.
+- **Localization**:
+  - Translation management, localization features, and internationalization tools.
+- **Integrations**:
+  - GraphQL API, webhooks, and third-party integrations (marketing, analytics).
+- **Customization**:
+  - Studio, content, and plugin customization.
+- **Deployment & Environment**:
+  - Environment setup, deployment pipeline, and monitoring.
+- **Security & Compliance**:
+  - Authentication, data protection, and audit/compliance.
+
+## Technical Stack
+- **Frontend**:
+  - Framework: Next.js 15 (App Router), React 18+, TypeScript.
+  - Styling: TailwindCSS, shadcn/ui, Custom Design System, Framer Motion.
+  - State: Zustand, TanStack Query, React Context.
+  - Forms: React Hook Form, Zod.
+  - UI: Radix UI, date-fns, react-dropzone, Recharts, Mapbox GL JS.
+  - Mobile: Workbox, react-swipeable, Use-device-detect.
+- **Backend**:
+  - API: tRPC, Next.js API Routes, OpenAPI.
+  - Auth: Supabase Auth, JWT, Row Level Security.
+  - Database: PostgreSQL (via Supabase), pgvector, Redis, Prisma.
+  - Storage: Vercel Blob, Supabase Storage, Sharp.
+  - AI: OpenAI (GPT, Whisper), Google Cloud Vision AI, Mindee.
+  - Background: QStash, Edge Functions, Cron.
+  - Realtime: Supabase Realtime, Server-Sent Events, Broadcast Channel API.
+- **DevOps**:
+  - Hosting: Vercel, Supabase, Cloudflare.
+  - CI/CD: GitHub Actions, Husky, ESLint/Prettier.
+  - Monitoring: Sentry, Axiom, PostHog.
+  - Testing: Vitest, Playwright, MSW, Testing Library.
+- **Marketing Site**:
+  - CMS: Sanity.io, GraphQL, Next.js.
+  - Analytics: Google Analytics 4, Segment, HubSpot.
+- **Integrations**:
+  - Stripe, SendGrid, AccuWeather, DocuSign/PandaDoc, QuickBooks/Sage.
+
+## Coding Standards & Preferences
+- **TypeScript**:
+  - Use TypeScript for all code.
+  - Prefer interfaces over type aliases (except for unions).
+  - Define return types for non-trivial functions.
+  - Use proper typing for React props.
+  - Avoid `any`; use `unknown` or specific types.
+- **Component Structure**:
+  - Use functional components with hooks.
+  - Colocate components in feature directories.
+  - Extract reusable UI to shared library.
+  - Use composition over inheritance.
+  - Keep components under 300 lines; split larger ones.
+- **State Management**:
+  - Use React Context for infrequent global state.
+  - Prefer hooks for local state.
+  - Use Zustand for complex, frequent updates.
+  - Optimize with `useMemo` and `useCallback`.
+- **Naming Conventions**:
+  - PascalCase for components and types.
+  - camelCase for variables and functions.
+  - UPPER_CASE for constants.
+  - Use descriptive names.
+  - Prefix custom hooks with "use".
+- **File Organization**:
+  - Group by feature, not type.
+  - Keep related files close.
+  - Use `index.ts` for exports.
+  - Use barrel exports for modules.
+- **CSS/Styling**:
+  - Use TailwindCSS (utility-first).
+  - Extract patterns to custom Tailwind components.
+  - Use CSS variables for theming.
+  - Ensure responsive design.
+- **React & Components**:
+  - Use functional components with hooks.
+  - Prefer composition over inheritance.
+  - Use React Context for deep prop sharing.
+  - Implement a11y attributes.
+  - Follow atomic design principles.
+- **File Structure**:
+  - Group by feature, then type.
+  - Keep components focused.
+  - Co-locate tests.
+  - Use barrel exports.
+  - Keep files under 300 lines.
+- **Code Style**:
+  - Use ESLint and Prettier.
+  - 2-space indentation.
+  - 80-100 character line length.
+  - Use semicolons.
+  - Use trailing commas in multiline objects/arrays.
+- **Code Quality**:
+  - Use ESLint and Prettier.
+  - Use Husky for pre-commit hooks.
+  - No commented-out code in production.
+  - No `console.log` in production.
+  - Implement proper error handling.
+- **Change Management**:
+  - Prefer simple solutions.
+  - Only make requested or understood changes.
+  - Preserve existing patterns.
+  - Exhaust existing patterns before new ones.
+  - Remove old implementations when replacing.
+- **Performance & Clean Code**:
+  - Avoid duplication; check for similar functionality.
+  - Keep codebase clean.
+  - Refactor files over 200-300 lines.
+  - Avoid scripts in application files.
+- **Environment Awareness**:
+  - Account for dev, test, prod environments.
+  - Use mock data only for tests.
+  - Avoid stubbing/fake data in dev/prod.
+- **Configuration Management**:
+  - Never overwrite `.env` without confirmation.
+  - Keep environment configs separate and documented.
+
+## Best Practices
+- **Prioritization**: Focus on Dashboard first, then Admin Console for control, followed by Marketing Website and CMS integration.
+- **Consistency**: Adhere to the Tech Stack and Coding Standards for all development.
+- **Testing**: Use Vitest for unit tests, Playwright for E2E, and MSW for API mocking.
+- **Performance**: Optimize for Core Web Vitals, use lazy loading, and implement caching.
+- **Accessibility**: Follow WCAG 2.1 AA standards, ensure a11y attributes, and support screen readers.
+- **Documentation**: Maintain clear comments for complex logic, update this file as the project evolves.
+
+## Additional Notes
+- Reference this `.windsurfrules` file in prompts to ensure Cascade follows these guidelines.
+- Use the Admin Console to manage Dashboard features and subscribers.
+- Ensure the Marketing Website aligns with CMS content management capabilities.
+- Follow the Tech Stack for all integrations and development tools.
