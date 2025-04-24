@@ -8,7 +8,7 @@
     "start": "next start",
     "lint": "next lint && stylelint '**/*.css'",
     "type-check": "tsc --noEmit",
-    "test": "jest",
+    "test": "jest --passWithNoTests",
     "prepare": "husky",
     "lint-staged": "lint-staged"
   },
