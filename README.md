@@ -4,6 +4,20 @@
 
 A comprehensive construction management solution with advanced project management, materials tracking, and AI-powered features.
 
+## Getting Started
+
+1. Clone the repository
+2. Install dependencies: `npm install`
+3. Copy `.env.example` to `.env` and fill in the values:
+   ```bash
+   cp .env.example .env
+   ```
+4. Set up Supabase:
+   - Create a new project at [supabase.com](https://supabase.com)
+   - Copy the `Project URL` and `anon` key from Project Settings > API
+   - Add them to your `.env` file
+5. Run the development server: `npm run dev`
+
 ## Project Structure
 
 - `app/` - Next.js application code
@@ -45,6 +59,7 @@ A comprehensive construction management solution with advanced project managemen
 ## Documentation
 
 Detailed documentation is available in the `rules/` directory:
+
 - 100 series: Marketing Website
 - 200 series: Admin Console
 - 300 series: CMS
