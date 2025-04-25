@@ -27,28 +27,35 @@ export class InMemoryUserService implements IUserService {
   private verificationTokens: Record<string, { userId: string, expires: Date }> = {};
 
   constructor() {
-    // Seed with a test user
-    const hashedPassword = bcrypt.hashSync('password123', 10);
-    this.users.push({
-      id: uuidv4(),
-      email: 'test@buildtrackpro.com',
-      name: 'Test User',
-      password: hashedPassword,
-      authProvider: 'email',
-      isEmailVerified: true,
-      createdAt: new Date(),
-      updatedAt: new Date(),
-      lastLoginAt: new Date(),
-      role: 'admin',
-      preferences: {
-        theme: 'light',
-        notifications: {
-          email: true,
-          push: true,
-          sms: false
+    this.loadFromStorage();
+
+    // If no users exist (first run or storage cleared), seed with a test user
+    if (this.users.length === 0) {
+      const hashedPassword = bcrypt.hashSync('password123', 10);
+      this.users.push({
+        id: uuidv4(),
+        email: 'test@buildtrackpro.com',
+        name: 'Test User',
+        password: hashedPassword,
+        authProvider: 'email',
+        isEmailVerified: true,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        lastLoginAt: new Date(),
+        role: 'admin',
+        preferences: {
+          theme: 'light',
+          notifications: {
+            email: true,
+            push: true,
+            sms: false
+          }
         }
-      }
-    });
+      });
+      
+      // Save the initial user to storage
+      this.saveToStorage();
+    }
     
     // Add a Google OAuth user
     this.users.push({
@@ -91,6 +98,53 @@ export class InMemoryUserService implements IUserService {
   }
 
   /**
+   * Save user data to localStorage for persistence
+   */
+  private saveToStorage(): void {
+    if (typeof window === 'undefined') return; // Skip during SSR
+
+    try {
+      // Convert Date objects to ISO strings for storage
+      const usersToStore = this.users.map(user => ({
+        ...user,
+        createdAt: user.createdAt instanceof Date ? user.createdAt.toISOString() : user.createdAt,
+        updatedAt: user.updatedAt instanceof Date ? user.updatedAt.toISOString() : user.updatedAt,
+        lastLoginAt: user.lastLoginAt instanceof Date ? user.lastLoginAt.toISOString() : user.lastLoginAt
+      }));
+
+      localStorage.setItem('buildtrack_users_db', JSON.stringify(usersToStore));
+      console.log(`Saved ${this.users.length} users to local storage`);
+    } catch (err) {
+      console.error('Error saving to localStorage:', err);
+    }
+  }
+
+  /**
+   * Load user data from localStorage
+   */
+  private loadFromStorage(): void {
+    if (typeof window === 'undefined') return; // Skip during SSR
+
+    try {
+      const storedUsers = localStorage.getItem('buildtrack_users_db');
+      if (!storedUsers) return;
+
+      // Convert stored ISO strings back to Date objects
+      const parsedUsers = JSON.parse(storedUsers);
+      this.users = parsedUsers.map((user: any) => ({
+        ...user,
+        createdAt: user.createdAt ? new Date(user.createdAt) : undefined,
+        updatedAt: user.updatedAt ? new Date(user.updatedAt) : undefined,
+        lastLoginAt: user.lastLoginAt ? new Date(user.lastLoginAt) : undefined
+      }));
+
+      console.log(`Loaded ${this.users.length} users from local storage`);
+    } catch (err) {
+      console.error('Error loading from localStorage:', err);
+    }
+  }
+
+  /**
    * Authenticate user with email and password
    */
   async authenticateWithCredentials(credentials: UserCredentials): Promise<UserWithToken | null> {
@@ -127,6 +181,9 @@ export class InMemoryUserService implements IUserService {
       // Update last login
       user.lastLoginAt = new Date();
       user.updatedAt = new Date();
+      
+      // Save changes to persistent storage
+      this.saveToStorage();
       
       // Generate and return token
       const token = this.generateToken(user);
@@ -178,6 +235,9 @@ export class InMemoryUserService implements IUserService {
       // Update last login
       user.lastLoginAt = new Date();
       user.updatedAt = new Date();
+      
+      // Save changes to persistent storage
+      this.saveToStorage();
     }
     
     // Generate and return token
@@ -222,6 +282,9 @@ export class InMemoryUserService implements IUserService {
       
       // Add to "database"
       this.users.push(newUser);
+      
+      // Save to persistent storage
+      this.saveToStorage();
       
       // For email registration, create verification token
       if (userData.authProvider === 'email' || !userData.authProvider) {
@@ -300,6 +363,9 @@ export class InMemoryUserService implements IUserService {
     };
     
     this.users[userIndex] = updatedUser;
+    
+    // Save changes to persistent storage
+    this.saveToStorage();
     return updatedUser;
   }
 
@@ -373,6 +439,9 @@ export class InMemoryUserService implements IUserService {
     
     // Mark email as verified
     await this.updateUser(user.id, { isEmailVerified: true });
+    
+    // Save changes to persistent storage
+    this.saveToStorage();
     
     // Remove used token
     delete this.verificationTokens[token];
