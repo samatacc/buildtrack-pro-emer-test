@@ -302,42 +302,49 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         throw new Error('Failed to create user account')
       }
       
-      // Extract user and token
-      const { token, ...user } = result
-      
-      // Setup permanent user
-      localStorage.removeItem('buildtrack_temp_user')
-      localStorage.removeItem('buildtrack_registration_data')
-      
-      // Convert to our User model
-      const appUser: User = {
-        id: user.id,
-        email: user.email,
-        firstName: user.name?.split(' ')[0] || '',
-        lastName: user.name?.split(' ').slice(1).join(' ') || '',
-        role: (user.role as 'admin' | 'project_manager' | 'contractor' | 'client' | 'user') || 'user',
-        organizationId: user.organizationId || '',
-        createdAt: user.createdAt.toISOString(),
-        updatedAt: user.updatedAt.toISOString(),
-        authProvider: user.authProvider || 'email'
+      try {
+        // Extract user and token
+        const { token, ...user } = result
+        
+        // Setup permanent user
+        localStorage.removeItem('buildtrack_temp_user')
+        localStorage.removeItem('buildtrack_registration_data')
+        
+        // Convert to our User model
+        const appUser: User = {
+          id: user.id,
+          email: user.email,
+          firstName: user.name?.split(' ')[0] || '',
+          lastName: user.name?.split(' ').slice(1).join(' ') || '',
+          role: (user.role as 'admin' | 'project_manager' | 'contractor' | 'client' | 'user') || 'user',
+          organizationId: user.organizationId || '',
+          createdAt: user.createdAt.toISOString(),
+          updatedAt: user.updatedAt.toISOString(),
+          authProvider: user.authProvider || 'email'
+        }
+        
+        localStorage.setItem('buildtrack_user', JSON.stringify(appUser))
+        localStorage.setItem('buildtrack_token', token)
+        
+        // Also set token in cookie
+        setCookie('buildtrack_token', token)
+        
+        setState({
+          user: appUser,
+          isLoading: false,
+          isAuthenticated: true,
+          error: null
+        })
+        
+        // Use window.location for direct navigation instead of router
+        // This forces a complete page refresh and avoids SPA navigation issues
+        window.location.href = '/dashboard'
+      } catch (innerError) {
+        console.error('Error in user processing:', innerError)
+        throw new Error('Failed to process user data')
       }
-      
-      localStorage.setItem('buildtrack_user', JSON.stringify(appUser))
-      localStorage.setItem('buildtrack_token', token)
-      
-      // Also set token in cookie
-      setCookie('buildtrack_token', token)
-      
-      setState({
-        user: appUser,
-        isLoading: false,
-        isAuthenticated: true,
-        error: null
-      })
-      
-      // Navigate to dashboard
-      router.push('/dashboard')
     } catch (error) {
+      console.error('Onboarding error:', error)
       setState(prev => ({
         ...prev,
         isLoading: false,

@@ -94,21 +94,47 @@ export class InMemoryUserService implements IUserService {
    * Authenticate user with email and password
    */
   async authenticateWithCredentials(credentials: UserCredentials): Promise<UserWithToken | null> {
-    // Find user by email
-    const user = this.users.find(u => u.email.toLowerCase() === credentials.email.toLowerCase());
-    
-    // Check if user exists and password matches
-    if (!user || !user.password || !bcrypt.compareSync(credentials.password, user.password)) {
+    try {
+      // Artificial delay to simulate API call
+      await new Promise(resolve => setTimeout(resolve, 500));
+      
+      // Find user by email
+      const user = this.users.find(u => u.email.toLowerCase() === credentials.email.toLowerCase());
+      
+      // Debug log for testing
+      console.log(`Auth attempt for: ${credentials.email}`);
+      console.log(`Found user: ${user ? 'Yes' : 'No'}`);
+      
+      // If no user found, return null
+      if (!user) {
+        console.log('User not found');
+        return null;
+      }
+      
+      // If no password or password doesn't match
+      if (!user.password) {
+        console.log('No password stored for user');
+        return null;
+      }
+      
+      const passwordMatch = bcrypt.compareSync(credentials.password, user.password);
+      console.log(`Password match: ${passwordMatch ? 'Yes' : 'No'}`);
+      
+      if (!passwordMatch) {
+        return null;
+      }
+      
+      // Update last login
+      user.lastLoginAt = new Date();
+      user.updatedAt = new Date();
+      
+      // Generate and return token
+      const token = this.generateToken(user);
+      return { ...user, token };
+    } catch (err) {
+      console.error('Error in authenticateWithCredentials:', err);
       return null;
     }
-    
-    // Update last login
-    user.lastLoginAt = new Date();
-    user.updatedAt = new Date();
-    
-    // Generate and return token
-    const token = this.generateToken(user);
-    return { ...user, token };
   }
 
   /**
@@ -163,52 +189,66 @@ export class InMemoryUserService implements IUserService {
    * Register a new user
    */
   async registerUser(userData: UserRegistrationData): Promise<UserWithToken | null> {
-    // Check if email already exists
-    if (this.users.some(u => u.email.toLowerCase() === userData.email.toLowerCase())) {
-      return null; // Email already in use
-    }
-    
-    // For email registration, hash the password
-    let hashedPassword: string | undefined;
-    if (userData.password) {
-      hashedPassword = bcrypt.hashSync(userData.password, 10);
-    }
-    
-    // Create new user
-    const newUser: User = {
-      id: uuidv4(),
-      email: userData.email,
-      name: userData.name,
-      password: hashedPassword,
-      authProvider: userData.authProvider || 'email',
-      authProviderId: userData.authProviderId,
-      isEmailVerified: userData.authProvider !== 'email', // Only email needs verification
-      createdAt: new Date(),
-      updatedAt: new Date(),
-      role: 'user'
-    };
-    
-    // Add to "database"
-    this.users.push(newUser);
-    
-    // For email registration, create verification token
-    if (userData.authProvider === 'email' || !userData.authProvider) {
-      const verificationToken = uuidv4();
-      const expiry = new Date();
-      expiry.setHours(expiry.getHours() + 24); // 24-hour expiry
+    try {
+      // Artificial delay to simulate API call
+      await new Promise(resolve => setTimeout(resolve, 500));
       
-      this.verificationTokens[verificationToken] = {
-        userId: newUser.id,
-        expires: expiry
+      // Check if email already exists
+      if (this.users.some(u => u.email.toLowerCase() === userData.email.toLowerCase())) {
+        return null; // Email already in use
+      }
+      
+      // For email registration, hash the password
+      let hashedPassword: string | undefined;
+      if (userData.password) {
+        hashedPassword = bcrypt.hashSync(userData.password, 10);
+      }
+      
+      // Create new user with a proper ID
+      const userId = uuidv4();
+      
+      const newUser: User = {
+        id: userId,
+        email: userData.email,
+        name: userData.name || '',
+        password: hashedPassword,
+        authProvider: userData.authProvider || 'email',
+        authProviderId: userData.authProviderId,
+        isEmailVerified: userData.authProvider !== 'email', // Only email needs verification
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        role: 'user'
       };
       
-      // In a real implementation, would send email here
-      console.log(`Verification token created: ${verificationToken} for user ${newUser.id}`);
+      // Add to "database"
+      this.users.push(newUser);
+      
+      // For email registration, create verification token
+      if (userData.authProvider === 'email' || !userData.authProvider) {
+        const verificationToken = uuidv4();
+        const expiry = new Date();
+        expiry.setHours(expiry.getHours() + 24); // 24-hour expiry
+        
+        this.verificationTokens[verificationToken] = {
+          userId: newUser.id,
+          expires: expiry
+        };
+        
+        // In a real implementation, would send email here
+        console.log(`Verification token created: ${verificationToken} for user ${newUser.id}`);
+      }
+      
+      // Generate and return token
+      const token = this.generateToken(newUser);
+      
+      // Log user creation for debugging
+      console.log(`User created: ${newUser.id}, ${newUser.email}`);
+      
+      return { ...newUser, token };
+    } catch (err) {
+      console.error('Error in registerUser:', err);
+      return null;
     }
-    
-    // Generate and return token
-    const token = this.generateToken(newUser);
-    return { ...newUser, token };
   }
 
   /**
