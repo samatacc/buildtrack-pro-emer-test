@@ -5,9 +5,28 @@ import { useAuth } from '../../lib/auth/AuthContext'
 
 // Dashboard component that follows the BuildTrack Pro design system
 export default function DashboardHome() {
-  const { user, logout } = useAuth()
+  const { user, isLoading, logout } = useAuth()
+  const [isInitialLoad, setIsInitialLoad] = useState(true)
   const [greeting, setGreeting] = useState('Good day')
   const [state, setState] = useState({ user })
+  
+  // After initial load, set loading state to false
+  useEffect(() => {
+    // If still loading after 2 seconds, stop showing loader
+    const timer = setTimeout(() => {
+      setIsInitialLoad(false)
+    }, 2000)
+    
+    return () => clearTimeout(timer)
+  }, [])
+  
+  if (isLoading && isInitialLoad) {
+    return (
+      <div className="flex justify-center items-center min-h-screen bg-gray-50">
+        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-[rgb(236,107,44)]"></div>
+      </div>
+    )
+  }
   
   // Update state when user changes
   useEffect(() => {

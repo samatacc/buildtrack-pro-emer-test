@@ -58,9 +58,16 @@ export default function OnboardingPage() {
     if (step < 4) {
       setStep(step + 1)
     } else {
-      // Complete onboarding using auth context
-      await completeOnboarding(profile)
-      // Note: Navigation is handled inside the completeOnboarding function
+      try {
+        // Complete onboarding using auth context
+        await completeOnboarding(profile)
+        
+        // Force direct navigation to dashboard
+        console.log('Onboarding complete, redirecting to dashboard...')
+        window.location.href = '/dashboard'
+      } catch (err) {
+        console.error('Error completing onboarding:', err)
+      }
     }
   }
 
