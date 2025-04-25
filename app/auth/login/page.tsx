@@ -6,7 +6,7 @@ import { useAuth } from '../../../lib/auth/AuthContext'
 import '../auth-styles.css'
 
 export default function LoginPage() {
-  const { login, loginWithGoogle, loginWithMicrosoft, loginWithApple, isLoading, error, clearErrors } = useAuth()
+  const { login, isLoading, error, clearErrors } = useAuth()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [rememberMe, setRememberMe] = useState(false)
@@ -24,25 +24,28 @@ export default function LoginPage() {
       return // Form validation is handled by HTML5 required attributes
     }
     
-    // Call login function from auth context
-    await login({
-      email,
-      password,
-      rememberMe
-    })
+    try {
+      // Call login function from auth context
+      await login({
+        email,
+        password,
+        rememberMe
+      })
+    } catch (err) {
+      console.error('Login error:', err)
+    }
   }
 
   return (
     <div className="auth-container">
-      
       <div className="auth-form-container">
         <div className="auth-heading">Sign in to your account</div>
         <div className="auth-subheading">
-        Don't have an account?{' '}
-        <Link href="/auth/register" className="link">
-          Start your 14-day free trial
-        </Link>
-      </div>
+          Don't have an account?{' '}
+          <Link href="/auth/register" className="link">
+            Start your 14-day free trial
+          </Link>
+        </div>
         
         <div className="auth-card">
           {error && (
@@ -54,7 +57,7 @@ export default function LoginPage() {
               borderRadius: '0.375rem',
               fontSize: '0.875rem'
             }}>
-              <p>{error}</p>
+              <p>{typeof error === 'string' ? error : 'Login failed. Please try again.'}</p>
             </div>
           )}
           
@@ -128,8 +131,8 @@ export default function LoginPage() {
             </button>
           </form>
 
-          <div className="social-login-divider">
-            <span className="social-login-divider-text">Or continue with</span>
+          <div className="divider">
+            <span>Or continue with</span>
           </div>
 
           <div className="social-buttons-container">
