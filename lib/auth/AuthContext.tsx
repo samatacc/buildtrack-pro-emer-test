@@ -173,10 +173,15 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         router.push('/dashboard')
       }, 100)
     } catch (error) {
+      // Safely handle errors without instanceof
+      const errorMessage = error && typeof error === 'object' && 'message' in error
+        ? error.message as string
+        : 'Login failed';
+      
       setState(prev => ({
         ...prev,
         isLoading: false,
-        error: error instanceof Error ? error.message : 'Login failed'
+        error: errorMessage
       }))
     }
   }, [router])
@@ -208,7 +213,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       setState(prev => ({
         ...prev,
         isLoading: false,
-        error: error instanceof Error ? error.message : 'Logout failed'
+        error: error && typeof error === 'object' && 'message' in error ? error.message as string : 'Logout failed'
       }))
     }
   }, [router])
@@ -260,7 +265,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       setState(prev => ({
         ...prev,
         isLoading: false,
-        error: error instanceof Error ? error.message : 'Registration failed'
+        error: error && typeof error === 'object' && 'message' in error ? error.message as string : 'Registration failed'
       }))
     }
   }, [router])
@@ -336,7 +341,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       setState(prev => ({
         ...prev,
         isLoading: false,
-        error: error instanceof Error ? error.message : 'Onboarding failed'
+        error: error && typeof error === 'object' && 'message' in error ? error.message as string : 'Onboarding failed'
       }))
       
       // Redirect back to registration on error
@@ -370,7 +375,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       setState(prev => ({
         ...prev,
         isLoading: false,
-        error: error instanceof Error ? error.message : 'Password reset failed'
+        error: error && typeof error === 'object' && 'message' in error ? error.message as string : 'Password reset failed'
       }))
       return Promise.reject(error)
     }
@@ -397,7 +402,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       setState(prev => ({
         ...prev,
         isLoading: false,
-        error: error instanceof Error ? error.message : 'Password update failed'
+        error: error && typeof error === 'object' && 'message' in error ? error.message as string : 'Password update failed'
       }))
       return Promise.reject(error)
     }
@@ -419,7 +424,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       setState(prev => ({
         ...prev,
         isLoading: false,
-        error: error instanceof Error ? error.message : 'Google login failed'
+        error: error && typeof error === 'object' && 'message' in error ? error.message as string : 'Google login failed'
       }))
     }
   }, [router])
@@ -434,7 +439,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       setState(prev => ({
         ...prev,
         isLoading: false,
-        error: error instanceof Error ? error.message : 'Microsoft login failed'
+        error: error && typeof error === 'object' && 'message' in error ? error.message as string : 'Microsoft login failed'
       }))
     }
   }, [router])
@@ -453,7 +458,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       setState(prev => ({
         ...prev,
         isLoading: false,
-        error: error instanceof Error ? error.message : 'Apple login failed'
+        error: error && typeof error === 'object' && 'message' in error ? error.message as string : 'Apple login failed'
       }))
     }
   }, [router])
