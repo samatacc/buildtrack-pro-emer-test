@@ -3,7 +3,7 @@ export interface User {
   email: string;
   firstName: string;
   lastName: string;
-  role: 'admin' | 'project_manager' | 'contractor' | 'client';
+  role: 'admin' | 'project_manager' | 'contractor' | 'client' | 'user';
   organizationId: string;
   createdAt: string;
   updatedAt: string;
