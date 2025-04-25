@@ -6,10 +6,10 @@ import { usePathname } from "next/navigation";
 
 const navigation = [
   { name: "Home", href: "/" },
-  { name: "About", href: "/about" },
-  { name: "Product", href: "/product" },
   { name: "Features", href: "/features" },
-  { name: "Pricing", href: "/pricing" },
+  { name: "Industry Solutions", href: "/solutions" },
+  { name: "Resources", href: "/resources" },
+  { name: "About", href: "/about" },
   { name: "Contact", href: "/contact" },
 ];
 
@@ -18,15 +18,33 @@ export default function Header(): React.ReactNode {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
-    <header className="bg-white shadow-sm relative">
+    <header className="bg-white shadow-sm sticky top-0 z-50 transition-shadow duration-300">
+      {/* Top notification bar - can be conditionally rendered */}
+      <div className="bg-[rgb(24,62,105)] text-white text-sm py-1 text-center">
+        <p className="max-w-7xl mx-auto px-4">
+          🚀 <span className="font-medium">New Feature:</span> AI-powered
+          project scheduling now available!{" "}
+          <a
+            href="/features/ai-scheduling"
+            className="underline hover:text-[rgb(236,107,44)] transition-colors"
+          >
+            Learn more
+          </a>
+        </p>
+      </div>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
           <Link
             href="/"
-            className="text-xl font-bold text-primary-600 flex-shrink-0"
+            className="flex items-center gap-2 flex-shrink-0 group"
           >
-            BuildTrack Pro
+            <div className="w-9 h-9 flex items-center justify-center rounded-lg bg-[rgb(24,62,105)] text-white font-bold text-lg group-hover:bg-[rgb(236,107,44)] transition-colors">
+              BT
+            </div>
+            <span className="text-xl font-bold text-[rgb(24,62,105)] group-hover:text-[rgb(236,107,44)] transition-colors">
+              BuildTrack Pro
+            </span>
           </Link>
 
           {/* Mobile menu button */}
@@ -109,8 +127,8 @@ export default function Header(): React.ReactNode {
               href={item.href}
               className={`${
                 pathname === item.href
-                  ? "text-primary-600 bg-primary-50"
-                  : "text-slate-600 hover:bg-gray-50"
+                  ? "text-[rgb(236,107,44)] bg-orange-50"
+                  : "text-[rgb(24,62,105)] hover:bg-gray-50"
               } block px-3 py-2 rounded-md text-base font-medium transition-colors`}
               onClick={() => setIsMenuOpen(false)}
             >

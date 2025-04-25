@@ -71,7 +71,7 @@ export default function AboutPage(): ReactNode {
           Revolutionizing construction management with innovative technology
           solutions.
         </p>
-        <div className="mt-12 space-x-6">
+        <div className="mt-12 flex justify-center space-x-6">
           <a
             href="/register"
             className="inline-block px-8 py-3 bg-[rgb(236,107,44)] text-white rounded-lg hover:bg-[rgb(24,62,105)] transition-colors font-medium animate-fade-in animation-delay-400"
@@ -80,7 +80,7 @@ export default function AboutPage(): ReactNode {
           </a>
           <a
             href="#learn-more"
-            className="inline-block px-8 py-3 text-[rgb(24,62,105)] hover:bg-[rgb(24,62,105)] transition-colors font-medium animate-fade-in animation-delay-600"
+            className="inline-block px-8 py-3 text-[rgb(24,62,105)] hover:bg-[rgb(24,62,105)] hover:text-white border-2 border-[rgb(24,62,105)] rounded-lg transition-colors font-medium animate-fade-in animation-delay-600"
           >
             Learn More
           </a>

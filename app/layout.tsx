@@ -1,28 +1,21 @@
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import React from "react";
-import { Theme } from "@radix-ui/themes";
-import "@radix-ui/themes/styles.css";
-import "./styles/globals.css";
+import { type ReactNode } from "react";
+import "./globals.css";
+import Header from "./components/layout/Header";
+import Footer from "./components/layout/Footer";
 
-const inter = Inter({ subsets: ["latin"] });
-
-export const metadata: Metadata = {
-  title: "BuildTrack Pro",
-  description: "Comprehensive construction management solution",
+export const metadata = {
+  title: "BuildTrack Pro - Construction Management Solution",
+  description:
+    "Streamline projects, boost efficiency, and deliver results with the most comprehensive construction management platform.",
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}): React.ReactNode {
+export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body className={inter.className}>
-        <Theme appearance="light" accentColor="blue" radius="medium">
-          {children}
-        </Theme>
+    <html lang="en">
+      <body className="min-h-screen flex flex-col">
+        <Header />
+        <main className="flex-grow">{children}</main>
+        <Footer />
       </body>
     </html>
   );

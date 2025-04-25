@@ -1,0 +1,88 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-primary-blue: rgb(24 62 105);
+  --color-primary-orange: rgb(236 107 44);
+  --color-text-primary: rgb(24 62 105);
+  --color-text-body: rgb(75 85 99);
+  --color-background: white;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    color: rgb(75 85 99);
+    background-color: white;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    color: rgb(24 62 105);
+    font-weight: 700;
+  }
+}
+
+@layer components {
+  .animation-delay-200 {
+    animation-delay: 200ms;
+  }
+  
+  .animation-delay-400 {
+    animation-delay: 400ms;
+  }
+  
+  .animation-delay-600 {
+    animation-delay: 600ms;
+  }
+  
+  .animate-fade-in {
+    animation: fade-in 0.5s ease-in-out forwards;
+  }
+  
+  .animate-fade-in-up {
+    animation: fade-in-up 0.5s ease-in-out forwards;
+  }
+  
+  .animate-slide-in-right {
+    animation: slide-in-right 0.5s ease-in-out forwards;
+  }
+  
+  .animation-delay-dynamic {
+    animation-delay: calc(200ms * var(--index));
+  }
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes fade-in-up {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slide-in-right {
+  0% {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
