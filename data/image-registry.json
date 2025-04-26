@@ -1,0 +1,73 @@
+{
+  "images": [
+    {
+      "id": "project-blueprint-1745677096820",
+      "category": "project",
+      "variant": "blueprint",
+      "path": "/generated-images/project/project-blueprint-1745677096820.png",
+      "originalUrl": "https://oaidalleapiprodscus.blob.core.windows.net/private/org-5NAqmTE7iiC15nauZ9hvHjeI/user-QzTP612GaX8a0kE2QC1K5iYo/img-888s768W76HR3fGzpF2qg0dz.png?st=2025-04-26T13%3A18%3A16Z&se=2025-04-26T15%3A18%3A16Z&sp=r&sv=2024-08-04&sr=b&rscd=inline&rsct=image/png&skoid=cc612491-d948-4d2e-9821-2683df3719f5&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2025-04-25T19%3A54%3A42Z&ske=2025-04-26T19%3A54%3A42Z&sks=b&skv=2024-08-04&sig=MZH4az1BzWlyfYZ6EgOB%2B0FnWHFJqL2Hxw1%2Bppbzkj4%3D",
+      "prompt": "A modern residential construction site with workers and equipment, showing a house frame in progress with scaffolding and materials neatly organized. The scene should be well-lit with natural daylight. Include safety features and proper construction practices.",
+      "timestamp": 1745677097723,
+      "favorite": false
+    },
+    {
+      "id": "report-financial-1745677097944",
+      "category": "report",
+      "variant": "financial",
+      "path": "/generated-images/report/report-financial-1745677097944.png",
+      "originalUrl": "https://oaidalleapiprodscus.blob.core.windows.net/private/org-5NAqmTE7iiC15nauZ9hvHjeI/user-QzTP612GaX8a0kE2QC1K5iYo/img-boNI6iC9qRVAEB70YbtiE1EV.png?st=2025-04-26T13%3A18%3A17Z&se=2025-04-26T15%3A18%3A17Z&sp=r&sv=2024-08-04&sr=b&rscd=inline&rsct=image/png&skoid=cc612491-d948-4d2e-9821-2683df3719f5&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2025-04-26T11%3A42%3A06Z&ske=2025-04-27T11%3A42%3A06Z&sks=b&skv=2024-08-04&sig=G40z%2BNOx54vcDQqnmsp%2BmWptWoLQD9uvDOUJZNTI0Ro%3D",
+      "prompt": "A financial report visualization for construction projects with budget vs. actual graphs and cost breakdown. The visualization should include professional charts showing expense categories, budget allocation, and variance tracking. Use clean data visualization with the BuildTrack Pro color scheme. Include elements like pie charts for expense breakdown and line charts for budget tracking over time.",
+      "timestamp": 1745677098116,
+      "favorite": false
+    },
+    {
+      "id": "project-1745677097694",
+      "category": "project",
+      "path": "/generated-images/project/project-1745677097694.png",
+      "originalUrl": "https://oaidalleapiprodscus.blob.core.windows.net/private/org-5NAqmTE7iiC15nauZ9hvHjeI/user-QzTP612GaX8a0kE2QC1K5iYo/img-EC7Sv5Lk1K1L4LIKFqOgJvQ3.png?st=2025-04-26T13%3A18%3A17Z&se=2025-04-26T15%3A18%3A17Z&sp=r&sv=2024-08-04&sr=b&rscd=inline&rsct=image/png&skoid=cc612491-d948-4d2e-9821-2683df3719f5&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2025-04-25T15%3A54%3A08Z&ske=2025-04-26T15%3A54%3A08Z&sks=b&skv=2024-08-04&sig=gfqwyGSwj7RhalQX/iycBpMEHHSuu1ODgwJZkJ374BA%3D",
+      "prompt": "A modern residential construction site with workers and equipment, showing a house frame in progress with scaffolding and materials neatly organized. The scene should be well-lit with natural daylight. Include safety features and proper construction practices.",
+      "timestamp": 1745677098434,
+      "favorite": false
+    },
+    {
+      "id": "project-commercial-1745677098017",
+      "category": "project",
+      "variant": "commercial",
+      "path": "/generated-images/project/project-commercial-1745677098017.png",
+      "originalUrl": "https://oaidalleapiprodscus.blob.core.windows.net/private/org-5NAqmTE7iiC15nauZ9hvHjeI/user-QzTP612GaX8a0kE2QC1K5iYo/img-vj2yl5rweoJhjbQQCu6HwnHK.png?st=2025-04-26T13%3A18%3A17Z&se=2025-04-26T15%3A18%3A17Z&sp=r&sv=2024-08-04&sr=b&rscd=inline&rsct=image/png&skoid=cc612491-d948-4d2e-9821-2683df3719f5&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2025-04-26T00%3A41%3A33Z&ske=2025-04-27T00%3A41%3A33Z&sks=b&skv=2024-08-04&sig=ur/1HsZ29HLSTBAvG0anOwwaCfb9bXOddWAkZ9Qo12k%3D",
+      "prompt": "A commercial construction site with steel framework, cranes, and workers in safety gear, showing a mid-rise building under construction. The scene should show professional organization, with equipment and materials properly staged. Include details like temporary fencing, signage, and proper safety measures.",
+      "timestamp": 1745677098921,
+      "favorite": false
+    },
+    {
+      "id": "material-tools-1745677100751",
+      "category": "material",
+      "variant": "tools",
+      "path": "/generated-images/material/material-tools-1745677100751.png",
+      "originalUrl": "https://oaidalleapiprodscus.blob.core.windows.net/private/org-5NAqmTE7iiC15nauZ9hvHjeI/user-QzTP612GaX8a0kE2QC1K5iYo/img-10D8ZVaOBafr2EGLFGNxRMWD.png?st=2025-04-26T13%3A18%3A20Z&se=2025-04-26T15%3A18%3A20Z&sp=r&sv=2024-08-04&sr=b&rscd=inline&rsct=image/png&skoid=cc612491-d948-4d2e-9821-2683df3719f5&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2025-04-25T22%3A53%3A11Z&ske=2025-04-26T22%3A53%3A11Z&sks=b&skv=2024-08-04&sig=rpFuE%2BWSXDzrEWkxFXHjNZGcSjyf23Wqu6j3pCJyDn8%3D",
+      "prompt": "Professional construction tools organized at a jobsite, including power tools, hand tools, and measuring equipment. The tools should appear well-maintained and organized in toolboxes, bags, or on a mobile workstation. Include both general construction tools and specialized tools for specific trades. The scene should emphasize organization and safety.",
+      "timestamp": 1745677101046,
+      "favorite": false
+    },
+    {
+      "id": "floorplan-1745681349403",
+      "category": "floorplan",
+      "path": "/generated-images/floorplan/floorplan-1745681349403.png",
+      "originalUrl": "https://oaidalleapiprodscus.blob.core.windows.net/private/org-5NAqmTE7iiC15nauZ9hvHjeI/user-QzTP612GaX8a0kE2QC1K5iYo/img-Daj0XT42aiuLlB33yAvcmN1W.png?st=2025-04-26T14%3A29%3A08Z&se=2025-04-26T16%3A29%3A08Z&sp=r&sv=2024-08-04&sr=b&rscd=inline&rsct=image/png&skoid=cc612491-d948-4d2e-9821-2683df3719f5&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2025-04-26T15%3A29%3A08Z&ske=2025-04-27T15%3A29%3A08Z&sks=b&skv=2024-08-04&sig=uauiVFgcNxTONPcrM33eEFrJdvydOPzNz6c3VWd3M7w%3D",
+      "prompt": "A detailed residential floor plan showing room layouts, dimensions, and architectural elements. Include furniture placement, door swings, and room labels. The style should be clean and professional with a white background and the BuildTrack Pro blue for lines and annotations. Include elements like bathrooms, kitchens, bedrooms, and living spaces with appropriate symbols.",
+      "timestamp": 1745681350216,
+      "favorite": false
+    },
+    {
+      "id": "floorplan-blueprint-1745681351414",
+      "category": "floorplan",
+      "variant": "blueprint",
+      "path": "/generated-images/floorplan/floorplan-blueprint-1745681351414.png",
+      "originalUrl": "https://oaidalleapiprodscus.blob.core.windows.net/private/org-5NAqmTE7iiC15nauZ9hvHjeI/user-QzTP612GaX8a0kE2QC1K5iYo/img-LPaHIOLJtpNkm6UkW44YGzdI.png?st=2025-04-26T14%3A29%3A11Z&se=2025-04-26T16%3A29%3A11Z&sp=r&sv=2024-08-04&sr=b&rscd=inline&rsct=image/png&skoid=cc612491-d948-4d2e-9821-2683df3719f5&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2025-04-26T01%3A56%3A22Z&ske=2025-04-27T01%3A56%3A22Z&sks=b&skv=2024-08-04&sig=Yvw/q9tcxCzmrsZYwd00IdhRv%2BT%2Bj%2Bl2c2CFQYdZNZU%3D",
+      "prompt": "A technical blueprint-style floor plan with detailed measurements, structural elements, and building systems. Use the classic blueprint blue background with white lines. Include architectural symbols, dimension lines, and technical annotations. The plan should show structural elements, electrical systems, plumbing, and HVAC components with industry-standard symbols.",
+      "timestamp": 1745681352028,
+      "favorite": false
+    }
+  ],
+  "selectedImages": {}
+}

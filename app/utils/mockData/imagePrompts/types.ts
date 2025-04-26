@@ -30,10 +30,13 @@ export interface GenerateMockImageOptions {
   variant?: ImageVariant;
   size?: string;
   fallbackUrl?: string;
+  forceNew?: boolean;
 }
 
 export interface ImageGenerationResponse {
   url: string;
   success: boolean;
   error?: string;
+  originalUrl?: string; // Original OpenAI URL when image is saved locally
+  warning?: string; // Warning message when image couldn't be saved
 }

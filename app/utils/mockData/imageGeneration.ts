@@ -30,7 +30,8 @@ export async function generateMockImage({
   category,
   variant,
   size = '1024x1024',
-  fallbackUrl
+  fallbackUrl,
+  forceNew = false
 }: GenerateMockImageOptions): Promise<string> {
   // Determine the appropriate fallback URL
   const defaultFallback = FALLBACK_IMAGES[category] || FALLBACK_IMAGES.default;
@@ -55,7 +56,8 @@ export async function generateMockImage({
     const params = new URLSearchParams({
       category,
       ...(variant && { variant }),
-      size
+      size,
+      ...(forceNew && { forceNew: 'true' })
     });
 
     console.log(`Attempting to generate mock image: category=${category}, variant=${variant || 'default'}, size=${size}`);
@@ -79,13 +81,20 @@ export async function generateMockImage({
       return finalFallbackUrl;
     }
     
-    console.log('Successfully generated mock image:', data.url?.substring(0, 50) + '...');
+    // The URL could be either a local path (saved image) or an external URL
+    const imageUrl = data.url;
+    console.log('Successfully generated/retrieved mock image:', imageUrl.substring(0, 50) + '...');
+    
+    // Store additional information if available (like the original OpenAI URL)
+    if (data.originalUrl) {
+      console.log('Original OpenAI URL:', data.originalUrl.substring(0, 50) + '...');
+    }
     
     // Cache the successful result for 24 hours
     // This prevents unnecessary API calls and costs
-    cache.set(cacheKey, data.url, 60 * 60 * 24);
+    cache.set(cacheKey, imageUrl, 60 * 60 * 24);
     
-    return data.url;
+    return imageUrl;
   } catch (error) {
     console.error('Error generating mock image:', error);
     return finalFallbackUrl;

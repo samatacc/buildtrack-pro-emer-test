@@ -5,6 +5,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getPromptForCategory } from '../../utils/mockData/imagePrompts';
 import { ImageCategory, ImageVariant } from '../../utils/mockData/imagePrompts/types';
+import { saveImageFromUrl, findExistingImage } from '../../utils/mockData/imageSaver';
 
 // Environment-specific constants
 const IS_DEV = process.env.NODE_ENV === 'development';
@@ -31,13 +32,14 @@ export async function GET(request: NextRequest) {
       { status: 403 }
     );
   }
-
+  
   // Get query parameters
   const searchParams = request.nextUrl.searchParams;
   const category = searchParams.get('category') as ImageCategory;
   const variant = searchParams.get('variant') as ImageVariant | null;
   const size = searchParams.get('size') || '1024x1024';
-
+  const forceNew = searchParams.get('forceNew') === 'true';
+  
   // Validate parameters
   if (!category) {
     return NextResponse.json(
@@ -45,6 +47,21 @@ export async function GET(request: NextRequest) {
       { status: 400 }
     );
   }
+  
+  // Check for existing images unless force new is specified
+  if (!forceNew) {
+    const existingImagePath = findExistingImage(category, variant || undefined);
+    if (existingImagePath) {
+      console.log(`Using existing image: ${existingImagePath}`);
+      return NextResponse.json({
+        url: existingImagePath,
+        success: true,
+        reused: true
+      });
+    }
+  }
+
+  // Query parameters already parsed at the beginning of the function
 
   try {
     const apiKey = process.env.OPENAI_API_KEY;
@@ -76,13 +93,33 @@ export async function GET(request: NextRequest) {
     // Call OpenAI API for image generation
     console.log('Making request to OpenAI API with prompt:', prompt);
     
+    // Get organization and project IDs for project-specific API keys if available
+    const orgId = process.env.OPENAI_ORG_ID;
+    const projectId = process.env.OPENAI_PROJECT_ID;
+    
+    // Prepare headers with required Authorization
+    const headers: Record<string, string> = {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${apiKey}`
+    };
+    
+    // Add optional organization and project headers if provided
+    if (orgId) {
+      headers['OpenAI-Organization'] = orgId;
+    }
+    
+    if (projectId) {
+      headers['OpenAI-Project'] = projectId;
+    }
+    
+    console.log('Using project-specific API key with headers:', 
+      Object.keys(headers).filter(h => h !== 'Authorization')
+    );
+    
     // Call OpenAI API for image generation
     const response = await fetch('https://api.openai.com/v1/images/generations', {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${apiKey}`
-      },
+      headers,
       body: JSON.stringify({
         model: 'dall-e-3',
         prompt,
@@ -149,11 +186,29 @@ export async function GET(request: NextRequest) {
         { status: 200 }
       );
     }
-
-    return NextResponse.json({
-      url: imageUrl,
-      success: true
-    });
+    
+    // Save the image to local storage
+    try {
+      console.log('Saving image to local storage:', { category, variant });
+      const savedImagePath = await saveImageFromUrl(imageUrl, category, variant || undefined, imageUrl);
+      
+      console.log('Image saved successfully:', savedImagePath);
+      
+      return NextResponse.json({
+        url: savedImagePath, // Return the local path instead of OpenAI URL
+        originalUrl: imageUrl, // Keep the original URL for reference
+        success: true,
+        reused: false
+      });
+    } catch (saveError) {
+      console.error('Error saving image:', saveError);
+      // Fall back to returning the original URL if saving fails
+      return NextResponse.json({
+        url: imageUrl,
+        success: true,
+        warning: 'Image was generated but could not be saved locally'
+      });
+    }
   } catch (error) {
     console.error('Error generating mock image:', error);
     

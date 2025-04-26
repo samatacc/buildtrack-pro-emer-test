@@ -22,6 +22,29 @@ export async function GET(request: NextRequest) {
   
   try {
     // Based on test type, make the appropriate request
+    // Get organization and project IDs for project-specific API keys if available
+    const orgId = process.env.OPENAI_ORG_ID;
+    const projectId = process.env.OPENAI_PROJECT_ID;
+    
+    // Prepare headers with required Authorization
+    const headers: Record<string, string> = {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${process.env.OPENAI_API_KEY}`
+    };
+    
+    // Add optional organization and project headers if provided
+    if (orgId) {
+      headers['OpenAI-Organization'] = orgId;
+    }
+    
+    if (projectId) {
+      headers['OpenAI-Project'] = projectId;
+    }
+    
+    console.log('Using project-specific API key with headers:', 
+      Object.keys(headers).filter(h => h !== 'Authorization')
+    );
+    
     if (testType === 'image') {
       // Test simple image generation with DALL-E 3
       console.log('Testing DALL-E 3 image generation...');
@@ -31,8 +54,7 @@ export async function GET(request: NextRequest) {
       const imageResponse = await fetch('https://api.openai.com/v1/images/generations', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${process.env.OPENAI_API_KEY}`
+          ...headers
         },
         body: JSON.stringify({
           model: 'dall-e-3',
@@ -72,11 +94,13 @@ export async function GET(request: NextRequest) {
       });
     } else {
       // Default: Test models endpoint
+      // Use the same headers but without content-type for GET request
+      const getHeaders = { ...headers };
+      delete getHeaders['Content-Type'];
+      
       const response = await fetch('https://api.openai.com/v1/models', {
         method: 'GET',
-        headers: {
-          'Authorization': `Bearer ${process.env.OPENAI_API_KEY}`
-        }
+        headers: getHeaders
       });
       
       console.log('OpenAI API status code:', response.status);
