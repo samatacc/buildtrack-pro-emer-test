@@ -4,13 +4,11 @@
 generator client {
   provider        = "prisma-client-js"
   output          = "../lib/generated/prisma"
-  previewFeatures = ["postgresqlExtensions"]
 }
 
 datasource db {
   provider   = "postgresql"
   url        = env("DATABASE_URL")
-  extensions = [pgvector]
 }
 
 // Core Identity & Access Control Models
