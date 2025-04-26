@@ -12,7 +12,9 @@ module.exports = {
         primary: {
           blue: 'rgb(24,62,105)',
           orange: 'rgb(236,107,44)'
-        }
+        },
+        'primary-blue': 'rgb(24,62,105)',
+        'primary-orange': 'rgb(236,107,44)',
       },
       animation: {
         'fade-in': 'fadeIn 0.5s ease-in-out',

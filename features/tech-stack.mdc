@@ -1,0 +1,115 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# tech-stack
+
+BuildTrack Pro: Complete Technical Stack
+Frontend Technologies
+Core Framework
+Next.js 15 (App Router) - For server-side rendering, static generation, and API routes
+TypeScript - For type safety and developer experience
+React 18+ - Component-based UI development
+Styling & Design
+TailwindCSS - Utility-first CSS framework
+shadcn/ui - Primary UI foundation providing robust, accessible, and customizable components
+Custom Design System:
+- Based on shadcn/ui's theming capabilities for consistent brand identity
+- Selective neumorphic elements for depth and visual interest (buttons, cards)
+- Focus on maintainability and accessibility while preserving aesthetics
+- Careful implementation of shadows and contrast for optimal usability
+Framer Motion - Animation library for transitions and interactions
+State Management
+Zustand - Lightweight state management
+TanStack Query (React Query) - Server state management, caching, and synchronization
+React Context - For global application state where appropriate
+Form Management
+React Hook Form - Performance-focused form library
+Zod - TypeScript-first schema validation
+UI Enhancements
+Radix UI - Accessible primitive components
+date-fns - Date manipulation utilities
+react-dropzone - File upload handling
+Recharts - React charting library for analytics
+Mapbox GL JS - For location-based features
+Mobile Optimization
+Workbox - For PWA support and offline capabilities
+react-swipeable - Touch gestures support
+Use-device-detect - Adaptive rendering based on device
+Backend Technologies
+API Layer
+tRPC - End-to-end typesafe API development
+API Routes - Next.js API routing for simpler endpoints
+OpenAPI - Specification for third-party integrations
+Authentication & Authorization
+Supabase Auth - Authentication system with multiple providers
+JWT - Token-based authentication
+Row Level Security (RLS) - Database-level security
+Database
+PostgreSQL - Primary relational database (via Supabase)
+pgvector - Vector embeddings for AI features
+Redis - Caching and real-time features
+Prisma - ORM for database access with type safety
+File Storage
+Vercel Blob - For file storage and delivery
+Supabase Storage - Additional blob storage options
+Sharp - Image processing for optimizations and thumbnails
+AI Services
+OpenAI - GPT models for text generation and analysis
+Google Cloud Vision AI - For photo analysis and object detection
+OpenAI Whisper - Speech-to-text for voice inputs
+Mindee - Document data extraction (receipts, permits)
+Background Processing
+QStash - Message queue for background jobs
+Edge Functions - Serverless compute for API operations
+Cron - Scheduled jobs for reports and notifications
+Realtime Features
+Supabase Realtime - WebSocket-based real-time data
+Server-Sent Events - For notification streams
+Broadcast Channel API - For tab synchronization
+DevOps & Infrastructure
+Hosting & Deployment
+Vercel - Frontend and serverless functions hosting
+Supabase - Backend database and authentication
+Cloudflare - CDN and DNS management
+CI/CD
+GitHub Actions - Automated testing and deployment
+Husky - Git hooks for code quality
+ESLint/Prettier - Code quality and formatting
+Monitoring & Analytics
+Sentry - Error tracking and performance monitoring
+Axiom - Log management and analysis
+PostHog - Product analytics and user behavior
+Testing
+Vitest - Unit testing framework
+Playwright - End-to-end testing
+MSW - API mocking for testing
+Testing Library - Component testing utilities
+Marketing Site
+CMS
+Sanity.io - Headless CMS for marketing content
+GraphQL - API for content fetching
+Next.js - Static site generation
+Analytics & Marketing
+Google Analytics 4 - Website analytics
+Segment - Customer data platform
+HubSpot - CRM and marketing automation
+Integrations
+Key APIs
+Stripe - Payment processing
+SendGrid - Transactional emails
+AccuWeather - Weather data
+DocuSign/PandaDoc - Document signing
+QuickBooks/Sage - Accounting integration
+This comprehensive technical stack provides all the tools needed to implement BuildTrack Pro according to our specifications, with an emphasis on performance, type safety, and scalability.
+
+.cursor/
+└── rules/
+    ├── authorization.rules    # Permissions & RLS policies
+    ├── data_models.rules      # Core entities/relationships
+    ├── feature_flags.rules    # Feature toggle management
+    ├── workflows.rules        # User journey maps
+    └── audit.rules            # Logging/versioning requirements
+
+

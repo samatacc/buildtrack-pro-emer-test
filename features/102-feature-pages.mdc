@@ -1,0 +1,107 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+ ---
+description: Feature pages specifications for marketing website
+globs: app/(marketing)/features/**/*
+alwaysApply: false
+---
+# BuildTrack Pro Marketing Website: Feature Pages
+
+## 2.1 Feature Category Landing Pages
+
+### Category Overview Header:
+- Category title with descriptive headline
+- Problem-solution narrative introduction
+- Visual representation of category scope
+- Key benefits summary in bullet points
+- Category-specific testimonial highlight
+- Breadcrumb navigation showing hierarchy
+- Category icon for consistent navigation
+- Page progress indicator
+
+### Feature Grid Layout:
+- Card-based display of all features in category
+- Consistent card format with icon and name
+- Brief feature description focusing on benefits
+- Visual hover state with animation
+- Click behavior navigating to feature detail
+- Filterable by subcategory if applicable
+- Masonry layout for varied content lengths
+- Lazy loading for performance
+
+### Integration Ecosystem:
+- Related integrations showcase
+- Partner logo display with recognition
+- Integration benefit summary
+- "Works with" section for popular tools
+- API reference link for developers
+- Custom integration request option
+- Testimonial specific to integration value
+- Mobile-friendly logo grid with touch expansion
+
+## 2.2 Individual Feature Pages
+
+### Feature Hero Section:
+- Feature name and concise tagline
+- Problem statement addressing pain point
+- Solution description with key benefits
+- Primary visual demonstration (image/video)
+- "How it works" summary in steps
+- Demo request or trial CTA
+- Mobile-first visual hierarchy
+- Screenshot gallery with lightbox functionality
+
+### Use Case Scenarios:
+- Practical application examples
+- Role-based use case tabs (PM, Field Worker, Owner)
+- Step-by-step workflow demonstration
+- Expected outcomes and benefits
+- Real customer examples if available
+- Industry-specific adaptations
+- Mobile-friendly scenario viewer
+- Print option for training materials
+
+### Technical Specifications:
+- Detailed feature capabilities
+- Supported file formats/standards
+- Platform compatibility information
+- Performance expectations
+- Security and compliance details
+- API/integration possibilities
+- Requirements or prerequisites
+- Comparison with industry alternatives
+
+## 2.3 Feature Comparison
+
+### Competitive Matrix:
+- Side-by-side comparison with competitors
+- Feature presence checkmarks
+- Capabilities detail pop-ups
+- Highlighting of unique advantages
+- Fair and factual comparison approach
+- Last updated date for credibility
+- Sortable/filterable interface
+- Mobile-optimized comparison view
+
+### Industry Benchmark Comparison:
+- Performance metrics against industry standards
+- Time-saving quantification
+- Cost efficiency calculations
+- Quality improvement metrics
+- Data source citations for credibility
+- Methodology explanation expandable section
+- Custom benchmark request option
+- Print-friendly version for presentations
+
+### ROI Case Builder:
+- Interactive ROI calculation tool
+- Industry and company size selectors
+- Current process efficiency inputs
+- Expected improvement visualization
+- Payback period calculation
+- Annual savings projection
+- Customizable assumptions
+- Results export functionality

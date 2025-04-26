@@ -1,0 +1,102 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+ # BuildTrack Pro Admin Console: System Maintenance & Operations
+
+## 14.1 Database Management
+
+### Database Performance:
+- Query performance monitoring
+- Index management interface
+- Table size and growth tracking
+- Slow query identification
+- Optimization recommendation engine
+- Database parameter configuration
+- Connection pool management
+- Read/write operation balancing
+
+### Data Migration Tools:
+- Migration planning interface
+- Schema comparison tools
+- Data mapping configuration
+- Validation rule definition
+- Test migration capability
+- Rollback preparation
+- Migration scheduling
+- Progress monitoring dashboard
+
+### Backup Management:
+- Backup schedule configuration
+- Storage location management
+- Retention policy definition
+- Backup verification testing
+- Restoration test automation
+- Point-in-time recovery options
+- Backup encryption management
+- Cross-region backup configuration
+
+## 14.2 Infrastructure Operations
+
+### Environment Management:
+- Production environment configuration
+- Staging environment controls
+- Development environment settings
+- Environment comparison tools
+- Configuration synchronization
+- Environment-specific variables
+- Isolation policy enforcement
+- Access control by environment
+
+### Deployment Management:
+- Release planning interface
+- Deployment schedule configuration
+- Change approval workflow
+- Deployment automation controls
+- Rollback trigger definition
+- Blue-green deployment options
+- Canary release configuration
+- Post-deployment verification
+
+### Scaling Operations:
+- Auto-scaling rule configuration
+- Manual scaling controls
+- Resource allocation management
+- Load balancer configuration
+- Geographic distribution settings
+- Capacity reservation planning
+- Utilization threshold definition
+- Cost optimization controls
+
+## 14.3 Service Health
+
+### Monitoring Configuration:
+- Alert threshold definition
+- Metric collection configuration
+- Health check setup
+- Synthetic transaction creation
+- Uptime monitoring settings
+- Performance benchmark definition
+- SLA target configuration
+- Notification routing rules
+
+### Incident Response:
+- Incident detection settings
+- Severity classification rules
+- Escalation path configuration
+- On-call rotation management
+- Communication template creation
+- Status page configuration
+- Incident resolution tracking
+- Post-mortem documentation
+
+### Maintenance Planning:
+- Maintenance window scheduling
+- Impact assessment tools
+- User notification management
+- Service degradation configuration
+- Rollback planning
+- Dependency analysis for changes
+- Staggered deployment planning
+- Success criteria definition

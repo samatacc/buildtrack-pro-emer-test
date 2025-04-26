@@ -1,0 +1,102 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+ # BuildTrack Pro Admin Console: System Configuration & Customization
+
+## 11.1 Global Settings
+
+### System Defaults:
+- Time zone configuration
+- Date and time format settings
+- Currency and number formatting
+- Language preference defaults
+- Default user preferences
+- System measurement units
+- Default notification settings
+- Session timeout configuration
+
+### White Labeling Options:
+- Logo replacement management
+- Color scheme customization
+- Email sender customization
+- Custom domain configuration
+- Favicon management
+- Custom CSS injection
+- Landing page customization
+- Default email template branding
+
+### Legal Document Management:
+- Terms of service maintenance
+- Privacy policy administration
+- Cookie policy configuration
+- Acceptable use policy control
+- Service level agreement management
+- Copyright notice configuration
+- Compliance statement maintenance
+- Version history and acceptance tracking
+
+## 11.2 Workflow Configuration
+
+### Process Designer:
+- Visual workflow creation tools
+- Stage and step definition
+- Conditional logic configuration
+- Approval hierarchy setup
+- Automated action definition
+- SLA and deadline configuration
+- Notification trigger mapping
+- Escalation path definition
+
+### Form Builder:
+- Custom form creation interface
+- Field type selection and configuration
+- Validation rule definition
+- Conditional visibility settings
+- Default value configuration
+- Layout and styling controls
+- Mobile responsiveness settings
+- Form submission handling configuration
+
+### Automation Rules:
+- Trigger condition definition
+- Action sequence configuration
+- Scheduling options for automation
+- Variable and parameter handling
+- Error handling configuration
+- Testing and simulation tools
+- Performance impact assessment
+- Version control for automation rules
+
+## 11.3 Custom Fields & Metadata
+
+### Field Management:
+- Custom field creation interface
+- Data type selection and validation
+- Field display configuration
+- Default value settings
+- Required field designation
+- Help text management
+- Field dependency rules
+- Field visibility by role/plan
+
+### Entity Customization:
+- Object schema extension
+- Relationship definition
+- Custom object creation
+- Field grouping and layout
+- Search configuration by entity
+- Filtering capability definition
+- Autonumbering and ID management
+- History tracking configuration
+
+### Validation Rules:
+- Data validation rule creation
+- Cross-field validation logic
+- Error message customization
+- Validation timing configuration
+- Bypass permission management
+- Bulk validation tools
+- Testing interface for rules
+- Import/export of validation rules

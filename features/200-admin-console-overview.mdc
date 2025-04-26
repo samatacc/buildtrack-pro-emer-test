@@ -1,0 +1,35 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+ # BuildTrack Pro Admin Console: Overview
+
+This is the master file for BuildTrack Pro admin console specifications. It provides a high-level overview of all admin console components with references to detailed specification files.
+
+## Main Sections
+The admin console consists of these primary sections, each with detailed specifications in their own files:
+
+1. Admin Console Dashboard (@201-admin-console-dashboard.mdc)
+2. Customer & Organization Management (@202-customer-organization-management.mdc)
+3. Feature & Product Management (@203-feature-product-management.mdc)
+4. System Performance & Security (@204-system-performance-security.mdc)
+5. Data & Analytics Management (@205-data-analytics-management.mdc)
+6. Marketing & Growth Tools (@206-marketing-growth-tools.mdc)
+7. Financial Operations (@207-financial-operations.mdc)
+8. User Administration (@208-user-administration.mdc)
+9. Content & Documentation Management (@209-content-documentation-management.mdc)
+10. Integration & API Management (@210-integration-api-management.mdc)
+11. System Configuration & Customization (@211-system-configuration-customization.mdc)
+12. Analytics & Reporting (@212-admin-analytics-reporting.mdc)
+13. Compliance & Governance (@213-compliance-governance.mdc)
+14. System Maintenance & Operations (@214-system-maintenance-operations.mdc)
+15. Developer Tools & API (@215-developer-tools-api.mdc)
+
+## Global Design Principles
+- Consistent admin UI design language across all sections
+- Role-based access control for all administrative functions
+- Comprehensive audit logging for all administrative actions
+- Responsive design supporting desktop-first approach
+- Performance optimization for large data sets
+- Consistent navigation and information architecture

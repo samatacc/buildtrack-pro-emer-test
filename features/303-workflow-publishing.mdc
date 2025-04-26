@@ -1,0 +1,102 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+ # BuildTrack Pro CMS: Workflow & Publishing
+
+## 3.1 Editorial Workflow
+
+### Status Management:
+- Draft/published state control
+- Custom workflow state definition
+- Status transition rules
+- Status-based permission control
+- Visual status indicators
+- Status change history logging
+- Bulk status change capabilities
+- Status filter across content
+
+### Review & Approval:
+- Review request assignment
+- Approval routing configuration
+- Multi-stage approval workflows
+- Approval/rejection with comments
+- Conditional approval paths
+- Due date assignment
+- Reminder automation
+- Review completion tracking
+
+### Publishing Control:
+- Immediate publication option
+- Scheduled publishing configuration
+- Expiration date setting
+- Publication dependency checking
+- Pre-publication validation
+- Publishing queue management
+- Rollback capability
+- Emergency unpublish functionality
+
+## 3.2 Scheduling & Planning
+
+### Editorial Calendar:
+- Month/week/day calendar views
+- Content scheduling visualization
+- Drag-and-drop rescheduling
+- Content status color coding
+- Filter by content type/author
+- Publication gap identification
+- Content series planning
+- Holiday/event overlay
+
+### Content Planning:
+- Content request submission form
+- Topic ideation repository
+- Production timeline estimation
+- Resource assignment tracking
+- Priority level assignment
+- Content brief templates
+- Content goal association
+- Pipeline visualization dashboard
+
+### Automated Scheduling:
+- Optimal time suggestion
+- Frequency rule configuration
+- Conflict detection and resolution
+- Even distribution automation
+- Time zone consideration
+- Seasonal adjustment rules
+- Traffic pattern consideration
+- Publication volume balancing
+
+## 3.3 Distribution & Promotion
+
+### Channel Management:
+- Multi-channel distribution control
+- Channel-specific formatting
+- Preview by channel capability
+- Channel-specific scheduling
+- Performance tracking by channel
+- Channel priority configuration
+- Audience targeting by channel
+- Cross-channel coordination
+
+### Social Media Integration:
+- Social post creation from content
+- Platform-specific formatting
+- Image cropping by platform
+- Scheduled social posting
+- Hashtag management
+- URL shortening integration
+- Social performance tracking
+- Re-promotion scheduling
+
+### Email Newsletter Tools:
+- Newsletter template selection
+- Content block selection for email
+- Subscriber segment targeting
+- A/B testing configuration
+- Send time optimization
+- Preview and test sending
+- Performance metric tracking
+- Automated content curation

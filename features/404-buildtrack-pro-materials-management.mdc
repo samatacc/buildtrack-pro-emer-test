@@ -1,0 +1,135 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+ # BuildTrack Pro: Materials Management Module
+
+## 4.1 Materials Dashboard
+
+### Materials Overview:
+- Summary statistics (total items, value, status)
+- Low stock alerts with reorder suggestions
+- Upcoming deliveries timeline
+- Recent material activity log
+- Quick filter tabs (All, Low Stock, Ordered, Delivered)
+- Search functionality with predictive results
+- View toggle between list/card/table views
+- Add material button with quick-add option
+
+### Material Category Management:
+- Hierarchical category structure
+- Custom category creation interface
+- Drag-and-drop category reorganization
+- Category-specific attributes definition
+- Default suppliers by category
+- Unit of measure standardization
+- Visual icons for categories
+- Bulk category assignment tools
+
+### Inventory Valuation Dashboard:
+- Current inventory value calculation
+- Cost basis selection (FIFO, LIFO, average)
+- Historical value tracking chart
+- Price trend analysis by category
+- Budget impact visualization
+- Waste/loss tracking metrics
+- Export to financial systems option
+- Audit trail of value changes
+
+## 4.2 Material List & Detail
+
+### Material List Interface:
+- Comprehensive data table with customizable columns
+- Advanced filtering and sorting capabilities
+- Bulk action menu (update, transfer, generate QR)
+- Status indicators with color coding
+- Thumbnail previews where applicable
+- Quantity visualization with progress bars
+- Location information at a glance
+- Quick edit capability for key fields
+
+### Material Detail View:
+- Complete material specifications
+- Inventory levels across locations
+- Historical usage graph
+- Associated vendors with contact information
+- Price history tracking
+- Related documentation/spec sheets
+- QR code display and printing option
+- Warranty information if applicable
+- Alternative/substitute materials listing
+
+### Material Transactions Log:
+- Chronological list of all material movements
+- Transaction categorization (delivery, use, transfer, adjustment)
+- User attribution for each transaction
+- Quantity and location changes
+- Associated tasks/projects for each transaction
+- Date/time stamps with filtering
+- Notes and justification fields
+- Variance reconciliation tools
+
+## 4.3 Material Procurement
+
+### Ordering Interface:
+- Purchase order creation wizard
+- Vendor selection with preferred vendor indicators
+- Cart-based item selection with quantities
+- Price comparison from multiple vendors
+- Delivery scheduling with calendar
+- Approval workflow integration
+- Budget impact calculation
+- Template-based quick ordering
+
+### Vendor Management:
+- Vendor database with complete contact information
+- Performance metrics (delivery times, quality ratings)
+- Price history tracking by material
+- Document storage for agreements/terms
+- Communication log with vendors
+- Preferred vendor flagging
+- Alternative vendor suggestions
+- Integration with accounting systems
+
+### Order Tracking:
+- Status monitoring for all orders
+- Delivery schedule calendar view
+- Delay notifications and alerts
+- Partial delivery handling
+- Receiving interface with discrepancy recording
+- Quality inspection checklists
+- Invoice reconciliation tools
+- Reorder automation based on thresholds
+
+## 4.4 Mobile Material Management
+
+### QR/Barcode Scanning:
+- Camera activation with scanning frame
+- Multiple code format support (QR, Code128, UPC)
+- Batch scanning mode for multiple items
+- Offline capability with sync queue
+- Sound/vibration confirmation
+- Quick actions menu post-scan
+- History of recent scans
+- Manual entry fallback option
+
+### Field Inventory Management:
+- Material usage logging interface
+- Transfer between locations
+- Damage/waste reporting
+- Photo documentation of materials
+- Voice input option for notes
+- GPS tagging of material locations
+- Low-connectivity operation mode
+- Emergency order requests
+
+### Delivery Processing:
+- Delivery verification checklist
+- Quantity confirmation interface
+- Condition assessment with photo capture
+- Signature capture for proof of delivery
+- Exception reporting workflow
+- Storage location assignment
+- Notification to relevant team members
+- Integration with material tracking system

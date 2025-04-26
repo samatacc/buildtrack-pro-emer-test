@@ -1,0 +1,134 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+ # BuildTrack Pro: Communication & Notification System
+
+## 9.1 Messaging Center
+
+### Direct Messaging Interface:
+- Contact list with online status indicators
+- Conversation list with preview and unread count
+- Message composer with rich text formatting
+- File and image attachment capabilities
+- Emoji and reaction support
+- Read receipts with timestamp
+- Message search functionality
+- Thread organization and following
+
+### Group Messaging:
+- Group creation with member management
+- Permission settings for posting/viewing
+- @mention functionality for specific members
+- Topic organization within groups
+- Pinned messages for important information
+- Poll/survey creation within groups
+- Calendar integration for events
+- File library specific to group
+
+### Message Organization:
+- Conversation filtering and sorting
+- Starred/flagged message tracking
+- Follow-up reminders on messages
+- Conversation archiving
+- Message categorization system
+- Priority flagging capabilities
+- Muting options for notifications
+- Folder organization for conversations
+
+## 9.2 Notification System
+
+### Notification Center:
+- Centralized feed of all notifications
+- Categorization by type (task, message, system)
+- Read/unread status tracking
+- Importance level indicators
+- Action buttons directly in notifications
+- Clear all/mark all as read functionality
+- Filter and search capabilities
+- Preference access shortcut
+
+### Notification Delivery:
+- In-app notification badges
+- Push notifications for mobile
+- Email notifications with frequency control
+- SMS for critical alerts
+- Browser notifications for desktop
+- Sound alerts with customization
+- Banner/toast appearance options
+- Do not disturb scheduling
+
+### Notification Preferences:
+- Granular control by notification type
+- Time-based delivery settings
+- Channel selection per notification type
+- Priority threshold configuration
+- Grouping and digest options
+- Project-specific override settings
+- Role-based default templates
+- Temporary suspension options
+
+## 9.3 Announcement System
+
+### Project Announcements:
+- Creation interface with formatting tools
+- Audience selection (all, specific roles, individuals)
+- Scheduling for future delivery
+- Importance level setting
+- Duration control (expiration)
+- Delivery channel selection
+- Acknowledgment requirement option
+- Visibility tracking of who has seen
+
+### Company News Feed:
+- Organization-wide announcement channel
+- Category tagging for classification
+- Media embedding capabilities
+- Interactive elements (polls, confirmations)
+- Comment thread on announcements
+- Archiving system for past announcements
+- Featured/pinned announcement control
+- Analytics on engagement
+
+### Field Alerts:
+- Urgent notification system for field issues
+- Location tagging on floorplan
+- Severity classification system
+- Distribution to affected team members
+- Response tracking and escalation
+- Resolution workflow integration
+- Photo/video attachment capability
+- Historical alert log with resolution details
+
+## 9.4 Weather Integration
+
+### Weather Dashboard:
+- Current conditions for project location
+- 7-day forecast visualization
+- Severe weather alerts with color coding
+- Weather impact assessment on schedule
+- Historical weather tracking
+- Season-specific risk indicators
+- Multiple location monitoring
+- Custom weather triggers configuration
+
+### Weather Alert System:
+- Severe weather warning notification
+- Task-specific weather impact alerts
+- Material protection recommendations
+- Schedule adjustment suggestions
+- Crew safety notifications
+- Customizable alert thresholds
+- Automatic rescheduling proposals
+- Manual override capabilities
+
+### Weather-Based Automation:
+- Schedule adjustments based on forecast
+- Task reprioritization during weather events
+- Automated communications to stakeholders
+- Weather delay documentation
+- Alternative task suggestions for indoor work
+- Resource reallocation recommendations
+- Climate control system integration
+- Historical weather pattern analysis

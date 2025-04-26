@@ -1,0 +1,107 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+ ---
+description: Mobile experience specifications for marketing website
+globs: app/(marketing)/**/*
+alwaysApply: false
+---
+# BuildTrack Pro Marketing Website: Mobile Experience
+
+## 8.1 Mobile-Specific Design
+
+### Mobile Navigation:
+- Hamburger menu with smooth animation
+- Persistent bottom navigation bar
+- One-thumb reachable design
+- Prominent search accessibility
+- Breadcrumb trail for deep pages
+- Back button behavior optimization
+- Progress indicators for multi-step processes
+- Context preservation during navigation
+
+### Touch Optimization:
+- Large, easily tappable targets (minimum 44px)
+- Appropriate spacing between interactive elements
+- Swipe gestures for carousel content
+- Pull-to-refresh for dynamic content
+- Touch feedback (haptic where supported)
+- Pinch-to-zoom for detailed images
+- Horizontal scrolling for tables/comparisons
+- Touch-friendly form elements
+
+### Mobile Performance:
+- Image lazy loading and optimization
+- Reduced animation for battery conservation
+- Content prioritization for limited bandwidth
+- Offline reading capability for blog/resources
+- Lightweight page structure
+- Critical CSS loading prioritization
+- Font subsetting for faster loading
+- SDK loading prioritization
+
+## 8.2 Responsive Content
+
+### Adaptive Layouts:
+- Fluid grid system implementation
+- Breakpoint-specific content reorganization
+- Column stacking for narrow viewports
+- Content priority shifts for mobile
+- White space optimization for readability
+- Font size adjustment for legibility
+- Video aspect ratio preservation
+- Table reformatting for narrow screens
+
+### Mobile-First Media:
+- Responsive image srcset implementation
+- Video bandwidth detection and quality adjustment
+- Audio controls optimized for touch
+- Thumbnail size optimization
+- Full-screen media viewing option
+- Alternative text for non-loading media
+- Background image simplification
+- Progressive image loading
+
+### Mobile Form Optimization:
+- Appropriate keyboard types for input fields
+- Autofill support for common fields
+- Inline validation with touch-friendly errors
+- Reduced form fields for mobile
+- Step-by-step form breaking
+- Persistent form data across steps
+- One-handed form completion design
+- Label visibility during input focus
+
+## 8.3 Mobile Conversion Paths
+
+### Mobile CTAs:
+- Prominent, fixed-position primary buttons
+- High-contrast action colors
+- Text sizing for readability without zooming
+- Tap area extending beyond visible button
+- Loading states with minimal movement
+- Success confirmation visibility
+- Alternative action accessibility
+- A/B testing specific to mobile conversion
+
+### Mobile Lead Generation:
+- Simplified form fields for mobile leads
+- Click-to-call prominent placement
+- SMS contact option where appropriate
+- Social login integration for faster signup
+- Progressive data collection
+- Saved form state for abandonment
+- Mobile-specific offer presentation
+- Location-based relevance indicators
+
+### Mobile Chat Support:
+- Non-intrusive chat bubble placement
+- Keyboard-aware positioning
+- Pre-written response options
+- Image attachment from camera/gallery
+- Notification permission request
+- Background operation capability
+- Session persistence across pages
+- Bandwidth-conscious message delivery
