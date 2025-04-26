@@ -1,0 +1,70 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+ # BuildTrack Pro Admin Console: Dashboard
+
+## 1.1 Executive Overview
+
+### Business Health Dashboard:
+- Real-time active user count with trend graph
+- MRR/ARR visualization with growth indicators
+- Customer acquisition and churn rates
+- User engagement metrics (DAU/WAU/MAU)
+- Storage utilization across platform
+- System health status indicators
+- Critical alerts and notifications panel
+- Period comparison toggles (daily, weekly, monthly, quarterly, yearly)
+
+### Key Performance Metrics:
+- User growth trajectory charts
+- Feature adoption heatmap by percentage
+- Revenue per user calculations
+- Cost per feature metrics
+- Customer lifetime value estimations
+- Retention cohort analysis
+- Activation rate by onboarding path
+- Upgrade conversion visualization
+
+### Alert Center:
+- Critical system issues requiring attention
+- Security incident notifications
+- Billing and payment alerts
+- Capacity threshold warnings
+- Performance degradation indicators
+- Integration failure notifications
+- Database health warnings
+- Regulatory compliance alerts
+
+## 1.2 Quick Action Center
+
+### Admin Action Hub:
+- User management shortcuts
+- Organization creation/management
+- Feature toggle quick access
+- System status controls
+- Support ticket overview
+- Scheduled maintenance management
+- Announcement creation
+- Emergency controls for system issues
+
+### Recent Activity Log:
+- Admin actions audit trail
+- System configuration changes
+- User permission modifications
+- Billing adjustment records
+- Feature toggle changes
+- Critical error occurrences
+- Security-related events
+- Data restoration actions
+
+### Scheduled Tasks Monitor:
+- Upcoming maintenance windows
+- Automated report generation status
+- Data backup schedule and status
+- Bulk email campaigns
+- Database optimization jobs
+- Storage cleanup operations
+- Integration synchronization status
+- Scheduled feature deployments

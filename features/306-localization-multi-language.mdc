@@ -1,0 +1,102 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+ # BuildTrack Pro CMS: Localization & Multi-language
+
+## 6.1 Translation Management
+
+### Language Configuration:
+- Supported language definition
+- Default language designation
+- Language variant handling
+- Language fallback configuration
+- Translation completeness thresholds
+- Language-specific validation
+- RTL language support
+- Character encoding handling
+
+### Translation Workflow:
+- Translation job creation
+- Translator assignment
+- Translation memory integration
+- Machine translation pre-filling
+- Translation status tracking
+- Review and approval process
+- Integration with translation services
+- Bulk translation operations
+
+### Field-level Translation:
+- Translatable field designation
+- Language version side-by-side editing
+- Translation difference highlighting
+- Missing translation identification
+- Translation history tracking
+- Translation reuse suggestions
+- Context provision for translators
+- Translation validation rules
+
+## 6.2 Localization Features
+
+### Content Adaptations:
+- Regional variant management
+- Culture-specific content substitution
+- Adaptive image selection by locale
+- Region-specific component swapping
+- Seasonal content variation
+- Holiday-specific content rules
+- Local example substitution
+- Cultural sensitivity checking
+
+### Locale-specific Metadata:
+- SEO metadata by language
+- Regional keyword optimization
+- Local schema markup
+- Geo-targeting configuration
+- Language URL structure
+- Hreflang tag management
+- Local search engine optimization
+- Regional compliance metadata
+
+### Format Localization:
+- Date format by locale
+- Number and currency formatting
+- Address format adaptation
+- Measurement unit conversion
+- Phone number formatting
+- Time zone display adaptation
+- Name order customization
+- Culturally appropriate salutations
+
+## 6.3 Internationalization Tools
+
+### Content Reuse Across Locales:
+- Global content component sharing
+- Selective translation inheritance
+- Master content synchronization
+- Deviation tracking from source
+- Update propagation management
+- Override marking and tracking
+- Reusable translation memory
+- Global vs. local content designation
+
+### Translation Quality Tools:
+- Terminology consistency checking
+- Translation memory leverage
+- Machine translation quality scoring
+- Human translation quality metrics
+- Side-by-side comparison tools
+- Linguistic validation rules
+- Glossary term highlighting
+- Context reference provision
+
+### Localization Dashboard:
+- Translation progress visualization
+- Language coverage metrics
+- Translation workflow status
+- Quality score by language
+- Top missing translations
+- Recent translation activity
+- Translator performance metrics
+- Cost and effort tracking

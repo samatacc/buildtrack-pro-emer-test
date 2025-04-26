@@ -1,0 +1,107 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+ ---
+description: Resources and content hub specifications for marketing website
+globs: app/(marketing)/resources/**/*,app/(marketing)/blog/**/*
+alwaysApply: false
+---
+# BuildTrack Pro Marketing Website: Resources & Content Hub
+
+## 4.1 Blog Platform
+
+### Blog Homepage Layout:
+- Featured article hero with image
+- Category navigation with visual indicators
+- Recent post grid with thumbnails
+- Popular/trending posts sidebar
+- Tag cloud for topic exploration
+- Search functionality with suggestions
+- Author highlights with expertise
+- Mobile-responsive card layout
+
+### Article Page Structure:
+- Clean reading layout with optimal width
+- Estimated reading time display
+- Progress bar for long articles
+- Table of contents for navigation
+- Related article suggestions
+- Author bio with expertise highlights
+- Social sharing buttons
+- Comment/discussion section
+
+### Content Categorization System:
+- Primary category taxonomy
+- Multi-level subcategories
+- Tag system for cross-categorization
+- Series grouping for sequential content
+- Industry vertical classifications
+- Experience level indicators
+- Content type labeling
+- Filter and sort capabilities
+
+## 4.2 Resource Library
+
+### Document Repository:
+- Whitepaper and e-book listings
+- PDF preview thumbnails
+- Brief description with key takeaways
+- Download with lead capture form
+- File size and page count display
+- Last updated date indication
+- Related resource recommendations
+- Mobile-optimized download process
+
+### Template Gallery:
+- Construction template previews
+- Template purpose and benefit explanation
+- Industry compatibility information
+- Download with optional customization
+- Usage instruction access
+- User rating and popularity indicators
+- Contribution option for partners
+- Mobile preview optimization
+
+### Video Learning Center:
+- Categorized video tutorials
+- Playlist organization by topic
+- Thumbnail previews with duration
+- Transcription availability indicator
+- Progressive learning path suggestions
+- Certification tracking integration
+- Watch history and bookmarking
+- Mobile video optimization
+
+## 4.3 Webinar & Event System
+
+### Upcoming Webinar Promotion:
+- Featured webinar announcement cards
+- Date, time, and duration display
+- Topic description and learning objectives
+- Speaker profiles with credentials
+- Registration form with calendar integration
+- Reminder option configuration
+- Timezone automatic detection
+- Capacity and availability indicators
+
+### Webinar Recording Archive:
+- Past webinar catalog with search
+- Topic and date filtering
+- Preview thumbnail with duration
+- Engagement and rating metrics
+- Related content recommendations
+- Downloadable slides option
+- Q&A summary access
+- Mobile-friendly video player
+
+### Virtual Event Platform:
+- Event agenda display with sessions
+- Speaker profile gallery
+- Registration and attendance tracking
+- Virtual booth functionality
+- Networking capability description
+- Live demo scheduling
+- Post-event access information
+- Mobile event experience

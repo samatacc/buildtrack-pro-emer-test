@@ -1,0 +1,102 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+ # BuildTrack Pro Admin Console: Developer Tools & API
+
+## 15.1 Developer Portal
+
+### Documentation Management:
+- API documentation generation
+- Documentation versioning
+- Interactive API explorer
+- Code sample creation and testing
+- Authentication method documentation
+- Schema definition maintenance
+- Error code documentation
+- Changelog management
+
+### Developer Account Management:
+- Developer registration workflow
+- API key generation and management
+- Usage quota assignment
+- Rate limit configuration
+- Access level permission
+- Developer agreement tracking
+- Usage monitoring by account
+- Communication preferences
+
+### SDK & Library Management:
+- SDK version management
+- Language-specific package administration
+- Compatibility tracking
+- Release notes management
+- Deprecation scheduling
+- Sample application maintenance
+- Library usage analytics
+- Bug tracking and resolution
+
+## 15.2 API Testing & Monitoring
+
+### API Testing Tools:
+- Endpoint testing interface
+- Request builder with authentication
+- Response validator configuration
+- Test case management
+- Environment variable support
+- Collection runner for test suites
+- Mock response configuration
+- Test result history
+
+### Performance Monitoring:
+- Response time tracking
+- Throughput measurement
+- Error rate monitoring
+- Availability tracking
+- Rate limit utilization
+- Payload size analysis
+- Cache hit ratio tracking
+- Endpoint usage patterns
+
+### API Analytics Dashboard:
+- API call volume visualization
+- Top consumers identification
+- Error rate by endpoint
+- Average response time tracking
+- Geographical usage distribution
+- Authentication method breakdown
+- Version adoption metrics
+- Deprecation impact analysis
+
+## 15.3 API Lifecycle Management
+
+### Version Control:
+- API versioning strategy configuration
+- Version compatibility definition
+- Migration path documentation
+- Sunset policy management
+- Breaking vs. non-breaking changes
+- Legacy version support settings
+- Version routing configuration
+- Transition period management
+
+### Feature Flags for APIs:
+- API feature toggle management
+- Gradual rollout configuration
+- Consumer-specific enablement
+- Canary release settings
+- A/B testing for API responses
+- Emergency kill switch capability
+- Feature adoption tracking
+- Rollback configuration
+
+### API Governance:
+- Design standard enforcement
+- Naming convention configuration
+- Security requirement definition
+- Performance benchmark setting
+- Documentation completeness checking
+- Breaking change detection
+- Approval workflow configuration
+- Compliance requirement mapping

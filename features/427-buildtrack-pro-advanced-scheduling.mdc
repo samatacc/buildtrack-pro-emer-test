@@ -1,0 +1,166 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+ # BuildTrack Pro: Advanced Scheduling
+
+## 27.1 Schedule Development & Management
+
+### Baseline Schedule Creation:
+- Critical path method (CPM) implementation
+- Work breakdown structure integration
+- Resource-loaded schedules
+- Multiple calendar support
+- Activity coding structures
+- Milestone definition and tracking
+- Schedule templates and wizards
+- Baseline version control
+
+### Schedule Maintenance:
+- Progress tracking mechanisms
+- Schedule revision history
+- Version comparison tools
+- Schedule narrative generation
+- Look-ahead schedule extraction
+- Schedule health checking
+- Automated update workflows
+- Schedule performance metrics
+
+### Schedule Visualization:
+- Interactive Gantt charts
+- Network logic diagrams
+- Resource histograms
+- Time-scaled logic diagrams
+- Schedule compression views
+- Timeline visualization
+- S-curve analysis charts
+- Multiple critical path display
+
+## 27.2 Resource Management & Optimization
+
+### Resource Allocation:
+- Resource calendar management
+- Skill-based resource assignment
+- Resource leveling algorithms
+- Multi-project resource sharing
+- Capacity planning tools
+- Resource utilization analytics
+- Role-based resource planning
+- Resource forecasting models
+
+### Workload Balancing:
+- Automated leveling solutions
+- Manual resource adjustment tools
+- Resource conflict resolution
+- Workload smoothing algorithms
+- Peak demand identification
+- Optimization recommendations
+- Resource constraint analysis
+- Utilization thresholds and alerts
+
+### Cost-Loaded Scheduling:
+- Labor cost allocation
+- Equipment cost tracking
+- Material cost integration
+- Indirect cost distribution
+- Currency conversion support
+- Cost-loaded baselines
+- Earned value management
+- Cash flow forecasting
+
+## 27.3 Advanced Scheduling Techniques
+
+### Risk-Based Scheduling:
+- Schedule risk assessment
+- Probabilistic duration modeling
+- Monte Carlo simulation
+- Risk mitigation planning
+- Confidence level indicators
+- Risk-adjusted critical paths
+- Weather impact modeling
+- Contingency time allocation
+
+### Constraint Management:
+- Hard and soft constraint definition
+- Constraint impact analysis
+- Constraint removal strategies
+- Lead/lag relationship management
+- Date constraint visualization
+- Resource constraint tracking
+- External constraint integration
+- Constraint violation alerts
+
+### Schedule Optimization:
+- Crashing algorithms
+- Fast-tracking support
+- Multiple optimization scenarios
+- What-if analysis tools
+- Duration compression strategies
+- Critical chain methodology
+- Schedule acceleration options
+- Optimization trade-off analysis
+
+## 27.4 Integration & Collaboration
+
+### Cross-System Schedule Integration:
+- ERP schedule synchronization
+- Project management tool imports
+- BIM 4D schedule linking
+- Procurement schedule coordination
+- Subcontractor schedule integration
+- Client schedule alignment
+- Design schedule coordination
+- Facilities management handoff
+
+### Collaborative Scheduling:
+- Multi-user schedule access
+- Fragnet development and insertion
+- Schedule review workflows
+- Approval cycles management
+- Review comment tracking
+- Schedule change notifications
+- Distributed schedule updates
+- Stakeholder visibility controls
+
+### Mobile Schedule Access:
+- Field schedule updates
+- Mobile progress recording
+- Offline schedule viewing
+- On-site delay documentation
+- Mobile time impact analysis
+- Field constraint identification
+- Real-time schedule adjustment
+- Task completion verification
+
+## 27.5 Advanced Analytics & Reporting
+
+### Schedule Analysis:
+- Forensic delay analysis tools
+- Critical path analysis
+- Near-critical path identification
+- Total float consumption tracking
+- Schedule compression analysis
+- Relationship logic validation
+- Sequence optimization analysis
+- Duration sensitivity analysis
+
+### Schedule Performance Measurement:
+- SPI and CPI calculations
+- Schedule variance tracking
+- Milestone variance analysis
+- Planned vs. actual comparison
+- Progress S-curve analysis
+- Key performance indicators
+- Trend analysis and forecasting
+- Productivity rate analysis
+
+### Schedule Reporting:
+- Customizable schedule reports
+- Executive dashboard integration
+- Stakeholder-specific views
+- Schedule narrative generation
+- Automated report distribution
+- Compliance reporting templates
+- Progress visualization tools
+- Multi-project roll-up reporting

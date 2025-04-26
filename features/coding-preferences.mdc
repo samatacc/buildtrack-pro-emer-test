@@ -1,0 +1,126 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# Coding Standards & Preferences
+
+This document outlines the coding standards and preferences for the BuildTrack Pro project.
+
+## TypeScript Standards
+- Use TypeScript for all new code
+- Prefer interfaces for object types over type aliases except for unions
+- Always define return types for functions with non-trivial logic
+- Use proper typing for React component props
+- Avoid `any` types; use unknown or specific types instead
+
+## Component Structure
+- Use functional components with hooks, not class components
+- Colocate related components in feature directories
+- Extract reusable UI elements to shared component library
+- Use composition over inheritance for component design
+- Keep component files under 300 lines; split larger components
+
+## State Management
+- Use React Context for global state that changes infrequently
+- Prefer hooks for component-local state
+- Consider Zustand for complex state with frequent updates
+- Optimize re-renders with useMemo and useCallback where appropriate
+
+## Naming Conventions
+- PascalCase for React components and type definitions
+- camelCase for variables, functions, and instances
+- UPPER_CASE for constants
+- Use descriptive, intention-revealing names
+- Prefix custom hooks with "use"
+
+## File Organization
+- Group files by feature, not by type
+- Keep related files close to each other
+- Use index files for public API exports
+- Barrel exports for feature modules
+
+## CSS/Styling
+- Use Tailwind for styling components
+- Follow utility-first approach
+- Extract common patterns to custom Tailwind components
+- Use CSS variables for theming
+- Maintain responsive design principles
+
+## React & Components
+
+- Use functional components with hooks
+- Prefer composition over inheritance
+- Use React Context for deep prop sharing
+- Implement proper accessibility (a11y) attributes
+- Follow atomic design principles
+
+## File Structure
+
+- Group by feature first, then by type
+- Keep components focused on one responsibility
+- Co-locate tests with implementation files
+- Use barrel exports (index.ts) for cleaner imports
+- Keep component files under 300 lines when possible
+
+## Code Style
+
+- Use ESLint and Prettier
+- 2 space indentation
+- 80-100 character line length
+- Semi-colons required
+- Use trailing commas in multiline objects/arrays
+
+## Code Quality Rules
+- Use ESLint for static code analysis
+- Use Prettier for code formatting
+- Use Husky for pre-commit hooks
+- No commented-out code in production
+- No console.log in production (use logger service instead)
+- Implement proper error handling (no swallowed exceptions)
+
+## Error Handling Standards
+- Use custom error classes for different error categories
+- Implement Error Boundaries at feature boundaries
+- Log errors with proper context and stack traces
+- Provide user-friendly error messages with actionable feedback
+- Handle API errors consistently using error interceptors
+- Include error reporting to Sentry with proper breadcrumbs
+
+## Performance Standards
+- Component render time should not exceed 16ms (60fps)
+- Initial page load under 2 seconds on 4G connection
+- Implement code splitting at route level
+- Use React.memo for expensive renders
+- Implement virtual scrolling for large lists (>100 items)
+- Monitor and optimize bundle size (max 200KB initial JS)
+
+## Testing Requirements
+- Minimum 80% test coverage for business logic
+- Unit tests for all utility functions
+- Integration tests for critical user flows
+- E2E tests for core business processes
+- Performance testing for data-heavy features
+- Accessibility testing using jest-axe
+
+## Change Management
+- Always prefer simple solutions
+- Only make changes that are requested or confidently understood
+- Preserve existing designs and patterns when restructuring code
+- When fixing issues, exhaust all options with existing patterns before introducing new ones
+- Remove old implementations when replacing with new patterns to avoid duplicate logic
+
+## Performance & Clean Code
+- Avoid duplication of code; check for similar functionality before creating new code
+- Keep the codebase clean and well-organized
+- Avoid files over 200-300 lines of code; refactor when approaching this limit
+- Avoid writing scripts in application files, especially for one-time operations
+
+## Environment Awareness
+- Write code that accounts for different environments: dev, test, and prod
+- Only use mock data for tests, never for development or production
+- Never add stubbing or fake data patterns that affect dev or prod environments
+
+## Configuration Management
+- Never overwrite .env files without explicit confirmation
+- Keep environment-specific configuration separate and clearly documented 

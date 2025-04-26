@@ -1,0 +1,166 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+ # BuildTrack Pro: Administration System
+
+## 15.1 System Administration
+
+### Admin Dashboard:
+- System health monitoring
+- User license utilization
+- Storage usage metrics
+- API request volume
+- System performance graphs
+- Error rate monitoring
+- Background job status
+- Maintenance scheduling interface
+
+### Configuration Management:
+- Global system settings
+- Default preferences
+- Regional settings (units, currency)
+- Company branding controls
+- System-wide templates
+- Integration settings
+- Approval workflow templates
+- Notification templates
+
+### Maintenance Tools:
+- Database optimization options
+- Cache clearing utilities
+- Log management & filtering
+- Backup and restore tools
+- Data archiving utilities
+- System updates management
+- Scheduled maintenance window
+- Storage cleanup tools
+
+## 15.2 Organization Management
+
+### Company Hierarchy:
+- Multi-company structure management
+- Division and department setup
+- Office location management
+- Subsidiary relationship mapping
+- Operating region definitions
+- Cost center configuration
+- Business unit structure
+- Intercompany relationship settings
+
+### Team Management:
+- Team creation and configuration
+- Team member assignment
+- Team hierarchy definition
+- Permission inheritance settings
+- Resource allocation between teams
+- Performance measurement by team
+- Team-based notification routing
+- Cross-team collaboration settings
+
+### Resource Assignment Rules:
+- Automatic assignment algorithms
+- Workload balancing rules
+- Skill-based matching
+- Location-based assignment
+- Project type specialization
+- Client relationship continuity
+- Escalation paths
+- Out-of-office contingency handling
+
+## 15.3 Security Management
+
+### Security Policy Enforcement:
+- Password complexity requirements
+- Multi-factor authentication settings
+- Session duration limits
+- IP restriction options
+- Device management policies
+- Failed login attempt handling
+- Security question management
+- Biometric authentication options
+
+### Access Control:
+- Role definition management
+- Permission template creation
+- Custom permission sets
+- Feature-level access control
+- Data-level security policies
+- Field-level security settings
+- Record ownership rules
+- Temporary access provisioning
+
+### Security Monitoring:
+- User activity auditing
+- Login attempt tracking
+- Sensitive action logging
+- Data export monitoring
+- Permission change tracking
+- API access monitoring
+- Unusual activity detection
+- Security incident reporting
+
+## 15.4 Compliance Management
+
+### Compliance Frameworks:
+- Industry standard compliance templates
+- Custom compliance checklist creation
+- Regulatory requirement mapping
+- Compliance documentation library
+- Due diligence process templates
+- Control implementation tracking
+- Gap analysis tools
+- Certification management
+
+### Audit Support:
+- Audit trail configuration
+- Evidence collection automation
+- Snapshot generation for audits
+- Compliance report generation
+- Control effectiveness testing
+- User attestation workflows
+- Third-party audit support tools
+- Remediation tracking
+
+### Data Governance:
+- Data classification schemes
+- Retention policy management
+- Data privacy controls
+- Consent management
+- Right to be forgotten workflow
+- Data anonymization tools
+- Cross-border data transfer controls
+- Data subject request handling
+
+## 15.5 Licensing & Subscriptions
+
+### License Management:
+- User license assignment
+- License type management
+- Add-on feature licensing
+- License utilization reporting
+- License pool administration
+- User onboarding/offboarding
+- License cost allocation
+- Renewal management
+
+### Subscription Administration:
+- Subscription plan management
+- Billing cycle configuration
+- Payment method management
+- Invoice history and retrieval
+- Subscription upgrade/downgrade
+- Usage-based billing configuration
+- Contract term management
+- Renewal notification settings
+
+### Account Management:
+- Account owner designation
+- Billing contact management
+- Technical contact assignment
+- Support entitlement tracking
+- Service level agreement monitoring
+- Account health metrics
+- Customer success program enrollment
+- Relationship management tools

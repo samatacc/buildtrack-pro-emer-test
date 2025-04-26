@@ -1,0 +1,102 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+ # BuildTrack Pro CMS: Deployment & Environment Management
+
+## 9.1 Environment Configuration
+
+### Environment Setup:
+- Development environment configuration
+- Staging environment provisioning
+- Production environment isolation
+- Environment variable management
+- Configuration inheritance hierarchy
+- Environment-specific overrides
+- Feature flag by environment
+- Service account management
+
+### Dataset Management:
+- Dataset creation and configuration
+- Cross-dataset references
+- Dataset cloning capabilities
+- Data migration between datasets
+- Dataset backup automation
+- Restoration process management
+- Dataset comparison tools
+- Archival and cleanup policies
+
+### Configuration Management:
+- Configuration version control
+- Environment-specific settings
+- Secret management integration
+- Configuration validation
+- Deployment rollback capability
+- Configuration change auditing
+- Dependency tracking
+- Configuration testing framework
+
+## 9.2 Deployment Workflow
+
+### Deployment Pipeline:
+- Continuous integration setup
+- Automated build process
+- Test execution automation
+- Linting and validation
+- Schema compatibility checking
+- Preview deployment generation
+- Approval gates configuration
+- Production deployment automation
+
+### Version Control Integration:
+- Git repository connection
+- Branch strategy implementation
+- Pull request workflow
+- Commit message conventions
+- Release tagging process
+- Semantic versioning enforcement
+- Automated changelog generation
+- Source code organization
+
+### Release Management:
+- Release planning interface
+- Feature bundling for releases
+- Release notes generation
+- Deployment scheduling
+- Phased rollout configuration
+- Canary release support
+- Rollback procedure definition
+- Post-deployment verification
+
+## 9.3 Monitoring & Maintenance
+
+### Performance Monitoring:
+- Query performance tracking
+- API response time monitoring
+- Resource utilization metrics
+- Cache hit rate tracking
+- CDN performance analysis
+- Client-side rendering metrics
+- Error rate monitoring
+- Performance trend analysis
+
+### Health Checks:
+- Service availability monitoring
+- Database connectivity checking
+- API endpoint health verification
+- Storage access validation
+- Memory usage monitoring
+- CPU utilization tracking
+- Network latency measurement
+- Third-party service dependency checks
+
+### Maintenance Operations:
+- Index optimization scheduling
+- Database vacuuming
+- Log rotation and archiving
+- Backup verification testing
+- Content integrity checking
+- Reference validation
+- Unused asset cleanup
+- Cache invalidation management

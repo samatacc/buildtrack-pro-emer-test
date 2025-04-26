@@ -1,0 +1,1570 @@
+diff --git a/.env.example b/.env.example
+new file mode 100644
+index 0000000..5a967e8
+--- /dev/null
++++ b/.env.example
+@@ -0,0 +1,15 @@
++# BuildTrack Pro Environment Configuration
++
++# App Configuration
++NEXT_PUBLIC_APP_URL=http://localhost:3000
++JWT_SECRET="your-secret-key-here"
++
++# Database Configuration
++# For PostgreSQL (production/development)
++DATABASE_URL="postgresql://postgres:postgres@localhost:5432/buildtrack"
++# For SQLite (local development)
++# DATABASE_URL="file:./dev.db"
++
++# Supabase Configuration
++NEXT_PUBLIC_SUPABASE_URL=your-supabase-url
++NEXT_PUBLIC_SUPABASE_ANON_KEY=your-supabase-anon-key
+diff --git a/DATABASE_SETUP.md b/DATABASE_SETUP.md
+new file mode 100644
+index 0000000..5763e4b
+--- /dev/null
++++ b/DATABASE_SETUP.md
+@@ -0,0 +1,108 @@
++# BuildTrack Pro Database Setup Guide
++
++## Prerequisites
++
++- PostgreSQL 14+ installed
++- Node.js 16+ and npm installed
++- Prisma CLI installed (`npm install -g prisma`)
++
++## Database Configuration
++
++BuildTrack Pro uses PostgreSQL via Supabase for its database layer. The schema is managed using Prisma ORM.
++
++### Local Development Setup
++
++1. **Install PostgreSQL**
++   ```bash
++   # macOS (using Homebrew)
++   brew install postgresql
++   brew services start postgresql
++
++   # Ubuntu/Debian
++   sudo apt update
++   sudo apt install postgresql postgresql-contrib
++   sudo systemctl enable postgresql
++   sudo systemctl start postgresql
++   ```
++
++2. **Create Database**
++   ```bash
++   # Connect to PostgreSQL
++   psql postgres
++
++   # Create database and user
++   CREATE DATABASE buildtrack;
++   CREATE USER buildtrack_user WITH ENCRYPTED PASSWORD 'your_password';
++   GRANT ALL PRIVILEGES ON DATABASE buildtrack TO buildtrack_user;
++   ```
++
++3. **Install pgvector Extension**
++   The schema requires the pgvector extension for AI features:
++   ```bash
++   # As PostgreSQL superuser
++   \c buildtrack
++   CREATE EXTENSION IF NOT EXISTS pgvector;
++   ```
++
++4. **Configure Environment Variables**
++   Update your `.env` file with the database connection string:
++   ```
++   DATABASE_URL="postgresql://buildtrack_user:your_password@localhost:5432/buildtrack"
++   ```
++
++## Running Migrations
++
++To apply the database schema:
++
++```bash
++# Generate Prisma client
++npx prisma generate
++
++# Create and apply migrations
++npx prisma migrate dev --name init
++```
++
++## Database Schema Overview
++
++The BuildTrack Pro database schema includes:
++
++1. **Core Identity & Access Control**
++   - Organizations, users, roles, and permissions
++   
++2. **Dashboard Configuration**
++   - Widgets, layouts, and dashboard preferences
++   
++3. **Project Management**
++   - Projects, tasks, and milestones
++   
++4. **Notification System**
++   - Notifications and user preferences
++   
++5. **Analytics & Reporting**
++   - Reports, metrics, and KPI tracking
++
++## Row Level Security (RLS)
++
++When deployed with Supabase, the database uses Row Level Security (RLS) policies to ensure data isolation between organizations. These policies are automatically applied during migration when using Supabase.
++
++## Development Workflow
++
++When making schema changes:
++
++1. Update the Prisma schema (`prisma/schema.prisma`)
++2. Create a migration:
++   ```bash
++   npx prisma migrate dev --name descriptive_name
++   ```
++3. Commit the migration files along with schema changes
++4. Deploy the migration to production environments using:
++   ```bash
++   npx prisma migrate deploy
++   ```
++
++## Troubleshooting
++
++If you encounter the error `Can't reach database server at localhost:5432`:
++- Ensure PostgreSQL is running
++- Check if the port is correct (default is 5432)
++- Verify network accessibility and firewall settings
+diff --git a/prisma/schema.prisma b/prisma/schema.prisma
+new file mode 100644
+index 0000000..dd82dab
+--- /dev/null
++++ b/prisma/schema.prisma
+@@ -0,0 +1,672 @@
++// BuildTrack Pro Prisma Schema
++// Comprehensive schema for the Dashboard Home feature and future extensions
++
++generator client {
++  provider        = "prisma-client-js"
++  output          = "../lib/generated/prisma"
++  previewFeatures = ["postgresqlExtensions"]
++}
++
++datasource db {
++  provider   = "postgresql"
++  url        = env("DATABASE_URL")
++  extensions = [pgvector]
++}
++
++// Core Identity & Access Control Models
++
++// User model for authentication and user management
++model User {
++  id                     String                 @id @default(uuid())
++  email                  String                 @unique
++  firstName              String
++  lastName               String
++  avatarUrl              String?
++  passwordHash           String?                // Hashed password (null for OAuth users)
++  emailVerified          Boolean                @default(false)
++  phoneNumber            String?
++  organizationId         String
++  roleId                 String
++  isActive               Boolean                @default(true)
++  lastLogin              DateTime?
++  createdAt              DateTime               @default(now())
++  updatedAt              DateTime               @updatedAt
++  preferences            Json                   @default("{}")   // User preferences as JSON
++  
++  // Relations
++  organization           Organization           @relation(fields: [organizationId], references: [id], onDelete: Cascade)
++  role                   Role                   @relation(fields: [roleId], references: [id])
++  teams                  TeamMember[]
++  dashboardLayouts       DashboardLayout[]
++  assignedTasks          Task[]                 @relation("assignee")
++  createdTasks           Task[]                 @relation("creator")
++  receivedNotifications  Notification[]         @relation("recipient")
++  sentNotifications      Notification[]         @relation("sender")
++  notificationSettings   NotificationSetting?
++  createdReports         Report[]
++  
++  @@index([organizationId])
++  @@index([email])
++}
++
++// Organization model for company/team management
++model Organization {
++  id                String             @id @default(uuid())
++  name              String
++  slug              String             @unique
++  logoUrl           String?
++  isActive          Boolean            @default(true)
++  subscriptionTier  String             @default("free")
++  subscriptionEnds  DateTime?
++  createdAt         DateTime           @default(now())
++  updatedAt         DateTime           @updatedAt
++  settings          Json               @default("{}")   // Organization settings as JSON
++  
++  // Relations
++  users             User[]
++  projects          Project[]
++  roles             Role[]
++  teams             Team[]
++  widgets           Widget[]
++  dashboards        Dashboard[]
++  dashboardLayouts  DashboardLayout[]
++  notifications     Notification[]
++  reports           Report[]
++  metricDefinitions MetricDefinition[]
++  analyticsSnapshots AnalyticsSnapshot[]
++  
++  @@index([slug])
++}
++
++// Roles and Permissions
++model Role {
++  id              String        @id @default(uuid())
++  name            String
++  description     String?
++  isSystemRole    Boolean       @default(false)
++  createdAt       DateTime      @default(now())
++  updatedAt       DateTime      @updatedAt
++  organizationId  String
++  defaultWidgets  Json          @default("[]")   // Array of default widget IDs for this role
++  
++  // Relations
++  organization    Organization  @relation(fields: [organizationId], references: [id], onDelete: Cascade)
++  users           User[]
++  permissions     Permission[]
++  
++  @@unique([name, organizationId])
++  @@index([organizationId])
++}
++
++model Permission {
++  id          String   @id @default(uuid())
++  name        String   @unique
++  description String?
++  createdAt   DateTime @default(now())
++  updatedAt   DateTime @updatedAt
++  
++  // Relations
++  roles       Role[]
++}
++
++model Team {
++  id              String       @id @default(uuid())
++  name            String
++  description     String?
++  createdAt       DateTime     @default(now())
++  updatedAt       DateTime     @updatedAt
++  organizationId  String
++  
++  // Relations
++  organization    Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
++  members         TeamMember[]
++  
++  @@unique([name, organizationId])
++  @@index([organizationId])
++}
++
++model TeamMember {
++  id         String   @id @default(uuid())
++  teamId     String
++  userId     String
++  role       String   @default("member")   // e.g., "lead", "member"
++  createdAt  DateTime @default(now())
++  updatedAt  DateTime @updatedAt
++  
++  // Relations
++  team       Team     @relation(fields: [teamId], references: [id], onDelete: Cascade)
++  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
++  
++  @@unique([teamId, userId])
++  @@index([userId])
++}
++
++// Dashboard Configuration Models
++
++model Widget {
++  id                String              @id @default(uuid())
++  name              String
++  description       String?
++  widgetType        String              // e.g., "project_overview", "task_list", "timeline"
++  icon              String?
++  defaultSize       WidgetSize          @default(NORMAL)
++  minSize           WidgetSize          @default(SMALL)
++  maxSize           WidgetSize?
++  defaultSettings   Json                @default("{}")   // Default widget settings as JSON
++  isSystemWidget    Boolean             @default(false)
++  createdAt         DateTime            @default(now())
++  updatedAt         DateTime            @updatedAt
++  organizationId    String?
++  
++  // Relations
++  organization      Organization?       @relation(fields: [organizationId], references: [id], onDelete: SetNull)
++  dashboardWidgets  DashboardWidget[]
++  
++  @@index([widgetType])
++  @@index([organizationId])
++}
++
++enum WidgetSize {
++  SMALL     // 1x1
++  NORMAL    // 1x2
++  LARGE     // 2x2
++  XLARGE    // 2x3
++}
++
++model Dashboard {
++  id              String             @id @default(uuid())
++  name            String
++  description     String?
++  isDefault       Boolean            @default(false)
++  createdAt       DateTime           @default(now())
++  updatedAt       DateTime           @updatedAt
++  organizationId  String
++  
++  // Relations
++  organization    Organization       @relation(fields: [organizationId], references: [id], onDelete: Cascade)
++  layouts         DashboardLayout[]
++  dashboardMetrics DashboardMetric[]
++  
++  @@index([organizationId])
++}
++
++model DashboardLayout {
++  id                String             @id @default(uuid())
++  deviceType        DeviceType         @default(DESKTOP)
++  layoutJson        Json               // Stores the grid layout configuration
++  createdAt         DateTime           @default(now())
++  updatedAt         DateTime           @updatedAt
++  dashboardId       String
++  userId            String?
++  organizationId    String
++  
++  // Relations
++  dashboard         Dashboard          @relation(fields: [dashboardId], references: [id], onDelete: Cascade)
++  user              User?              @relation(fields: [userId], references: [id], onDelete: SetNull)
++  organization      Organization       @relation(fields: [organizationId], references: [id], onDelete: Cascade)
++  widgets           DashboardWidget[]
++  
++  @@unique([dashboardId, userId, deviceType])
++  @@index([userId])
++  @@index([dashboardId])
++  @@index([organizationId])
++}
++
++enum DeviceType {
++  MOBILE
++  TABLET
++  DESKTOP
++}
++
++model DashboardWidget {
++  id                 String           @id @default(uuid())
++  positionX          Int
++  positionY          Int
++  width              Int              @default(1)
++  height             Int              @default(1)
++  settings           Json             @default("{}")   // Widget specific settings
++  createdAt          DateTime         @default(now())
++  updatedAt          DateTime         @updatedAt
++  widgetId           String
++  dashboardLayoutId  String
++  
++  // Relations
++  widget             Widget           @relation(fields: [widgetId], references: [id], onDelete: Cascade)
++  dashboardLayout    DashboardLayout  @relation(fields: [dashboardLayoutId], references: [id], onDelete: Cascade)
++  
++  @@unique([dashboardLayoutId, positionX, positionY])
++  @@index([widgetId])
++  @@index([dashboardLayoutId])
++}
++
++// Project Management Models
++
++// Project model for construction project management
++model Project {
++  id                String          @id @default(uuid())
++  name              String
++  description       String?
++  startDate         DateTime
++  targetEndDate     DateTime
++  actualEndDate     DateTime?
++  status            ProjectStatus   @default(NOT_STARTED)
++  progress          Float           @default(0)   // 0 to 100
++  thumbnailUrl      String?
++  createdAt         DateTime        @default(now())
++  updatedAt         DateTime        @updatedAt
++  organizationId    String
++  
++  // Relations
++  organization      Organization    @relation(fields: [organizationId], references: [id], onDelete: Cascade)
++  tasks             Task[]
++  milestones        Milestone[]
++  kpiTargets        KpiTarget[]
++  analyticsSnapshots AnalyticsSnapshot[]
++  
++  @@index([organizationId])
++  @@index([status])
++}
++
++enum ProjectStatus {
++  NOT_STARTED
++  IN_PROGRESS
++  ON_HOLD
++  COMPLETED
++  CANCELLED
++}
++
++model Milestone {
++  id            String           @id @default(uuid())
++  name          String
++  description   String?
++  targetDate    DateTime
++  actualDate    DateTime?
++  status        MilestoneStatus  @default(NOT_STARTED)
++  createdAt     DateTime         @default(now())
++  updatedAt     DateTime         @updatedAt
++  projectId     String
++  
++  // Relations
++  project       Project          @relation(fields: [projectId], references: [id], onDelete: Cascade)
++  
++  @@index([projectId])
++  @@index([targetDate])
++}
++
++enum MilestoneStatus {
++  NOT_STARTED
++  IN_PROGRESS
++  COMPLETED
++  MISSED
++}
++
++// Task model for project tasks
++model Task {
++  id                String         @id @default(uuid())
++  title             String
++  description       String?
++  status            TaskStatus     @default(TO_DO)
++  priority          TaskPriority   @default(MEDIUM)
++  dueDate           DateTime?
++  estimatedHours    Float?
++  actualHours       Float?
++  isOnCriticalPath  Boolean        @default(false)
++  createdAt         DateTime       @default(now())
++  updatedAt         DateTime       @updatedAt
++  projectId         String
++  assigneeId        String?
++  creatorId         String
++  
++  // Relations
++  project           Project        @relation(fields: [projectId], references: [id], onDelete: Cascade)
++  assignee          User?          @relation("assignee", fields: [assigneeId], references: [id], onDelete: SetNull)
++  creator           User           @relation("creator", fields: [creatorId], references: [id], onDelete: Restrict)
++  dependsOn         TaskDependency[] @relation("dependent_task")
++  dependents        TaskDependency[] @relation("prerequisite_task")
++  
++  @@index([projectId])
++  @@index([assigneeId])
++  @@index([status])
++  @@index([priority])
++  @@index([dueDate])
++}
++
++enum TaskStatus {
++  TO_DO
++  IN_PROGRESS
++  BLOCKED
++  DONE
++  CANCELLED
++}
++
++enum TaskPriority {
++  LOW
++  MEDIUM
++  HIGH
++  CRITICAL
++}
++
++model TaskDependency {
++  id                    String   @id @default(uuid())
++  dependentTaskId       String
++  prerequisiteTaskId    String
++  
++  // Relations
++  dependentTask         Task     @relation("dependent_task", fields: [dependentTaskId], references: [id], onDelete: Cascade)
++  prerequisiteTask      Task     @relation("prerequisite_task", fields: [prerequisiteTaskId], references: [id], onDelete: Cascade)
++  
++  @@unique([dependentTaskId, prerequisiteTaskId])
++  @@index([prerequisiteTaskId])
++}
++
++// Notification System Models
++
++model Notification {
++  id               String               @id @default(uuid())
++  title            String
++  message          String
++  type             NotificationType     @default(SYSTEM)
++  category         String?              // e.g., "task", "project", "message"
++  priority         NotificationPriority @default(NORMAL)
++  actionLink       String?              // URL or deep link for the notification
++  isRead           Boolean              @default(false)
++  readAt           DateTime?
++  createdAt        DateTime             @default(now())
++  recipientId      String
++  senderId         String?
++  organizationId   String
++  
++  // Relations
++  recipient        User                 @relation("recipient", fields: [recipientId], references: [id], onDelete: Cascade)
++  sender           User?                @relation("sender", fields: [senderId], references: [id], onDelete: SetNull)
++  organization     Organization         @relation(fields: [organizationId], references: [id], onDelete: Cascade)
++  
++  @@index([recipientId])
++  @@index([isRead])
++  @@index([organizationId])
++  @@index([type])
++  @@index([priority])
++}
++
++enum NotificationType {
++  TASK
++  MESSAGE
++  SYSTEM
++  WEATHER
++  ADMIN
++}
++
++enum NotificationPriority {
++  LOW
++  NORMAL
++  HIGH
++  CRITICAL
++}
++
++model NotificationSetting {
++  id                    String    @id @default(uuid())
++  emailNotifications    Boolean   @default(true)
++  pushNotifications     Boolean   @default(true)
++  taskNotifications     Boolean   @default(true)
++  messageNotifications  Boolean   @default(true)
++  systemNotifications   Boolean   @default(true)
++  weatherNotifications  Boolean   @default(true)
++  adminNotifications    Boolean   @default(true)
++  quietHoursStart       Int?      // Hour of day (0-23)
++  quietHoursEnd         Int?      // Hour of day (0-23)
++  createdAt             DateTime  @default(now())
++  updatedAt             DateTime  @updatedAt
++  userId                String    @unique
++  
++  // Relations
++  user                  User      @relation(fields: [userId], references: [id], onDelete: Cascade)
++}
++
++// Authentication and token management
++
++model VerificationToken {
++  id         String   @id @default(uuid())
++  token      String   @unique
++  userId     String
++  expiresAt  DateTime
++  createdAt  DateTime @default(now())
++  
++  // Remove this relation temporarily
++  // user       User     @relation(fields: [userId], references: [id])
++  
++  @@index([userId])
++}
++
++model ResetToken {
++  id         String   @id @default(uuid())
++  token      String   @unique
++  userId     String
++  expiresAt  DateTime
++  createdAt  DateTime @default(now())
++  
++  // Remove this relation temporarily
++  // user       User     @relation(fields: [userId], references: [id])
++  
++  @@index([userId])
++}
++
++/* Analytics & Reporting System Models */
++
++model Report {
++  id                String           @id @default(uuid())
++  name              String
++  description       String?
++  reportType        ReportType
++  isTemplate        Boolean          @default(false)
++  isFavorite        Boolean          @default(false)
++  isPublic          Boolean          @default(false)  // Visible to all org members
++  thumbnailUrl      String?
++  config            Json             // Report configuration including layout, filters, etc.
++  lastRunAt         DateTime?
++  createdAt         DateTime         @default(now())
++  updatedAt         DateTime         @updatedAt
++  creatorId         String
++  organizationId    String
++  
++  // Relations
++  creator           User             @relation(fields: [creatorId], references: [id], onDelete: Restrict)
++  organization      Organization     @relation(fields: [organizationId], references: [id], onDelete: Cascade)
++  schedules         ReportSchedule[]
++  dashboardMetrics  DashboardMetric[]
++  
++  @@index([organizationId])
++  @@index([reportType])
++  @@index([creatorId])
++}
++
++enum ReportType {
++  PROJECT_PERFORMANCE
++  FINANCIAL
++  RESOURCE_UTILIZATION
++  TASK_ANALYSIS
++  TEAM_PERFORMANCE
++  QUALITY_METRICS
++  CUSTOM
++}
++
++model ReportSchedule {
++  id              String            @id @default(uuid())
++  frequency       ScheduleFrequency
++  dayOfWeek       Int?             // 0-6, 0 is Sunday (for WEEKLY)
++  dayOfMonth      Int?             // 1-31 (for MONTHLY)
++  timeOfDay       Int              // Hour of day (0-23)
++  format          ReportFormat     @default(PDF)
++  deliveryMethod  DeliveryMethod   @default(EMAIL)
++  recipients      Json             // Array of email addresses or user IDs
++  isActive        Boolean          @default(true)
++  lastExecuted    DateTime?
++  nextExecution   DateTime?
++  createdAt       DateTime         @default(now())
++  updatedAt       DateTime         @updatedAt
++  reportId        String
++  
++  // Relations
++  report          Report           @relation(fields: [reportId], references: [id], onDelete: Cascade)
++  
++  @@index([reportId])
++  @@index([nextExecution])
++}
++
++enum ScheduleFrequency {
++  DAILY
++  WEEKLY
++  MONTHLY
++  QUARTERLY
++}
++
++enum ReportFormat {
++  PDF
++  EXCEL
++  CSV
++  INTERACTIVE
++}
++
++enum DeliveryMethod {
++  EMAIL
++  DASHBOARD
++  DOWNLOAD
++}
++
++model MetricDefinition {
++  id                String             @id @default(uuid())
++  name              String
++  description       String?
++  dataSource        String             // Table or data origin
++  calculation       String             // SQL or formula definition
++  unit              String?            // e.g., "hours", "%", "$"
++  aggregation       AggregationType    @default(SUM)
++  isSystemMetric    Boolean            @default(false)  // Built-in vs custom
++  createdAt         DateTime           @default(now())
++  updatedAt         DateTime           @updatedAt
++  organizationId    String
++  
++  // Relations
++  organization      Organization       @relation(fields: [organizationId], references: [id], onDelete: Cascade)
++  dashboardMetrics  DashboardMetric[]
++  kpiTargets        KpiTarget[]
++  
++  @@unique([name, organizationId])
++  @@index([organizationId])
++}
++
++enum AggregationType {
++  SUM
++  AVERAGE
++  COUNT
++  MIN
++  MAX
++  LAST
++  FIRST
++}
++
++model DashboardMetric {
++  id                 String              @id @default(uuid())
++  displayName        String
++  visualizationType  VisualizationType
++  size               WidgetSize          @default(NORMAL)  // Reusing widget size enum
++  refreshInterval    Int?                // Minutes, null for manual only
++  chartConfig        Json                // Colors, labels, etc.
++  filterConfig       Json?               // Any applied filters
++  positionX          Int
++  positionY          Int
++  width              Int                 @default(1)
++  height             Int                 @default(1)
++  createdAt          DateTime            @default(now())
++  updatedAt          DateTime            @updatedAt
++  metricId           String
++  reportId           String?
++  dashboardId        String
++  
++  // Relations
++  metric             MetricDefinition    @relation(fields: [metricId], references: [id], onDelete: Cascade)
++  report             Report?             @relation(fields: [reportId], references: [id], onDelete: SetNull)
++  dashboard          Dashboard           @relation(fields: [dashboardId], references: [id], onDelete: Cascade)
++  
++  @@unique([dashboardId, positionX, positionY])
++  @@index([metricId])
++  @@index([dashboardId])
++}
++
++enum VisualizationType {
++  BAR_CHART
++  LINE_CHART
++  PIE_CHART
++  AREA_CHART
++  TABLE
++  KPI_CARD
++  GAUGE
++  HEAT_MAP
++  SCATTER_PLOT
++  CUSTOM
++}
++
++model KpiTarget {
++  id                String           @id @default(uuid())
++  targetValue       Float
++  minThreshold      Float?           // Warning threshold
++  maxThreshold      Float?           // Success threshold
++  direction         TargetDirection  @default(HIGHER_BETTER)
++  timePeriod        TimePeriod       @default(MONTHLY)
++  startDate         DateTime
++  endDate           DateTime?
++  createdAt         DateTime         @default(now())
++  updatedAt         DateTime         @updatedAt
++  metricId          String
++  projectId         String?
++  
++  // Relations
++  metric            MetricDefinition @relation(fields: [metricId], references: [id], onDelete: Cascade)
++  project           Project?         @relation(fields: [projectId], references: [id], onDelete: SetNull)
++  
++  @@index([metricId])
++  @@index([projectId])
++  @@index([startDate, endDate])
++}
++
++enum TargetDirection {
++  HIGHER_BETTER
++  LOWER_BETTER
++  TARGET_EXACT
++}
++
++enum TimePeriod {
++  DAILY
++  WEEKLY
++  MONTHLY
++  QUARTERLY
++  YEARLY
++  PROJECT_DURATION
++}
++
++model AnalyticsSnapshot {
++  id               String          @id @default(uuid())
++  snapshotDate     DateTime
++  data             Json            // Aggregated data snapshot
++  snapshotType     SnapshotType
++  createdAt        DateTime        @default(now())
++  organizationId   String
++  projectId        String?
++  
++  // Relations
++  organization     Organization    @relation(fields: [organizationId], references: [id], onDelete: Cascade)
++  project          Project?        @relation(fields: [projectId], references: [id], onDelete: SetNull)
++  
++  @@index([organizationId])
++  @@index([projectId])
++  @@index([snapshotDate])
++  @@index([snapshotType])
++}
++
++enum SnapshotType {
++  DAILY_METRICS
++  WEEKLY_SUMMARY
++  MONTHLY_PERFORMANCE
++  PROJECT_MILESTONE
++}
++
++/* Other placeholders for future features that will be implemented */
+diff --git a/schema.md b/schema.md
+new file mode 100644
+index 0000000..691db95
+--- /dev/null
++++ b/schema.md
+@@ -0,0 +1,751 @@
++# BuildTrack Pro Database Schema
++
++## Core Identity & Access Control
++
++### Organizations
++```prisma
++model Organization {
++  id                String              @id @default(uuid())
++  name              String
++  slug              String              @unique
++  logo_url          String?
++  created_at        DateTime            @default(now())
++  updated_at        DateTime            @updatedAt
++  is_active         Boolean             @default(true)
++  subscription_tier String              @default("free")
++  subscription_ends DateTime?
++  users             User[]
++  projects          Project[]
++  roles             Role[]
++  teams             Team[]
++  widgets           Widget[]
++  dashboards        Dashboard[]
++  dashboard_layouts DashboardLayout[]
++  notifications     Notification[]
++  settings          Json                @default("{}")
++  
++  @@index([slug])
++}
++```
++
++### Users
++```prisma
++model User {
++  id                    String               @id @default(uuid())
++  email                 String               @unique
++  first_name            String
++  last_name             String
++  avatar_url            String?
++  password_hash         String?
++  email_verified        Boolean              @default(false)
++  phone_number          String?
++  created_at            DateTime             @default(now())
++  updated_at            DateTime             @updatedAt
++  is_active             Boolean              @default(true)
++  last_login            DateTime?
++  organization_id       String
++  organization          Organization         @relation(fields: [organization_id], references: [id], onDelete: Cascade)
++  role_id               String
++  role                  Role                 @relation(fields: [role_id], references: [id])
++  teams                 TeamMember[]
++  assigned_tasks        Task[]               @relation("assignee")
++  created_tasks         Task[]               @relation("creator")
++  dashboard_layouts     DashboardLayout[]
++  notifications         Notification[]       @relation("recipient")
++  sent_notifications    Notification[]       @relation("sender")
++  notification_settings NotificationSetting?
++  preferences           Json                 @default("{}")
++  
++  @@index([organization_id])
++  @@index([email])
++}
++```
++
++### Roles
++```prisma
++model Role {
++  id              String        @id @default(uuid())
++  name            String
++  description     String?
++  created_at      DateTime      @default(now())
++  updated_at      DateTime      @updatedAt
++  is_system_role  Boolean       @default(false)
++  organization_id String
++  organization    Organization  @relation(fields: [organization_id], references: [id], onDelete: Cascade)
++  users           User[]
++  permissions     Permission[]
++  default_widgets Json          @default("[]") // Array of default widget IDs for this role
++  
++  @@unique([name, organization_id])
++  @@index([organization_id])
++}
++```
++
++### Permissions
++```prisma
++model Permission {
++  id          String   @id @default(uuid())
++  name        String
++  description String?
++  created_at  DateTime @default(now())
++  updated_at  DateTime @updatedAt
++  roles       Role[]
++  
++  @@unique([name])
++}
++```
++
++### Teams
++```prisma
++model Team {
++  id              String       @id @default(uuid())
++  name            String
++  description     String?
++  created_at      DateTime     @default(now())
++  updated_at      DateTime     @updatedAt
++  organization_id String
++  organization    Organization @relation(fields: [organization_id], references: [id], onDelete: Cascade)
++  members         TeamMember[]
++  
++  @@unique([name, organization_id])
++  @@index([organization_id])
++}
++```
++
++### TeamMembers
++```prisma
++model TeamMember {
++  id         String   @id @default(uuid())
++  team_id    String
++  user_id    String
++  role       String   @default("member") // e.g., "lead", "member"
++  created_at DateTime @default(now())
++  updated_at DateTime @updatedAt
++  team       Team     @relation(fields: [team_id], references: [id], onDelete: Cascade)
++  user       User     @relation(fields: [user_id], references: [id], onDelete: Cascade)
++  
++  @@unique([team_id, user_id])
++  @@index([user_id])
++}
++```
++
++## Dashboard Configuration
++
++### Widgets
++```prisma
++model Widget {
++  id                 String              @id @default(uuid())
++  name               String
++  description        String?
++  widget_type        String              // e.g., "project_overview", "task_list", "timeline"
++  icon               String?
++  default_size       WidgetSize          @default(NORMAL)
++  min_size           WidgetSize          @default(SMALL)
++  max_size           WidgetSize?
++  default_settings   Json                @default("{}")
++  created_at         DateTime            @default(now())
++  updated_at         DateTime            @updatedAt
++  is_system_widget   Boolean             @default(false)
++  organization_id    String?
++  organization       Organization?       @relation(fields: [organization_id], references: [id], onDelete: SetNull)
++  dashboard_widgets  DashboardWidget[]
++  
++  @@index([widget_type])
++  @@index([organization_id])
++}
++
++enum WidgetSize {
++  SMALL     // 1x1
++  NORMAL    // 1x2
++  LARGE     // 2x2
++  XLARGE    // 2x3
++}
++```
++
++### Dashboards
++```prisma
++model Dashboard {
++  id                  String             @id @default(uuid())
++  name                String
++  description         String?
++  is_default          Boolean            @default(false)
++  created_at          DateTime           @default(now())
++  updated_at          DateTime           @updatedAt
++  organization_id     String
++  organization        Organization       @relation(fields: [organization_id], references: [id], onDelete: Cascade)
++  dashboard_layouts   DashboardLayout[]
++  
++  @@index([organization_id])
++}
++```
++
++### DashboardLayouts
++```prisma
++model DashboardLayout {
++  id             String           @id @default(uuid())
++  device_type    DeviceType       @default(DESKTOP)
++  layout_json    Json             // Stores the grid layout configuration
++  created_at     DateTime         @default(now())
++  updated_at     DateTime         @updatedAt
++  dashboard_id   String
++  dashboard      Dashboard        @relation(fields: [dashboard_id], references: [id], onDelete: Cascade)
++  user_id        String?          // Null if it's a default layout
++  user           User?            @relation(fields: [user_id], references: [id], onDelete: SetNull)
++  organization_id String
++  organization   Organization     @relation(fields: [organization_id], references: [id], onDelete: Cascade)
++  dashboard_widgets DashboardWidget[]
++  
++  @@unique([dashboard_id, user_id, device_type])
++  @@index([user_id])
++  @@index([dashboard_id])
++  @@index([organization_id])
++}
++
++enum DeviceType {
++  MOBILE
++  TABLET
++  DESKTOP
++}
++```
++
++### DashboardWidgets
++```prisma
++model DashboardWidget {
++  id                 String           @id @default(uuid())
++  position_x         Int
++  position_y         Int
++  width              Int              @default(1)
++  height             Int              @default(1)
++  settings           Json             @default("{}")
++  created_at         DateTime         @default(now())
++  updated_at         DateTime         @updatedAt
++  widget_id          String
++  widget             Widget           @relation(fields: [widget_id], references: [id], onDelete: Cascade)
++  dashboard_layout_id String
++  dashboard_layout   DashboardLayout  @relation(fields: [dashboard_layout_id], references: [id], onDelete: Cascade)
++  
++  @@unique([dashboard_layout_id, position_x, position_y])
++  @@index([widget_id])
++  @@index([dashboard_layout_id])
++}
++```
++
++## Project Management Foundation
++
++### Projects
++```prisma
++model Project {
++  id                 String         @id @default(uuid())
++  name               String
++  description        String?
++  start_date         DateTime
++  target_end_date    DateTime
++  actual_end_date    DateTime?
++  status             ProjectStatus  @default(NOT_STARTED)
++  progress           Float          @default(0) // 0 to 100
++  thumbnail_url      String?
++  created_at         DateTime       @default(now())
++  updated_at         DateTime       @updatedAt
++  organization_id    String
++  organization       Organization   @relation(fields: [organization_id], references: [id], onDelete: Cascade)
++  tasks              Task[]
++  milestones         Milestone[]
++  
++  @@index([organization_id])
++  @@index([status])
++}
++
++enum ProjectStatus {
++  NOT_STARTED
++  IN_PROGRESS
++  ON_HOLD
++  COMPLETED
++  CANCELLED
++}
++```
++
++### Tasks
++```prisma
++model Task {
++  id                String        @id @default(uuid())
++  title             String
++  description       String?
++  status            TaskStatus    @default(TO_DO)
++  priority          TaskPriority  @default(MEDIUM)
++  due_date          DateTime?
++  estimated_hours   Float?
++  actual_hours      Float?
++  is_on_critical_path Boolean     @default(false)
++  created_at        DateTime      @default(now())
++  updated_at        DateTime      @updatedAt
++  project_id        String
++  project           Project       @relation(fields: [project_id], references: [id], onDelete: Cascade)
++  assignee_id       String?
++  assignee          User?         @relation("assignee", fields: [assignee_id], references: [id], onDelete: SetNull)
++  creator_id        String
++  creator           User          @relation("creator", fields: [creator_id], references: [id], onDelete: Restrict)
++  dependencies      TaskDependency[] @relation("dependent_task")
++  dependents        TaskDependency[] @relation("prerequisite_task")
++  
++  @@index([project_id])
++  @@index([assignee_id])
++  @@index([status])
++  @@index([priority])
++  @@index([due_date])
++}
++
++enum TaskStatus {
++  TO_DO
++  IN_PROGRESS
++  BLOCKED
++  DONE
++  CANCELLED
++}
++
++enum TaskPriority {
++  LOW
++  MEDIUM
++  HIGH
++  CRITICAL
++}
++```
++
++### TaskDependencies
++```prisma
++model TaskDependency {
++  id                    String  @id @default(uuid())
++  dependent_task_id     String
++  dependent_task        Task    @relation("dependent_task", fields: [dependent_task_id], references: [id], onDelete: Cascade)
++  prerequisite_task_id  String
++  prerequisite_task     Task    @relation("prerequisite_task", fields: [prerequisite_task_id], references: [id], onDelete: Cascade)
++  
++  @@unique([dependent_task_id, prerequisite_task_id])
++  @@index([prerequisite_task_id])
++}
++```
++
++### Milestones
++```prisma
++model Milestone {
++  id                 String          @id @default(uuid())
++  name               String
++  description        String?
++  target_date        DateTime
++  actual_date        DateTime?
++  status             MilestoneStatus @default(NOT_STARTED)
++  created_at         DateTime        @default(now())
++  updated_at         DateTime        @updatedAt
++  project_id         String
++  project            Project         @relation(fields: [project_id], references: [id], onDelete: Cascade)
++  
++  @@index([project_id])
++  @@index([target_date])
++}
++
++enum MilestoneStatus {
++  NOT_STARTED
++  IN_PROGRESS
++  COMPLETED
++  MISSED
++}
++```
++
++## Notification System
++
++### Notifications
++```prisma
++model Notification {
++  id               String             @id @default(uuid())
++  title            String
++  message          String
++  type             NotificationType   @default(SYSTEM)
++  category         String?            // e.g., "task", "project", "message", "system"
++  priority         NotificationPriority @default(NORMAL)
++  action_link      String?            // URL or deep link for the notification
++  is_read          Boolean            @default(false)
++  read_at          DateTime?
++  created_at       DateTime           @default(now())
++  recipient_id     String
++  recipient        User               @relation("recipient", fields: [recipient_id], references: [id], onDelete: Cascade)
++  sender_id        String?
++  sender           User?              @relation("sender", fields: [sender_id], references: [id], onDelete: SetNull)
++  organization_id  String
++  organization     Organization       @relation(fields: [organization_id], references: [id], onDelete: Cascade)
++  
++  @@index([recipient_id])
++  @@index([is_read])
++  @@index([organization_id])
++  @@index([type])
++  @@index([priority])
++}
++
++enum NotificationType {
++  TASK
++  MESSAGE
++  SYSTEM
++  WEATHER
++  ADMIN
++}
++
++enum NotificationPriority {
++  LOW
++  NORMAL
++  HIGH
++  CRITICAL
++}
++```
++
++### NotificationSettings
++```prisma
++model NotificationSetting {
++  id                      String   @id @default(uuid())
++  email_notifications     Boolean  @default(true)
++  push_notifications      Boolean  @default(true)
++  task_notifications      Boolean  @default(true)
++  message_notifications   Boolean  @default(true)
++  system_notifications    Boolean  @default(true)
++  weather_notifications   Boolean  @default(true)
++  admin_notifications     Boolean  @default(true)
++  quiet_hours_start       Int?     // Hour of day (0-23)
++  quiet_hours_end         Int?     // Hour of day (0-23)
++  created_at              DateTime @default(now())
++  updated_at              DateTime @updatedAt
++  user_id                 String   @unique
++  user                    User     @relation(fields: [user_id], references: [id], onDelete: Cascade)
++}
++```
++
++## Analytics & Reporting System
++
++### Reports
++```prisma
++model Report {
++  id                String          @id @default(uuid())
++  name              String
++  description       String?
++  report_type       ReportType
++  is_template       Boolean         @default(false)
++  is_favorite       Boolean         @default(false)
++  is_public         Boolean         @default(false)  // Visible to all org members
++  thumbnail_url     String?
++  config            Json            // Report configuration including layout, filters, etc.
++  last_run_at       DateTime?
++  created_at        DateTime        @default(now())
++  updated_at        DateTime        @updatedAt
++  creator_id        String
++  creator           User            @relation(fields: [creator_id], references: [id], onDelete: Restrict)
++  organization_id   String
++  organization      Organization    @relation(fields: [organization_id], references: [id], onDelete: Cascade)
++  schedules         ReportSchedule[]
++  dashboards        DashboardMetric[]
++  
++  @@index([organization_id])
++  @@index([report_type])
++  @@index([creator_id])
++}
++
++enum ReportType {
++  PROJECT_PERFORMANCE
++  FINANCIAL
++  RESOURCE_UTILIZATION
++  TASK_ANALYSIS
++  TEAM_PERFORMANCE
++  QUALITY_METRICS
++  CUSTOM
++}
++```
++
++### ReportSchedules
++```prisma
++model ReportSchedule {
++  id                String          @id @default(uuid())
++  frequency         ScheduleFrequency
++  day_of_week       Int?           // 0-6, 0 is Sunday (for WEEKLY)
++  day_of_month      Int?           // 1-31 (for MONTHLY)
++  time_of_day       Int            // Hour of day (0-23)
++  format            ReportFormat   @default(PDF)
++  delivery_method   DeliveryMethod @default(EMAIL)
++  recipients        Json           // Array of email addresses or user IDs
++  is_active         Boolean        @default(true)
++  last_executed     DateTime?
++  next_execution    DateTime?
++  created_at        DateTime       @default(now())
++  updated_at        DateTime       @updatedAt
++  report_id         String
++  report            Report         @relation(fields: [report_id], references: [id], onDelete: Cascade)
++  
++  @@index([report_id])
++  @@index([next_execution])
++}
++
++enum ScheduleFrequency {
++  DAILY
++  WEEKLY
++  MONTHLY
++  QUARTERLY
++}
++
++enum ReportFormat {
++  PDF
++  EXCEL
++  CSV
++  INTERACTIVE
++}
++
++enum DeliveryMethod {
++  EMAIL
++  DASHBOARD
++  DOWNLOAD
++}
++```
++
++### MetricDefinitions
++```prisma
++model MetricDefinition {
++  id                String          @id @default(uuid())
++  name              String
++  description       String?
++  data_source       String          // Table or data origin
++  calculation       String          // SQL or formula definition
++  unit              String?         // e.g., "hours", "%", "$"
++  aggregation       AggregationType @default(SUM)
++  is_system_metric  Boolean         @default(false)  // Built-in vs custom
++  created_at        DateTime        @default(now())
++  updated_at        DateTime        @updatedAt
++  organization_id   String
++  organization      Organization    @relation(fields: [organization_id], references: [id], onDelete: Cascade)
++  dashboard_metrics DashboardMetric[]
++  kpi_targets       KpiTarget[]
++  
++  @@unique([name, organization_id])
++  @@index([organization_id])
++}
++
++enum AggregationType {
++  SUM
++  AVERAGE
++  COUNT
++  MIN
++  MAX
++  LAST
++  FIRST
++}
++```
++
++### DashboardMetrics
++```prisma
++model DashboardMetric {
++  id                  String          @id @default(uuid())
++  display_name        String
++  visualization_type  VisualizationType
++  size                WidgetSize      @default(NORMAL)  // Reusing widget size enum
++  refresh_interval    Int?            // Minutes, null for manual only
++  chart_config        Json            // Colors, labels, etc.
++  filter_config       Json?           // Any applied filters
++  position_x          Int
++  position_y          Int
++  width               Int             @default(1)
++  height              Int             @default(1)
++  created_at          DateTime        @default(now())
++  updated_at          DateTime        @updatedAt
++  metric_id           String
++  metric              MetricDefinition @relation(fields: [metric_id], references: [id], onDelete: Cascade)
++  report_id           String?
++  report              Report?         @relation(fields: [report_id], references: [id], onDelete: SetNull)
++  dashboard_id        String
++  dashboard           Dashboard       @relation(fields: [dashboard_id], references: [id], onDelete: Cascade)
++  
++  @@unique([dashboard_id, position_x, position_y])
++  @@index([metric_id])
++  @@index([dashboard_id])
++}
++
++enum VisualizationType {
++  BAR_CHART
++  LINE_CHART
++  PIE_CHART
++  AREA_CHART
++  TABLE
++  KPI_CARD
++  GAUGE
++  HEAT_MAP
++  SCATTER_PLOT
++  CUSTOM
++}
++```
++
++### KpiTargets
++```prisma
++model KpiTarget {
++  id                String          @id @default(uuid())
++  target_value      Float
++  min_threshold     Float?          // Warning threshold
++  max_threshold     Float?          // Success threshold
++  direction         TargetDirection @default(HIGHER_BETTER)
++  time_period       TimePeriod      @default(MONTHLY)
++  start_date        DateTime
++  end_date          DateTime?
++  created_at        DateTime        @default(now())
++  updated_at        DateTime        @updatedAt
++  metric_id         String
++  metric            MetricDefinition @relation(fields: [metric_id], references: [id], onDelete: Cascade)
++  project_id        String?
++  project           Project?        @relation(fields: [project_id], references: [id], onDelete: SetNull)
++  
++  @@index([metric_id])
++  @@index([project_id])
++  @@index([start_date, end_date])
++}
++
++enum TargetDirection {
++  HIGHER_BETTER
++  LOWER_BETTER
++  TARGET_EXACT
++}
++
++enum TimePeriod {
++  DAILY
++  WEEKLY
++  MONTHLY
++  QUARTERLY
++  YEARLY
++  PROJECT_DURATION
++}
++```
++
++### AnalyticsSnapshots
++```prisma
++model AnalyticsSnapshot {
++  id                String          @id @default(uuid())
++  snapshot_date     DateTime
++  data              Json            // Aggregated data snapshot
++  snapshot_type     SnapshotType
++  created_at        DateTime        @default(now())
++  organization_id   String
++  organization      Organization    @relation(fields: [organization_id], references: [id], onDelete: Cascade)
++  project_id        String?
++  project           Project?        @relation(fields: [project_id], references: [id], onDelete: SetNull)
++  
++  @@index([organization_id])
++  @@index([project_id])
++  @@index([snapshot_date])
++  @@index([snapshot_type])
++}
++
++enum SnapshotType {
++  DAILY_METRICS
++  WEEKLY_SUMMARY
++  MONTHLY_PERFORMANCE
++  PROJECT_MILESTONE
++}
++```
++
++## Row Level Security (RLS) Policies
++
++All tables in this schema will have RLS policies applied to ensure data isolation between organizations. Here are examples of the RLS policies:
++
++### Organization RLS
++```sql
++-- Users can only see their own organization
++CREATE POLICY "Users can view own organization"
++  ON public.organizations
++  FOR SELECT
++  USING (auth.uid() IN (
++    SELECT user_id FROM public.users 
++    WHERE organization_id = id
++  ));
++
++-- Only organization admins can update organization details
++CREATE POLICY "Only admins can update organization"
++  ON public.organizations
++  FOR UPDATE
++  USING (
++    auth.uid() IN (
++      SELECT u.id FROM public.users u
++      JOIN public.roles r ON u.role_id = r.id
++      WHERE u.organization_id = id
++      AND r.name = 'Admin'
++    )
++  );
++```
++
++### User RLS
++```sql
++-- Users can only see users in their own organization
++CREATE POLICY "Users can only view users in their organization"
++  ON public.users
++  FOR SELECT
++  USING (
++    organization_id IN (
++      SELECT organization_id FROM public.users 
++      WHERE id = auth.uid()
++    )
++  );
++```
++
++### Project RLS
++```sql
++-- Users can only see projects in their own organization
++CREATE POLICY "Users can only view projects in their organization"
++  ON public.projects
++  FOR SELECT
++  USING (
++    organization_id IN (
++      SELECT organization_id FROM public.users 
++      WHERE id = auth.uid()
++    )
++  );
++```
++
++### Dashboard RLS
++```sql
++-- Users can only see dashboards in their own organization
++CREATE POLICY "Users can only view dashboards in their organization"
++  ON public.dashboards
++  FOR SELECT
++  USING (
++    organization_id IN (
++      SELECT organization_id FROM public.users 
++      WHERE id = auth.uid()
++    )
++  );
++```
++
++### Analytics RLS
++```sql
++-- Users can only see metrics and reports in their own organization
++CREATE POLICY "Users can only view metrics in their organization"
++  ON public.metric_definitions
++  FOR SELECT
++  USING (
++    organization_id IN (
++      SELECT organization_id FROM public.users 
++      WHERE id = auth.uid()
++    )
++  );
++
++-- Users can only see reports in their own organization
++CREATE POLICY "Users can only view reports in their organization"
++  ON public.reports
++  FOR SELECT
++  USING (
++    organization_id IN (
++      SELECT organization_id FROM public.users 
++      WHERE id = auth.uid()
++    ) AND (is_public = true OR creator_id = auth.uid())
++  );
++
++-- Users can only see KPI targets in their own organization
++CREATE POLICY "Users can only view KPI targets in their organization"
++  ON public.kpi_targets
++  FOR SELECT
++  USING (
++    metric_id IN (
++      SELECT id FROM public.metric_definitions
++      WHERE organization_id IN (
++        SELECT organization_id FROM public.users 
++        WHERE id = auth.uid()
++      )
++    )
++  );
++```
