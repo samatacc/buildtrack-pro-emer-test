@@ -3,15 +3,15 @@
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
-import ProfileHeader from '@/app/components/profile/ProfileHeader';
-import ProfessionalInfo from '@/app/components/profile/ProfessionalInfo';
-import CommunicationPreferences from '@/app/components/profile/CommunicationPreferences';
-import MobileSettings from '@/app/components/profile/MobileSettings';
-import DashboardCustomization from '@/app/components/profile/DashboardCustomization';
-import ConnectionStatus from '@/app/components/shared/ConnectionStatus';
-import { useTranslations } from '@/app/hooks/useTranslations';
-import { useProfile } from '@/app/hooks/useProfile';
-import ProfileAPI, { ProfileData } from '@/lib/api/profile-client';
+import ProfileHeader from '../../../components/profile/ProfileHeader';
+import ProfessionalInfo from '../../../components/profile/ProfessionalInfo';
+import CommunicationPreferences from '../../../components/profile/CommunicationPreferences';
+import MobileSettings from '../../../components/profile/MobileSettings';
+import DashboardCustomization from '../../../components/profile/DashboardCustomization';
+import ConnectionStatus from '../../../components/shared/ConnectionStatus';
+import { useTranslations } from '../../../hooks/useTranslations';
+import { useProfile } from '../../../hooks/useProfile';
+import ProfileAPI, { ProfileData } from '../../../lib/api/profile-client';
 
 /**
  * ProfilePage component

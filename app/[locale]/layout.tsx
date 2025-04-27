@@ -6,7 +6,7 @@ import NetworkAwareDataFetcher from '../components/shared/NetworkAwareDataFetche
 import IntlProvider from '../providers/IntlProvider'
 import { useLocale } from 'next-intl'
 import { notFound } from 'next/navigation'
-import { locales } from '@/i18n'
+import { locales } from '../../i18n'
 import LanguageSyncWrapper from '../components/shared/LanguageSyncWrapper'
 
 // Import animation styles

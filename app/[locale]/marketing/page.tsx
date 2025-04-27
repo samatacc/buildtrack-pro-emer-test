@@ -1,6 +1,6 @@
 'use client';
 
-import { useTranslations } from '@/app/hooks/useTranslations';
+import { useTranslations } from '../../hooks/useTranslations';
 import Link from 'next/link';
 
 /**

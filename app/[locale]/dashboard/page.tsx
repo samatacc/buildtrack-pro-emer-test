@@ -2,8 +2,8 @@
 
 import { useState, useEffect } from 'react'
 import { useSupabaseAuth } from '../../../lib/auth/SupabaseAuthContext'
-import { useTranslations } from '@/app/hooks/useTranslations'
-import ConnectionStatus from '@/app/components/shared/ConnectionStatus'
+import { useTranslations } from '../../hooks/useTranslations'
+import ConnectionStatus from '../../components/shared/ConnectionStatus'
 
 /**
  * DashboardHome Component

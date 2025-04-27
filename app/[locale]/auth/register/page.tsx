@@ -53,20 +53,17 @@ export default function LocalizedRegisterPage() {
       return; // Password mismatch is shown to user
     }
     
-    // Call signup function from auth context with user metadata
+    // Call signup function from auth context with full name
+    // Note: The signUp function expects a name string as the third parameter, not an object
+    const fullName = `${firstName} ${lastName}`;
     await signUp(
       email, 
       password, 
-      {
-        first_name: firstName,
-        last_name: lastName,
-        job_title: jobTitle,
-        company: company,
-        name: `${firstName} ${lastName}`,
-        language: 'en', // Default language
-        timezone: Intl.DateTimeFormat().resolvedOptions().timeZone // Get user's timezone
-      }
+      fullName
     );
+    
+    // Note: Additional user metadata (e.g., first_name, last_name, job_title, timezone, etc.)
+    // will be added during the onboarding process
   };
 
   return (

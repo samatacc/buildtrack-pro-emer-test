@@ -1,10 +1,10 @@
 'use client';
 
 import { useEffect } from 'react';
-import MarketingHeader from '@/app/components/marketing/MarketingHeader';
-import { useTranslations } from '@/app/hooks/useTranslations';
+import MarketingHeader from '../../../components/marketing/MarketingHeader';
+import { useTranslations } from '../../../hooks/useTranslations';
 import Link from 'next/link';
-import EnhancedLanguageSelector from '@/app/components/shared/EnhancedLanguageSelector';
+import EnhancedLanguageSelector from '../../../components/shared/EnhancedLanguageSelector';
 
 /**
  * Marketing Layout
