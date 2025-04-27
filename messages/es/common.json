@@ -1,0 +1,143 @@
+{
+  "app": {
+    "name": "BuildTrack Pro",
+    "tagline": "Gestión de Proyectos de Construcción Simplificada"
+  },
+  "navigation": {
+    "dashboard": "Panel de Control",
+    "projects": "Proyectos",
+    "tasks": "Tareas",
+    "reports": "Informes",
+    "calendar": "Calendario",
+    "messages": "Mensajes",
+    "profile": "Perfil",
+    "settings": "Ajustes",
+    "help": "Ayuda y Soporte",
+    "logout": "Cerrar Sesión"
+  },
+  "dashboard": {
+    "greeting": "Hola, {name}",
+    "welcome": "Bienvenido de nuevo a BuildTrack Pro",
+    "overview": "Resumen del Proyecto",
+    "recentActivity": "Actividad Reciente",
+    "upcomingTasks": "Próximas Tareas",
+    "projectStatus": "Estado del Proyecto",
+    "teamActivity": "Actividad del Equipo",
+    "quickActions": "Acciones Rápidas"
+  },
+  "profile": {
+    "title": "Configuración del Perfil",
+    "personalInfo": "Información Personal",
+    "professionalInfo": "Información Profesional",
+    "communicationPrefs": "Preferencias de Comunicación",
+    "mobileSettings": "Configuración Móvil",
+    "dashboardCustomization": "Personalización del Panel",
+    "security": "Seguridad y Privacidad",
+    "firstName": "Nombre",
+    "lastName": "Apellido",
+    "email": "Correo Electrónico",
+    "phone": "Número de Teléfono",
+    "jobTitle": "Puesto de Trabajo",
+    "company": "Empresa",
+    "department": "Departamento",
+    "role": "Rol",
+    "certification": "Certificaciones",
+    "expertise": "Áreas de Experiencia",
+    "language": "Preferencia de Idioma",
+    "timezone": "Zona Horaria",
+    "notifications": {
+      "title": "Notificaciones",
+      "email": "Notificaciones por Correo",
+      "push": "Notificaciones Push",
+      "sms": "Notificaciones SMS",
+      "inApp": "Notificaciones en la Aplicación",
+      "projectUpdates": "Actualizaciones de Proyectos",
+      "taskAssignments": "Asignaciones de Tareas",
+      "deadlineReminders": "Recordatorios de Plazos",
+      "teamMessages": "Mensajes del Equipo",
+      "systemAnnouncements": "Anuncios del Sistema"
+    },
+    "mobile": {
+      "title": "Configuración Móvil",
+      "dataUsage": "Uso de Datos",
+      "offlineAccess": "Acceso sin Conexión",
+      "syncFrequency": "Frecuencia de Sincronización",
+      "cacheSize": "Tamaño de Caché",
+      "locationServices": "Servicios de Ubicación",
+      "autoUpload": "Carga Automática de Fotos",
+      "lowBandwidth": "Modo de Bajo Ancho de Banda",
+      "optimization": "Optimización Móvil"
+    },
+    "dashboard": {
+      "title": "Personalización del Panel",
+      "layout": "Diseño",
+      "widgets": "Widgets",
+      "defaultView": "Vista Predeterminada",
+      "dateFormat": "Formato de Fecha",
+      "theme": "Tema",
+      "density": "Densidad de Visualización"
+    },
+    "buttons": {
+      "save": "Guardar Cambios",
+      "cancel": "Cancelar",
+      "reset": "Restablecer por Defecto",
+      "upload": "Subir Foto",
+      "remove": "Eliminar",
+      "edit": "Editar",
+      "sync": "Sincronizar Ahora"
+    },
+    "messages": {
+      "saveSuccess": "Tu perfil ha sido actualizado correctamente",
+      "saveError": "Hubo un error al actualizar tu perfil",
+      "syncSuccess": "Perfil sincronizado correctamente",
+      "syncError": "Error al sincronizar el perfil",
+      "uploadSuccess": "Archivo subido correctamente",
+      "uploadError": "Error al subir el archivo",
+      "requiredField": "Este campo es obligatorio",
+      "invalidEmail": "Por favor, introduce un correo electrónico válido",
+      "invalidPhone": "Por favor, introduce un número de teléfono válido"
+    }
+  },
+  "connectionStatus": {
+    "online": "En línea",
+    "offline": "Sin conexión",
+    "reconnecting": "Reconectando...",
+    "limited": "Conectividad Limitada"
+  },
+  "actions": {
+    "create": "Crear",
+    "update": "Actualizar",
+    "delete": "Eliminar",
+    "view": "Ver",
+    "download": "Descargar",
+    "upload": "Subir",
+    "share": "Compartir",
+    "export": "Exportar",
+    "import": "Importar",
+    "filter": "Filtrar",
+    "search": "Buscar",
+    "sort": "Ordenar",
+    "print": "Imprimir",
+    "assign": "Asignar",
+    "complete": "Completar"
+  },
+  "time": {
+    "today": "Hoy",
+    "yesterday": "Ayer",
+    "tomorrow": "Mañana",
+    "thisWeek": "Esta Semana",
+    "lastWeek": "Semana Pasada",
+    "nextWeek": "Próxima Semana",
+    "thisMonth": "Este Mes",
+    "lastMonth": "Mes Pasado",
+    "nextMonth": "Próximo Mes"
+  },
+  "errors": {
+    "general": "Algo salió mal. Por favor, inténtalo de nuevo.",
+    "notFound": "El recurso solicitado no fue encontrado.",
+    "unauthorized": "No tienes permiso para acceder a este recurso.",
+    "validation": "Por favor, revisa tus entradas e inténtalo de nuevo.",
+    "network": "Error de red. Por favor, comprueba tu conexión.",
+    "offline": "Actualmente estás sin conexión. Algunas funciones pueden no estar disponibles."
+  }
+}

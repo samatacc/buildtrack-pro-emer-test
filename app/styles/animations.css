@@ -1,0 +1,144 @@
+/**
+ * BuildTrack Pro Animation Styles
+ * 
+ * This file contains animation definitions used throughout the application,
+ * following the BuildTrack Pro design system specifications:
+ * - Primary Blue: rgb(24,62,105)
+ * - Primary Orange: rgb(236,107,44)
+ * - Micro-animations for improved user engagement
+ * - Mobile-optimized for performance
+ * - Light neumorphism and glassmorphism effects
+ */
+
+/* Basic fade in animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Fade in while moving up animation */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(1rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Slide in from left animation */
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(-1rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Scale in animation for checkmarks and indicators */
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Pulse animation for notification indicators */
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* Rotate animation for loading indicators */
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Animation utility classes */
+.animate-fade-in {
+  animation: fadeIn 300ms ease-out forwards;
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 400ms ease-out forwards;
+}
+
+.animate-slide-in-right {
+  animation: slideInRight 400ms ease-out forwards;
+}
+
+.animate-scale-in {
+  animation: scaleIn 300ms cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+.animate-pulse {
+  animation: pulse 2s infinite ease-in-out;
+}
+
+.animate-rotate {
+  animation: rotate 1s linear infinite;
+}
+
+/* Delay utility classes - 200ms increments as per design spec */
+.delay-100 {
+  animation-delay: 100ms;
+}
+
+.delay-200 {
+  animation-delay: 200ms;
+}
+
+.delay-300 {
+  animation-delay: 300ms;
+}
+
+.delay-400 {
+  animation-delay: 400ms;
+}
+
+.delay-500 {
+  animation-delay: 500ms;
+}
+
+/* Dynamic delay using CSS variables for list items */
+.delay-dynamic {
+  animation-delay: calc(100ms * var(--index, 0));
+}
+
+/* Reduced motion preferences for accessibility */
+@media (prefers-reduced-motion) {
+  .animate-fade-in,
+  .animate-fade-in-up,
+  .animate-slide-in-right,
+  .animate-scale-in,
+  .animate-pulse,
+  .animate-rotate {
+    animation: none;
+    transition: none;
+  }
+}

@@ -1,0 +1,143 @@
+{
+  "app": {
+    "name": "BuildTrack Pro",
+    "tagline": "Construction Project Management Simplified"
+  },
+  "navigation": {
+    "dashboard": "Dashboard",
+    "projects": "Projects",
+    "tasks": "Tasks",
+    "reports": "Reports",
+    "calendar": "Calendar",
+    "messages": "Messages",
+    "profile": "Profile",
+    "settings": "Settings",
+    "help": "Help & Support",
+    "logout": "Log Out"
+  },
+  "dashboard": {
+    "greeting": "Hello, {name}",
+    "welcome": "Welcome back to BuildTrack Pro",
+    "overview": "Project Overview",
+    "recentActivity": "Recent Activity",
+    "upcomingTasks": "Upcoming Tasks",
+    "projectStatus": "Project Status",
+    "teamActivity": "Team Activity",
+    "quickActions": "Quick Actions"
+  },
+  "profile": {
+    "title": "Profile Settings",
+    "personalInfo": "Personal Information",
+    "professionalInfo": "Professional Information",
+    "communicationPrefs": "Communication Preferences",
+    "mobileSettings": "Mobile Settings",
+    "dashboardCustomization": "Dashboard Customization",
+    "security": "Security & Privacy",
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "email": "Email Address",
+    "phone": "Phone Number",
+    "jobTitle": "Job Title",
+    "company": "Company",
+    "department": "Department",
+    "role": "Role",
+    "certification": "Certifications",
+    "expertise": "Areas of Expertise",
+    "language": "Language Preference",
+    "timezone": "Timezone",
+    "notifications": {
+      "title": "Notifications",
+      "email": "Email Notifications",
+      "push": "Push Notifications",
+      "sms": "SMS Notifications",
+      "inApp": "In-App Notifications",
+      "projectUpdates": "Project Updates",
+      "taskAssignments": "Task Assignments",
+      "deadlineReminders": "Deadline Reminders",
+      "teamMessages": "Team Messages",
+      "systemAnnouncements": "System Announcements"
+    },
+    "mobile": {
+      "title": "Mobile Settings",
+      "dataUsage": "Data Usage",
+      "offlineAccess": "Offline Access",
+      "syncFrequency": "Sync Frequency",
+      "cacheSize": "Cache Size",
+      "locationServices": "Location Services",
+      "autoUpload": "Auto Upload Photos",
+      "lowBandwidth": "Low Bandwidth Mode",
+      "optimization": "Mobile Optimization"
+    },
+    "dashboard": {
+      "title": "Dashboard Customization",
+      "layout": "Layout",
+      "widgets": "Widgets",
+      "defaultView": "Default View",
+      "dateFormat": "Date Format",
+      "theme": "Theme",
+      "density": "Display Density"
+    },
+    "buttons": {
+      "save": "Save Changes",
+      "cancel": "Cancel",
+      "reset": "Reset to Default",
+      "upload": "Upload Photo",
+      "remove": "Remove",
+      "edit": "Edit",
+      "sync": "Sync Now"
+    },
+    "messages": {
+      "saveSuccess": "Your profile has been updated successfully",
+      "saveError": "There was an error updating your profile",
+      "syncSuccess": "Profile successfully synchronized",
+      "syncError": "Error synchronizing profile",
+      "uploadSuccess": "File uploaded successfully",
+      "uploadError": "Error uploading file",
+      "requiredField": "This field is required",
+      "invalidEmail": "Please enter a valid email address",
+      "invalidPhone": "Please enter a valid phone number"
+    }
+  },
+  "connectionStatus": {
+    "online": "Online",
+    "offline": "Offline",
+    "reconnecting": "Reconnecting...",
+    "limited": "Limited Connectivity"
+  },
+  "actions": {
+    "create": "Create",
+    "update": "Update",
+    "delete": "Delete",
+    "view": "View",
+    "download": "Download",
+    "upload": "Upload",
+    "share": "Share",
+    "export": "Export",
+    "import": "Import",
+    "filter": "Filter",
+    "search": "Search",
+    "sort": "Sort",
+    "print": "Print",
+    "assign": "Assign",
+    "complete": "Complete"
+  },
+  "time": {
+    "today": "Today",
+    "yesterday": "Yesterday",
+    "tomorrow": "Tomorrow",
+    "thisWeek": "This Week",
+    "lastWeek": "Last Week",
+    "nextWeek": "Next Week",
+    "thisMonth": "This Month",
+    "lastMonth": "Last Month",
+    "nextMonth": "Next Month"
+  },
+  "errors": {
+    "general": "Something went wrong. Please try again.",
+    "notFound": "The requested resource was not found.",
+    "unauthorized": "You don't have permission to access this resource.",
+    "validation": "Please check your inputs and try again.",
+    "network": "Network error. Please check your connection.",
+    "offline": "You are currently offline. Some features may be unavailable."
+  }
+}

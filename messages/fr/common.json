@@ -1,0 +1,143 @@
+{
+  "app": {
+    "name": "BuildTrack Pro",
+    "tagline": "Gestion de Projets de Construction Simplifiée"
+  },
+  "navigation": {
+    "dashboard": "Tableau de Bord",
+    "projects": "Projets",
+    "tasks": "Tâches",
+    "reports": "Rapports",
+    "calendar": "Calendrier",
+    "messages": "Messages",
+    "profile": "Profil",
+    "settings": "Paramètres",
+    "help": "Aide et Support",
+    "logout": "Déconnexion"
+  },
+  "dashboard": {
+    "greeting": "Bonjour, {name}",
+    "welcome": "Bienvenue à nouveau sur BuildTrack Pro",
+    "overview": "Aperçu du Projet",
+    "recentActivity": "Activité Récente",
+    "upcomingTasks": "Tâches à Venir",
+    "projectStatus": "État du Projet",
+    "teamActivity": "Activité de l'Équipe",
+    "quickActions": "Actions Rapides"
+  },
+  "profile": {
+    "title": "Paramètres du Profil",
+    "personalInfo": "Informations Personnelles",
+    "professionalInfo": "Informations Professionnelles",
+    "communicationPrefs": "Préférences de Communication",
+    "mobileSettings": "Paramètres Mobiles",
+    "dashboardCustomization": "Personnalisation du Tableau de Bord",
+    "security": "Sécurité et Confidentialité",
+    "firstName": "Prénom",
+    "lastName": "Nom",
+    "email": "Adresse Email",
+    "phone": "Numéro de Téléphone",
+    "jobTitle": "Titre du Poste",
+    "company": "Entreprise",
+    "department": "Département",
+    "role": "Rôle",
+    "certification": "Certifications",
+    "expertise": "Domaines d'Expertise",
+    "language": "Préférence de Langue",
+    "timezone": "Fuseau Horaire",
+    "notifications": {
+      "title": "Notifications",
+      "email": "Notifications par Email",
+      "push": "Notifications Push",
+      "sms": "Notifications SMS",
+      "inApp": "Notifications dans l'Application",
+      "projectUpdates": "Mises à Jour des Projets",
+      "taskAssignments": "Attributions des Tâches",
+      "deadlineReminders": "Rappels d'Échéance",
+      "teamMessages": "Messages d'Équipe",
+      "systemAnnouncements": "Annonces Système"
+    },
+    "mobile": {
+      "title": "Paramètres Mobiles",
+      "dataUsage": "Utilisation des Données",
+      "offlineAccess": "Accès Hors Ligne",
+      "syncFrequency": "Fréquence de Synchronisation",
+      "cacheSize": "Taille du Cache",
+      "locationServices": "Services de Localisation",
+      "autoUpload": "Téléchargement Automatique des Photos",
+      "lowBandwidth": "Mode Faible Bande Passante",
+      "optimization": "Optimisation Mobile"
+    },
+    "dashboard": {
+      "title": "Personnalisation du Tableau de Bord",
+      "layout": "Disposition",
+      "widgets": "Widgets",
+      "defaultView": "Vue par Défaut",
+      "dateFormat": "Format de Date",
+      "theme": "Thème",
+      "density": "Densité d'Affichage"
+    },
+    "buttons": {
+      "save": "Enregistrer les Modifications",
+      "cancel": "Annuler",
+      "reset": "Réinitialiser par Défaut",
+      "upload": "Télécharger une Photo",
+      "remove": "Supprimer",
+      "edit": "Modifier",
+      "sync": "Synchroniser Maintenant"
+    },
+    "messages": {
+      "saveSuccess": "Votre profil a été mis à jour avec succès",
+      "saveError": "Une erreur s'est produite lors de la mise à jour de votre profil",
+      "syncSuccess": "Profil synchronisé avec succès",
+      "syncError": "Erreur lors de la synchronisation du profil",
+      "uploadSuccess": "Fichier téléchargé avec succès",
+      "uploadError": "Erreur lors du téléchargement du fichier",
+      "requiredField": "Ce champ est obligatoire",
+      "invalidEmail": "Veuillez entrer une adresse email valide",
+      "invalidPhone": "Veuillez entrer un numéro de téléphone valide"
+    }
+  },
+  "connectionStatus": {
+    "online": "En ligne",
+    "offline": "Hors ligne",
+    "reconnecting": "Reconnexion...",
+    "limited": "Connectivité Limitée"
+  },
+  "actions": {
+    "create": "Créer",
+    "update": "Mettre à jour",
+    "delete": "Supprimer",
+    "view": "Voir",
+    "download": "Télécharger",
+    "upload": "Importer",
+    "share": "Partager",
+    "export": "Exporter",
+    "import": "Importer",
+    "filter": "Filtrer",
+    "search": "Rechercher",
+    "sort": "Trier",
+    "print": "Imprimer",
+    "assign": "Assigner",
+    "complete": "Terminer"
+  },
+  "time": {
+    "today": "Aujourd'hui",
+    "yesterday": "Hier",
+    "tomorrow": "Demain",
+    "thisWeek": "Cette Semaine",
+    "lastWeek": "Semaine Dernière",
+    "nextWeek": "Semaine Prochaine",
+    "thisMonth": "Ce Mois",
+    "lastMonth": "Mois Dernier",
+    "nextMonth": "Mois Prochain"
+  },
+  "errors": {
+    "general": "Quelque chose s'est mal passé. Veuillez réessayer.",
+    "notFound": "La ressource demandée n'a pas été trouvée.",
+    "unauthorized": "Vous n'avez pas la permission d'accéder à cette ressource.",
+    "validation": "Veuillez vérifier vos entrées et réessayer.",
+    "network": "Erreur réseau. Veuillez vérifier votre connexion.",
+    "offline": "Vous êtes actuellement hors ligne. Certaines fonctionnalités peuvent être indisponibles."
+  }
+}

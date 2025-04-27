@@ -1,0 +1,105 @@
+{
+  "hero": {
+    "title": "Construa Melhor, Monitore de Forma Inteligente",
+    "subtitle": "A plataforma completa de gestão de construção projetada para construtores que desejam otimizar seus projetos, reduzir custos e entregar resultados excepcionais.",
+    "cta": {
+      "primary": "Iniciar Teste Gratuito",
+      "secondary": "Assistir Demonstração"
+    }
+  },
+  "trustedBy": {
+    "heading": "Confiado por líderes do setor"
+  },
+  "features": {
+    "heading": "Recursos que Transformam sua Construção",
+    "subtitle": "Ferramentas poderosas projetadas especificamente para o setor de construção brasileiro",
+    "projectManagement": "Gestão de Projetos",
+    "projectManagementDesc": "Controle cada aspecto do seu projeto com painéis personalizáveis, cronogramas interativos e acompanhamento de progresso em tempo real.",
+    "resourceTracking": "Rastreamento de Recursos",
+    "resourceTrackingDesc": "Monitore materiais, equipamentos e mão de obra com precisão para otimizar o uso de recursos e evitar desperdícios.",
+    "fieldMobileApp": "Aplicativo Móvel em Campo",
+    "fieldMobileAppDesc": "Acesse informações críticas do projeto em qualquer lugar, mesmo sem conexão à internet, perfeito para obras em locais remotos.",
+    "documentManagement": "Gestão de Documentos",
+    "documentManagementDesc": "Armazene, organize e compartilhe plantas, documentos técnicos e aprovações regulatórias com sua equipe e clientes.",
+    "financialTools": "Ferramentas Financeiras",
+    "financialToolsDesc": "Gerencie orçamentos, controle custos e monitore despesas com relatórios detalhados que facilitam a prestação de contas.",
+    "teamCollaboration": "Colaboração em Equipe",
+    "teamCollaborationDesc": "Comunique-se eficientemente com sua equipe através de mensagens, atribuições de tarefas e notificações em tempo real."
+  },
+  "benefits": {
+    "heading": "Vantagens para seu Negócio",
+    "subtitle": "Como o BuildTrack Pro pode transformar sua operação de construção",
+    "efficiency": "Aumento de Eficiência",
+    "efficiencyDesc": "Reduza o tempo gasto em tarefas administrativas em até 40%, permitindo que você foque no que realmente importa.",
+    "costs": "Redução de Custos",
+    "costsDesc": "Diminua o desperdício de materiais e otimize a utilização de recursos, reduzindo custos operacionais em até 25%.",
+    "quality": "Melhoria na Qualidade",
+    "qualityDesc": "Garanta consistência e excelência em todos os projetos com processos padronizados e verificações de qualidade.",
+    "clientSatisfaction": "Satisfação do Cliente",
+    "clientSatisfactionDesc": "Aumente a transparência com seus clientes e entregue projetos dentro do prazo e do orçamento."
+  },
+  "testimonials": {
+    "heading": "O que Nossos Clientes Dizem",
+    "subtitle": "Histórias de sucesso de construtoras brasileiras que utilizam o BuildTrack Pro"
+  },
+  "pricing": {
+    "heading": "Planos Flexíveis para Todos os Tamanhos de Projetos",
+    "subtitle": "Escolha o plano ideal para suas necessidades de construção",
+    "starter": "Inicial",
+    "professional": "Profissional",
+    "enterprise": "Empresarial",
+    "custom": "Personalizado",
+    "perUser": "por usuário/mês",
+    "contactUs": "Fale Conosco",
+    "startTrial": "Iniciar Teste Gratuito",
+    "features": {
+      "users": "usuários",
+      "projects": "projetos",
+      "storage": "de armazenamento",
+      "support": "Suporte por e-mail",
+      "prioritySupport": "Suporte prioritário",
+      "phoneSupport": "Suporte por telefone",
+      "api": "Acesso à API",
+      "whiteLabel": "Marca própria",
+      "advanced": "Recursos avançados"
+    }
+  },
+  "cta": {
+    "heading": "Pronto para Transformar seus Projetos de Construção?",
+    "subtitle": "Junte-se a construtoras de todo o Brasil que já estão aproveitando o poder do BuildTrack Pro.",
+    "button": "Comece Hoje Mesmo",
+    "noCard": "Não é necessário cartão de crédito"
+  },
+  "footer": {
+    "product": "Produto",
+    "company": "Empresa",
+    "resources": "Recursos",
+    "legal": "Legal",
+    "contact": "Contato",
+    "copyright": "© 2025 BuildTrack Pro. Todos os direitos reservados.",
+    "links": {
+      "features": "Recursos",
+      "pricing": "Preços",
+      "demo": "Demonstração",
+      "about": "Sobre Nós",
+      "careers": "Carreiras",
+      "partners": "Parceiros",
+      "blog": "Blog",
+      "documentation": "Documentação",
+      "support": "Suporte",
+      "terms": "Termos de Serviço",
+      "privacy": "Política de Privacidade",
+      "cookies": "Política de Cookies",
+      "email": "contato@buildtrackpro.com",
+      "phone": "+55 11 9999-9999",
+      "address": "São Paulo, SP - Brasil"
+    }
+  },
+  "industry": {
+    "residential": "Construção Residencial",
+    "commercial": "Construção Comercial",
+    "infrastructure": "Infraestrutura",
+    "industrial": "Construção Industrial",
+    "renovation": "Reformas e Restaurações"
+  }
+}
