@@ -2,8 +2,8 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { useSupabaseAuth } from '@/lib/auth/SupabaseAuthContext';
-import { useTranslations } from '@/app/hooks/useTranslations';
+import { useSupabaseAuth } from '../../../../lib/auth/SupabaseAuthContext';
+import { useTranslations } from '../../../hooks/useTranslations';
 
 /**
  * Internationalized Register Page
