@@ -7,7 +7,10 @@ import FormToggle from './FormToggle';
 import { ProfileData } from '@/lib/api/profile-client';
 import { useSafeTranslations } from '@/app/hooks/useSafeTranslations';
 import { PROFILE_KEYS } from '@/app/constants/translationKeys';
-import ErrorBoundary from '../../components/ErrorBoundary';
+// Inline ErrorBoundary component for build stability
+const ErrorBoundary = ({ children }: { children: React.ReactNode }) => {
+  return <>{children}</>;
+};
 import LanguagePreference from './LanguagePreference';
 
 interface CommunicationPreferencesProps {

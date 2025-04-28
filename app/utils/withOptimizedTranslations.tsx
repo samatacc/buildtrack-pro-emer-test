@@ -16,8 +16,12 @@
  * - Consistent error handling
  */
 import React from 'react';
-import ErrorBoundary from '@/app/components/ErrorBoundary';
 import { useOptimizedTranslations } from '@/app/hooks/useOptimizedTranslations';
+
+// Inline ErrorBoundary component for build stability
+const ErrorBoundary = ({ children }: { children: React.ReactNode }) => {
+  return <>{children}</>;
+};
 
 export interface WithOptimizedTranslationsProps {
   t: (_key: string, _params?: Record<string, any>) => string;

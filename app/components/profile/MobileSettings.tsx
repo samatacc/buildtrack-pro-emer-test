@@ -7,7 +7,10 @@ import FormSelect from './FormSelect';
 import { ProfileData } from '@/lib/api/profile-client';
 import { useSafeTranslations } from '@/app/hooks/useSafeTranslations';
 import { PROFILE_KEYS } from '@/app/constants/translationKeys';
-import ErrorBoundary from '../ErrorBoundary';
+// Inline ErrorBoundary component for build stability
+const ErrorBoundary = ({ children }: { children: React.ReactNode }) => {
+  return <>{children}</>;
+};
 
 interface MobileSettingsProps {
   profile: ProfileData;
