@@ -1,0 +1,166 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+ # BuildTrack Pro: Resource Management
+
+## 24.1 Personnel Resource Management
+
+### Resource Allocation:
+- Multi-project resource planning
+- Skill-based assignment algorithms
+- Resource availability forecasting
+- Capacity planning tools
+- Resource utilization analytics
+- Real-time allocation adjustments
+- Conflict detection and resolution
+- Resource reservation system
+
+### Team Composition:
+- Skills matrix management
+- Role-based team assembly
+- Specialty team templates
+- Cross-functional team building
+- Team capacity analytics
+- Performance-based team optimization
+- Team diversity tracking
+- Team compatibility analysis
+
+### Resource Forecasting:
+- Long-term resource needs planning
+- Seasonal demand prediction
+- Project pipeline resource analysis
+- Hiring requirement forecasting
+- Bench strength monitoring
+- Resource gap identification
+- Scenario-based planning tools
+- Resource planning dashboards
+
+## 24.2 Equipment & Asset Management
+
+### Equipment Tracking:
+- Equipment lifecycle monitoring
+- GPS-based location tracking
+- Usage hour tracking
+- Maintenance status indicators
+- Equipment categorization
+- Custom attribute tracking
+- Equipment history logging
+- Barcode/RFID integration
+
+### Asset Scheduling:
+- Visual scheduling calendar
+- Conflict detection algorithms
+- Equipment reservation system
+- Priority-based allocation
+- Schedule optimization tools
+- Drag-and-drop rescheduling
+- Resource dependency mapping
+- Advanced search filtering
+
+### Maintenance Management:
+- Preventive maintenance scheduling
+- Usage-based maintenance triggers
+- Maintenance history tracking
+- Service record documentation
+- Inspection checklist integration
+- Downtime tracking and analysis
+- Maintenance cost monitoring
+- Service provider management
+
+## 24.3 Subcontractor Management
+
+### Subcontractor Directory:
+- Comprehensive vendor database
+- Specialty classification system
+- Performance rating framework
+- Insurance and certification tracking
+- Contact management system
+- Service area mapping
+- Pricing structure records
+- Historical relationship tracking
+
+### Subcontractor Scheduling:
+- Availability calendar integration
+- Work order management
+- Schedule confirmation workflow
+- Real-time schedule updates
+- Schedule conflict resolution
+- Automated notification system
+- Schedule adherence tracking
+- Long-term commitment planning
+
+### Performance Management:
+- Quality rating system
+- On-time performance metrics
+- Budget adherence tracking
+- Safety compliance scoring
+- Customer satisfaction feedback
+- Performance trend analysis
+- Improvement planning tools
+- Performance-based assignment
+
+## 24.4 Material & Supply Chain Management
+
+### Inventory Management:
+- Real-time inventory tracking
+- Multi-location inventory visibility
+- Minimum stock level alerts
+- Inventory value calculation
+- Batch and lot tracking
+- Expiration date monitoring
+- Inventory adjustment workflows
+- Inventory audit tools
+
+### Procurement Workflow:
+- Purchase requisition system
+- Approval workflow automation
+- Vendor selection optimization
+- Purchase order management
+- Delivery tracking system
+- Invoice matching capabilities
+- Payment status monitoring
+- Procurement analytics dashboard
+
+### Supply Chain Visibility:
+- Order status tracking
+- Supplier performance monitoring
+- Lead time management
+- Delivery schedule coordination
+- Supply risk assessment
+- Alternative supplier identification
+- Cost trend analysis
+- Supply chain mapping
+
+## 24.5 Resource Optimization & Analytics
+
+### Resource Utilization:
+- Cross-project utilization metrics
+- Utilization heat maps
+- Underutilization alerts
+- Peak demand identification
+- Resource balancing tools
+- Utilization trend analysis
+- Benchmarking capabilities
+- Resource efficiency scoring
+
+### Predictive Resource Planning:
+- AI-driven resource forecasting
+- Historical pattern recognition
+- Project similarity analysis
+- Resource demand modeling
+- What-if scenario planning
+- Resource constraint simulation
+- Optimization recommendation engine
+- Automated resource leveling
+
+### Resource Performance Analytics:
+- Resource productivity metrics
+- Cost efficiency analysis
+- Quality contribution scoring
+- Skill development tracking
+- Performance trend visualization
+- Resource ROI calculation
+- Comparative performance analysis
+- Custom KPI dashboards

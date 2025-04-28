@@ -1,0 +1,102 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+ # BuildTrack Pro Admin Console: Content & Documentation Management
+
+## 9.1 Knowledge Base Administration
+
+### Article Management:
+- Content creation and editing interface
+- Category and tag organization
+- Version history tracking
+- Publishing workflow controls
+- Scheduled publishing options
+- Author assignment and tracking
+- Related article linking
+- Article analytics dashboard
+
+### Media Library:
+- Image and video management
+- File organization system
+- Version control for media
+- Usage tracking across content
+- Thumbnail generation settings
+- Metadata management for media
+- Size and format optimization
+- Rights and permission tracking
+
+### Localization Management:
+- Language version control
+- Translation workflow management
+- Content synchronization between languages
+- Translation status tracking
+- Default language configuration
+- Currency and date format localization
+- Regional variation support
+- Translation quality metrics
+
+## 9.2 Help & Support Content
+
+### Tutorial Management:
+- Interactive tutorial creation tools
+- Step sequence definition
+- Screenshot and annotation tools
+- Video tutorial hosting
+- Usage tracking and completion rates
+- Feedback collection on tutorials
+- Version tagging for feature changes
+- Targeted tutorial assignment
+
+### Support Material Creation:
+- Troubleshooting guide development
+- FAQ management system
+- Solution database organization
+- Common issue template creation
+- Error code documentation
+- Procedure step definition
+- Searchability optimization tools
+- Support material effectiveness tracking
+
+### In-app Guidance Management:
+- Contextual help configuration
+- Tooltip content management
+- Feature announcement creation
+- Onboarding flow definition
+- Progressive disclosure settings
+- Help widget content control
+- Trigger point configuration
+- Guidance effectiveness metrics
+
+## 9.3 Marketing Content Management
+
+### Website Content Control:
+- Page creation and management
+- Template system administration
+- Content block library
+- SEO metadata management
+- URL structure configuration
+- Redirect management
+- Publishing workflow control
+- A/B testing integration
+
+### Email Template Management:
+- Email template creation interface
+- Dynamic content configuration
+- Personalization token management
+- Template testing tools
+- Responsive design controls
+- Template version control
+- Performance analytics by template
+- Deliverability optimization settings
+
+### Asset Management:
+- Brand asset organization
+- Style guide enforcement tools
+- Digital asset distribution
+- Usage rights management
+- Asset expiration control
+- Version management for assets
+- Approval workflow for new assets
+- Asset performance analytics

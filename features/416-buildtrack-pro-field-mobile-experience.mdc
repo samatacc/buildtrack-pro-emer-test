@@ -1,0 +1,166 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+ # BuildTrack Pro: Field & Mobile Experience
+
+## 16.1 Mobile Application Architecture
+
+### Native Applications:
+- iOS application optimized for iPhones and iPads
+- Android application with Material Design implementation
+- Tablet-specific interfaces with enhanced layouts
+- Offline-first architecture
+- Background synchronization services
+- Push notification integration
+- Biometric authentication support
+- Device permission management
+
+### Progressive Web Application:
+- Device-responsive design
+- Installable web application
+- Service worker implementation
+- Local caching capabilities
+- Network status detection
+- Cross-platform consistency
+- Web notification support
+- Camera and GPS web API integration
+
+### Cross-Platform Functionality:
+- Consistent feature parity across platforms
+- Shared authentication mechanisms
+- Real-time synchronization between devices
+- User preference sync across platforms
+- Activity continuation between devices
+- Platform-specific optimizations
+- Device-specific feature availability
+- Battery consumption optimization
+
+## 16.2 Field Data Capture
+
+### Mobile Forms:
+- Dynamic form rendering
+- Required field validation
+- Multi-step form wizards
+- Conditional logic display
+- Form progress saving
+- Template-based form creation
+- Custom field type support
+- Form completion analytics
+
+### On-Site Documentation:
+- Photo capture with annotation
+- Video recording capabilities
+- Voice memo recording
+- Barcode/QR code scanning
+- Document scanning with OCR
+- Digital signature capture
+- GPS location tagging
+- Timestamp verification
+
+### Offline Capabilities:
+- Full offline form completion
+- Data queuing for sync
+- Conflict resolution strategies
+- Background synchronization
+- Data prioritization for sync
+- Storage management
+- Offline file access
+- Sync status indicators
+
+## 16.3 Field Operations Tools
+
+### On-Site Scheduling:
+- Daily work order view
+- Route optimization
+- Schedule adjustments in field
+- Time tracking for tasks
+- Next appointment notifications
+- Travel time estimation
+- Schedule sharing with team
+- Customer notification of arrival time
+
+### Inventory Management:
+- Mobile inventory tracking
+- Parts usage recording
+- Barcode inventory scanning
+- Inventory reservation
+- Low stock notifications
+- Inventory transfer requests
+- Parts return processing
+- Vehicle inventory tracking
+
+### Equipment Service:
+- Equipment history access
+- Service manual access
+- Maintenance checklist completion
+- Equipment diagnostics reporting
+- Part replacement recording
+- Warranty information lookup
+- Service interval tracking
+- Equipment meter reading input
+
+## 16.4 Field Communication
+
+### Team Messaging:
+- Real-time chat functionality
+- Group messaging for teams
+- Photo and file sharing
+- Message status indicators
+- Priority message flagging
+- @mention tagging
+- Conversation search
+- Offline message queuing
+
+### Customer Communication:
+- Direct customer messaging
+- Automated arrival notifications
+- Service completion updates
+- Follow-up scheduling
+- Customer satisfaction surveys
+- Photo sharing with customers
+- Service summary generation
+- Appointment confirmation
+
+### Remote Assistance:
+- Video call capabilities
+- Screen sharing functionality
+- Annotation during video calls
+- Remote equipment diagnostics
+- Expert knowledge base access
+- Augmented reality assistance
+- Step-by-step guidance tools
+- Troubleshooting flowcharts
+
+## 16.5 Location-Based Services
+
+### GPS Tracking:
+- Real-time location tracking
+- Geofencing for job sites
+- Route history recording
+- Mileage tracking
+- Location-based alerts
+- Team member location visibility
+- Privacy controls for tracking
+- Location verification for time tracking
+
+### Map Integration:
+- Interactive job site maps
+- Custom map overlays
+- Asset location mapping
+- Satellite imagery integration
+- Indoor mapping capabilities
+- Custom point of interest markers
+- Route planning and navigation
+- Map sharing with annotations
+
+### Location Intelligence:
+- Job density heat maps
+- Travel time analytics
+- Service area optimization
+- Proximity-based job assignment
+- Location-based reporting
+- Historical service location analysis
+- Geographic trend identification
+- Territory management tools

@@ -1,0 +1,107 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+ ---
+description: SEO and discoverability specifications for marketing website
+globs: app/(marketing)/**/*
+alwaysApply: false
+---
+# BuildTrack Pro Marketing Website: SEO & Discoverability
+
+## 11.1 Technical SEO
+
+### Site Structure Optimization:
+- Logical URL hierarchy
+- Breadcrumb implementation with schema
+- XML sitemap generation and submission
+- Robots.txt configuration
+- Canonical URL implementation
+- Pagination handling with rel attributes
+- Redirect management system
+- Site depth optimization
+
+### Page Speed Optimization:
+- Image optimization workflow
+- Code minification process
+- Above-the-fold content prioritization
+- Render-blocking resource handling
+- Server response time optimization
+- Browser caching configuration
+- Mobile performance enhancement
+- Progressive web app considerations
+
+### Schema Implementation:
+- Organization schema markup
+- Product schema for software
+- FAQ schema for question pages
+- BreadcrumbList schema implementation
+- Review and rating schema
+- Event schema for webinars
+- Article schema for blog content
+- LocalBusiness schema for offices
+
+## 11.2 Content SEO
+
+### Keyword Strategy:
+- Primary keyword assignment by page
+- Secondary keyword mapping
+- Semantic keyword incorporation
+- Keyword density monitoring
+- Question-based keyword inclusion
+- Long-tail phrase optimization
+- Competitor keyword analysis
+- Search intent alignment
+
+### On-page Optimization:
+- Title tag optimization
+- Meta description crafting
+- Heading hierarchy implementation
+- URL structure optimization
+- Internal linking strategy
+- Image alt text optimization
+- Content readability enhancement
+- Featured snippet optimization
+
+### Content Freshness:
+- Content update schedule
+- Last modified date display
+- Historical content review process
+- Trending topic incorporation
+- News section timeliness
+- Seasonal content planning
+- Outdated content identification
+- Update notification system
+
+## 11.3 Analytics & Measurement
+
+### Performance Tracking:
+- Organic traffic monitoring
+- Keyword position tracking
+- Click-through rate analysis
+- Bounce rate optimization
+- Time on page measurement
+- Conversion path analysis
+- Device type performance comparison
+- Geographic traffic distribution
+
+### User Behavior Analysis:
+- Heatmap implementation
+- Scroll depth tracking
+- Click pattern analysis
+- Form abandonment tracking
+- Exit page identification
+- Entry page optimization
+- User flow visualization
+- Session recording implementation
+
+### Conversion Attribution:
+- Goal setup for key actions
+- Funnel visualization configuration
+- Multi-touch attribution modeling
+- Assisted conversion tracking
+- Traffic source comparison
+- Campaign parameter tracking
+- Conversion rate by segment
+- Value assignment to micro-conversions

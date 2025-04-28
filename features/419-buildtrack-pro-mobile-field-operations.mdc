@@ -1,0 +1,166 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+ # BuildTrack Pro: Mobile & Field Operations
+
+## 19.1 Field Mobility Platform
+
+### Cross-Platform Mobile App:
+- Native iOS and Android applications
+- Progressive web app compatibility
+- Offline-first architecture
+- Adaptive UI for different device sizes
+- Biometric authentication support
+- Low-bandwidth operation modes
+- Deep linking capabilities
+- Push notification system
+
+### Field Data Collection:
+- Dynamic digital forms
+- Photo and video documentation
+- Voice note recording
+- Barcode and QR code scanning
+- NFC tag reading
+- GPS location capture
+- Electronic signature collection
+- Measurement tool integration
+
+### Offline Capability:
+- Data synchronization engine
+- Conflict resolution mechanisms
+- Background sync management
+- Priority data queueing
+- Delta updates for efficiency
+- Encrypted offline storage
+- Sync status indicators
+- Bandwidth usage optimization
+
+## 19.2 Field Service Management
+
+### Work Order Management:
+- Mobile dispatch system
+- Dynamic scheduling interface
+- Work order prioritization
+- Multi-assignment capability
+- Step-by-step work instructions
+- Checklist completion tracking
+- Time and material tracking
+- Electronic approval workflow
+
+### Field Technician Tools:
+- Interactive service manuals
+- Augmented reality guidance
+- Video support capabilities
+- Parts inventory lookup
+- Equipment history access
+- Knowledge base integration
+- Collaboration tools
+- Diagnostic procedure guides
+
+### Customer Interaction:
+- Real-time ETA notifications
+- Service history visibility
+- Digital work order approval
+- Customer satisfaction surveys
+- Photo/video evidence sharing
+- Service recommendation tools
+- Follow-up scheduling
+- Customer signature capture
+
+## 19.3 Site Management
+
+### Site Documentation:
+- Digital site plans and drawings
+- Annotated site photos
+- Progress documentation system
+- Site condition reports
+- Spatial reference mapping
+- Documentation version control
+- Site-specific document library
+- Visual timeline creation
+
+### Site Safety Management:
+- Digital safety checklists
+- Hazard identification tools
+- Safety incident reporting
+- Toolbox talk documentation
+- Permit-to-work management
+- Safety credential verification
+- Emergency response guides
+- Safety compliance tracking
+
+### Site Progress Tracking:
+- Visual progress recording
+- Milestone completion tracking
+- Comparison with planned schedule
+- Delay documentation system
+- Progress photo/video library
+- Geospatial progress mapping
+- As-built documentation
+- Handover preparation tools
+
+## 19.4 Equipment & Asset Management
+
+### Mobile Equipment Tracking:
+- GPS equipment location
+- Usage hour monitoring
+- Fuel consumption tracking
+- Operator assignment logs
+- Maintenance status indicators
+- Equipment reservation system
+- Idle time analysis
+- Theft prevention tools
+
+### Asset Inspection:
+- Digital inspection forms
+- Asset condition rating system
+- Photo documentation workflow
+- Defect identification tools
+- Historical inspection comparison
+- Risk assessment features
+- Maintenance recommendation engine
+- Compliance verification
+
+### Telematics Integration:
+- Equipment performance monitoring
+- Fault code interpretation
+- Real-time diagnostic alerts
+- Engine parameter tracking
+- Operator behavior analysis
+- Geofence compliance
+- Route optimization
+- Idling reduction tools
+
+## 19.5 Crew Management
+
+### Field Team Coordination:
+- Team assignment dashboard
+- Skill-based work allocation
+- Real-time location tracking
+- Team communication platform
+- Shift management tools
+- Productivity monitoring
+- Task handover functionality
+- Team capacity visualization
+
+### Time & Attendance:
+- Mobile time clock
+- Geofenced check-in/out
+- Break tracking
+- Overtime monitoring
+- Labor cost tracking
+- Attendance verification
+- Payroll integration
+- Work hour compliance tools
+
+### Field Communication:
+- Team messaging platform
+- Push-to-talk capability
+- Video conferencing integration
+- File and photo sharing
+- Translation services
+- Escalation pathways
+- Priority messaging
+- Communication logging

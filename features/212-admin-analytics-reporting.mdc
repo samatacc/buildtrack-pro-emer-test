@@ -1,0 +1,102 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+ # BuildTrack Pro Admin Console: Analytics & Reporting
+
+## 12.1 System Analytics
+
+### Usage Statistics:
+- User activity heat mapping
+- Feature utilization metrics
+- Session duration and frequency
+- Time on page analytics
+- Click path analysis
+- Error encounter rates
+- Search query analytics
+- Abandonment point identification
+
+### Performance Analytics:
+- Page load time tracking
+- API response time monitoring
+- Resource utilization correlation
+- Geographical performance variation
+- Device type performance comparison
+- Network impact analysis
+- Cache effectiveness metrics
+- Query performance tracking
+
+### Capacity Planning Tools:
+- Growth trend projection
+- Resource utilization forecasting
+- Scaling recommendation engine
+- Peak load analysis
+- Storage growth modeling
+- Database size projection
+- Bandwidth requirement forecasting
+- Concurrent user capacity planning
+
+## 12.2 Business Metrics
+
+### Revenue Analytics:
+- MRR/ARR tracking and forecasting
+- Churn and retention analysis
+- Customer lifetime value calculation
+- Revenue by plan breakdown
+- Upgrade/downgrade impact analysis
+- Expansion revenue tracking
+- Payment success rate monitoring
+- Pricing effectiveness analysis
+
+### Customer Success Metrics:
+- Adoption rate by feature
+- Time to value measurement
+- NPS and satisfaction scoring
+- Support ticket volume analysis
+- Feature request patterns
+- User engagement scoring
+- Renewal likelihood prediction
+- Customer health scoring
+
+### Growth Metrics:
+- Customer acquisition tracking
+- Conversion rate analysis
+- Funnel stage progression
+- Marketing campaign effectiveness
+- Referral program performance
+- Trial to paid conversion
+- User growth velocity
+- Market penetration analysis
+
+## 12.3 Custom Report Builder
+
+### Query Builder Interface:
+- Data source selection
+- Field selection and organization
+- Filter criteria definition
+- Sorting and grouping configuration
+- Calculation and formula creation
+- Parameter definition for dynamic reports
+- Sample data preview
+- Output format selection
+
+### Visualization Creator:
+- Chart type selection and configuration
+- Data mapping to visual elements
+- Color scheme and styling options
+- Axis and scale configuration
+- Legend and label customization
+- Interactive element definition
+- Dashboard layout design
+- Drill-down capability configuration
+
+### Report Distribution:
+- Scheduling interface for automated reports
+- Recipient management
+- Delivery method selection
+- Format options (PDF, Excel, CSV)
+- Conditional distribution rules
+- Embedded dashboard sharing
+- Access permission management
+- Delivery confirmation tracking

@@ -1,0 +1,156 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+ # BuildTrack Pro: Financial Management Module
+
+## 6.1 Budget Dashboard
+
+### Budget Overview:
+- Summary cards showing total budget, spent, committed, remaining
+- Visual progress bars by category
+- Variance analysis with color-coded indicators
+- Forecast to completion calculation
+- Cash flow projection chart
+- Budget health score with trends
+- Quick links to problematic categories
+- Time-phased budget visualization
+
+### Cost Breakdown Structure:
+- Hierarchical cost code visualization
+- Expandable categories showing detail levels
+- Original budget vs. current budget comparison
+- Actual cost tracking against budget
+- Commitment tracking with pending/approved status
+- Percentage complete by cost code
+- Earned value metrics calculation
+- Custom grouping options
+
+### Budget Adjustment Tracking:
+- Change order impact visualization
+- Budget transfer history log
+- Reallocation tools with approval workflow
+- Justification documentation for changes
+- Before/after comparison views
+- Approval status tracking
+- Impact analysis on project financials
+- Notification system for stakeholders
+
+## 6.2 Expense Management
+
+### Expense Entry Interface:
+- Manual entry form with required fields
+- Receipt image upload with preview
+- AI-powered data extraction from receipts
+- Category and cost code assignment
+- Tax calculation and management
+- Split expense functionality
+- Billable/non-billable designation
+- Recurring expense templates
+
+### Expense Approval Workflow:
+- Submission queue for approvers
+- Multi-level approval configuration
+- Approval/rejection with comment requirement
+- Delegation options for temporary reassignment
+- Threshold-based automatic approvals
+- Due date tracking for timely processing
+- Mobile approval capabilities
+- Escalation for overdue approvals
+
+### Expense Reporting:
+- Customizable report templates
+- Filtering by date range, category, project
+- Grouping options for analysis
+- Chart generation for visual representation
+- Export options (PDF, Excel, accounting system)
+- Scheduled report distribution
+- Trend analysis over time periods
+- Expense policy compliance metrics
+
+## 6.3 Invoicing System
+
+### Invoice Generation:
+- New invoice creation wizard
+- Template-based quick creation
+- Line item entry with description formatting
+- Tax calculation with multiple rate support
+- Discount application options
+- Payment terms configuration
+- Due date calculation with calendar
+- Preview and edit before finalization
+
+### Invoice Management Dashboard:
+- Status tracking (Draft, Sent, Partial, Paid, Overdue)
+- Aging receivables analysis
+- Due date calendar view
+- Payment recording interface
+- Reminder scheduling system
+- Invoice history with version tracking
+- Dispute management workflow
+- Collection process tracking
+
+### Client Billing Portal:
+- Client-facing invoice list
+- Secure PDF download capability
+- Online payment options integration
+- Payment history and receipts
+- Communication thread regarding invoices
+- Upcoming/past due notification
+- Auto-payment enrollment option
+- Statement generation on demand
+
+## 6.4 Financial Reporting
+
+### Standard Financial Reports:
+- Profit & Loss by project
+- Budget vs. Actual analysis
+- Cash flow statements
+- Accounts receivable aging
+- Revenue recognition tracking
+- Cost code analysis
+- Markup/margin calculation
+- Tax liability reporting
+
+### Custom Report Builder:
+- Drag-and-drop report designer
+- Field selection from financial database
+- Calculation formula creation
+- Grouping and subtotal configuration
+- Chart type selection for visualization
+- Conditional formatting rules
+- Saved report templates
+- Scheduled generation and distribution
+
+### Financial Data Export:
+- Accounting system integration (QuickBooks, Sage)
+- Custom format mapping for exports
+- Scheduled automatic export
+- Reconciliation tools for verification
+- Error logging and resolution
+- Audit trail of exported transactions
+- Historical export record keeping
+- Manual override capabilities
+
+## 6.5 Payment Processing
+
+### Payment Collection:
+- Multiple payment method support
+- Credit card processing integration
+- ACH/bank transfer handling
+- Check payment recording
+- Cash receipt management
+- Partial payment allocation
+- Overpayment handling protocols
+- Payment receipt generation
+
+### Payment Application:
+- Invoice selection for payment application
+- Automatic suggestion based on aging
+- Manual override capabilities
+- Split payment across multiple invoices
+- Unapplied payment tracking
+- Credit application workflow
+- Payment correction tools
+- Notification of payment to stakeholders

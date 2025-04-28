@@ -1,0 +1,102 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+ # BuildTrack Pro CMS: Architecture & Core Structure
+
+## 1.1 Schema Design
+
+### Content Type Definition:
+- Document type schema with field specifications
+- Type relationships and references configuration
+- Field validation rules and constraints
+- Required vs. optional field designation
+- Default value configuration
+- Custom field type registration
+- Localization support at schema level
+- Versioning and drafts configuration
+
+### Content Modeling Structure:
+- Page type hierarchical organization
+- Component/block type definitions
+- Reusable fragment architecture
+- Field group organization for related data
+- Content reference system design
+- Asset type configuration
+- Taxonomy and category structures
+- SEO metadata integration pattern
+
+### Relationship Mapping:
+- Parent-child relationship definitions
+- Many-to-many reference configuration
+- Cross-content type linking
+- Bidirectional reference handling
+- Reference integrity enforcement
+- Circular reference prevention
+- Dependency tracking between content
+- Reference visualization tools
+
+## 1.2 Basic Content Types
+
+### Page Types:
+- Homepage configuration
+- Feature page schema
+- Industry solution page model
+- Blog post structure
+- Case study format
+- Resource page template
+- Contact page configuration
+- Custom landing page schema
+
+### Component Types:
+- Hero section block
+- Feature highlight card
+- Testimonial component
+- Call-to-action block
+- Pricing table structure
+- Image gallery component
+- Video embed block
+- Form component schema
+
+### Global Types:
+- Site settings configuration
+- Navigation menu structure
+- Footer configuration
+- Theme and branding settings
+- Social media links
+- Cookie consent configuration
+- Legal document storage
+- Site-wide announcement model
+
+## 1.3 Advanced Content Structures
+
+### Flexible Layout System:
+- Page builder component array
+- Section ordering mechanism
+- Layout grid configuration
+- Component nesting capabilities
+- Conditional display rules
+- Device-specific visibility
+- Layout version control
+- Layout template system
+
+### Dynamic Content Rules:
+- Conditional field visibility
+- Value-dependent field validation
+- Cross-field validation rules
+- Complex condition builder
+- Default value generators
+- Calculated field configuration
+- Dynamic reference filtering
+- Rule-based content suggestions
+
+### Taxonomy & Classification:
+- Category hierarchy management
+- Tag system implementation
+- Custom taxonomy creation
+- Cross-category relationships
+- Automatic categorization rules
+- Category merging capabilities
+- Orphaned category detection
+- Taxonomy visualization tools

@@ -1,0 +1,132 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+ # BuildTrack Pro: Dashboard Home
+
+## 2.1 Main Dashboard Interface
+
+### Layout Structure:
+- Responsive grid layout adapting to screen sizes
+- Left sidebar navigation with collapsible categories
+- Top header with search, notifications, and profile menu
+- Main content area with widget-based dashboard
+- Bottom action bar on mobile
+- Breadcrumb navigation showing current location
+
+### Dashboard Customization:
+- Widget drag-and-drop repositioning
+- Add/remove widget functionality
+- Widget size adjustment (1x1, 1x2, 2x2)
+- Dashboard view saving and switching
+- Role-based default dashboards
+- Widget settings configuration
+- Layout memory across sessions
+
+## 2.2 Project Overview Widgets
+
+### Active Projects Card:
+- Scrollable list of active projects with thumbnails
+- Progress bar showing completion percentage for each
+- Color-coded status indicators (On Track, Delayed, At Risk)
+- Days ahead/behind schedule display
+- Quick-action buttons for frequent tasks
+- Click behavior opening project detail page
+- Create new project button with tooltip
+
+### Project Timeline Widget:
+- Horizontal timeline visualization of all projects
+- Today marker with upcoming milestones
+- Color-coded project bars showing duration
+- Dragable date range selector
+- Milestone icons with hover tooltips
+- Zoom controls for timeframe adjustment
+- Project filtering capabilities
+
+### Project Health Dashboard:
+- Matrix view showing all projects by status category
+- Risk level indicators with color coding
+- Key metrics for each project (tasks overdue, open issues)
+- Quick filter tabs (All, My Projects, Favorites)
+- Sort options (alphabetical, due date, creation date, status)
+- List/grid view toggle
+
+## 2.3 Task Management Widgets
+
+### My Tasks Widget:
+- Personalized view of assigned tasks
+- Grouping by project with collapsible sections
+- Due date highlighting with urgency indicators
+- Status pill badges (To Do, In Progress, Blocked, Done)
+- Priority flags with color coding
+- Quick status change dropdown
+- Checkbox for task completion
+- Click behavior opening task detail
+
+### Team Tasks Overview:
+- Team workload visualization
+- Grouped by assignee with avatar displays
+- Task count badges by status
+- Overdue task highlighting
+- Capacity indicators showing allocation
+- Filter by project/timeframe
+- Task reassignment capability via drag-and-drop
+
+### Critical Path Tasks:
+- Focused view of schedule-critical tasks
+- Impact indicator showing dependent task count
+- Days until due with color-coded urgency
+- Block status with reason codes
+- Direct link to dependent tasks
+- Priority sort toggle
+
+## 2.4 Analytics & Reporting Widgets
+
+### Progress Reports:
+- Visual charts showing project completion trends
+- Week-over-week comparison metrics
+- Planned vs. actual progress lines
+- Predictive completion trend line
+- Click behavior opening detailed reports page
+- Date range selector
+- Export functionality (PDF/CSV)
+
+### Financial Dashboard:
+- Budget vs. actual spending charts
+- Expense category breakdown in donut chart
+- Burn rate calculation and visualization
+- Invoice status summary
+- Cost code distribution
+- Filtering by project/timeframe
+- Drill-down capability into specific categories
+
+### Team Performance:
+- Task completion rate by team member
+- Quality metrics visualization
+- Response time averages
+- Workload distribution
+- Skill utilization metrics
+- Recognition highlights for top performers
+- Trend indicators with historical context
+
+## 2.5 Notification Center
+
+### Notification Hub:
+- Consolidated notification feed
+- Category-based grouping (Tasks, Messages, System, Weather, Admin)
+- Read/unread status indicators
+- Time-based grouping (Today, Yesterday, Earlier)
+- Filter controls for notification types
+- Mark all as read functionality
+- Notification preference settings
+- In-context actions directly from notifications
+
+### Alert System:
+- High-priority notification treatment
+- Persist-until-acknowledged alerts
+- Visual differentiation from standard notifications
+- Sound/vibration options (configurable)
+- Emergency banner for critical alerts
+- Acknowledgment tracking
+- Distribution list visibility

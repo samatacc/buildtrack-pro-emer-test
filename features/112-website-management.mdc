@@ -1,0 +1,107 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+ ---
+description: Website management and governance specifications
+globs: app/(marketing)/**/*
+alwaysApply: false
+---
+# BuildTrack Pro Marketing Website: Website Management & Governance
+
+## 12.1 Content Governance
+
+### Publication Workflow:
+- Content request process
+- Editorial calendar management
+- Review and approval workflow
+- Quality assurance checklist
+- Compliance review integration
+- Scheduled publishing configuration
+- Content expiration monitoring
+- Archive and removal process
+
+### Style Guide Enforcement:
+- Writing style guidelines
+- Brand voice documentation
+- Terminology standardization
+- Grammar and punctuation standards
+- Formatting consistency rules
+- Asset usage guidelines
+- Component usage standards
+- Accessibility requirements
+
+### Content Audit System:
+- Regular content inventory process
+- Performance analysis by content
+- Gap identification methodology
+- Outdated content flagging
+- Duplication identification
+- Quality scoring mechanism
+- SEO compliance checking
+- Update prioritization
+
+## 12.2 Website Evolution
+
+### A/B Testing Framework:
+- Test hypothesis documentation
+- Variant creation process
+- Traffic allocation controls
+- Statistical significance calculation
+- Conversion goal tracking
+- User segment targeting
+- Test duration determination
+- Implementation of winning variants
+
+### Feedback Collection:
+- User feedback widget implementation
+- Survey trigger configuration
+- NPS implementation on key pages
+- Exit survey for abandonment
+- Feature request collection
+- Usability testing recruitment
+- Feedback categorization system
+- Analysis and prioritization process
+
+### Continuous Improvement:
+- Performance metrics dashboard
+- Regular review schedule
+- Improvement initiative prioritization
+- Implementation sprint planning
+- Before/after measurement
+- Best practice incorporation
+- Competitive analysis integration
+- User research implementation
+
+## 12.3 Technical Maintenance
+
+### Version Control:
+- Git repository structure
+- Branch strategy for development
+- Pull request review process
+- Release tagging methodology
+- Rollback capability
+- Change documentation standards
+- Dependency management
+- Code quality standards
+
+### Monitoring & Alerting:
+- Uptime monitoring configuration
+- Performance threshold alerting
+- Error logging implementation
+- Security scan scheduling
+- Broken link checking
+- Form submission monitoring
+- API endpoint health checking
+- Automated test execution
+
+### Disaster Recovery:
+- Backup schedule configuration
+- Restore testing procedure
+- Failover configuration
+- Incident response playbook
+- Communication plan for outages
+- Performance degradation handling
+- Data loss prevention measures
+- Recovery time objective definition

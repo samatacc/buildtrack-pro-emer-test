@@ -1,0 +1,102 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+ # BuildTrack Pro Admin Console: Data & Analytics Management
+
+## 5.1 Data Governance
+
+### Data Model Management:
+- Schema visualization and documentation
+- Field dictionary maintenance
+- Relationship mapping tools
+- Data type standardization
+- Naming convention enforcement
+- Metadata management
+- Historical schema tracking
+- Data integrity rule definition
+
+### Data Quality Control:
+- Data validation rule management
+- Consistency checking automation
+- Duplicate detection systems
+- Error correction workflows
+- Data cleansing job scheduling
+- Quality score metrics
+- Threshold alerting for issues
+- Remediation tracking system
+
+### Data Lifecycle Management:
+- Retention policy configuration
+- Archiving rule definition
+- Data purging schedule management
+- Legal hold implementation
+- Regulatory compliance enforcement
+- Storage tier optimization
+- Data access frequency analysis
+- Age-based policy enforcement
+
+## 5.2 Business Intelligence
+
+### Analytics Configuration:
+- Data collection point management
+- Event tracking configuration
+- Custom metric definition
+- Dimension categorization
+- Calculation rule creation
+- Segmentation criteria definition
+- Funnel step configuration
+- Attribution model selection
+
+### Report Management:
+- System report template library
+- Custom report creation tools
+- Scheduled report configuration
+- Distribution list management
+- Report access permissions
+- Format selection and customization
+- Parameter configuration
+- Interactive vs. static report controls
+
+### Dashboard Creation:
+- Executive dashboard designer
+- Metric widget configuration
+- Visualization type selection
+- Data source mapping
+- Refresh rate configuration
+- Filtering and drill-down setup
+- Conditional formatting rules
+- Role-based dashboard assignment
+
+## 5.3 Data Integration
+
+### ETL Process Management:
+- Data pipeline configuration
+- Extract source definition
+- Transformation rule creation
+- Loading destination mapping
+- Schedule and trigger setup
+- Error handling configuration
+- Success criteria definition
+- Performance optimization controls
+
+### API Management:
+- API endpoint documentation
+- Authentication method configuration
+- Rate limiting settings
+- Usage quota management
+- Version management
+- Deprecation scheduling
+- Monitoring and alerting setup
+- Developer key management
+
+### Third-party Data Connections:
+- External data source configuration
+- Authentication credential management
+- Data mapping and transformation
+- Synchronization frequency control
+- Conflict resolution rules
+- Error handling and notification
+- Data validation requirements
+- Historical sync logging

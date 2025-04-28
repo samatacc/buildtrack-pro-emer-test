@@ -1,0 +1,134 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+ # BuildTrack Pro: Reporting & Analytics System
+
+## 8.1 Report Dashboard
+
+### Report Center:
+- Recently viewed reports with thumbnails
+- Favorite/pinned reports section
+- Category-based organization
+- Schedule indicator for automated reports
+- Creation date and last run information
+- Shared vs. private report distinction
+- Quick filter for report type
+- New report creation button with template selection
+
+### Report Library:
+- Standard report templates by category
+- Custom saved reports with descriptions
+- Preview thumbnails of report output
+- Usage statistics for popular reports
+- Rating system for report usefulness
+- Sharing controls and permissions
+- Duplication and editing options
+- Archiving for outdated reports
+
+### Scheduled Reporting:
+- Calendar view of report schedule
+- Frequency configuration (daily, weekly, monthly)
+- Distribution list management
+- Delivery method selection (email, dashboard, download)
+- Format options (PDF, Excel, interactive)
+- Conditional scheduling based on data
+- Override controls for special cases
+- Execution history with status tracking
+
+## 8.2 Report Generation
+
+### Report Builder Interface:
+- Intuitive drag-and-drop report designer
+- Data source selection with preview
+- Field picker organized by category
+- Formula creation with function library
+- Grouping and sorting controls
+- Filter definition with parameter support
+- Layout templates for quick starting points
+- Mobile optimization options
+
+### Visualization Options:
+- Chart type selection with previews
+- Data mapping to visual elements
+- Color scheme customization
+- Axis configuration and scaling
+- Drill-down capability setup
+- Interactive element definition
+- Annotation and highlighting tools
+- Multi-chart dashboard layouts
+
+### Advanced Reporting Features:
+- Cross-project data aggregation
+- Time-based trend analysis
+- Statistical function library
+- Predictive analytics integration
+- Conditional formatting rules
+- Parameter-driven filtering
+- Subreport embedding
+- Custom code extensions
+
+## 8.3 Analytics Dashboards
+
+### Executive Dashboard:
+- KPI summary cards with trend indicators
+- Portfolio-level performance metrics
+- Financial health visualization
+- Resource utilization charts
+- Risk profile across projects
+- Strategic initiative tracking
+- Benchmark comparison data
+- Goal achievement indicators
+
+### Project Analytics:
+- Schedule performance index tracking
+- Cost performance metrics
+- Quality indicators and defect trends
+- Resource efficiency analysis
+- Critical path health monitoring
+- Milestone completion patterns
+- Change order impact assessment
+- Predictive completion modeling
+
+### Team Analytics:
+- Productivity metrics by team/individual
+- Workload balance visualization
+- Skills utilization mapping
+- Response time and cycle time analysis
+- Quality of work indicators
+- Collaboration network mapping
+- Training needs identification
+- Performance trend charting
+
+## 8.4 Business Intelligence Features
+
+### Data Exploration Tools:
+- Ad-hoc query builder with natural language support
+- Cross-filtering between visualizations
+- Drill-through to transaction details
+- Slice and dice capabilities
+- Outlier identification tools
+- Pattern recognition assistance
+- What-if scenario modeling
+- Data export for external analysis
+
+### Key Performance Indicators:
+- KPI definition interface
+- Target setting with threshold configuration
+- Actual vs. target visualization
+- Trend line with forecast
+- Alert rules for off-track KPIs
+- Responsibility assignment
+- Commentary and annotation capability
+- Historical performance tracking
+
+### Predictive Analytics:
+- Future performance forecasting
+- Risk probability calculation
+- Resource needs prediction
+- Schedule outcome modeling
+- Cost projection scenarios
+- Weather impact simulation
+- Material shortage prediction
+- Delay cascade analysis

@@ -1,0 +1,166 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+ # BuildTrack Pro: Integration Ecosystem
+
+## 14.1 Integration Management
+
+### Integration Dashboard:
+- Available integration catalog
+- Activated integration status
+- Connection health monitoring
+- Authentication management
+- Usage statistics by integration
+- Data flow visualization
+- Error and warning alerts
+- Configuration access shortcuts
+
+### Connection Setup:
+- Step-by-step integration wizards
+- Authentication flow handling
+- Permission scope selection
+- Test connection capability
+- Template configuration options
+- Custom field mapping interface
+- Schedule and trigger definition
+- Advanced settings access
+
+### Data Mapping:
+- Field-to-field mapping interface
+- Default mapping suggestions
+- Required field validation
+- Transformation rule creation
+- Custom formula definition
+- Bidirectional sync configuration
+- Conflict resolution rules
+- Test mapping with sample data
+
+## 14.2 Accounting Integrations
+
+### QuickBooks Integration:
+- Chart of accounts synchronization
+- Customer/vendor record mapping
+- Invoice and payment syncing
+- Expense categorization
+- Class/location tracking
+- Tax code harmonization
+- Journal entry creation
+- Reconciliation tools
+
+### Sage Integration:
+- Financial data synchronization
+- Cost code mapping
+- Project financial tracking
+- Purchase order integration
+- Payment tracking
+- Budget comparison
+- Audit trail maintenance
+- Financial reporting enhancement
+
+### General Accounting Features:
+- CSV export for any accounting system
+- Standard accounting file formats
+- Trial balance generation
+- Account reconciliation support
+- Tax documentation preparation
+- Financial statement preparation
+- Intercompany transaction handling
+- Currency conversion for global operations
+
+## 14.3 Calendar & Scheduling
+
+### Google Calendar Integration:
+- Two-way event synchronization
+- Task deadline to calendar events
+- Meeting scheduling with details
+- Resource booking representation
+- Project milestone publication
+- Team availability sharing
+- Notification alignment between systems
+- Time zone intelligent handling
+
+### Microsoft Outlook Integration:
+- Calendar event synchronization
+- Email to task conversion
+- Contact synchronization
+- Meeting creation from app
+- Document sharing via links
+- Task assignment via email
+- Out-of-office awareness
+- Teams meeting integration
+
+### General Calendar Features:
+- iCal feed generation
+- Subscription to external calendars
+- Holiday and working day configuration
+- Resource availability calendars
+- Conflict detection and resolution
+- Recurring event pattern support
+- Reminder system configuration
+- Calendar sharing permissions
+
+## 14.4 Document Management
+
+### Cloud Storage Integration:
+- Google Drive connection
+- Microsoft OneDrive/SharePoint linking
+- Dropbox synchronization
+- Box enterprise integration
+- Two-way file synchronization
+- Version control harmonization
+- Folder structure mirroring
+- Permission mapping between systems
+
+### Document Signing:
+- DocuSign integration
+- PandaDoc workflow connection
+- Adobe Sign compatibility
+- Signature request creation
+- Signing status tracking
+- Completed document retrieval
+- Template usage from systems
+- Signature field mapping
+
+### Document Collaboration:
+- Microsoft Office online editing
+- Google Workspace collaborative editing
+- Version history tracking
+- Comment synchronization
+- Co-editing status indicators
+- Edit locking management
+- Notification of changes
+- Offline editing reconciliation
+
+## 14.5 Field & Specialty Integrations
+
+### Weather Services:
+- AccuWeather data integration
+- Severe weather alerts
+- Historical weather recording
+- Weather impact assessment
+- Location-specific forecasts
+- Custom alert thresholds
+- Weather event documentation
+- Climate data for planning
+
+### Equipment & Tool Management:
+- Rental provider integrations (United Rentals)
+- Equipment maintenance systems
+- IoT device data collection
+- Telematics information
+- Fuel and usage tracking
+- Preventative maintenance scheduling
+- Equipment availability checking
+- Cost tracking and allocation
+
+### Material Suppliers:
+- Home Depot Pro account connection
+- Lowe's for Pros integration
+- Supplier catalog access
+- Pricing and availability checking
+- Order placement capabilities
+- Delivery tracking
+- Invoice reconciliation
+- Account management

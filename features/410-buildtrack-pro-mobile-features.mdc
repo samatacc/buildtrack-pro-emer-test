@@ -1,0 +1,168 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+ # BuildTrack Pro: Mobile & Field Features
+
+## 10.1 Mobile Dashboard
+
+### Mobile Home Screen:
+- Task-focused interface with priority sorting
+- Project quick-select with visual cards
+- Today's weather and alerts
+- Quick action floating button
+- Notification center access
+- Offline status indicator
+- Sync status and last updated timestamp
+- Personal productivity summary
+
+### Mobile Navigation:
+- Bottom tab bar for primary navigation
+- Swipe gestures for common actions
+- Project/location context persistence
+- Recent screens quick access
+- Breadcrumb navigation option
+- Voice command integration
+- One-handed operation optimization
+- Quick return to home button
+
+### Field Mode Toggle:
+- High contrast display for sunlight
+- Enlarged touch targets for gloves
+- Battery optimization settings
+- Data conservation controls
+- Audio feedback enhancement
+- Quick access to camera and scanner
+- Emergency contact shortcut
+- Auto-location tracking toggle
+
+## 10.2 Field Data Capture
+
+### Photo Capture System:
+- In-app camera with grid overlay
+- Burst mode for multiple shots
+- Project/location tagging
+- Voice annotation recording
+- Automatic upload when connected
+- Offline photo queue management
+- Photo quality settings
+- Required field enforcement
+
+### Voice Memo Recorder:
+- One-touch recording initiation
+- Automatic speech-to-text transcription
+- Speaker identification for multiple voices
+- Noise cancellation for construction sites
+- Task/project association
+- Playback speed control
+- Editing tools for transcription
+- Categorization and tagging
+
+### Form-Based Data Collection:
+- Customizable field forms by template
+- Required vs. optional field distinction
+- Field validation in real-time
+- Photo attachment to specific fields
+- Location stamping option
+- Signature capture capability
+- Draft saving for incomplete forms
+- Template selection by context
+
+## 10.3 Offline Capabilities
+
+### Offline Mode Architecture:
+- Automatic detection of connection status
+- Selective data synchronization configuration
+- Storage space management
+- Bandwidth optimization on reconnect
+- Conflict resolution system
+- Background synchronization
+- Critical data prioritization
+- Sync status indicators
+
+### Offline-Enabled Features:
+- Task creation and updates
+- Form completion and saving
+- Photo and document capture
+- Reference document access
+- Contact information lookup
+- Basic plan viewing
+- Notes and comments creation
+- Calendar and schedule viewing
+
+### Sync Management:
+- Manual sync trigger option
+- Scheduled sync configuration
+- Wi-Fi only sync setting
+- Partial sync capabilities
+- Bandwidth usage monitoring
+- Sync error resolution tools
+- Sync history logging
+- Prioritization settings for critical data
+- Storage cleanup tools after successful sync
+- Notification of sync completion
+
+## 10.4 Field-Specific Tools
+
+### QR/Barcode Scanner:
+- Multiple code format support (QR, UPC, Code 128)
+- Flash control for low light conditions
+- Continuous scan mode for inventory
+- History of recent scans
+- Quick actions based on scan content
+- Custom scan result handling rules
+- Batch scanning with count tracking
+- Manual entry fallback option
+
+### Measurement Tools:
+- AR-based measurement capabilities
+- Integration with Bluetooth laser measures
+- Photo measurement with reference object
+- Measurement history logging
+- Association with tasks or materials
+- Unit conversion on the fly
+- Accuracy indication levels
+- Export to plan or document
+
+### Safety Checklist System:
+- Daily safety briefing templates
+- Pre-task hazard analysis forms
+- Incident reporting workflow
+- Safety observation recording
+- Required acknowledgment tracking
+- Photo documentation of safety measures
+- Compliance verification tools
+- Emergency procedure quick access
+
+## 10.5 Quick Actions Dock
+
+### Context-Aware Action Menu:
+- Floating button triggering action fan
+- Most frequent actions based on context
+- Role-specific action suggestions
+- Recently used action shortcuts
+- Custom action configuration
+- Voice command alternative
+- Haptic feedback on selection
+- Automatic positioning for accessibility
+
+### Common Field Actions:
+- Create task
+- Log material usage
+- Report issue
+- Capture photo
+- Scan QR code
+- Record voice note
+- Check weather alert
+- Contact team member
+
+### Action Sequencing:
+- Predefined action workflows
+- One-touch initiation of common sequences
+- Progress tracking through sequence
+- Modification capabilities mid-sequence
+- Template creation from successful sequences
+- Sharing sequences with team
+- Analytics on sequence usage
+- AI-suggested sequence optimization

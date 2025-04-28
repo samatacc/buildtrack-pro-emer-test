@@ -1,0 +1,107 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+ ---
+description: Conversion and lead generation specifications for marketing website
+globs: app/(marketing)/trial/**/*,app/(marketing)/demo/**/*
+alwaysApply: false
+---
+# BuildTrack Pro Marketing Website: Conversion & Lead Generation
+
+## 7.1 Trial Signup Flow
+
+### Trial Registration Form:
+- Progressive information collection
+- Email validation with suggestions
+- Password strength indicator
+- Company size and industry selection
+- Role selection for personalization
+- How did you hear about us tracking
+- Terms and privacy acceptance
+- Mobile-optimized signup experience
+
+### Trial Confirmation:
+- Success message with next steps
+- Email verification instructions
+- Account access information
+- Estimated setup time expectation
+- Quick start guide access
+- Video tutorial suggestion
+- Support contact information
+- Calendar add for trial expiration
+
+### Trial Extension/Conversion:
+- Remaining time notification
+- Usage statistics visualization
+- Value received summary
+- Upgrade path options
+- Special offer for conversion
+- Decision assistance resources
+- Easy payment method addition
+- Mobile-friendly conversion process
+
+## 7.2 Demo Request System
+
+### Demo Request Form:
+- Contact information collection
+- Company size and industry inputs
+- Current solution questions
+- Specific interest area selection
+- Preferred date/time selection
+- Special request or question field
+- Calendar integration for scheduling
+- Mobile-friendly form with autofill
+
+### Demo Confirmation:
+- Schedule confirmation details
+- Calendar invitation attachment
+- Presenter information with photo
+- Preparation suggestions
+- Pre-demo resource links
+- Reminder configuration options
+- Rescheduling instructions
+- Mobile calendar integration
+
+### Post-Demo Follow-up:
+- Thank you messaging
+- Demo recording access if available
+- Additional resource recommendations
+- Next steps suggestion based on interest
+- Custom quote request option
+- Feedback collection on demo quality
+- Direct contact with sales representative
+- Mobile-friendly resource access
+
+## 7.3 Lead Nurturing Components
+
+### Content Download Gates:
+- Value proposition for content
+- Minimal form with progressive profiling
+- Preview snippet to demonstrate value
+- Social proof for content quality
+- One-click access for returning visitors
+- Download format options
+- Related content suggestions
+- Mobile-optimized download process
+
+### Email Capture Mechanisms:
+- Timed popup with value offer
+- Exit intent capture for abandoning visitors
+- Inline form within relevant content
+- Footer signup with benefit explanation
+- Content notification subscription
+- Industry update opt-in
+- GDPR compliant consent checkboxes
+- Mobile-friendly signup experiences
+
+### Interactive Assessment Tools:
+- Construction readiness quiz
+- Efficiency scoring calculator
+- Technology adoption assessment
+- Cost-saving potential estimator
+- Customized results with recommendations
+- Email results functionality
+- Comparison to industry benchmarks
+- Mobile-compatible assessment experience

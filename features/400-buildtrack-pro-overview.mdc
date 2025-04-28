@@ -1,0 +1,27 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+ # BuildTrack Pro Dashboard: Comprehensive Feature and Workflow Specification
+
+## Overview
+BuildTrack Pro is a comprehensive construction project management dashboard with features spanning authentication, project management, materials management, document handling, financial tracking, spatial management, reporting, communication, mobile capabilities, AI assistance, and more.
+
+## Main Sections
+1. Authentication & User Onboarding
+2. Dashboard Home
+3. Project Management Module
+4. Materials Management Module
+5. Document & File Management
+6. Financial Management Module
+7. Floorplan & Spatial Management
+8. Reporting & Analytics System
+9. Communication & Notification System
+10. Mobile & Field Features
+11. AI Assistant & Intelligence Features
+12. Settings & User Preferences
+13. Help & Support System
+14. Integration Ecosystem
+15. Administration & System Management
+16. Advanced Features & Specialty Tools

@@ -1,0 +1,75 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+ ---
+description: International and localization specifications for marketing website
+globs: app/(marketing)/**/*
+alwaysApply: false
+---
+# BuildTrack Pro Marketing Website: International & Localization
+
+## 10.1 Multi-language Support
+
+### Language Selection System:
+- Language selector placement
+- Geolocation-based language suggestion
+- Browser language detection
+- Language preference persistence
+- URL structure for language versions
+- Language fallback hierarchy
+- Mobile language selector optimization
+- Partial translation handling
+
+### Translation Management:
+- Translation workflow in CMS
+- String extraction for localization
+- Translation memory utilization
+- Contextual information for translators
+- Variable handling in translations
+- Date, time, and number formatting
+- Language-specific asset management
+- Translation status tracking
+
+### Cultural Adaptation:
+- Region-specific imagery selection
+- Cultural reference appropriateness review
+- Local case study prioritization
+- Regional compliance information
+- Currency display adaptation
+- Unit of measurement conversion
+- Regional contact information
+- Cultural color significance awareness
+
+## 10.2 Regional Content
+
+### Geo-specific Landing Pages:
+- Region-specific value propositions
+- Local customer testimonials
+- Regional compliance and regulation information
+- Local partner and integration highlights
+- Industry focus relevant to region
+- Regional event and webinar promotion
+- Location-specific pricing information
+- Local team and support details
+
+### Regional SEO Optimization:
+- Local keyword research integration
+- Hreflang tag implementation
+- Regional search engine optimization
+- Local backlink strategy
+- Regional schema markup
+- Local search registration
+- Geographic sitemap implementation
+- Regional SEO performance tracking
+
+### International Business Support:
+- Multi-currency pricing display
+- International payment method support
+- Global tax handling information
+- International shipping/delivery details
+- Global support hours with time zones
+- International compliance statements
+- Regional partner program information
+- Global headquarters and office locations

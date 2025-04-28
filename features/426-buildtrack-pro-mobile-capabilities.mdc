@@ -1,0 +1,166 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+ # BuildTrack Pro: Mobile Capabilities
+
+## 26.1 Mobile Application Architecture
+
+### Cross-Platform Compatibility:
+- Native iOS application
+- Native Android application
+- Progressive Web App (PWA) support
+- Mobile-responsive web interface
+- Offline functionality
+- Cross-device synchronization
+- Consistent user experience across platforms
+- Device-specific optimizations
+
+### Performance Optimization:
+- On-device data caching
+- Bandwidth-efficient communication
+- Battery consumption optimization
+- Background processing limitations
+- Memory footprint management
+- Startup time optimization
+- Resource-aware image handling
+- Network condition adaptation
+
+### Mobile Security Framework:
+- Biometric authentication
+- Device-level encryption
+- Secure offline storage
+- Certificate pinning
+- Jailbreak/root detection
+- Mobile-specific authorization
+- Remote device management
+- Secure data synchronization
+
+## 26.2 Field Operations
+
+### On-Site Progress Tracking:
+- Visual progress documentation
+- GPS-tagged activity logs
+- Real-time task completion
+- Photo/video documentation
+- Voice-to-text field notes
+- Electronic signature capture
+- Work verification workflows
+- Location-based task assignments
+
+### Mobile Inspections & Quality Control:
+- Digital inspection checklists
+- Defect documentation with media
+- Mobile QA/QC workflows
+- Inspection report generation
+- Pass/fail verification
+- Corrective action assignment
+- Inspector certification validation
+- Offline inspection capabilities
+
+### Field Crew Management:
+- Mobile time tracking
+- Geofenced check-in/out
+- Crew attendance tracking
+- Field worker scheduling
+- Labor hour allocation
+- Equipment usage logging
+- Break and downtime tracking
+- Real-time labor cost monitoring
+
+## 26.3 Mobile Communication & Collaboration
+
+### In-Field Collaboration:
+- Mobile chat integration
+- Push notifications
+- Location sharing
+- Field team coordination
+- Document annotation on mobile
+- Video conferencing capabilities
+- Voice memo sharing
+- Status update broadcasting
+
+### Drawing & Document Access:
+- Mobile plan viewing
+- Drawing annotation on-site
+- Document markup tools
+- Measurement tools
+- Offline document access
+- BIM model viewing on mobile
+- Version comparison tools
+- Document search capabilities
+
+### Issue Reporting & Resolution:
+- In-field issue logging
+- Photo/video documentation
+- Issue assignment from mobile
+- Real-time resolution updates
+- Location-tagged issues
+- Priority classification
+- Resolution verification
+- Issue tracking notifications
+
+## 26.4 Mobile Data Collection & Forms
+
+### Digital Forms & Checklists:
+- Custom mobile form builder
+- Required field validation
+- Conditional form logic
+- Media attachment capabilities
+- Electronic signature capture
+- Form template library
+- Offline form submission
+- Location and timestamp recording
+
+### Field Data Collection:
+- Structured data capture tools
+- Barcode/QR code scanning
+- RFID integration capability
+- Voice data entry options
+- GPS coordinate recording
+- Measurement tool integration
+- Environmental data logging
+- Automatic data synchronization
+
+### Mobile Reporting:
+- On-device report generation
+- Field-generated analytics
+- Daily progress summaries
+- Real-time dashboards
+- Visual data presentation
+- KPI monitoring on mobile
+- Report sharing from device
+- Customizable mobile reports
+
+## 26.5 Mobile-Specific Features
+
+### Location-Based Services:
+- Project geofencing
+- Proximity-based alerts
+- Site navigation assistance
+- Location-based task assignment
+- Logistics route optimization
+- Site-specific information presentation
+- Asset location tracking
+- Spatial data visualization
+
+### Augmented Reality Integration:
+- BIM overlay on camera view
+- AR-assisted installation guidance
+- Progress comparison visualization
+- Visual clash detection
+- Equipment maintenance guidance
+- As-built vs design comparison
+- Measurement through AR
+- Training and guidance overlays
+
+### Mobile Resource Management:
+- Equipment QR code scanning
+- Material delivery verification
+- Tool check-in/check-out
+- Inventory counts on mobile
+- Supply request submission
+- Resource allocation visibility
+- Equipment status updates
+- Delivery tracking and confirmation
