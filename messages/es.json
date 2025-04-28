@@ -12,7 +12,34 @@
     "next": "Siguiente",
     "submit": "Enviar",
     "offline": "Modo Sin Conexión",
-    "backOnline": "Conexión Restaurada"
+    "backOnline": "Conexión Restaurada",
+    "languageSelector": "Cambiar Idioma",
+    "languageSuggestion": {
+      "detected": "Idioma detectado",
+      "message": "Hemos detectado que el idioma de tu navegador es {detectedLanguage}. ¿Te gustaría cambiar de {currentLanguage}?",
+      "switchTo": "Cambiar a {language}",
+      "noThanks": "No, gracias"
+    },
+    "preferences": {
+      "language": "Preferencias de idioma",
+      "savePreferences": "Guardar preferencias",
+      "autoDetect": "Detectar automáticamente del navegador",
+      "manualSelect": "Seleccionar manualmente"
+    },
+    "navigation": {
+      "dashboard": "Panel",
+      "projects": "Proyectos",
+      "tasks": "Tareas",
+      "reports": "Informes",
+      "calendar": "Calendario",
+      "messages": "Mensajes",
+      "profile": "Perfil",
+      "settings": "Configuración",
+      "help": "Ayuda",
+      "documents": "Documentos",
+      "materials": "Materiales",
+      "finance": "Finanzas"
+    }
   },
   "auth": {
     "signIn": "Iniciar Sesión",
@@ -43,6 +70,11 @@
     "company": "Empresa",
     "skills": "Habilidades",
     "certifications": "Certificaciones",
+    "lastLogin": "Último Acceso",
+    "saveChangesAutomatically": "Los cambios se guardan automáticamente",
+    "never": "Nunca",
+    "loading": "Cargando información del perfil...",
+    "retry": "Reintentar carga",
     "preferredContactMethod": "Método de Contacto Preferido",
     "notificationSettings": "Configuración de Notificaciones",
     "language": "Idioma",
@@ -77,11 +109,46 @@
     "status": "Estado",
     "dueDate": "Fecha Límite",
     "team": "Equipo",
+    "client": "Cliente",
     "budget": "Presupuesto",
     "progress": "Progreso",
     "documents": "Documentos",
     "timeline": "Cronograma",
     "issues": "Problemas",
     "reports": "Informes"
+  },
+  "preferences": {
+    "preferredContactMethod": "Método de Contacto Preferido",
+    "notificationSettings": "Configuración de Notificaciones",
+    "language": "Idioma",
+    "timezone": "Zona Horaria",
+    "availability": "Disponibilidad",
+    "dataUsage": "Uso de Datos",
+    "offlineMode": "Modo Sin Conexión",
+    "syncFrequency": "Frecuencia de Sincronización",
+    "theme": "Tema",
+    "layout": "Diseño",
+    "widgets": "Widgets",
+    "profileUpdated": "Perfil actualizado con éxito",
+    "errorUpdating": "Error al actualizar el perfil",
+    "saveChanges": "Guardar Cambios",
+    "discardChanges": "Descartar Cambios",
+    "uploadPhoto": "Subir Foto",
+    "removePhoto": "Eliminar Foto"
+  },
+  "example": {
+    "optimizedTitle": "Ejemplo de Traducción Optimizada",
+    "translatedContent": "Contenido Traducido",
+    "description": "Este componente demuestra el sistema de traducción optimizado con carga basada en espacios de nombres.",
+    "currentUser": "Usuario actual: {username}",
+    "date": "Fecha actual",
+    "number": "Número formateado",
+    "percent": "Porcentaje",
+    "metrics": "Métricas de Rendimiento",
+    "currentLocale": "Idioma actual",
+    "translationsReady": "Traducciones listas",
+    "renderTime": "Tiempo de renderizado",
+    "cacheSize": "Tamaño de caché",
+    "cachedNamespaces": "Espacios de nombres en caché"
   }
 }
