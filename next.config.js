@@ -1,3 +1,5 @@
+const path = require('path');
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
@@ -20,6 +22,15 @@ const nextConfig = {
         pathname: '/**',
       },
     ],
+  },
+  // Enhanced path resolution for Vercel deployment
+  webpack: (config, { buildId, dev, isServer, defaultLoaders, webpack }) => {
+    // Enhance module resolution with explicit path aliases
+    config.resolve.alias = {
+      ...config.resolve.alias,
+      '@/app': path.resolve(__dirname, './app'),
+    };
+    return config;
   },
 };
 

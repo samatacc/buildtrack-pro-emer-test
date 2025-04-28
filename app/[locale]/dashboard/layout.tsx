@@ -38,13 +38,13 @@ const useStubTranslations = (namespace: string = 'common') => {
 
 // Dynamic imports with fallbacks to ensure build succeeds
 const ConnectionStatus = dynamic(
-  () => import('@/app/components/shared/ConnectionStatus')
+  () => import('../../../components/shared/ConnectionStatus')
     .catch(() => ({ default: StubConnectionStatus })),
   { ssr: false, loading: StubConnectionStatus }
 );
 
 const EnhancedLanguageSelector = dynamic(
-  () => import('@/app/components/shared/EnhancedLanguageSelector')
+  () => import('../../../components/shared/EnhancedLanguageSelector')
     .catch(() => ({ default: StubLanguageSelector })),
   { ssr: false, loading: StubLanguageSelector }
 );

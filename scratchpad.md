@@ -231,3 +231,335 @@ All tables include proper indexes for query performance and appropriate JSON fie
 - Do we need any additional tables or fields for specialized reports (financial, resource allocation, etc.)?
 - Should we create database migration scripts for the initial schema?
 - Do we want to set up automated testing for our database entities and relationships?
+
+
+# Vercel Deployment Fix Plan
+
+## Problem Statement
+The Vercel build is failing due to missing dependencies and module import errors when trying to deploy the `feat/enhanced-internationalization` branch. The key issues are:
+
+1. Missing dependency: `@supabase/auth-helpers-nextjs`
+2. Missing module imports:
+   - `@/app/hooks/useTranslations`
+   - `@/app/components/shared/ConnectionStatus`
+   - `@/app/components/shared/EnhancedLanguageSelector`
+   - `../../components/shared/ConnectionStatus`
+
+## Root Cause Analysis
+The internationalization branch was developed with a focus on specific i18n components, but it appears some imports and dependencies from other branches were not included in our feature branch, leading to build errors in Vercel's production environment.
+
+## Action Plan
+
+### Phase 1: Dependency Installation (Estimated time: 10 minutes)
+1. Install missing `@supabase/auth-helpers-nextjs` dependency:
+   ```bash
+   npm install @supabase/auth-helpers-nextjs
+   ```
+
+### Phase 2: Module Resolution (Estimated time: 30 minutes)
+1. Create the missing modules or update imports based on available components:
+   a. For `useTranslations.ts`:
+      - Either create a new hook that forwards to our optimized translation system
+      - Or update imports to use our `useSafeTranslations` or `useOptimizedTranslations` hooks
+
+   b. For `ConnectionStatus.tsx`:
+      - Implement a minimal version of this component
+      - Or make the import conditional if it's not critical
+
+   c. For `EnhancedLanguageSelector.tsx`:
+      - Ensure our implementation is properly exported
+      - Fix any path issues in imports
+
+### Phase 3: Testing (Estimated time: 15 minutes)
+1. Run local build tests:
+   ```bash
+   npm run build
+   ```
+2. Fix any additional issues discovered during local build
+
+### Phase 4: Deployment (Estimated time: 10 minutes)
+1. Commit and push fixes
+2. Monitor Vercel deployment to ensure successful build
+
+## Success Criteria
+- Vercel build completes successfully
+- Application loads correctly in deployment preview
+- Internationalization features function as expected in the deployed environment
+
+## Risk Assessment
+- **Medium Risk**: Adding missing components might introduce new dependencies
+- **Low Risk**: Changes to core internationalization functionality
+
+## Rollback Plan
+If deployment issues persist:
+1. Revert the latest fixes
+2. Consider creating a new branch that includes only the essential i18n components
+3. Create a more limited PR that doesn't depend on components from other features
+
+# Vercel Deployment Fix Plan - Updated
+
+## Problem Statement
+Despite adding missing components, the Vercel build is still failing with module resolution errors:
+
+1. Missing dependency: `@supabase/auth-helpers-nextjs` is still referenced in layout files
+2. Missing module imports persist:
+   - `@/app/hooks/useTranslations`
+   - `@/app/components/shared/ConnectionStatus`
+   - `@/app/components/shared/EnhancedLanguageSelector`
+
+## Root Cause Analysis
+The issue appears more complex than initially assessed:
+
+1. While we've added the files to the repository, there seem to be path discrepancies between local development and Vercel's build environment
+2. The dependency `@supabase/auth-helpers-nextjs` is still referenced directly in some files despite installing `@supabase/ssr` as its replacement
+3. Git may not have tracked all the necessary files or there might be case sensitivity differences
+
+## Action Plan
+
+### Phase 1: Supabase Auth Dependency Resolution (Estimated time: 20 minutes)
+1. Identify all files using `@supabase/auth-helpers-nextjs`:
+   ```bash
+   grep -r "@supabase/auth-helpers-nextjs" --include="*.tsx" --include="*.ts" .
+   ```
+
+2. Update imports in all identified files to use the new `@supabase/ssr` package:
+   - For `createClientComponentClient` imports, update to equivalent in `@supabase/ssr`
+   - For other auth functions, find equivalents in the new package documentation
+
+### Phase 2: Module Path Resolution (Estimated time: 30 minutes)
+1. Create a comprehensive file inventory to ensure all required files exist:
+   ```bash
+   find app -type f -name "*.tsx" -o -name "*.ts" | sort
+   ```
+
+2. Verify file paths match import statements:
+   - Check case sensitivity (particularly important for deployment)
+   - Ensure path aliases (`@/`) resolve correctly
+
+3. For each missing module:
+   a. Check exact paths in the repository
+   b. Verify they're committed to Git 
+   c. Create stub implementations if necessary
+
+### Phase 3: Create Minimal Import Bridge (Estimated time: 20 minutes)
+Create a new branch that simplifies imports:
+
+1. For dashboard layout:
+   - Create simplified versions of components with minimal dependencies
+   - Remove non-essential features from ConnectionStatus and EnhancedLanguageSelector
+
+2. Use conditional imports or dynamic loading:
+   ```typescript
+   // Example of conditional import
+   const ConnectionStatus = process.env.NODE_ENV === 'production' ? 
+     () => null : // Stub component for production
+     dynamic(() => import('@/app/components/shared/ConnectionStatus'))
+   ```
+
+### Phase 4: Build Configuration (Estimated time: 15 minutes)
+1. Create a Vercel-specific build script that handles special cases
+2. Add proper module aliasing in next.config.js
+3. Configure the build to ignore problematic imports in production
+
+### Phase 5: Testing & Deployment (Estimated time: 15 minutes)
+1. Test the build locally with strict mode to simulate Vercel environment:
+   ```bash
+   NODE_ENV=production npm run build
+   ```
+2. Commit and push changes to a new branch for targeted deployment testing
+3. Monitor Vercel logs in detail to catch any remaining issues
+
+## Success Criteria
+- Vercel build completes successfully
+- Application loads correctly in deployment preview
+- Core internationalization features function as expected
+
+## Risk Assessment
+- **High Risk**: Major changes to import structure could affect app behavior
+- **Medium Risk**: Stub components might impact UX in production
+- **Low Risk**: Auth migration should be straightforward but might have edge cases
+
+## Rollback Plan
+If deployment issues persist despite these measures:
+
+1. Create a minimal branch with only core i18n functionality that doesn't depend on problematic imports
+2. Feature flag the advanced components to be disabled in production until fully resolved
+3. Consider a staged deployment approach focusing on core features first
+
+# Vercel Deployment Fix - Phase 2
+
+## Updated Problem Statement
+Despite our initial fixes, Vercel build is still failing due to path resolution issues:
+
+1. In app/[locale]/dashboard/layout.tsx:
+   - '@/app/hooks/useTranslations'
+   - '@/app/components/shared/ConnectionStatus'
+   - '@/app/components/shared/EnhancedLanguageSelector'
+
+2. In app/[locale]/dashboard/profile/page.tsx:
+   - '../../../components/profile/ProfileHeader'
+   - '../../../components/profile/ProfessionalInfo'
+
+## Root Cause Analysis
+The issue appears to be with Next.js path resolution in the Vercel build environment. While the files exist in our local repository, Vercel's build process cannot resolve them. This could be due to:
+
+1. Path alias resolution differences between development and production environments
+2. Case sensitivity issues in imports (important in Linux environments like Vercel)
+3. Git not properly tracking some files (even after we added them)
+
+## Phase 2 Implementation Plan
+
+### Step 1: Use Dynamic Imports with Error Handling
+For the dashboard layout file, we'll implement a dynamic import approach with fallback stubs:
+
+```tsx
+// Instead of direct imports like:
+import ConnectionStatus from '@/app/components/shared/ConnectionStatus';
+
+// We'll use dynamic imports with fallbacks:
+import dynamic from 'next/dynamic';
+
+// Create stub components
+const StubConnectionStatus = () => <div className="hidden">Connection Status</div>;
+
+// Dynamic import with fallback
+const ConnectionStatus = dynamic(
+  () => import('@/app/components/shared/ConnectionStatus')
+    .catch(() => ({ default: StubConnectionStatus })),
+  { ssr: false, loading: () => <StubConnectionStatus /> }
+);
+```
+
+### Step 2: Create Minimal Implementation Files
+For each missing component, we'll create minimal versioned stubs following BuildTrack Pro's design system that can be used in production.
+
+### Step 3: Update Deployment Branch
+We'll create a special deployment branch that combines our i18n work with simplified components for production deployment.
+
+
+# Final Vercel Deployment Fix Strategy - Path Aliasing Resolution
+
+## Current Problem Assessment
+After multiple approaches, we're still encountering the same module resolution errors in Vercel deployment:
+
+1. In dashboard layout:
+   - '@/app/components/shared/ConnectionStatus'
+   - '@/app/components/shared/EnhancedLanguageSelector'
+
+2. In profile page:
+   - '../../../components/profile/ProfileHeader'
+   - '../../../components/profile/ProfessionalInfo'
+   - '../../../components/profile/CommunicationPreferences'
+
+## Root Cause Analysis
+The dynamic imports with fallbacks strategy wasn't effective because the module resolution issue occurs during build time, not runtime. Two key factors are likely causing this:
+
+1. **Path alias discrepancy**: Next.js may be resolving the `@/` alias differently between local development and Vercel build environment
+2. **Physical file locations**: The components might not be in the exact locations specified in the import paths
+
+## Comprehensive Solution Plan
+
+### Phase 1: Direct Path Resolution (Estimated time: 30 minutes)
+
+1. **Create essential directories & files**
+   - Create explicit directories and stub files for all missing components with exact path structure:
+     ```bash
+     mkdir -p app/components/shared app/components/profile
+     touch app/components/shared/ConnectionStatus.tsx
+     touch app/components/shared/EnhancedLanguageSelector.tsx
+     touch app/components/profile/ProfileHeader.tsx
+     touch app/components/profile/ProfessionalInfo.tsx
+     touch app/components/profile/CommunicationPreferences.tsx
+     touch app/components/profile/MobileSettings.tsx
+     touch app/components/profile/DashboardCustomization.tsx
+     ```
+
+2. **Create minimal component implementations**
+   - Implement basic versions of each component following BuildTrack Pro's design system
+   - Include necessary props and TypeScript interfaces
+   - Use Primary Blue (rgb(24,62,105)) and Primary Orange (rgb(236,107,44)) for consistency
+
+### Phase 2: Path Configuration Fix (Estimated time: 20 minutes)
+
+1. **Next.js Configuration Update**
+   - Verify and update path aliases in `next.config.js`:
+     ```js
+     const nextConfig = {
+       // Existing config
+       webpack: (config, { buildId, dev, isServer, defaultLoaders, webpack }) => {
+         config.resolve.alias = {
+           ...config.resolve.alias,
+           '@/app': path.resolve(__dirname, './app'),
+         };
+         return config;
+       },
+     };
+     ```
+
+2. **JSConfig/TSConfig Update**
+   - Ensure proper path resolution in `tsconfig.json` or `jsconfig.json`:
+     ```json
+     {
+       "compilerOptions": {
+         "baseUrl": ".",
+         "paths": {
+           "@/app/*": ["app/*"]
+         }
+       }
+     }
+     ```
+
+### Phase 3: Import Restructuring (Estimated time: 25 minutes)
+
+1. **Modify Dashboard Layout Imports**
+   - Refactor the layout.tsx imports to use direct relative paths instead of aliases:
+     ```tsx
+     // Replace
+     import ConnectionStatus from '@/app/components/shared/ConnectionStatus';
+     // With
+     import ConnectionStatus from '../../../components/shared/ConnectionStatus';
+     ```
+
+2. **Simplify Component Implementations**
+   - Create simplified versions of components with minimal dependencies
+   - Remove advanced features that might cause import chain issues
+
+### Phase 4: Deployment Package Optimization (Estimated time: 15 minutes)
+
+1. **Dependency Pruning**
+   - Verify all dependencies are correctly listed in package.json
+   - Remove any unnecessary imports in component files
+
+2. **File Structure Verification**
+   - Ensure all components are in the correct directories with proper casing
+   - Add index.ts barrel files in each directory for easier imports
+
+3. **Build Configuration**
+   - Update Vercel build settings if needed
+   - Consider adding a custom build script for Vercel
+
+### Phase 5: Testing & Deployment (Estimated time: 20 minutes)
+
+1. **Local Build Testing**
+   - Test build locally with simulated production settings:
+     ```bash
+     NODE_ENV=production npm run build
+     ```
+
+2. **Git Management**
+   - Ensure all new files are tracked by Git
+   - Make appropriate commits with detailed descriptions
+   - Push changes to GitHub for Vercel deployment
+
+### Success Metrics
+- Vercel build completes successfully
+- Page loads correctly in deployed environment
+- Core internationalization features function as expected
+
+### Monitoring & Verification
+After deployment, verify:
+- All pages render correctly
+- Internationalization works as expected
+- No console errors related to missing modules
+
+This plan follows BuildTrack Pro's development standards with a focus on mobile-first design, performance optimization, and proper implementation of the design system using the specified primary colors.
