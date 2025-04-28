@@ -1,5 +1,120 @@
 # Scratchpad
 
+## Vercel Deployment Fix Plan - Prisma and Import Error (April 28, 2025)
+
+### Current Issues Identified in Latest Deployment
+
+1. **Prisma Client Initialization Error**:
+   - Error: `PrismaClientInitializationError: Prisma has detected that this project was built on Vercel, which caches dependencies.`
+   - Root cause: Prisma client is not being generated during the Vercel build process.
+
+2. **Import Error in Profile API**:
+   - Error: `Attempted import error: '@/lib/api/profile-client' does not contain a default export (imported as 'ProfileAPI').`
+   - Root cause: Dashboard profile page is trying to import a default export from a module that doesn't have one.
+
+### Action Plan
+
+#### Phase 1: Fix Prisma Client Generation (Estimated time: 15 minutes)
+
+1. **Add Prisma Generate Command to Vercel Build Script**
+   - Update `package.json` to include Prisma generate in the build process:
+   ```json
+   "scripts": {
+     "vercel-build": "bash ./deployment-helper.sh && prisma generate && next build"
+   }
+   ```
+
+2. **Create Prisma Schema Directory if Needed**
+   - Update deployment-helper.sh to ensure the prisma directory exists:
+   ```bash
+   echo "Ensuring prisma directory exists..."
+   mkdir -p prisma
+   if [ ! -f prisma/schema.prisma ]; then
+     echo "Creating minimal schema.prisma file..."
+     cat << 'EOF' > prisma/schema.prisma
+     generator client {
+       provider = "prisma-client-js"
+     }
+     
+     datasource db {
+       provider = "postgresql"
+       url      = env("DATABASE_URL")
+     }
+     
+     // Minimal schema for build process
+     model User {
+       id    String @id @default(uuid())
+       email String @unique
+     }
+     EOF
+   fi
+   ```
+
+#### Phase 2: Fix Profile Client Import Error (Estimated time: 20 minutes)
+
+1. **Examine the Profile Client Module**
+   - Determine what exports are available in the module
+   - The error indicates it doesn't have a default export, but the dashboard page is trying to import one
+
+2. **Fix the Profile Client Module**
+   - Update `lib/api/profile-client.ts` to include a default export:
+   ```typescript
+   // Existing exports
+   export const someFunction = () => {...};
+   export const anotherFunction = () => {...};
+   
+   // Add default export combining all functions
+   const ProfileAPI = {
+     someFunction,
+     anotherFunction,
+     // Include all other exported functions
+   };
+   
+   export default ProfileAPI;
+   ```
+
+3. **Alternatively, Update Import in Dashboard Profile Page**
+   - If modifying the API module isn't possible, update the dashboard profile page:
+   ```typescript
+   // Change this:
+   import ProfileAPI from '@/lib/api/profile-client';
+   
+   // To this:
+   import * as ProfileAPI from '@/lib/api/profile-client';
+   ```
+
+#### Phase 3: Testing and Verification (Estimated time: 15 minutes)
+
+1. **Run Local Build First**
+   ```bash
+   npm run prisma generate
+   npm run build
+   ```
+
+2. **Commit Changes**
+   ```bash
+   git add .
+   git commit -m "Fix: Vercel deployment issues with Prisma generation and profile client imports"
+   ```
+
+3. **Push and Monitor Deployment**
+   ```bash
+   git push origin feat/enhanced-internationalization
+   ```
+
+### Success Criteria
+
+1. Vercel build completes without Prisma initialization errors
+2. No import errors for profile-client module
+3. Full deployment completes successfully
+
+### Rollback Plan
+
+If issues persist:
+1. Temporarily remove Prisma from the project if it's not essential for core functionality
+2. Create lightweight mock implementations of any problematic modules
+3. Consider deploying a minimal version without the profile dashboard functionality
+
 ## Vercel Deployment Fix Plan (April 28, 2025)
 
 ### Current Issues Identified

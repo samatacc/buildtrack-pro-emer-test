@@ -31,3 +31,14 @@ export async function getProfile(): Promise<ProfileData> {
 export async function updateProfile(data: Partial<ProfileData>): Promise<void> {
   console.log('Updating profile with data:', data);
 }
+
+/**
+ * Default export combining all profile API functions
+ * Following BuildTrack Pro's module architecture pattern
+ */
+const ProfileAPI = {
+  getProfile,
+  updateProfile,
+};
+
+export default ProfileAPI;
