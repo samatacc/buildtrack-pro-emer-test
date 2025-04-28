@@ -1,0 +1,50 @@
+# BuildTrack Pro Technical Standards
+
+## TypeScript Configuration
+
+### Compiler Options
+- Use `"jsx": "react-jsx"` in tsconfig.json for Next.js projects
+- Enable `"strict": true` to catch potential type errors
+- Use `"esModuleInterop": true` for seamless interoperability with CommonJS modules
+- Consider `"forceConsistentCasingInFileNames": true` to ensure consistent file naming
+
+### Type Definitions
+- Always include types for component props using interfaces
+- Use type guards when narrowing types
+- Prefer explicit typing over `any`
+- Use generics for reusable components and utilities
+- Always type function parameters and return values
+
+### Import Standards
+- Use absolute imports for application modules
+- Group imports by: external libraries, internal components, types, styles
+- Avoid circular dependencies
+
+## Testing Framework
+
+### Test Structure
+- Organize tests to mirror source code structure
+- Use descriptive test names following the pattern: "should [expected behavior] when [condition]"
+- Group related tests within describe blocks
+- Separate unit, integration, and e2e tests
+
+### Testing Practices
+- Follow the Arrange-Act-Assert pattern
+- Mock external dependencies using vitest mocking features
+- Test component rendering, user interactions, and side effects
+- Use data-testid attributes for test selectors
+- Test error states and edge cases
+- Aim for 80%+ test coverage for critical paths
+
+### Authentication Testing
+- Mock Supabase authentication in tests
+- Test all authentication flows: registration, login, password reset
+- Test protected routes behavior
+- Verify proper error handling for auth failures
+- Test user session persistence and token refresh
+
+### UI Component Testing
+- Test rendering in different states (loading, error, success)
+- Verify responsive behavior across breakpoints
+- Test accessibility compliance
+- Verify animations and transitions work as expected

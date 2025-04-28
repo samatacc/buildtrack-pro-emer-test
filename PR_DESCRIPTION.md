@@ -50,6 +50,11 @@ This PR implements a comprehensive internationalization (i18n) system for BuildT
 - Updated path resolution configuration in Next.js to enhance build reliability
 - Created structured component organization with proper directory hierarchy
 - Replaced deprecated Supabase auth helpers with recommended @supabase/ssr package
+- Fixed Vercel deployment errors by properly separating client and server components:
+  - Created dedicated client provider components in separate files with 'use client' directive
+  - Moved React hooks out of server components into client components
+  - Implemented dynamic imports with proper Suspense boundaries for auth pages
+  - Added shadow components to ensure build stability across environments
 - No database migrations required
 - Translation changes can be deployed independently of code changes
 - Added environment variables for Lokalise integration (commented out until configured)

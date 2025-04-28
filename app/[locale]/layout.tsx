@@ -1,9 +1,7 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import { SupabaseAuthProvider } from '../../lib/auth/SupabaseAuthContext'
-import QueryProvider from '../providers/QueryProvider'
 import NetworkAwareDataFetcher from '../components/shared/NetworkAwareDataFetcher'
-import IntlProvider from '../providers/IntlProvider'
 import { useLocale } from 'next-intl'
 import { notFound } from 'next/navigation'
 import { locales } from '../../i18n'
@@ -11,6 +9,10 @@ import LanguageSyncWrapper from '../components/shared/LanguageSyncWrapper'
 
 // Import animation styles
 import '../styles/animations.css'
+
+// Import components for providers
+import QueryProvider from '../providers/QueryProviderClient'
+import IntlProvider from '../providers/IntlProviderClient'
 
 const inter = Inter({ subsets: ['latin'] })
 

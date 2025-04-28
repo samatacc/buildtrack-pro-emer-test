@@ -1,0 +1,27 @@
+import { NextResponse } from 'next/server';
+import { cookies } from 'next/headers';
+
+/**
+ * Route handler for the profile page
+ * 
+ * Redirects to the internationalized profile page using the user's
+ * preferred language or defaulting to English.
+ * 
+ * This follows BuildTrack Pro's mobile-first approach ensuring
+ * construction professionals can smoothly navigate the app
+ * regardless of their language preferences.
+ */
+export function GET() {
+  // Check for user's preferred language in cookies
+  const cookieStore = cookies();
+  const preferredLanguage = cookieStore.get('NEXT_LOCALE')?.value || 'en';
+  
+  // Ensure we only redirect to supported locales
+  const locale = ['en', 'es', 'fr'].includes(preferredLanguage) 
+    ? preferredLanguage 
+    : 'en';
+  
+  // Redirect to the internationalized profile page
+  return NextResponse.redirect(new URL(`/${locale}/dashboard/profile`, 
+    process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3005'));
+}

@@ -165,6 +165,95 @@ create_shadow_file "app/utils/storage.ts" "Storage Utility" "$(storage_template)
 # Create missing API modules
 create_shadow_file "lib/api/profile-client.ts" "Profile Client" "$(profile_client_template)"
 
+# QueryProvider template
+query_provider_template() {
+  echo "'use client';
+
+import React from 'react';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+
+/**
+ * QueryProvider Component
+ * 
+ * Sets up React Query for efficient data fetching and caching.
+ * Configured for mobile usage in construction environments.
+ */
+export default function QueryProvider({ children }: { children: React.ReactNode }) {
+  const [queryClient] = React.useState(() => new QueryClient({
+    defaultOptions: {
+      queries: {
+        staleTime: 60 * 1000,
+        retry: 3,
+        retryDelay: attemptIndex => Math.min(1000 * 2 ** attemptIndex, 30000),
+        refetchOnWindowFocus: false,
+      },
+      mutations: {
+        retry: 2,
+        retryDelay: attemptIndex => Math.min(1000 * 2 ** attemptIndex, 15000),
+      },
+    },
+  }));
+
+  return (
+    <QueryClientProvider client={queryClient}>
+      {children}
+      {process.env.NODE_ENV !== 'production' && <ReactQueryDevtools initialIsOpen={false} />}
+    </QueryClientProvider>
+  );
+}"
+}
+
+# IntlProvider template
+intl_provider_template() {
+  echo "'use client';
+
+import { NextIntlClientProvider } from 'next-intl';
+import { ReactNode } from 'react';
+
+/**
+ * IntlProvider Component
+ * 
+ * Provides internationalization context to the application.
+ * Supporting multiple languages for BuildTrack Pro's diverse user base.
+ */
+type IntlProviderProps = {
+  locale: string;
+  messages: Record<string, any>;
+  children: ReactNode;
+  timeZone?: string;
+};
+
+export default function IntlProvider({ 
+  locale, 
+  messages, 
+  children,
+  timeZone = 'UTC'
+}: IntlProviderProps) {
+  return (
+    <NextIntlClientProvider
+      locale={locale}
+      messages={messages}
+      timeZone={timeZone}
+      formats={{
+        dateTime: {
+          short: { day: 'numeric', month: 'short' },
+          long: { day: 'numeric', month: 'long', year: 'numeric' }
+        }
+      }}
+      now={new Date()}
+    >
+      {children}
+    </NextIntlClientProvider>
+  );
+}"
+}
+
+# Create provider files
+mkdir -p app/providers 2>/dev/null || echo "Warning: Could not create app/providers directory"
+create_shadow_file "app/providers/QueryProvider.tsx" "QueryProvider" "$(query_provider_template)"
+create_shadow_file "app/providers/IntlProvider.tsx" "IntlProvider" "$(intl_provider_template)"
+
 # Verify in-place components in layout files
 echo "Checking for in-place components in layout files..."
 DASHBOARD_LAYOUT="app/[locale]/dashboard/layout.tsx"
