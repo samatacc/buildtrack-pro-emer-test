@@ -3,6 +3,14 @@
 import { useTranslations as useNextIntlTranslations } from 'next-intl';
 import { usePathname, useRouter } from 'next/navigation';
 import { useCallback } from 'react';
+// Import the optimized translations hook if available, with fallback
+let useOptimizedTranslations;
+try {
+  useOptimizedTranslations = require('./useOptimizedTranslations').useOptimizedTranslations;
+} catch (e) {
+  // Fall back to next-intl if the optimized hook is not available
+  console.warn('Using basic translation system - optimized translations not available');
+}
 
 /**
  * Extended useTranslations hook
