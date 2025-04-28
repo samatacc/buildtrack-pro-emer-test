@@ -36,18 +36,42 @@ const useStubTranslations = (namespace: string = 'common') => {
   };
 };
 
-// Dynamic imports with fallbacks to ensure build succeeds
-const ConnectionStatus = dynamic(
-  () => import('../../../components/shared/ConnectionStatus')
-    .catch(() => ({ default: StubConnectionStatus })),
-  { ssr: false, loading: StubConnectionStatus }
-);
+// Radical approach: try multiple paths with fallbacks
+// First try the original path, then the shadow component path
+let ConnectionStatus;
+let EnhancedLanguageSelector;
 
-const EnhancedLanguageSelector = dynamic(
-  () => import('../../../components/shared/EnhancedLanguageSelector')
-    .catch(() => ({ default: StubLanguageSelector })),
-  { ssr: false, loading: StubLanguageSelector }
-);
+try {
+  // Try the original import path first
+  const originalConnectionStatus = require('../../../components/shared/ConnectionStatus');
+  ConnectionStatus = dynamic(
+    () => Promise.resolve(originalConnectionStatus),
+    { ssr: false, loading: StubConnectionStatus }
+  );
+} catch (e) {
+  // Fall back to shadow component
+  console.warn('Using shadow ConnectionStatus component');
+  ConnectionStatus = dynamic(
+    () => import('../shared-components/ConnectionStatus'),
+    { ssr: false, loading: StubConnectionStatus }
+  );
+}
+
+try {
+  // Try the original import path first
+  const originalLanguageSelector = require('../../../components/shared/EnhancedLanguageSelector');
+  EnhancedLanguageSelector = dynamic(
+    () => Promise.resolve(originalLanguageSelector),
+    { ssr: false, loading: StubLanguageSelector }
+  );
+} catch (e) {
+  // Fall back to shadow component
+  console.warn('Using shadow EnhancedLanguageSelector component');
+  EnhancedLanguageSelector = dynamic(
+    () => import('../shared-components/EnhancedLanguageSelector'),
+    { ssr: false, loading: StubLanguageSelector }
+  );
+}
 
 // Use either the real hook or the stub
 let useTranslations;

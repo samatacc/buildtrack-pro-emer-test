@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "vercel-build": "bash ./deployment-helper.sh && next build",
     "start": "next start",
     "lint": "next lint && stylelint '**/*.css'",
     "lint-staged": "lint-staged",

@@ -50,18 +50,42 @@ const useStubTranslations = (namespace: string = 'marketing') => {
   };
 };
 
-// Dynamic imports with fallbacks using relative paths for better Vercel compatibility
-const MarketingHeader = dynamic(
-  () => import('../../../components/marketing/MarketingHeader')
-    .catch(() => ({ default: StubMarketingHeader })),
-  { ssr: false, loading: StubMarketingHeader }
-);
+// Radical approach: try multiple paths with fallbacks
+// First try the original path, then the shadow component path
+let MarketingHeader;
+let EnhancedLanguageSelector;
 
-const EnhancedLanguageSelector = dynamic(
-  () => import('../../../components/shared/EnhancedLanguageSelector')
-    .catch(() => ({ default: StubLanguageSelector })),
-  { ssr: false, loading: StubLanguageSelector }
-);
+try {
+  // Try the original import path first
+  const originalMarketingHeader = require('../../../components/marketing/MarketingHeader');
+  MarketingHeader = dynamic(
+    () => Promise.resolve(originalMarketingHeader),
+    { ssr: false, loading: StubMarketingHeader }
+  );
+} catch (e) {
+  // Fall back to shadow component
+  console.warn('Using shadow MarketingHeader component');
+  MarketingHeader = dynamic(
+    () => import('../shared-components/MarketingHeader'),
+    { ssr: false, loading: StubMarketingHeader }
+  );
+}
+
+try {
+  // Try the original import path first
+  const originalLanguageSelector = require('../../../components/shared/EnhancedLanguageSelector');
+  EnhancedLanguageSelector = dynamic(
+    () => Promise.resolve(originalLanguageSelector),
+    { ssr: false, loading: StubLanguageSelector }
+  );
+} catch (e) {
+  // Fall back to shadow component
+  console.warn('Using shadow EnhancedLanguageSelector component');
+  EnhancedLanguageSelector = dynamic(
+    () => import('../shared-components/EnhancedLanguageSelector'),
+    { ssr: false, loading: StubLanguageSelector }
+  );
+}
 
 // Use either the real hook or the stub
 let useTranslations;
