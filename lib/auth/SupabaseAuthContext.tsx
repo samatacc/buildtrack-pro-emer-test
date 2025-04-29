@@ -5,6 +5,14 @@ import { useRouter } from 'next/navigation'
 import { Session, User, AuthError } from '@supabase/supabase-js'
 import { supabase } from '../supabase/client'
 
+// Type for onboarding data
+export interface OnboardingData {
+  role: string;
+  teamSize: string;
+  focusAreas: string[];
+  sampleProject: boolean;
+}
+
 // Types for our auth context
 export interface AuthContextType {
   user: User | null
@@ -18,6 +26,8 @@ export interface AuthContextType {
   signInWithGoogle: () => Promise<void>
   signInWithMicrosoft: () => Promise<void>
   resetPassword: (email: string) => Promise<void>
+  confirmPasswordReset: (token: string, newPassword: string) => Promise<void>
+  completeOnboarding: (data: OnboardingData) => Promise<void>
   clearErrors: () => void
 }
 
@@ -37,6 +47,12 @@ const initialState = {
 export function SupabaseAuthProvider({ children }: { children: ReactNode }) {
   const [state, setState] = useState(initialState)
   const router = useRouter()
+  
+  // Function to get the user's preferred locale
+  const getUserLocale = useCallback(() => {
+    // Default to English if no locale is found
+    return 'en'
+  }, [])
 
   // Initialize auth state from Supabase session
   useEffect(() => {
@@ -321,50 +337,124 @@ export function SupabaseAuthProvider({ children }: { children: ReactNode }) {
     }
   }, [])
 
-  // Reset password
+  // Reset password (forgot password flow)
   const resetPassword = useCallback(async (email: string) => {
     try {
       setState(prev => ({ ...prev, isLoading: true, error: null }))
       
       const { error } = await supabase.auth.resetPasswordForEmail(email, {
-        redirectTo: `${window.location.origin}/auth/reset-password`
+        redirectTo: `${window.location.origin}/auth/reset-password`,
       })
       
       if (error) throw error
       
-      setState(prev => ({
-        ...prev,
-        isLoading: false
-      }))
+      setState(prev => ({ ...prev, isLoading: false }))
       
-      // Navigate to check email page
-      router.push('/auth/check-email?type=reset')
+      // Success is handled by the UI component
     } catch (error) {
       console.error('Reset password error:', error)
+      
       setState(prev => ({
         ...prev,
         isLoading: false,
-        error: error instanceof AuthError ? error.message : 'Failed to reset password'
+        error: error instanceof Error ? error.message : 'Failed to send reset password email',
       }))
     }
-  }, [router])
+  }, []);
 
-  // Clear errors
+  // Confirm password reset with token and new password
+  const confirmPasswordReset = useCallback(async (token: string, newPassword: string) => {
+    try {
+      setState(prev => ({ ...prev, isLoading: true, error: null }))
+      
+      // Use the token from the URL to complete the password reset
+      const { error } = await supabase.auth.updateUser({
+        password: newPassword
+      })
+      
+      if (error) throw error
+      
+      setState(prev => ({ ...prev, isLoading: false }))
+      
+      // Success is handled by the UI component
+    } catch (error) {
+      console.error('Confirm password reset error:', error)
+      
+      setState(prev => ({
+        ...prev,
+        isLoading: false,
+        error: error instanceof Error ? error.message : 'Failed to reset password',
+      }))
+    }
+  }, []);
+
+  // Complete onboarding process
+  const completeOnboarding = useCallback(async (data: OnboardingData) => {
+    try {
+      setState(prev => ({ ...prev, isLoading: true, error: null }))
+      
+      if (!state.user) {
+        throw new Error('User not authenticated')
+      }
+      
+      // Save onboarding data to the profiles table
+      const { error } = await supabase
+        .from('profiles')
+        .update({
+          role: data.role,
+          team_size: data.teamSize,
+          focus_areas: data.focusAreas,
+          onboarding_completed: true,
+          updated_at: new Date().toISOString(),
+        })
+        .eq('id', state.user.id)
+      
+      if (error) throw error
+      
+      // If sample project was requested, create it
+      if (data.sampleProject) {
+        // Add sample project creation logic here
+        console.log('Creating sample project for user')
+      }
+      
+      setState(prev => ({ ...prev, isLoading: false }))
+      
+      // Navigate to dashboard
+      const locale = getUserLocale()
+      router.push(`/${locale}/dashboard`)
+    } catch (error) {
+      console.error('Onboarding completion error:', error)
+      
+      setState(prev => ({
+        ...prev,
+        isLoading: false,
+        error: error instanceof Error ? error.message : 'Failed to complete onboarding',
+      }))
+    }
+  }, [state.user, router, getUserLocale]);
+
+  // Clear any auth error messages
   const clearErrors = useCallback(() => {
     setState(prev => ({ ...prev, error: null }))
   }, [])
 
-  // Provide auth context
+  // Provide the auth context to children
   return (
     <AuthContext.Provider
       value={{
-        ...state,
+        user: state.user,
+        session: state.session,
+        isLoading: state.isLoading,
+        isAuthenticated: state.isAuthenticated,
+        error: state.error,
         signIn,
         signUp,
         signOut,
         signInWithGoogle,
         signInWithMicrosoft,
         resetPassword,
+        confirmPasswordReset,
+        completeOnboarding,
         clearErrors
       }}
     >

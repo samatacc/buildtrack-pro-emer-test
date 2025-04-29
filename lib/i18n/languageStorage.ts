@@ -74,17 +74,111 @@ export function clearLanguagePreference() {
  * @param locale The locale to sync
  */
 export async function syncLanguageWithProfile(userId: string, locale: string) {
+  if (!userId || !locale) {
+    console.error('Missing userId or locale for sync');
+    return false;
+  }
+  
   try {
-    // In a real implementation, this would update the user profile in the database
-    // This is a placeholder for the actual implementation
-    console.log(`Syncing language ${locale} for user ${userId}`);
+    // Call the language preference API to update user profile
+    const response = await fetch('/api/profiles/language', {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ locale })
+    });
     
-    // For now, just update the cookie
-    saveLanguagePreference(locale);
+    if (!response.ok) {
+      const error = await response.json();
+      throw new Error(error.error || 'Failed to update language preference');
+    }
     
+    console.log(`Language preference ${locale} synced with user profile ${userId}`);
     return true;
   } catch (error) {
-    console.error('Error syncing language with profile:', error);
+    console.error('Error syncing language preference with profile:', error);
     return false;
+  }
+}
+
+/**
+ * Fetch user's language preference from profile
+ * 
+ * @returns Promise resolving to the user's preferred locale or null if not found/authenticated
+ */
+export async function fetchProfileLanguage(): Promise<string | null> {
+  try {
+    // Call the language preference API to get user preference
+    const response = await fetch('/api/profiles/language', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      }
+    });
+    
+    if (!response.ok) {
+      // If unauthorized or other error, return null (will use cookie or browser default)
+      return null;
+    }
+    
+    const data = await response.json();
+    return data.locale || null;
+  } catch (error) {
+    console.error('Error fetching language preference from profile:', error);
+    return null;
+  }
+}
+
+/**
+ * Get the best language for the user
+ * Priorities:
+ * 1. Authenticated user profile preference
+ * 2. Stored cookie preference
+ * 3. Browser language (if supported)
+ * 4. Default 'en'
+ */
+export async function getBestLanguage(): Promise<string> {
+  try {
+    // Try to get language from profile if authenticated
+    const profileLanguage = await fetchProfileLanguage();
+    if (profileLanguage) {
+      // Save to cookie for consistency
+      saveLanguagePreference(profileLanguage);
+      return profileLanguage;
+    }
+    
+    // Try to get from cookie
+    const cookieLanguage = getLanguagePreference();
+    if (cookieLanguage) {
+      return cookieLanguage;
+    }
+    
+    // Detect browser language
+    if (typeof window !== 'undefined') {
+      const browserLang = navigator.language;
+      
+      // Check if the language is supported (en, es, fr, pt-BR)
+      const supportedLocales = ['en', 'es', 'fr', 'pt-BR'];
+      
+      // Special case for Portuguese
+      if (browserLang.toLowerCase() === 'pt-br') {
+        saveLanguagePreference('pt-BR');
+        return 'pt-BR';
+      }
+      
+      // Check if the base locale is supported
+      const baseLocale = browserLang.split('-')[0];
+      if (supportedLocales.includes(baseLocale)) {
+        saveLanguagePreference(baseLocale);
+        return baseLocale;
+      }
+    }
+    
+    // Default to English
+    return 'en';
+  } catch (error) {
+    console.error('Error determining best language:', error);
+    return 'en';
   }
 }

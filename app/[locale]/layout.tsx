@@ -13,6 +13,7 @@ import '../styles/animations.css'
 // Import components for providers
 import QueryProvider from '../providers/QueryProviderClient'
 import IntlProvider from '../providers/IntlProviderClient'
+import LanguageProvider from '../providers/LanguageProvider'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -48,9 +49,11 @@ export default async function LocaleLayout({
           <QueryProvider>
             <IntlProvider locale={locale} messages={messages}>
               <NetworkAwareDataFetcher>
-                <LanguageSyncWrapper>
-                  {children}
-                </LanguageSyncWrapper>
+                <LanguageProvider>
+                  <LanguageSyncWrapper>
+                    {children}
+                  </LanguageSyncWrapper>
+                </LanguageProvider>
               </NetworkAwareDataFetcher>
             </IntlProvider>
           </QueryProvider>

@@ -2,8 +2,11 @@
 
 import { useState, useEffect } from 'react'
 import { useSupabaseAuth } from '../../../lib/auth/SupabaseAuthContext'
-import { useTranslations } from '../../hooks/useTranslations'
+import { useNamespacedTranslations } from '../../hooks/useNamespacedTranslations'
 import ConnectionStatus from '../../components/shared/ConnectionStatus'
+import ProjectCard from '../../components/dashboard/ProjectCard'
+import TaskList from '../../components/dashboard/TaskList'
+import MaterialsManagement from '../../components/dashboard/MaterialsManagement'
 
 /**
  * DashboardHome Component
@@ -17,13 +20,16 @@ import ConnectionStatus from '../../components/shared/ConnectionStatus'
  */
 export default function DashboardHome() {
   const { user, signOut } = useSupabaseAuth()
-  const { t } = useTranslations('dashboard')
+  const { t, metrics } = useNamespacedTranslations('dashboard')
   const [greeting, setGreeting] = useState(t('welcome', { name: '' }))
   const [state, setState] = useState({ user })
+  const [isLoading, setIsLoading] = useState(true)
   
   // Update state when user changes
   useEffect(() => {
     setState({ user })
+    // Simulate data loading
+    setTimeout(() => setIsLoading(false), 600)
   }, [user])
   
   // Handle logout
@@ -51,54 +57,150 @@ export default function DashboardHome() {
     setGreeting(t(timeGreeting, { name }))
   }, [user, t])
 
-  // Mock data for dashboard components
+  // Enhanced mock data for dashboard components with internationalization support
   const projects = [
-    { id: 1, name: 'Highland Residence', status: 'In Progress', completion: 65, dueDate: '2025-05-15' },
-    { id: 2, name: 'Westfield Commercial', status: 'Planning', completion: 20, dueDate: '2025-06-30' },
-    { id: 3, name: 'Riverside Apartments', status: 'On Hold', completion: 45, dueDate: '2025-07-10' },
-    { id: 4, name: 'Downtown Renovation', status: 'In Progress', completion: 80, dueDate: '2025-05-05' },
+    { 
+      id: 1, 
+      name: 'Highland Residence', 
+      status: 'In Progress', 
+      completion: 65, 
+      dueDate: '2025-05-15',
+      client: 'Johnson Family',
+      budget: { total: 450000, spent: 290000, currency: 'USD' },
+      location: '1234 Highland Ave, Seattle WA'
+    },
+    { 
+      id: 2, 
+      name: 'Westfield Commercial', 
+      status: 'Planning', 
+      completion: 20, 
+      dueDate: '2025-06-30',
+      client: 'Westfield Properties LLC',
+      budget: { total: 2800000, spent: 560000, currency: 'USD' },
+      location: '987 Business Park Dr, Portland OR'
+    },
+    { 
+      id: 3, 
+      name: 'Riverside Apartments', 
+      status: 'On Hold', 
+      completion: 45, 
+      dueDate: '2025-07-10',
+      client: 'River Development Group',
+      budget: { total: 1200000, spent: 540000, currency: 'USD' },
+      location: '555 Riverside Blvd, San Francisco CA'
+    },
+    { 
+      id: 4, 
+      name: 'Downtown Renovation', 
+      status: 'In Progress', 
+      completion: 80, 
+      dueDate: '2025-05-05',
+      client: 'City of Oakridge',
+      budget: { total: 780000, spent: 624000, currency: 'USD' },
+      location: '100 Main Street, Oakridge CA'
+    },
   ]
   
   const tasks = [
-    { id: 1, title: 'Review contractor proposals', priority: 'High', dueDate: '2025-04-26', project: 'Highland Residence' },
-    { id: 2, title: 'Submit permit applications', priority: 'High', dueDate: '2025-04-27', project: 'Westfield Commercial' },
-    { id: 3, title: 'Order materials for kitchen', priority: 'Medium', dueDate: '2025-04-29', project: 'Highland Residence' },
-    { id: 4, title: 'Schedule inspections', priority: 'Medium', dueDate: '2025-05-02', project: 'Riverside Apartments' },
-    { id: 5, title: 'Finalize floor plans', priority: 'Low', dueDate: '2025-05-07', project: 'Downtown Renovation' },
+    { 
+      id: 1, 
+      title: 'Review contractor proposals', 
+      description: 'Evaluate submitted proposals from 3 electrical contractors', 
+      status: 'In Progress',
+      priority: 'High', 
+      dueDate: '2025-04-30', 
+      project: 'Highland Residence',
+      assignedTo: 'Carlos Mendez'
+    },
+    { 
+      id: 2, 
+      title: 'Submit permit applications', 
+      description: 'Complete and submit all required building permits', 
+      status: 'Not Started',
+      priority: 'High', 
+      dueDate: '2025-05-02', 
+      project: 'Westfield Commercial',
+      assignedTo: 'Sarah Johnson'
+    },
+    { 
+      id: 3, 
+      title: 'Order materials for kitchen', 
+      description: 'Order countertops, cabinets and fixtures for main kitchen', 
+      status: 'Not Started',
+      priority: 'Medium', 
+      dueDate: '2025-05-05', 
+      project: 'Highland Residence',
+      assignedTo: 'Miguel Santos'
+    },
+    { 
+      id: 4, 
+      title: 'Schedule inspections', 
+      description: 'Arrange for electrical and plumbing inspections', 
+      status: 'Blocked',
+      priority: 'Medium', 
+      dueDate: '2025-05-07', 
+      project: 'Riverside Apartments',
+      assignedTo: 'Jennifer Lee'
+    },
+    { 
+      id: 5, 
+      title: 'Finalize floor plans', 
+      description: 'Review and approve final floor plans with client', 
+      status: 'Completed',
+      priority: 'Low', 
+      dueDate: '2025-05-10', 
+      project: 'Downtown Renovation',
+      assignedTo: 'David Williams'
+    },
   ]
   
-  const metrics = [
-    { id: 1, name: 'Active Projects', value: 12, change: '+2', trend: 'up' },
-    { id: 2, name: 'Tasks Due Soon', value: 28, change: '+5', trend: 'up' },
-    { id: 3, name: 'Budget Utilization', value: '68%', change: '+3%', trend: 'up' },
-    { id: 4, name: 'Team Utilization', value: '82%', change: '-2%', trend: 'down' },
+  const dashboardMetrics = [
+    { id: 1, name: t('metrics.activeProjects'), value: 12, change: '+2', trend: 'up' },
+    { id: 2, name: t('metrics.tasksDue'), value: 28, change: '+5', trend: 'up' },
+    { id: 3, name: t('metrics.budgetUtilization'), value: '68%', change: '+3%', trend: 'up' },
+    { id: 4, name: t('metrics.teamUtilization'), value: '82%', change: '-2%', trend: 'down' },
   ]
   
   return (
     <div className="pb-6">
-      {/* Page header */}
+      {/* Page header with connection status */}
       <div className="p-4 sm:p-6 max-w-7xl mx-auto relative">
         {/* Online/Offline Connection Status Indicator */}
         <ConnectionStatus />
         
         {/* Header Section */}
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold text-[rgb(24,62,105)] mb-2">
-            {greeting}
-          </h1>
-          <p className="text-gray-500">Here's what's happening with your projects today.</p>
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 gap-4">
+          <div>
+            <h1 className="text-3xl font-bold text-[rgb(24,62,105)] mb-2">
+              {greeting}
+            </h1>
+            <p className="text-gray-500">
+              {t('summary')}
+              {metrics && <span className="text-xs ml-2">({t('loadedIn')} {metrics.loadTime}ms)</span>}
+            </p>
+          </div>
+          <button
+            onClick={handleLogout}
+            className="px-4 py-2 bg-[rgb(24,62,105)] text-white rounded-lg hover:bg-[rgb(19,49,84)] transition-colors"
+          >
+            {t('signOut')}
+          </button>
         </div>
-        <button
-          onClick={handleLogout}
-          className="px-4 py-2 bg-[rgb(24,62,105)] text-white rounded-lg hover:bg-[rgb(19,49,84)] transition-colors"
-        >
-          Sign Out
-        </button>
+        
+        {/* Loading indicator */}
+        {isLoading && (
+          <div className="fixed inset-0 bg-white bg-opacity-75 flex items-center justify-center z-50">
+            <div className="text-center">
+              <div className="inline-block animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-[rgb(24,62,105)]"></div>
+              <p className="mt-2 text-[rgb(24,62,105)] font-medium">{t('loading')}</p>
+            </div>
+          </div>
+        )}
       </div>
       
       {/* Metrics overview */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-        {metrics.map((metric) => (
+        {dashboardMetrics.map((metric) => (
           <div key={metric.id} className="bg-white rounded-lg shadow p-5">
             <div className="flex justify-between items-start">
               <div>
@@ -126,113 +228,41 @@ export default function DashboardHome() {
         ))}
       </div>
       
-      {/* Projects and Tasks section */}
-      <div className="grid grid-cols-1 xl:grid-cols-3 gap-6">
-        {/* Projects widget - takes 2/3 of the space on large screens */}
-        <div className="xl:col-span-2 bg-white rounded-lg shadow overflow-hidden">
-          <div className="px-6 py-4 border-b border-gray-200 flex justify-between items-center mb-4">
-            <h2 className="text-xl font-bold text-[rgb(24,62,105)]">{t('recentProjects')}</h2>
-            <a href="/projects" className="text-[rgb(236,107,44)] hover:text-[rgb(216,87,24)] transition-colors">
-              {t('viewAll')}
-            </a>
-          </div>
-          <div className="p-2">
-            <table className="min-w-full divide-y divide-gray-200">
-              <thead className="bg-gray-50">
-                <tr>
-                  <th scope="col" className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Project
-                  </th>
-                  <th scope="col" className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Status
-                  </th>
-                  <th scope="col" className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Progress
-                  </th>
-                  <th scope="col" className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Due Date
-                  </th>
-                </tr>
-              </thead>
-              <tbody className="bg-white divide-y divide-gray-200">
-                {projects.map((project) => (
-                  <tr key={project.id} className="hover:bg-gray-50">
-                    <td className="px-4 py-3 whitespace-nowrap">
-                      <div className="font-medium text-gray-900">{project.name}</div>
-                    </td>
-                    <td className="px-4 py-3 whitespace-nowrap">
-                      <span className={`px-2 py-1 text-xs rounded-full ${
-                        project.status === 'In Progress' ? 'bg-blue-100 text-blue-800' :
-                        project.status === 'Planning' ? 'bg-yellow-100 text-yellow-800' :
-                        project.status === 'On Hold' ? 'bg-red-100 text-red-800' :
-                        'bg-green-100 text-green-800'
-                      }`}>
-                        {project.status}
-                      </span>
-                    </td>
-                    <td className="px-4 py-3 whitespace-nowrap">
-                      <div className="w-full bg-gray-200 rounded-full h-2.5">
-                        <div 
-                          className="bg-[rgb(236,107,44)] h-2.5 rounded-full" 
-                          style={{ width: `${project.completion}%` }}
-                        ></div>
-                      </div>
-                      <span className="text-xs text-gray-500 mt-1">{project.completion}%</span>
-                    </td>
-                    <td className="px-4 py-3 whitespace-nowrap text-sm text-gray-500">
-                      {new Date(project.dueDate).toLocaleDateString('en-US', { 
-                        month: 'short', 
-                        day: 'numeric', 
-                        year: 'numeric' 
-                      })}
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+      {/* Projects section */}
+      <div className="mb-8">
+        <div className="flex justify-between items-center mb-4">
+          <h2 className="text-xl font-bold text-[rgb(24,62,105)]">{t('recentProjects')}</h2>
+          <a href="/projects" className="text-[rgb(236,107,44)] hover:text-[rgb(216,87,24)] transition-colors">
+            {t('viewAll')}
+          </a>
         </div>
-
-        {/* Tasks widget - takes 1/3 of the space on large screens */}
-        <div className="bg-white rounded-lg shadow overflow-hidden">
-          <div className="px-6 py-4 border-b border-gray-200 flex justify-between items-center mb-4 mt-8">
-            <h2 className="text-xl font-bold text-[rgb(24,62,105)]">{t('tasks')}</h2>
-            <a href="/tasks" className="text-[rgb(236,107,44)] hover:text-[rgb(216,87,24)] transition-colors">
-              {t('viewAll')}
-            </a>
-          </div>
-          <div className="divide-y divide-gray-200">
-            {tasks.map((task) => (
-              <div key={task.id} className="p-4 hover:bg-gray-50">
-                <div className="flex items-start">
-                  <input 
-                    type="checkbox" 
-                    className="h-4 w-4 text-[rgb(236,107,44)] focus:ring-[rgb(236,107,44)] border-gray-300 rounded mt-1"
-                  />
-                  <div className="ml-3">
-                    <p className="text-sm font-medium text-gray-900">{task.title}</p>
-                    <p className="text-xs text-gray-500 mt-1">{task.project}</p>
-                  </div>
-                </div>
-                <div className="mt-2 flex justify-between items-center">
-                  <span className={`px-2 py-1 text-xs rounded-full ${
-                    task.priority === 'High' ? 'bg-red-100 text-red-800' :
-                    task.priority === 'Medium' ? 'bg-yellow-100 text-yellow-800' :
-                    'bg-green-100 text-green-800'
-                  }`}>
-                    {task.priority}
-                  </span>
-                  <span className="text-xs text-gray-500">
-                    Due {new Date(task.dueDate).toLocaleDateString('en-US', { 
-                      month: 'short', 
-                      day: 'numeric'
-                    })}
-                  </span>
-                </div>
-              </div>
-            ))}
-          </div>
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+          {projects.slice(0, 4).map((project) => (
+            <ProjectCard 
+              key={project.id} 
+              project={project} 
+              variant="standard"
+            />
+          ))}
         </div>
+      </div>
+      
+      {/* Tasks and Materials section - two column layout */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        {/* Tasks widget */}
+        <TaskList 
+          tasks={tasks} 
+          showFilters={true}
+          maxItems={5}
+          variant="standard"
+        />
+        
+        {/* Materials widget */}
+        <MaterialsManagement 
+          projectId={1} 
+          variant="widget"
+        />
       </div>
     </div>
   )

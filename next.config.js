@@ -1,4 +1,13 @@
 const path = require('path');
+const createNextIntlPlugin = require('next-intl/plugin');
+
+/**
+ * BuildTrack Pro Next.js Configuration
+ * Integrates next-intl plugin and configures application settings
+ */
+
+// Configure next-intl plugin to use our standard request configuration
+const withNextIntl = createNextIntlPlugin('./src/i18n/request.js');
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -29,9 +38,11 @@ const nextConfig = {
     config.resolve.alias = {
       ...config.resolve.alias,
       '@/app': path.resolve(__dirname, './app'),
+      '@/i18n': path.resolve(__dirname, './src/i18n'),
     };
     return config;
   },
 };
 
-module.exports = nextConfig;
+// Export the configuration with the next-intl plugin applied
+module.exports = withNextIntl(nextConfig);

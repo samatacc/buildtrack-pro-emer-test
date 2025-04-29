@@ -266,7 +266,6 @@ redirect_uri = "http://127.0.0.1:3000/auth/callback"
 # Required for local development
 skip_nonce_check = true
 # For Microsoft Azure AD integration
-tenant_id = "common"
 
 # Use Firebase Auth as a third-party provider alongside Supabase Auth.
 [auth.third_party.firebase]

@@ -1,0 +1,15 @@
+{
+  "title": "Panel de Informes",
+  "projectPerformance": "Rendimiento del Proyecto",
+  "taskCompletion": "Estado de Finalización de Tareas",
+  "exportData": "Exportar Datos",
+  "printableReports": "Informes Imprimibles",
+  "filterBy": "Filtrar por",
+  "dateRange": "Rango de Fechas",
+  "projectType": "Tipo de Proyecto",
+  "exportFormat": "Formato de Exportación",
+  "generateReport": "Generar Informe",
+  "downloadReport": "Descargar Informe",
+  "printReport": "Imprimir Informe",
+  "noData": "No hay datos disponibles para los criterios seleccionados"
+}

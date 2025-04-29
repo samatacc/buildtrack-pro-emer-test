@@ -1,287 +1,171 @@
-# BuildTrack Pro Project Rules
+# BuildTrack Pro Windsurf Rules (.windsurfrules)
 
 ## Last Updated
-- Date: April 23, 2025
+- **Date**: April 25, 2025
 
-## Project Overview
-- **Name**: BuildTrack Pro
-- **Purpose**: A comprehensive construction management solution with a Dashboard for project management, an Admin Console for oversight, a Marketing Website for user acquisition, and a CMS for content management.
-- **Primary Focus**:
-  - Start with the **Dashboard** (Features & Workflow) for project management.
-  - Use the **Admin Console** to control the Dashboard and manage subscribers.
-  - Integrate the **Marketing Website** for user acquisition, managed by the **CMS**.
-- **Tech Stack**: Defined in the Tech Stack section below.
-- **Coding Standards**: Follow the coding preferences outlined in the Coding Standards section.
+## Overview
+This `.windsurfrules` file governs how Windsurf operates as a multi-agent system coordinator for the BuildTrack Pro project. Windsurf will reference project documentation (e.g., `project-overview.md`, 74 feature files in `features/`), create and update notes in `scratchpad.md`, and operate in two modes—Planner and Executor—to build BuildTrack Pro’s construction management platform, ensuring features align with the project’s guiding principles of user-centric design, accessibility, and scalability.
 
-## Project Structure
-- **Dashboard (Features & Workflow)**:
-  - Core user-facing application for managing construction projects.
-  - Includes Authentication, Dashboard Home, Project Management, Materials Management, Document Management, Financial Management, Floorplan Management, Reporting, Communication, Mobile Features, AI Features, Settings, Help, and Integrations.
-- **Admin Console**:
-  - Administrative interface to control the Dashboard and manage subscribers.
-  - Features: Dashboard (executive overview, quick actions), Customer & Organization Management, Feature Management, System Performance, Data & Analytics, Marketing Tools, Financial Operations, User Administration, Content Management, Integration Management, System Configuration, Analytics, Compliance, Maintenance, and Developer Tools.
-- **Marketing Website**:
-  - Public-facing site for user acquisition and marketing.
-  - Features: Homepage, Feature Pages, Industry Solutions, Resources, About Pages, Contact Pages, Conversion Tools, Mobile Experience, Technical Implementation, Internationalization, SEO, and Website Management.
-- **CMS**:
-  - Content Management System to manage the Marketing Website content.
-  - Features: Architecture, Editorial Interface, Workflow, Asset Management, User Management, Localization, Integrations, Customization, Deployment, and Security.
-- **Directory Structure**:
-  - Group files by feature, not type (e.g., `dashboard/auth/`, `admin-console/customer-management/`).
-  - Co-locate related components (e.g., `dashboard/project-management/components/`).
-  - Use barrel exports (`index.ts`) for feature modules.
+## Role Definitions
+Windsurf operates in two distinct modes: Planner and Executor. Windsurf will switch between these modes based on user instructions or prompt for clarification if the mode is unspecified.
 
-## Feature Details
+1. **Planner Mode**:
+   - **Responsibilities**: Perform high-level analysis, break down tasks into phases, define success criteria, and evaluate progress. The Planner ensures tasks align with BuildTrack Pro’s guiding principles (e.g., user-centric design, accessibility).
+   - **Actions**: Update `scratchpad.md` with the plan, including sections like Background and Motivation, Key Challenges and Analysis, and High-level Task Breakdown.
 
-### Dashboard (Features & Workflow)
-- **Authentication & User Onboarding**:
-  - Login with email/password, OAuth (Google, Microsoft, Apple), and 2FA.
-  - Registration with progressive form, plan selection (Freemium/Pro), and email validation.
-  - Onboarding with guided tours, profile completion, and sample projects.
-- **Dashboard Home**:
-  - Responsive grid layout with widgets (Projects, Tasks, Analytics, Notifications).
-  - Customizable widgets with drag-and-drop, role-based defaults.
-  - Project overview, tasks, team performance, and financial metrics.
-- **Project Management**:
-  - Creation wizard with templates, AI-assisted setup, and weather forecasting.
-  - Views: List, Kanban, Gantt, Calendar.
-  - Task details with subtasks, dependencies, comments, and team collaboration.
-- **Materials Management**:
-  - Overview with low stock alerts, inventory valuation, and category management.
-  - Procurement with vendor management, order tracking, and mobile QR scanning.
-- **Document & File Management**:
-  - Library with categories, drawing sets, and analytics.
-  - Upload, organization, viewing, markup, photo documentation, and workflows.
-- **Financial Management**:
-  - Budget overview, expense tracking, invoicing, reporting, and payment processing.
-  - Client billing portal and financial data export.
-- **Floor & Spatial Management**:
-  - Interactive floorplan viewer with zones, hotspots, 360° photos, and proximity features.
-  - Progress visualization and annotation system.
-- **Reporting & Analytics**:
-  - Report center with templates, scheduling, and visualization options.
-  - Analytics for projects, teams, and business intelligence.
-- **Communication & Notification**:
-  - Messaging (direct, group), notifications, announcements, and weather integration.
-- **Mobile & Field Features**:
-  - Mobile dashboard, field data capture, offline capabilities, QR scanning, and safety checklists.
-- **AI Assistant & Intelligence**:
-  - Virtual assistant, document processing, photo analysis, predictive intelligence, and NLP.
-- **Settings & User Preferences**:
-  - Profile management, workspace customization, organization settings, and billing.
-- **Help & Support**:
-  - In-app help, interactive guidance, training, and feedback collection.
-- **Integration Ecosystem**:
-  - Accounting (QuickBooks, Sage), calendar (Google, Microsoft), document management, weather, and equipment integrations.
+2. **Executor Mode**:
+   - **Responsibilities**: Implement tasks outlined in `scratchpad.md`, such as coding features, integrating APIs, and testing functionality. The Executor ensures implementation reflects BuildTrack Pro’s focus on usability and performance.
+   - **Actions**: Complete one task at a time, update `scratchpad.md` with progress (e.g., Current Status / Progress Tracking, Executor’s Feedback or Assistance Requests), and document lessons in the Lessons section.
 
-### Admin Console
-- **Dashboard**:
-  - Executive overview with business health, KPIs, and alerts.
-  - Quick actions for user management, feature toggles, and system status.
-- **Customer & Organization Management**:
-  - Organization directory, customer insights, account management, and support operations.
-  - Health score system and customer journey visualization.
-- **Feature & Product Management**:
-  - Feature toggles, configuration, analytics, onboarding experience, beta programs, and release management.
-- **System Performance & Security**:
-  - Performance monitoring, security dashboard, access control, audit, and infrastructure management.
-- **Data & Analytics**:
-  - Data governance, business intelligence, and data integration (ETL, API).
-- **Marketing & Growth Tools**:
-  - Conversion optimization, campaign management, and referral programs.
-- **Financial Operations**:
-  - Revenue management, payment processing, and financial reporting.
-- **User Administration**:
-  - Admin and system user management, authentication, and activity monitoring.
-- **Content & Documentation**:
-  - Knowledge base, help content, and marketing content management.
-- **Integration & API**:
-  - API administration, third-party integrations, and webhook management.
-- **System Configuration**:
-  - Global settings, workflow configuration, and custom fields.
-- **Analytics & Reporting**:
-  - System analytics, business metrics, and custom report builder.
-- **Compliance & Governance**:
-  - Compliance management, data protection, and risk management.
-- **System Maintenance**:
-  - Database management, infrastructure operations, and service health.
-- **Developer Tools**:
-  - Developer portal, API testing, and lifecycle management.
+## Workflow Guidelines
+- **Initial Prompt Handling**: Upon receiving a new task prompt, Windsurf will:
+  1. Reference `project-overview.md` and the 74 feature files in `features/` to understand BuildTrack Pro’s goals, components, and feature requirements.
+  2. Update the `scratchpad.md` file’s Background and Motivation section with the task context.
+  3. Invoke Planner Mode to create a detailed plan, unless specified otherwise.
+- **Planner Mode**:
+  - Document the plan in `scratchpad.md`, including:
+    - **Background and Motivation**: Task context and alignment with BuildTrack Pro’s goals (e.g., improving construction project management).
+    - **Key Challenges and Analysis**: Potential obstacles (e.g., ensuring accessibility for diverse users) and mitigation strategies.
+    - **High-level Task Breakdown**: Step-by-step tasks with success criteria (e.g., “Implement Dashboard Home; success criteria: widgets are draggable and persist state”).
+  - Ensure tasks reflect BuildTrack Pro’s guiding principles (e.g., user-centric design with intuitive UI, scalability with optimized performance).
+- **Executor Mode**:
+  - Execute one task at a time from the `scratchpad.md` Project Status Board.
+  - Use tools specified in `features/tech-stack.md` (e.g., Next.js, TypeScript, Supabase, TailwindCSS).
+  - Adopt Test-Driven Development (TDD): Write tests first (e.g., unit tests for API routes, accessibility tests for UI), then code, ensuring functionality meets success criteria.
+  - Update `scratchpad.md` after each task:
+    - Mark tasks as complete in the Project Status Board.
+    - Log progress in Current Status / Progress Tracking.
+    - Document issues or questions in Executor’s Feedback or Assistance Requests.
+  - Notify the user after completing a task, providing evidence of success (e.g., test results, UI screenshots) and requesting manual verification.
+- **Task Completion**:
+  - Only the Planner can confirm task completion after cross-checking Executor outputs against success criteria.
+  - If the Executor believes a task is complete, it must request Planner confirmation.
 
-  - **Feature & Product Management**:
-  - Complete feature availability philosophy (no feature-gating)
-  - Global feature toggle system for all features
-  - Two-tier plan management (Freemium/Pro)
-  - Feature toggles and configuration at global and organization levels
-  - Usage analytics and monitoring for all features
-  - Parameter adjustment and threshold configuration
-  - Feature dependency management
-  - Performance and adoption tracking
-  - Cost-to-serve analysis
-  - Beta program management
+## Documentation Conventions
+- **Scratchpad Structure**:
+  - Maintain the following sections in `scratchpad.md`:
+    - **Background and Motivation**: Task context and goals.
+    - **Key Challenges and Analysis**: Potential issues and solutions.
+    - **High-level Task Breakdown**: Step-by-step tasks with success criteria.
+    - **Project Status Board**: Markdown todo list (e.g., `- [ ] Task 1`, `- [x] Task 2`).
+    - **Current Status / Progress Tracking**: Executor’s progress updates.
+    - **Executor’s Feedback or Assistance Requests**: Questions or blockers.
+    - **Lessons**: Documented solutions to errors or reusable information.
+  - Do not arbitrarily change section titles to maintain consistency.
+- **Documentation Practices**:
+  - Avoid rewriting the entire `scratchpad.md` unless necessary; append or mark sections as outdated.
+  - When external information is needed (e.g., API docs for Supabase), use the `@web` tag to fetch up-to-date documentation, then create `.md` files for reference (e.g., `docs/supabase-api.md`).
+  - Document reusable information (e.g., library versions, fixes) in the Lessons section.
 
-### Marketing Website
-- **Homepage**:
-  - Hero with CTAs, social proof, feature showcase, testimonials, pricing, and conversion sections.
-- **Feature Pages**:
-  - Category landing pages, individual feature details, and comparisons.
-- **Industry Solutions**:
-  - Industry-specific pages, case studies, and resources.
-- **Resources & Content Hub**:
-  - Blog, resource library, and webinar/event system.
-- **About & Company**:
-  - Company story, careers, culture, press, and news.
-- **Contact & Support**:
-  - Contact options, support resources, and partner program.
-- **Conversion & Lead Generation**:
-  - Trial signup, demo requests, and lead nurturing.
-- **Mobile Experience**:
-  - Mobile-specific design, responsive content, and conversion paths.
-- **Technical Implementation**:
-  - CMS integration (Sanity.io), performance optimization, and integrations.
-- **International & Localization**:
-  - Multi-language support, regional content, and SEO.
-- **SEO & Discoverability**:
-  - Technical SEO, content SEO, and analytics.
-- **Website Management**:
-  - Content governance, A/B testing, feedback, and technical maintenance.
+## Project-Specific Instructions
+- **Reference Materials**:
+  - Always consult `project-overview.md` (updated April 25, 2025) for project goals, components (Dashboard, Admin Console, Marketing Website, CMS), and guiding principles (e.g., user-centric design, accessibility, scalability).
+  - Use the 74 feature files in `features/` for detailed requirements (e.g., `features/dashboard-home.md`: “Customizable dashboard with widgets for projects, tasks, analytics, and notifications, supporting drag-and-drop functionality”).
+  - Follow the technical stack in `features/tech-stack.md` (e.g., Next.js, TypeScript, Supabase, TailwindCSS).
+- **Coding Standards**:
+  - **General**:
+    - Adhere to the summarized Coding Standards in `project-overview.md` and the detailed guidelines below.
+    - Write clean, readable, and maintainable code following the principles of DRY (Don’t Repeat Yourself) and KISS (Keep It Simple, Stupid).
+    - **Simplify Code Structure**:
+      - Break down complex functions into smaller, single-responsibility functions (e.g., instead of one large `handleFormSubmit`, create `validateForm`, `saveFormData`, and `updateUI`).
+      - Limit functions to a maximum of 15 lines; if longer, refactor into smaller functions.
+      - Avoid nested conditionals by using early returns (e.g., `if (!condition) return; doSomething();` instead of `if (condition) { ... }`).
+      - Use simple data structures when possible (e.g., prefer a flat array over a nested object unless the nesting is necessary).
+    - Use meaningful variable and function names that reflect their purpose (e.g., `fetchProjectData` instead of `getData`).
+    - Limit line length to 80 characters for readability; use Prettier to enforce formatting.
+    - Use 2-space indentation for all code files.
+  - **TypeScript**:
+    - Use TypeScript in strict mode to catch errors early (`"strict": true` in `tsconfig.json`).
+    - Prefer interfaces over types for defining object shapes (e.g., `interface Project { id: string; name: string; }`).
+    - Always define explicit return types for functions (e.g., `function getProject(id: string): Promise<Project>`).
+    - Avoid using `any` unless absolutely necessary; prefer `unknown` and type guards for safer type handling.
+    - Use type inference where possible to reduce boilerplate (e.g., `const projectId = "123";` instead of `const projectId: string = "123";`).
+    - **Simplify Type Definitions**:
+      - Avoid over-typing; rely on TypeScript’s inference for simple cases (e.g., don’t type array literals like `const ids: string[] = ["1", "2"]` when `const ids = ["1", "2"]` suffices).
+      - Use union types or optional properties instead of creating complex nested types when possible (e.g., `status: "active" | "inactive"` instead of separate interfaces for each status).
+  - **React/Next.js**:
+    - Use functional components with hooks (e.g., `useState`, `useEffect`) instead of class components.
+    - Organize components by feature (e.g., `components/dashboard/ProjectWidget.tsx`, `components/admin/UserTable.tsx`).
+    - **Simplify Components**:
+      - Keep components small and focused; if a component exceeds 100 lines, refactor it into smaller sub-components.
+      - Extract reusable logic into custom hooks (e.g., `useProjectData` instead of repeating fetch logic in multiple components).
+      - Avoid deeply nested JSX; use helper components or fragments to flatten the structure.
+    - Use Next.js API routes for backend logic (e.g., `/pages/api/projects.ts` for fetching project data).
+    - Implement static generation (`getStaticProps`) or server-side rendering (`getServerSideProps`) for pages where applicable to optimize performance.
+    - Use React’s Context API or a lightweight state management library (e.g., Zustand) for global state, avoiding prop drilling.
+  - **Styling**:
+    - Use TailwindCSS for all styling, following its utility-first approach.
+    - Group related Tailwind classes logically (e.g., `className="flex flex-col gap-4 p-4 bg-gray-100"`).
+    - Avoid inline styles unless necessary for dynamic values (e.g., `style={{ width: `${progress}%` }}`).
+    - **Simplify Styling**:
+      - Use Tailwind’s utility classes to reduce CSS complexity; avoid writing custom CSS unless Tailwind cannot achieve the desired style.
+      - Keep class names concise by leveraging Tailwind’s shorthand (e.g., `p-4` instead of `padding: 1rem`).
+    - Ensure responsive design using Tailwind’s responsive prefixes (e.g., `md:flex-row` for medium screens and up).
+  - **Database (Supabase)**:
+    - Use Supabase’s TypeScript client (`@supabase/supabase-js`) for all database interactions.
+    - Define database types in a central location (e.g., `types/database.ts`) using Supabase’s generated types (via `supabase typegen`).
+    - Follow RESTful conventions for API endpoints (e.g., `GET /api/projects` for fetching projects, `POST /api/projects` for creating a project).
+    - Implement row-level security (RLS) in Supabase to ensure data access is restricted to authorized users.
+  - **Error Handling**:
+    - Use try-catch blocks for asynchronous operations (e.g., `try { await supabase.from('projects').select('*'); } catch (error) { console.error('Error fetching projects:', error); }`).
+    - Provide user-friendly error messages in the UI (e.g., “Unable to load projects. Please try again later.”).
+    - Log errors to the console and document them in `scratchpad.md` under Executor’s Feedback or Assistance Requests.
+  - **Testing**:
+    - Adopt Test-Driven Development (TDD): Write tests before implementation using Vitest for unit tests and Playwright for end-to-end tests.
+    - Name tests descriptively (e.g., `should render ProjectWidget with project data`).
+    - Aim for at least 80% test coverage for critical components (e.g., Dashboard widgets, API routes).
+    - Test accessibility using Playwright’s axe integration to ensure WCAG 2.1 AA compliance.
+  - **File Structure**:
+    - Group files by feature (e.g., `components/dashboard/`, `pages/api/projects/`, `lib/supabase/`).
+    - Use lowercase with hyphens for file names (e.g., `project-widget.tsx`, `fetch-projects.ts`).
+    - Maintain a `types/` directory for TypeScript types and interfaces (e.g., `types/project.ts`).
+  - **Git Practices**:
+    - Write descriptive commit messages following the Conventional Commits format (e.g., `feat(dashboard): add project widget drag-and-drop`).
+    - Use feature branches for development (e.g., `feature/dashboard-widget`).
+    - Create pull requests for code reviews, ensuring at least one approval before merging to `main`.
+- **Best Practices**:
+  - Prioritize the Dashboard, then Admin Console, Marketing Website, and CMS, as outlined in `project-overview.md`.
+  - Optimize for Core Web Vitals (e.g., use Next.js image optimization, lazy load components).
+  - Ensure WCAG 2.1 AA accessibility (e.g., use semantic HTML, provide alt text for images).
+  - Use testing tools from `features/tech-stack.md` (e.g., Vitest, Playwright) and adopt TDD.
 
-### CMS (Content Management System)
-- **Architecture**:
-  - Schema design, content types (pages, components, global), and relationships.
-- **Editorial Interface**:
-  - Content creation, organization, and collaboration tools.
-- **Workflow & Publishing**:
-  - Editorial workflows, scheduling, and distribution.
-- **Asset & Media Management**:
-  - Digital asset organization, image processing, and video/document management.
-- **User & Permission Management**:
-  - User administration, role-based permissions, and activity monitoring.
-- **Localization**:
-  - Translation management, localization features, and internationalization tools.
-- **Integrations**:
-  - GraphQL API, webhooks, and third-party integrations (marketing, analytics).
-- **Customization**:
-  - Studio, content, and plugin customization.
-- **Deployment & Environment**:
-  - Environment setup, deployment pipeline, and monitoring.
-- **Security & Compliance**:
-  - Authentication, data protection, and audit/compliance.
+## Implementation Phases
+- **Phase 1: Core Features** (Dashboard, Authentication, Basic Admin Console):
+  - Focus on user-facing features like the Dashboard and authentication to establish the core user journey.
+  - Example task: “Implement Dashboard Home; success criteria: widgets are draggable and persist state.”
+- **Phase 2: Secondary Features** (Marketing Website, CMS, Advanced Admin Console):
+  - Enhance functionality with marketing pages, content management, and advanced admin tools.
+  - Example task: “Implement CMS for Marketing Website; success criteria: users can edit and publish landing pages.”
+- **Phase 3: Integrations and Scalability** (Third-Party APIs, Performance Optimization):
+  - Add integrations (e.g., payment gateways, analytics) and optimize for scale.
+  - Example task: “Integrate Stripe for payments; success criteria: users can subscribe to plans.”
+- **Phase 4: Future Expansions** (Mobile App Support, Advanced Analytics):
+  - Plan for future growth while maintaining core functionality.
+  - Example task: “Plan mobile app support; success criteria: draft a feature spec for responsive design.”
 
-## Technical Stack
-- **Frontend**:
-  - Framework: Next.js 15 (App Router), React 18+, TypeScript.
-  - Styling: TailwindCSS, shadcn/ui, Custom Design System, Framer Motion.
-  - State: Zustand, TanStack Query, React Context.
-  - Forms: React Hook Form, Zod.
-  - UI: Radix UI, date-fns, react-dropzone, Recharts, Mapbox GL JS.
-  - Mobile: Workbox, react-swipeable, Use-device-detect.
-- **Backend**:
-  - API: tRPC, Next.js API Routes, OpenAPI.
-  - Auth: Supabase Auth, JWT, Row Level Security.
-  - Database: PostgreSQL (via Supabase), pgvector, Redis, Prisma.
-  - Storage: Vercel Blob, Supabase Storage, Sharp.
-  - AI: OpenAI (GPT, Whisper), Google Cloud Vision AI, Mindee.
-  - Background: QStash, Edge Functions, Cron.
-  - Realtime: Supabase Realtime, Server-Sent Events, Broadcast Channel API.
-- **DevOps**:
-  - Hosting: Vercel, Supabase, Cloudflare.
-  - CI/CD: GitHub Actions, Husky, ESLint/Prettier.
-  - Monitoring: Sentry, Axiom, PostHog.
-  - Testing: Vitest, Playwright, MSW, Testing Library.
-- **Marketing Site**:
-  - CMS: Sanity.io, GraphQL, Next.js.
-  - Analytics: Google Analytics 4, Segment, HubSpot.
-- **Integrations**:
-  - Stripe, SendGrid, AccuWeather, DocuSign/PandaDoc, QuickBooks/Sage.
+## Debugging and Error Handling
+- **Error Detection**:
+  - Check the console for error messages and report them in `scratchpad.md` under Executor’s Feedback or Assistance Requests.
+  - Include debugging information in program output (e.g., logs for API failures).
+- **Error Resolution**:
+  - Revert to the last working checkpoint if an error persists, using the “Restore checkpoint” feature.
+  - Rethink the prompt, asking for missing information (e.g., “What do you need to feel 100% confident you can implement this?”).
+  - If stuck, simplify the scope and restart the planning process in Planner Mode.
+- **Lessons Learned**:
+  - Document solutions to errors in the Lessons section of `scratchpad.md` (e.g., “Adjusted Supabase query to handle pagination”).
+  - Follow user-specified lessons: Read files before editing, run `npm audit` if vulnerabilities appear, ask before using `git -force`.
 
-## Coding Standards & Preferences
-- **TypeScript**:
-  - Use TypeScript for all code.
-  - Prefer interfaces over type aliases (except for unions).
-  - Define return types for non-trivial functions.
-  - Use proper typing for React props.
-  - Avoid `any`; use `unknown` or specific types.
-- **Component Structure**:
-  - Use functional components with hooks.
-  - Colocate components in feature directories.
-  - Extract reusable UI to shared library.
-  - Use composition over inheritance.
-  - Keep components under 300 lines; split larger ones.
-- **State Management**:
-  - Use React Context for infrequent global state.
-  - Prefer hooks for local state.
-  - Use Zustand for complex, frequent updates.
-  - Optimize with `useMemo` and `useCallback`.
-- **Naming Conventions**:
-  - PascalCase for components and types.
-  - camelCase for variables and functions.
-  - UPPER_CASE for constants.
-  - Use descriptive names.
-  - Prefix custom hooks with "use".
-- **File Organization**:
-  - Group by feature, not type.
-  - Keep related files close.
-  - Use `index.ts` for exports.
-  - Use barrel exports for modules.
-- **CSS/Styling**:
-  - Use TailwindCSS (utility-first).
-  - Extract patterns to custom Tailwind components.
-  - Use CSS variables for theming.
-  - Ensure responsive design.
-- **React & Components**:
-  - Use functional components with hooks.
-  - Prefer composition over inheritance.
-  - Use React Context for deep prop sharing.
-  - Implement a11y attributes.
-  - Follow atomic design principles.
-- **File Structure**:
-  - Group by feature, then type.
-  - Keep components focused.
-  - Co-locate tests.
-  - Use barrel exports.
-  - Keep files under 300 lines.
-- **Code Style**:
-  - Use ESLint and Prettier.
-  - 2-space indentation.
-  - 80-100 character line length.
-  - Use semicolons.
-  - Use trailing commas in multiline objects/arrays.
-- **Code Quality**:
-  - Use ESLint and Prettier.
-  - Use Husky for pre-commit hooks.
-  - No commented-out code in production.
-  - No `console.log` in production.
-  - Implement proper error handling.
-- **Change Management**:
-  - Prefer simple solutions.
-  - Only make requested or understood changes.
-  - Preserve existing patterns.
-  - Exhaust existing patterns before new ones.
-  - Remove old implementations when replacing.
-- **Performance & Clean Code**:
-  - Avoid duplication; check for similar functionality.
-  - Keep codebase clean.
-  - Refactor files over 200-300 lines.
-  - Avoid scripts in application files.
-- **Environment Awareness**:
-  - Account for dev, test, prod environments.
-  - Use mock data only for tests.
-  - Avoid stubbing/fake data in dev/prod.
-- **Configuration Management**:
-  - Never overwrite `.env` without confirmation.
-  - Keep environment configs separate and documented.
+## Additional Guidelines
+- **Communication**:
+  - If unsure, prompt the user for clarification (e.g., “Do you want to invoke Planner Mode or Executor Mode?”).
+  - Do not proceed with actions you’re not 100% confident about, as the user is non-technical.
+- **Large-Scale Changes**:
+  - Before executing large-scale changes, the Executor must notify the Planner in `scratchpad.md` to ensure alignment.
+- **Project Completion**:
+  - The Planner will indicate when the project is complete, based on the goals in `project-overview.md` and the 74 feature files.
 
-## Best Practices
-- **Prioritization**: Focus on Dashboard first, then Admin Console for control, followed by Marketing Website and CMS integration.
-- **Consistency**: Adhere to the Tech Stack and Coding Standards for all development.
-- **Testing**: Use Vitest for unit tests, Playwright for E2E, and MSW for API mocking.
-- **Performance**: Optimize for Core Web Vitals, use lazy loading, and implement caching.
-- **Accessibility**: Follow WCAG 2.1 AA standards, ensure a11y attributes, and support screen readers.
-- **Documentation**: Maintain clear comments for complex logic, update this file as the project evolves.
-
-## Additional Notes
-- Reference this `.windsurfrules` file in prompts to ensure Cascade follows these guidelines.
-- Use the Admin Console to manage Dashboard features and subscribers.
-- Ensure the Marketing Website aligns with CMS content management capabilities.
-- Follow the Tech Stack for all integrations and development tools.
+## User-Specified Lessons
+- Include info useful for debugging in the program output.
+- Read the file before you try to edit it.
+- If there are vulnerabilities that appear in the terminal, run `npm audit` before proceeding.
+- Always ask before using the `-force` git command.

@@ -1,0 +1,15 @@
+{
+  "title": "Tableau de Bord des Rapports",
+  "projectPerformance": "Performance du Projet",
+  "taskCompletion": "État d'Achèvement des Tâches",
+  "exportData": "Exporter les Données",
+  "printableReports": "Rapports Imprimables",
+  "filterBy": "Filtrer par",
+  "dateRange": "Plage de Dates",
+  "projectType": "Type de Projet",
+  "exportFormat": "Format d'Exportation",
+  "generateReport": "Générer un Rapport",
+  "downloadReport": "Télécharger le Rapport",
+  "printReport": "Imprimer le Rapport",
+  "noData": "Aucune donnée disponible pour les critères sélectionnés"
+}

@@ -1,0 +1,42 @@
+{
+  "welcome": "Welcome",
+  "goodMorning": "Good Morning",
+  "goodAfternoon": "Good Afternoon", 
+  "goodEvening": "Good Evening",
+  "navigation": {
+    "dashboard": "Dashboard",
+    "projects": "Projects",
+    "tasks": "Tasks",
+    "materials": "Materials",
+    "documents": "Documents",
+    "reports": "Reports",
+    "team": "Team",
+    "schedule": "Schedule",
+    "settings": "Settings",
+    "profile": "Profile",
+    "help": "Help & Support",
+    "logout": "Log out",
+    "collapse": "Collapse",
+    "expand": "Expand",
+    "search": "Search",
+    "notifications": "Notifications",
+    "searchPlaceholder": "Search BuildTrack Pro..."
+  },
+  "projectStatus": {
+    "onTrack": "On Track",
+    "atRisk": "At Risk",
+    "delayed": "Delayed",
+    "completed": "Completed"
+  },
+  "connectionStatus": {
+    "online": "Online",
+    "offline": "Offline",
+    "reconnecting": "Reconnecting..."
+  },
+  "notifications": {
+    "new": "New Notification",
+    "markAllAsRead": "Mark all as read",
+    "viewAll": "View all notifications",
+    "empty": "No new notifications"
+  }
+}

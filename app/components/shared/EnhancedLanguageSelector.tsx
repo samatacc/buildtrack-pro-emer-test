@@ -7,10 +7,7 @@ import {
   getPreferredLanguage,
   setLanguageCookie,
 } from '@/app/utils/languageDetection';
-import {
-  withSafeTranslations,
-  WithTranslationsProps,
-} from '@/app/utils/withSafeTranslations';
+import { useNamespacedTranslations } from '@/app/hooks/useNamespacedTranslations';
 
 /**
  * EnhancedLanguageSelector Component
@@ -48,8 +45,9 @@ function EnhancedLanguageSelector({
   showFlags = true,
   showLanguageName = true,
   className = '',
-  t,
-}: EnhancedLanguageSelectorProps & WithTranslationsProps) {
+}: EnhancedLanguageSelectorProps) {
+  // Use the namespaced translations for better performance
+  const { t, metrics } = useNamespacedTranslations('common');
   // Get the current locale from the document's html tag
   const currentLocale = document.documentElement.lang || 'en';
 
@@ -391,5 +389,5 @@ function EnhancedLanguageSelector({
   );
 }
 
-// Export the component wrapped with safe translations
-export default withSafeTranslations(EnhancedLanguageSelector);
+// Export the component - no need for withSafeTranslations wrapper now
+export default EnhancedLanguageSelector;

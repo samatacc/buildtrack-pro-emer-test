@@ -1,0 +1,15 @@
+{
+  "title": "Painel de Relatórios",
+  "projectPerformance": "Desempenho do Projeto",
+  "taskCompletion": "Status de Conclusão de Tarefas",
+  "exportData": "Exportar Dados",
+  "printableReports": "Relatórios Imprimíveis",
+  "filterBy": "Filtrar por",
+  "dateRange": "Período",
+  "projectType": "Tipo de Projeto",
+  "exportFormat": "Formato de Exportação",
+  "generateReport": "Gerar Relatório",
+  "downloadReport": "Baixar Relatório",
+  "printReport": "Imprimir Relatório",
+  "noData": "Não há dados disponíveis para os critérios selecionados"
+}

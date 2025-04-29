@@ -1,63 +1,121 @@
 # BuildTrack Pro Project Overview
 
 ## Last Updated
-- Date: April 25, 2025
+- **Date**: April 25, 2025
 
 ## Project Overview
 - **Name**: BuildTrack Pro
-- **Purpose**: A comprehensive construction management solution with a Dashboard for project management, an Admin Console for oversight, a Marketing Website for user acquisition, and a CMS for content management.
+- **Purpose**: BuildTrack Pro is a comprehensive construction management solution designed to streamline project management, oversight, and user acquisition through a user-friendly Dashboard, an Admin Console for administrative control, a Marketing Website for lead generation, and a CMS for efficient content management.
 - **Primary Focus**:
-  - Start with the **Dashboard** (Features & Workflow) for project management.
-  - Use the **Admin Console** to control the Dashboard and manage subscribers.
-  - Integrate the **Marketing Website** for user acquisition, managed by the **CMS**.
-- **Tech Stack**: Refer to `features/tech-stack.md` for the complete technical stack, which includes Next.js, TypeScript, Supabase, and more.
-- **Coding Standards**: Follow the coding preferences outlined in the Coding Standards section below.
+  - Start with the **Dashboard** (Features & Workflow) to empower users in managing construction projects effectively.
+  - Use the **Admin Console** to oversee the Dashboard, manage subscribers, and ensure system performance.
+  - Integrate the **Marketing Website** for user acquisition, supported by the **CMS** for dynamic content management.
+- **Tech Stack**: Refer to `features/tech-stack.md` for the complete technical stack, which includes modern tools like Next.js, TypeScript, Supabase, and AI services for intelligent features.
+- **Coding Standards**: Follow the coding preferences outlined in the Coding Standards section below and detailed in `.windsurfrules` for implementation consistency.
 
 ## Project Culture and Guiding Principles
-- **Prioritization**: Focus on the Dashboard first, then Admin Console for control, followed by Marketing Website and CMS integration.
-- **Consistency**: Adhere strictly to the Tech Stack (see `features/tech-stack.md`) and Coding Standards to maintain a cohesive codebase.
-- **User-Centric Design**: Build features with the end-user in mind, ensuring intuitive workflows (e.g., guided onboarding, customizable dashboards).
-- **Scalability and Performance**: Optimize for scale and speed, using modern tools and best practices as defined in `features/tech-stack.md` (e.g., lazy loading, caching).
-- **Accessibility and Inclusivity**: Follow WCAG 2.1 AA standards to ensure the platform is accessible to all users.
-- **Collaboration and Transparency**: Foster collaboration through features like team communication tools and transparent reporting in the Admin Console.
-- **Innovation with AI**: Leverage AI for intelligent features (e.g., predictive analytics, document processing) to enhance user experience, using AI services specified in `features/tech-stack.md`.
+- **Prioritization**: Focus on the Dashboard first to deliver core project management functionality, followed by the Admin Console for oversight, and then the Marketing Website and CMS for user acquisition and content management.
+- **Consistency**: Adhere strictly to the Tech Stack (see `features/tech-stack.md`) and Coding Standards to ensure a cohesive and maintainable codebase across all components.
+- **User-Centric Design**: Build features with the end-user in mind, prioritizing intuitive workflows such as guided onboarding, customizable dashboards, and mobile accessibility to enhance user experience.
+- **Scalability and Performance**: Optimize for scale and speed, leveraging best practices like lazy loading, caching, and Core Web Vitals optimization as defined in `features/tech-stack.md`.
+- **Accessibility and Inclusivity**: Follow WCAG 2.1 AA standards to ensure the platform is accessible to all users, incorporating a11y attributes and screen reader support.
+- **Collaboration and Transparency**: Foster collaboration through integrated communication tools (e.g., messaging, notifications) and transparent reporting in the Admin Console to keep teams aligned.
+- **Innovation with AI**: Leverage AI for intelligent features like predictive analytics, document processing, and photo analysis, using AI services specified in `features/tech-stack.md` to deliver cutting-edge functionality.
 
 ## Project Structure
+BuildTrack Pro consists of four interconnected components, each serving a distinct role in the construction management ecosystem. Below is a summary of each component and its key features, with further details available in the 74 feature files (e.g., `features/dashboard-home.md`).
+
 - **Dashboard (Features & Workflow)**:
-  - Core user-facing application for managing construction projects.
-  - Key Features: Authentication, Dashboard Home, Project Management, Materials Management, Document Management, Financial Management, Floorplan Management, Reporting, Communication, Mobile Features, AI Features, Settings, Help, and Integrations.
+  - **Purpose**: The core user-facing application for managing construction projects efficiently.
+  - **Key Features**:
+    - **Authentication & User Onboarding**: Secure login (email/password, OAuth, 2FA) with guided onboarding tours and sample projects.
+    - **Dashboard Home**: Customizable dashboard with widgets for projects, tasks, analytics, and notifications, supporting drag-and-drop functionality.
+    - **Project Management**: Create and manage projects with templates, AI-assisted setup, and views like Kanban, Gantt, and Calendar.
+    - **Materials Management**: Track inventory with low stock alerts, vendor management, and mobile QR scanning for procurement.
+    - **Document & File Management**: Organize and annotate documents with categories, drawing sets, and photo documentation workflows.
+    - **Financial Management**: Monitor budgets, track expenses, and manage invoicing with a client billing portal.
+    - **Floor & Spatial Management**: Visualize progress with interactive floorplans, zones, hotspots, and 360° photos.
+    - **Reporting & Analytics**: Generate reports with templates and visualize project, team, and business insights.
+    - **Communication & Notification**: Enable team messaging, notifications, and weather-integrated announcements.
+    - **Mobile & Field Features**: Access a mobile dashboard with offline capabilities, field data capture, and safety checklists.
+    - **AI Assistant & Intelligence**: Use an AI assistant for document processing, photo analysis, and predictive insights.
+    - **Settings & User Preferences**: Customize profiles, workspaces, and billing settings.
+    - **Help & Support**: Provide in-app help, interactive guidance, and feedback collection.
+    - **Integration Ecosystem**: Connect with tools like QuickBooks, Google Calendar, and weather services.
+
 - **Admin Console**:
-  - Administrative interface to control the Dashboard and manage subscribers.
-  - Key Features: Dashboard (executive overview, quick actions), Customer & Organization Management, Feature Management, System Performance, Data & Analytics, Marketing Tools, Financial Operations, User Administration, Content Management, Integration Management, System Configuration, Analytics, Compliance, Maintenance, and Developer Tools.
+  - **Purpose**: An administrative interface to control the Dashboard, manage subscribers, and ensure system reliability.
+  - **Key Features**:
+    - **Dashboard**: Executive overview with KPIs, business health metrics, and quick actions for user management.
+    - **Customer & Organization Management**: Manage organizations and customers with insights, health scores, and support operations.
+    - **Feature & Product Management**: Control feature toggles, configurations, and beta programs with usage analytics.
+    - **System Performance & Security**: Monitor performance, security, and access control with audit capabilities.
+    - **Data & Analytics**: Govern data, integrate ETL processes, and provide business intelligence insights.
+    - **Marketing & Growth Tools**: Optimize conversions with campaign management and referral programs.
+    - **Financial Operations**: Oversee revenue, payment processing, and financial reporting.
+    - **User Administration**: Manage admin users, authentication, and activity monitoring.
+    - **Content & Documentation**: Maintain a knowledge base and help content for users.
+    - **Integration & API**: Administer APIs, webhooks, and third-party integrations.
+    - **System Configuration**: Configure global settings, workflows, and custom fields.
+    - **Analytics & Reporting**: Build custom reports with system and business metrics.
+    - **Compliance & Governance**: Ensure compliance with data protection and risk management standards.
+    - **System Maintenance**: Manage databases, infrastructure, and service health.
+    - **Developer Tools**: Provide a developer portal for API testing and lifecycle management.
+
 - **Marketing Website**:
-  - Public-facing site for user acquisition and marketing.
-  - Key Features: Homepage, Feature Pages, Industry Solutions, Resources, About Pages, Contact Pages, Conversion Tools, Mobile Experience, Technical Implementation, Internationalization, SEO, and Website Management.
-- **CMS**:
-  - Content Management System to manage the Marketing Website content.
-  - Key Features: Architecture, Editorial Interface, Workflow, Asset Management, User Management, Localization, Integrations, Customization, Deployment, and Security.
+  - **Purpose**: A public-facing site to attract and convert users through marketing and lead generation.
+  - **Key Features**:
+    - **Homepage**: Engage visitors with a hero section, CTAs, social proof, and feature showcases.
+    - **Feature Pages**: Highlight features with category pages, comparisons, and detailed descriptions.
+    - **Industry Solutions**: Offer industry-specific pages, case studies, and resources.
+    - **Resources & Content Hub**: Host a blog, resource library, and webinar/event system.
+    - **About & Company**: Share the company story, careers, culture, and press updates.
+    - **Contact & Support**: Provide contact options, support resources, and a partner program.
+    - **Conversion & Lead Generation**: Facilitate trial signups, demo requests, and lead nurturing.
+    - **Mobile Experience**: Deliver a responsive design with mobile-specific conversion paths.
+    - **Technical Implementation**: Integrate with the CMS (Sanity.io), optimize performance, and enable integrations.
+    - **International & Localization**: Support multiple languages, regional content, and SEO.
+    - **SEO & Discoverability**: Implement technical and content SEO with analytics tracking.
+    - **Website Management**: Enable content governance, A/B testing, and technical maintenance.
+
+- **CMS (Content Management System)**:
+  - **Purpose**: A system to manage and distribute content for the Marketing Website efficiently.
+  - **Key Features**:
+    - **Architecture**: Define schemas, content types, and relationships for flexible content management.
+    - **Editorial Interface**: Support content creation, organization, and collaboration for editors.
+    - **Workflow & Publishing**: Manage editorial workflows, scheduling, and distribution.
+    - **Asset & Media Management**: Organize digital assets with image processing and video support.
+    - **User & Permission Management**: Administer users, roles, and activity monitoring.
+    - **Localization**: Enable translation, localization, and internationalization features.
+    - **Integrations**: Connect via GraphQL API, webhooks, and third-party tools (e.g., marketing, analytics).
+    - **Customization**: Allow studio, content, and plugin customization for flexibility.
+    - **Deployment & Environment**: Set up environments, deployment pipelines, and monitoring.
+    - **Security & Compliance**: Ensure authentication, data protection, and audit compliance.
+
 - **Directory Structure**:
   - Group files by feature, not type (e.g., `dashboard/auth/`, `admin-console/customer-management/`).
   - Co-locate related components (e.g., `dashboard/project-management/components/`).
-  - Use barrel exports (`index.ts`) for feature modules.
+  - Use barrel exports (`index.ts`) for feature modules to simplify imports.
 
 ## Coding Standards & Preferences (Summary)
-- **TypeScript**: Use TypeScript for all code; prefer interfaces, avoid `any`.
-- **Component Structure**: Use functional components with hooks; colocate components in feature directories.
-- **State Management**: Use Zustand for complex state, React Context for global state.
-- **Naming Conventions**: PascalCase for components, camelCase for variables, UPPER_CASE for constants.
-- **File Organization**: Group by feature, use barrel exports, keep files under 300 lines.
-- **CSS/Styling**: Use TailwindCSS, ensure responsive design.
-- **Code Quality**: Use ESLint/Prettier, no commented-out code in production, implement proper error handling.
-- **Performance**: Optimize with `useMemo`, `useCallback`, lazy loading, and caching.
+These standards ensure consistency and quality across the codebase. Refer to `.windsurfrules` for detailed implementation guidelines.
+- **TypeScript**: Use TypeScript for all code; prefer interfaces over type aliases (except for unions) and avoid using `any`.
+- **Component Structure**: Use functional components with hooks; colocate components in feature directories for organization.
+- **State Management**: Use Zustand for complex state management and React Context for global state needs.
+- **Naming Conventions**: Use PascalCase for components and types, camelCase for variables and functions, and UPPER_CASE for constants.
+- **File Organization**: Group files by feature, use barrel exports (`index.ts`), and keep files under 300 lines to maintain readability.
+- **CSS/Styling**: Use TailwindCSS for utility-first styling, ensuring responsive design across devices.
+- **Code Quality**: Enforce standards with ESLint and Prettier, avoid commented-out code in production, and implement proper error handling.
+- **Performance**: Optimize with `useMemo`, `useCallback`, lazy loading, and caching to ensure efficient performance.
 
 ## Best Practices
-- **Testing**: Use testing tools specified in `features/tech-stack.md` (e.g., Vitest for unit tests, Playwright for E2E, MSW for API mocking).
-- **Performance**: Optimize for Core Web Vitals, use lazy loading, and implement caching as per `features/tech-stack.md`.
-- **Accessibility**: Follow WCAG 2.1 AA standards, ensure a11y attributes, and support screen readers.
-- **Documentation**: Maintain clear comments for complex logic, update this file as the project evolves.
+- **Testing**: Use testing tools specified in `features/tech-stack.md` (e.g., Vitest for unit tests, Playwright for end-to-end tests, MSW for API mocking) to ensure reliability.
+- **Performance**: Optimize for Core Web Vitals, implement lazy loading, and use caching strategies as outlined in `features/tech-stack.md`.
+- **Accessibility**: Adhere to WCAG 2.1 AA standards, incorporate accessibility attributes, and ensure compatibility with screen readers.
+- **Documentation**: Maintain clear comments for complex logic in the codebase and update this project overview as the project evolves.
 
 ## Additional Notes
-- Reference this file in Windsurf prompts to ensure alignment with project goals.
-- Use the Admin Console to manage Dashboard features and subscribers.
-- Ensure the Marketing Website aligns with CMS content management capabilities.
-- Follow the Tech Stack in `features/tech-stack.md` for all integrations and development tools.
+- Reference this file in Windsurf prompts to ensure alignment with project goals and principles.
+- Use the Admin Console to manage Dashboard features and subscribers, ensuring seamless control and oversight.
+- Ensure the Marketing Website integrates effectively with the CMS for dynamic content management.
+- Follow the Tech Stack in `features/tech-stack.md` for all development tools and integrations to maintain consistency.

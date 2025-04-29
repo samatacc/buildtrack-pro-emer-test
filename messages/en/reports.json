@@ -1,0 +1,15 @@
+{
+  "title": "Reports Dashboard",
+  "projectPerformance": "Project Performance",
+  "taskCompletion": "Task Completion Status",
+  "exportData": "Export Data",
+  "printableReports": "Printable Reports",
+  "filterBy": "Filter by",
+  "dateRange": "Date Range",
+  "projectType": "Project Type",
+  "exportFormat": "Export Format",
+  "generateReport": "Generate Report",
+  "downloadReport": "Download Report",
+  "printReport": "Print Report",
+  "noData": "No data available for the selected criteria"
+}
