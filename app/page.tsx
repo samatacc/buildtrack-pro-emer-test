@@ -13,6 +13,21 @@ export default function Home() {
           <p className="text-xl max-w-2xl mx-auto text-gray-600 mt-4">
             Construction management made simple with AI-generated visualization
           </p>
+          
+          <div className="mt-8 flex justify-center gap-4">
+            <a 
+              href="/dashboard" 
+              className="px-6 py-3 bg-[rgb(24,62,105)] text-white rounded-md font-semibold hover:bg-[rgb(19,49,84)] transition-colors"
+            >
+              Go to Dashboard
+            </a>
+            <a 
+              href="/dashboard/projects/new" 
+              className="px-6 py-3 border border-[rgb(24,62,105)] text-[rgb(24,62,105)] rounded-md font-semibold hover:bg-gray-50 transition-colors"
+            >
+              Create New Project
+            </a>
+          </div>
         </div>
         
         <div className="bg-white rounded-xl shadow-md p-8 mt-8 border border-gray-100">
