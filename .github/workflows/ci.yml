@@ -42,11 +42,15 @@ jobs:
     needs: build-and-test
     runs-on: ubuntu-latest
     if: github.event_name == 'pull_request'
+    environment:
+      name: Preview
+      url: ${{ steps.deploy-preview.outputs.preview-url }}
 
     steps:
     - uses: actions/checkout@v3
 
     - name: Deploy to Vercel (Preview)
+      id: deploy-preview
       uses: amondnet/vercel-action@v20
       with:
         vercel-token: ${{ secrets.VERCEL_TOKEN }}
@@ -58,11 +62,15 @@ jobs:
     needs: build-and-test
     runs-on: ubuntu-latest
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    environment:
+      name: Production
+      url: ${{ steps.deploy-production.outputs.preview-url }}
 
     steps:
     - uses: actions/checkout@v3
 
     - name: Deploy to Vercel (Production)
+      id: deploy-production
       uses: amondnet/vercel-action@v20
       with:
         vercel-token: ${{ secrets.VERCEL_TOKEN }}
