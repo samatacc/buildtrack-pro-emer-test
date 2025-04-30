@@ -1,9 +1,11 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { Calendar, Info, Plus, Trash2, AlertCircle, CheckCircle } from 'lucide-react';
+import { Calendar, Info, Plus, Trash2, AlertCircle, CheckCircle, Zap, BarChart, ListTodo, Clock } from 'lucide-react';
 import { useNamespacedTranslations } from '@/app/hooks/useNamespacedTranslations';
-import { Project, Milestone, MilestoneStatus } from '@/lib/types/project';
+import { Project, Milestone, MilestoneStatus, ProjectType, Deliverable } from '@/lib/types/project';
+import { generateMilestones } from '@/lib/services/milestoneGenerationService';
+import { generateTasksForMilestone, Task, TaskStatus, TaskPriority } from '@/lib/services/taskGenerationService';
 
 /**
  * MilestonesStep Component
@@ -13,7 +15,11 @@ import { Project, Milestone, MilestoneStatus } from '@/lib/types/project';
  */
 
 interface MilestonesStepProps {
-  formData: Partial<Project>;
+  formData: Partial<Project> & {
+    projectType?: ProjectType;
+    startDate?: string | Date;
+    targetEndDate?: string | Date;
+  };
   updateFormData: (data: Partial<Project>) => void;
   updateStepValidation: (isValid: boolean) => void;
 }
@@ -26,12 +32,29 @@ export default function MilestonesStep({
   const { t } = useNamespacedTranslations('projects');
   
   // Initialize milestones from form data or with an empty array
-  const [milestones, setMilestones] = useState<Milestone[]>(formData.milestones || []);
+  const [milestones, setMilestones] = useState<MilestoneWithTasks[]>(
+    (formData.milestones || []).map(m => ({ ...m, showTasks: false }))
+  );
   const [showAddForm, setShowAddForm] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
   
+  // Define an interface for the new milestone form data that allows string dates
+  interface NewMilestoneForm {
+    name: string;
+    description: string;
+    targetDate: string;
+    status: MilestoneStatus;
+    deliverables: Deliverable[];
+  }
+  
+  // Extended milestone interface to include tasks
+  interface MilestoneWithTasks extends Milestone {
+    tasks?: Task[];
+    showTasks?: boolean;
+  }
+
   // New milestone form data
-  const [newMilestone, setNewMilestone] = useState<Partial<Milestone>>({
+  const [newMilestone, setNewMilestone] = useState<NewMilestoneForm>({
     name: '',
     description: '',
     targetDate: '',
@@ -65,16 +88,21 @@ export default function MilestonesStep({
     
     if (!newMilestone.targetDate) {
       newErrors.targetDate = t('validation.dateRequired');
-    } else if (
-      formData.startDate && 
-      new Date(newMilestone.targetDate) < new Date(formData.startDate)
-    ) {
-      newErrors.targetDate = t('validation.dateAfterStart');
-    } else if (
-      formData.targetEndDate && 
-      new Date(newMilestone.targetDate) > new Date(formData.targetEndDate)
-    ) {
-      newErrors.targetDate = t('validation.dateBeforeEnd');
+    } else {
+      const milestoneDate = new Date(newMilestone.targetDate);
+      
+      // Convert string dates to Date objects if needed for comparison
+      const startDate = formData.startDate ? 
+        (typeof formData.startDate === 'string' ? new Date(formData.startDate) : formData.startDate) : null;
+      
+      const endDate = formData.targetEndDate ? 
+        (typeof formData.targetEndDate === 'string' ? new Date(formData.targetEndDate) : formData.targetEndDate) : null;
+      
+      if (startDate && milestoneDate < startDate) {
+        newErrors.targetDate = t('validation.dateAfterStart');
+      } else if (endDate && milestoneDate > endDate) {
+        newErrors.targetDate = t('validation.dateBeforeEnd');
+      }
     }
     
     setErrors(newErrors);
@@ -84,16 +112,16 @@ export default function MilestonesStep({
   // Add a new deliverable to the current milestone form
   const addDeliverable = () => {
     if (!newDeliverable.trim()) return;
-    
-    setNewMilestone(prev => ({
-      ...prev,
-      deliverables: [...(prev.deliverables || []), { 
-        id: `deliverable-${Date.now()}`,
-        name: newDeliverable.trim(),
-        completed: false
-      }]
-    }));
-    
+
+    const deliverables = newMilestone.deliverables || [];
+    setNewMilestone({
+      ...newMilestone,
+      deliverables: [
+        ...deliverables,
+        { id: `deliverable-${Date.now()}`, name: newDeliverable, completed: false }
+      ]
+    });
+
     setNewDeliverable('');
   };
   
@@ -109,14 +137,15 @@ export default function MilestonesStep({
   const addMilestone = () => {
     if (!validateNewMilestone()) return;
     
-    const milestone: Milestone = {
+    const milestone: MilestoneWithTasks = {
       id: `milestone-${Date.now()}`,
       name: newMilestone.name || '',
       description: newMilestone.description || '',
       targetDate: new Date(newMilestone.targetDate || ''),
       status: MilestoneStatus.NOT_STARTED,
       deliverables: newMilestone.deliverables || [],
-      dateCreated: new Date()
+      dateCreated: new Date(),
+      showTasks: false
     };
     
     setMilestones([...milestones, milestone]);
@@ -144,6 +173,37 @@ export default function MilestonesStep({
       ...prev,
       [name]: value
     }));
+  };
+  
+  // Handle auto-generate milestones
+  const handleAutoGenerateMilestones = () => {
+    if (!formData.projectType || !formData.startDate || !formData.targetEndDate) {
+      // Show error or return if required data is missing
+      return;
+    }
+    
+    try {
+      // Convert string dates to Date objects if needed
+      const startDate = typeof formData.startDate === 'string' 
+        ? new Date(formData.startDate) 
+        : formData.startDate;
+      
+      const endDate = typeof formData.targetEndDate === 'string' 
+        ? new Date(formData.targetEndDate) 
+        : formData.targetEndDate;
+      
+      const generatedMilestones = generateMilestones(
+        formData.projectType,
+        startDate,
+        endDate
+      );
+      
+      // Convert to MilestoneWithTasks
+      const milestonesWithTasks = generatedMilestones.map(m => ({ ...m, showTasks: false }));
+      setMilestones(milestonesWithTasks);
+    } catch (error) {
+      console.error('Error generating milestones:', error);
+    }
   };
   
   // Format date
@@ -190,11 +250,95 @@ export default function MilestonesStep({
     }
   };
   
+  const [expandedMilestoneId, setExpandedMilestoneId] = useState<string | null>(null);
+  const [generatingTasks, setGeneratingTasks] = useState(false);
+
+  const updateForm = () => {
+    // Filter out tasks before updating form data to avoid serialization issues
+    const milestonesWithoutTasks = milestones.map(m => {
+      const { tasks, showTasks, ...milestoneData } = m;
+      return milestoneData;
+    });
+    
+    updateFormData({ milestones: milestonesWithoutTasks });
+  }
+
+  const toggleTasksVisibility = (id: string) => {
+    setMilestones(milestones.map(m => {
+      if (m.id === id) {
+        return { ...m, showTasks: !m.showTasks };
+      }
+      return m;
+    }));
+  };
+
+  const handleGenerateTasks = (milestoneId: string) => {
+    if (!formData.projectType) {
+      return;
+    }
+    
+    setGeneratingTasks(true);
+    
+    try {
+      // Find the milestone to generate tasks for
+      const milestoneIndex = milestones.findIndex(m => m.id === milestoneId);
+      if (milestoneIndex === -1) return;
+      
+      // Generate tasks
+      const tasks = generateTasksForMilestone(
+        milestones[milestoneIndex],
+        formData.projectType
+      );
+      
+      // Update the milestone with tasks
+      const updatedMilestones = [...milestones];
+      updatedMilestones[milestoneIndex] = {
+        ...updatedMilestones[milestoneIndex],
+        tasks,
+        showTasks: true
+      };
+      
+      setMilestones(updatedMilestones);
+    } catch (error) {
+      console.error('Error generating tasks:', error);
+    } finally {
+      setGeneratingTasks(false);
+    }
+  };
+
+  const removeTask = (milestoneId: string, taskId: string) => {
+    setMilestones(milestones.map(m => {
+      if (m.id === milestoneId && m.tasks) {
+        return { 
+          ...m, 
+          tasks: m.tasks.filter(t => t.id !== taskId) 
+        };
+      }
+      return m;
+    }));
+  };
+
   return (
     <div className="space-y-6">
-      <div>
-        <h2 className="text-xl font-semibold text-gray-900 mb-1">{t('steps.milestones')}</h2>
-        <p className="text-gray-600">{t('milestonesDescription')}</p>
+      <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-4">
+        <div>
+          <h2 className="text-xl font-semibold text-gray-900 mb-1">{t('steps.milestones')}</h2>
+          <p className="text-gray-600">{t('milestonesDescription')}</p>
+        </div>
+        
+        {formData.projectType && formData.startDate && formData.targetEndDate && milestones.length === 0 && (
+          <div className="flex-shrink-0">
+            <button
+              onClick={handleAutoGenerateMilestones}
+              className="px-4 py-2 bg-[rgb(24,62,105)] text-white rounded-md hover:bg-[rgb(19,50,86)] transition-colors inline-flex items-center"
+              type="button"
+            >
+              <Zap className="h-4 w-4 mr-1.5" />
+              {t('autoGenerateMilestones')}
+            </button>
+            <p className="text-xs text-gray-500 mt-1">{t('autoGenerateTip')}</p>
+          </div>
+        )}
       </div>
       
       {/* Milestones Timeline */}
@@ -261,6 +405,66 @@ export default function MilestonesStep({
                           </ul>
                         </div>
                       )}
+                      
+                      {/* Tasks section */}
+                      {milestone.tasks && milestone.tasks.length > 0 && (
+                        <div className="mt-4 border-t border-gray-100 pt-3">
+                          <div 
+                            className="flex items-center justify-between cursor-pointer text-sm font-medium text-gray-700" 
+                            onClick={() => toggleTasksVisibility(milestone.id)}
+                          >
+                            <div className="flex items-center">
+                              <ListTodo className="h-4 w-4 mr-2 text-blue-500" />
+                              <span>{t('tasks')} ({milestone.tasks.length})</span>
+                            </div>
+                            <div className="text-gray-400">
+                              {milestone.showTasks ? '▼' : '▶'}
+                            </div>
+                          </div>
+                          
+                          {milestone.showTasks && (
+                            <div className="mt-2 pl-2">
+                              <ul className="space-y-2">
+                                {milestone.tasks.map(task => (
+                                  <li key={task.id} className="p-2 bg-gray-50 rounded-md text-sm">
+                                    <div className="flex justify-between items-start">
+                                      <div>
+                                        <div className="font-medium">{task.name}</div>
+                                        <div className="text-gray-500 text-xs mt-1">{task.description}</div>
+                                      </div>
+                                      <button 
+                                        onClick={(e) => {
+                                          e.stopPropagation();
+                                          removeTask(milestone.id, task.id);
+                                        }}
+                                        className="text-gray-400 hover:text-red-500"
+                                      >
+                                        <Trash2 className="h-4 w-4" />
+                                      </button>
+                                    </div>
+                                    <div className="flex items-center mt-2 text-xs text-gray-500 space-x-4">
+                                      <div className="flex items-center">
+                                        <Clock className="h-3 w-3 mr-1" />
+                                        <span>{task.estimatedHours} {t('hours')}</span>
+                                      </div>
+                                      <div>
+                                        <span className={`px-2 py-1 rounded-full text-xs ${{
+                                          [TaskPriority.LOW]: 'bg-gray-100 text-gray-600',
+                                          [TaskPriority.MEDIUM]: 'bg-blue-100 text-blue-600',
+                                          [TaskPriority.HIGH]: 'bg-orange-100 text-orange-600',
+                                          [TaskPriority.URGENT]: 'bg-red-100 text-red-600'
+                                        }[task.priority]}`}>
+                                          {task.priority}
+                                        </span>
+                                      </div>
+                                    </div>
+                                  </li>
+                                ))}
+                              </ul>
+                            </div>
+                          )}
+                        </div>
+                      )}
                     </div>
                   </div>
                 </div>
@@ -274,20 +478,46 @@ export default function MilestonesStep({
             </div>
             <h3 className="text-gray-800 font-medium mb-1">{t('noMilestones')}</h3>
             <p className="text-gray-600 text-sm mb-4">{t('addMilestonesDescription')}</p>
-            <button
-              onClick={() => setShowAddForm(true)}
-              className="px-4 py-2 bg-[rgb(24,62,105)] text-white rounded-md hover:bg-[rgb(19,50,86)] transition-colors inline-flex items-center"
-            >
-              <Plus className="h-4 w-4 mr-1.5" />
-              {t('addFirstMilestone')}
-            </button>
+            <div className="space-y-3">
+              <button
+                onClick={() => setShowAddForm(true)}
+                className="px-4 py-2 bg-[rgb(24,62,105)] text-white rounded-md hover:bg-[rgb(19,50,86)] transition-colors inline-flex items-center"
+              >
+                <Plus className="h-4 w-4 mr-1.5" />
+                {t('addFirstMilestone')}
+              </button>
+              
+              {formData.projectType && formData.startDate && formData.targetEndDate && (
+                <button
+                  onClick={handleAutoGenerateMilestones}
+                  className="px-4 py-2 bg-white border border-[rgb(24,62,105)] text-[rgb(24,62,105)] rounded-md hover:bg-gray-50 transition-colors inline-flex items-center w-full justify-center mt-2"
+                  type="button"
+                >
+                  <BarChart className="h-4 w-4 mr-1.5" />
+                  {t('orUseAutoGenerate')}
+                </button>
+              )}
+            </div>
           </div>
         )}
       </div>
       
+      {/* Add Milestone Button - Only show when there are already milestones */}
+      {sortedMilestones.length > 0 && !showAddForm && (
+        <div className="flex justify-end mt-6">
+          <button
+            onClick={() => setShowAddForm(true)}
+            className="px-4 py-2 bg-gray-100 border border-gray-300 text-gray-800 rounded-md hover:bg-gray-200 transition-colors inline-flex items-center"
+          >
+            <Plus className="h-4 w-4 mr-1.5" />
+            {t('addAnotherMilestone')}
+          </button>
+        </div>
+      )}
+      
       {/* Add Milestone Form */}
       {showAddForm && (
-        <div className="bg-white p-5 rounded-lg border border-gray-200 space-y-4">
+        <div className="bg-white p-5 rounded-lg border border-gray-200 space-y-4 mt-6">
           <h3 className="text-lg font-medium text-gray-900">{t('addMilestone')}</h3>
           
           {/* Milestone Name */}
@@ -324,7 +554,7 @@ export default function MilestonesStep({
                 type="date"
                 id="targetDate"
                 name="targetDate"
-                value={newMilestone.targetDate}
+                value={typeof newMilestone.targetDate === 'string' ? newMilestone.targetDate : ''}
                 onChange={handleInputChange}
                 className={`w-full pl-10 pr-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-[rgb(24,62,105)] ${
                   errors.targetDate ? 'border-red-300' : 'border-gray-300'
