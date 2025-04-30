@@ -6,7 +6,7 @@
  * This aligns with BuildTrack Pro's commitment to accessibility and inclusivity.
  */
 
-import { getRequestConfig } from 'next-intl/server';
+// Simplified i18n configuration for the client-side only
 import { notFound } from 'next/navigation';
 
 // Define supported locales
@@ -29,14 +29,23 @@ export const localeFlags = {
   'pt-BR': '🇧🇷'
 };
 
-export default getRequestConfig(async ({ locale }) => {
+// Helper function to handle locale configuration
+export async function getLocaleConfig(locale: string) {
   // Validate that the locale is supported
   if (!locales.includes(locale as any)) {
     notFound();
   }
 
-  return {
-    messages: (await import(`./messages/${locale}.json`)).default,
-    locale: locale // Add the required locale property
-  };
-});
+  try {
+    return {
+      messages: (await import(`./messages/${locale}.json`)).default,
+      locale: locale // Add the required locale property
+    };
+  } catch (error) {
+    console.error(`Failed to load messages for locale ${locale}:`, error);
+    return {
+      messages: {},
+      locale: defaultLocale
+    };
+  }
+}

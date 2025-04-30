@@ -1,6 +1,6 @@
 'use client';
 
-import { useProfileLanguageSync } from '@/app/hooks/useProfileLanguageSync';
+import { useProfileLanguageSync } from '../../../app/hooks/useProfileLanguageSync';
 import { ReactNode } from 'react';
 
 interface LanguageSyncWrapperProps {

@@ -2,8 +2,8 @@
 
 import { useEffect } from 'react';
 import { redirect } from 'next/navigation';
-import { useSupabaseAuth } from '@/lib/auth/SupabaseAuthContext';
-import { useTranslations } from '@/app/hooks/useTranslations';
+import { useSupabaseAuth } from '../../lib/auth/SupabaseAuthContext';
+import { useTranslations } from '../hooks/useTranslations';
 
 /**
  * Localized Root Page

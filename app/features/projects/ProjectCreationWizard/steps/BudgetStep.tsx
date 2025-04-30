@@ -3,31 +3,37 @@
 import { useState, useEffect } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { useTranslations } from 'next-intl';
+// Import Card components directly for now - could be adapted in the future
 import { 
   Card, 
   CardContent, 
   CardHeader, 
   CardTitle,
   CardDescription
-} from '../../../../../components/ui/card';
-import { Label } from '../../../../../components/ui/label';
-import { Input } from '../../../../../components/ui/input';
-import { Button } from '../../../../../components/ui/button';
+} from '../../../../../app/components/ui/Card';
+import { Label } from '../../../../../app/components/ui/label';
+import { Input } from '../../../../../app/components/ui/input';
 import {
+  Button,
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '../../../../../components/ui/select';
-import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from '../../../../../components/ui/accordion';
-import { Checkbox } from '../../../../../components/ui/checkbox';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '../../../../../components/ui/tabs';
+  Checkbox,
+  Tabs, 
+  TabsContent, 
+  TabsList, 
+  TabsTrigger,
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger
+} from './adapter';
 import { 
   generateBudgetRecommendation, 
   generateBudgetWithItems,
@@ -47,12 +53,7 @@ import {
   HelpCircle,
   Info
 } from 'lucide-react';
-import { 
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from '../../../../../components/ui/tooltip';
+// Tooltip components now come from the adapter which has the BuildTrack Pro styling
 
 // US States for location factor
 const US_STATES = [

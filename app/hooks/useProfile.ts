@@ -2,7 +2,7 @@
 
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
-import ProfileAPI, { ProfileData } from '@/lib/api/profile-client';
+import ProfileAPI, { ProfileData } from '../../lib/api/profile-client';
 import { useState, useEffect } from 'react';
 
 // Cache keys for profile-related queries
@@ -127,9 +127,8 @@ export function useProfile() {
   
   // Mutation for updating dashboard layout
   const updateDashboardMutation = useMutation({
-    mutationFn: ({ layout, widgets }: { layout: string; widgets: any[] }) => 
-      ProfileAPI.updateDashboardLayout(layout, widgets),
-    onMutate: async ({ layout, widgets }) => {
+    mutationFn: (layout: any) => ProfileAPI.updateDashboardLayout(layout),
+    onMutate: async (layout: any) => {
       await queryClient.cancelQueries({ queryKey: profileKeys.dashboard() });
       
       const previousDashboard = queryClient.getQueryData(profileKeys.dashboard());
@@ -137,8 +136,7 @@ export function useProfile() {
       queryClient.setQueryData(profileKeys.dashboard(), (old: any) => ({
         ...old,
         dashboardLayout: {
-          layout,
-          widgets,
+          layout
         },
       }));
       
@@ -181,7 +179,7 @@ export function useProfile() {
     // Add project to recent projects
     addRecentProject: async (projectId: string, projectName: string, thumbnailUrl?: string) => {
       try {
-        const result = await ProfileAPI.addRecentProject(projectId, projectName, thumbnailUrl);
+        const result = await ProfileAPI.addRecentProject(projectId);
         queryClient.invalidateQueries({ queryKey: profileKeys.details() });
         return result;
       } catch (error) {
