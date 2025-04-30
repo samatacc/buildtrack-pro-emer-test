@@ -1,0 +1,73 @@
+{
+  "projectsTitle": "Projets",
+  "projectsMetaDescription": "Gérez tous vos projets de construction en un seul endroit avec les outils de gestion de projet de BuildTrack Pro.",
+  "createProject": "Créer un Projet",
+  "createProjectDescription": "Ajoutez un nouveau projet à votre portefeuille en remplissant les informations ci-dessous.",
+  "createProjectMetaDescription": "Créez un nouveau projet de construction avec l'assistant de création de projet de BuildTrack Pro.",
+  "createProjectError": "Une erreur s'est produite lors de la création de votre projet. Veuillez réessayer.",
+  "creating": "Création en cours...",
+  "loading": "Chargement des projets...",
+  "loadingTemplates": "Chargement des modèles...",
+  "retry": "Réessayer",
+  "noProjects": "Pas encore de projets",
+  "noProjectsFound": "Aucun projet ne correspond à vos critères",
+  "noProjectsMatchFilters": "Essayez d'ajuster vos filtres de recherche pour trouver ce que vous cherchez.",
+  "createYourFirstProject": "Commencez par créer votre premier projet pour suivre vos activités de construction.",
+  "searchProjects": "Rechercher des projets...",
+  "filter": "Filtrer",
+  "filters": "Filtres",
+  "clearAll": "Tout effacer",
+  "clearFilters": "Effacer les filtres",
+  "cancel": "Annuler",
+  "next": "Suivant",
+  "previous": "Précédent",
+  "progress": "Progression",
+  "team": "Membres de l'équipe",
+  "tasks": "Tâches",
+  "overdue": "En retard",
+  "tip": "Conseil",
+  "members": "Membres",
+  "spent": "dépensé",
+  "notProvided": "Non fourni",
+  
+  "steps": {
+    "template": "Modèle",
+    "basics": "Détails de Base",
+    "location": "Emplacement",
+    "team": "Équipe",
+    "milestones": "Jalons",
+    "budget": "Budget",
+    "review": "Révision"
+  },
+  
+  "projectName": "Nom du Projet",
+  "projectNamePlaceholder": "Entrez le nom du projet",
+  "projectDescription": "Description du Projet",
+  "projectDescriptionPlaceholder": "Décrivez le projet et ses objectifs",
+  "projectType": "Type de Projet",
+  "projectTypes": {
+    "residential": "Résidentiel",
+    "commercial": "Commercial",
+    "industrial": "Industriel",
+    "infrastructure": "Infrastructure",
+    "renovation": "Rénovation",
+    "other": "Autre"
+  },
+  
+  "projectPriority": "Priorité du Projet",
+  "priority": {
+    "high": "Haute",
+    "medium": "Moyenne",
+    "low": "Basse"
+  },
+  
+  "startDate": "Date de Début",
+  "targetEndDate": "Date de Fin Prévue",
+  "basicDetailsDescription": "Entrez les informations essentielles sur votre projet",
+  "basicDetailsTip": "Une description détaillée du projet aidera votre équipe à mieux comprendre la portée et les objectifs.",
+  "aiSuggestion": "Suggestion IA",
+  "aiProjectTypeSuggestion": "D'après le nom et la description de votre projet, nous recommandons :",
+  "getProjectTypeRecommendation": "Obtenir des recommandations de type de projet",
+  "industryAdditionalInfo": "Entrez les exigences ou réglementations spécifiques liées à cette industrie",
+  "aiSuggestionApplied": "Suggestion IA appliquée"
+}
