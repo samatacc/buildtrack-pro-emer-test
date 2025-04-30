@@ -1,0 +1,181 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+ # BuildTrack Pro: Project Management Module
+
+## 3.1 Project Creation
+
+### Project Creation Wizard:
+- Multi-step form with progress indicator
+- Basic details step (name, type, dates, client)
+- Location information with map selection
+- Team assignment with role specification
+- Initial tasks/milestones creation
+- Template selection option
+- Budget initialization
+- Final review and creation step
+
+### Project Templates:
+- Pre-defined industry-specific templates
+- Organization templates from previous projects
+- Template preview showing structure
+- Customization options during application
+- Permission controls for template creation
+- Version control for templates
+- Template analytics showing usage frequency
+
+### AI-Assisted Setup:
+- Project type suggestion based on name/description
+- Auto-generated initial task list based on project type
+- Recommended team assignments based on skills
+- Duration estimates from similar projects
+- Risk assessment based on project attributes
+- Weather impact forecasting based on location/timeline
+- Automatic resource suggestions
+
+## 3.2 Project Dashboard
+
+### Project Overview Tab:
+- Project summary statistics (completion %, days remaining)
+- Recent activity feed with user attribution
+- Team member list with roles and contact options
+- Weather forecast for project location
+- Upcoming milestone previews with countdown
+- Quick action buttons for common tasks
+- Custom status message field
+- Financial health indicators
+
+### Interactive Status Chart:
+- Visual breakdown of project status by category
+- Color-coded segments for different task statuses
+- Hover interactions showing detailed counts
+- Click behavior filtering the task list
+- Historical trend comparison
+- Benchmark indicators against similar projects
+- Export/share functionality
+
+### Project Communication Hub:
+- Recent comments across all project items
+- Unresolved question highlighting
+- @mention tracking
+- Reply capabilities directly from dashboard
+- File attachment previews
+- Activity categorization (decisions, questions, updates)
+- Team notification status indicators
+
+## 3.3 Tasks Management Interface
+
+### Task List View:
+- Comprehensive task table with sortable columns
+- Grouping options (by status, assignee, priority, zone)
+- Advanced filtering panel with saved filters
+- Bulk action capabilities (reassign, change status)
+- Inline editing of key fields
+- Expand/collapse details functionality
+- Dependency visualization indicators
+- Context menu for quick actions
+
+### Kanban Board View:
+- Customizable column definition by status
+- Drag-and-drop card movement between columns
+- Swimlanes grouping by assignee/category
+- Color-coded cards by priority or type
+- Card previews showing key information
+- Collapsible columns for focus
+- Work-in-progress limits with visual indicators
+- Quick add task capability in each column
+
+### Gantt Chart View:
+- Interactive timeline visualization of all tasks
+- Drag functionality for date adjustment
+- Dependency arrows showing relationships
+- Critical path highlighting
+- Milestone diamonds with description
+- Resource allocation bars below tasks
+- Zoom and pan controls
+- Baseline comparison option
+- Export to PDF/image
+
+### Calendar View:
+- Month/week/day view options
+- Task visualization as calendar events
+- Color-coding by project or category
+- Drag-and-drop for rescheduling
+- Multi-select capabilities
+- Resource view showing team allocation
+- Integration with external calendars
+- Print/export functionality
+
+## 3.4 Task Detail Interface
+
+### Task Information Panel:
+- Comprehensive task details with editable fields
+- Status update button with workflow options
+- Priority indicator with adjustment controls
+- Due date with calendar picker
+- Time tracking (estimated vs. actual)
+- Assigned users with avatar display
+- Labels/tags with color customization
+- Custom fields based on project/task type
+
+### Subtask Management:
+- Nested subtask list with collapsible sections
+- Completion checkboxes with progress tracking
+- Individual assignees for subtasks
+- Due dates relative to parent task
+- Bulk creation capabilities
+- Reordering via drag-and-drop
+- Summary statistics of subtask completion
+
+### Dependency Management:
+- Visual dependency map showing relationships
+- Add dependency interface with search
+- Dependency type selection (Finish-to-Start, etc.)
+- Impact analysis of dependency changes
+- Circular dependency prevention
+- Critical path indication
+- Dependency verification system
+
+### Comments & Activity:
+- Threaded comments with rich text formatting
+- @mention capability with user picker
+- File/image attachment with preview
+- Emoji reactions to comments
+- Historical activity log with filtering
+- Comment resolution marking
+- Email reply integration
+- Watching/unwatching toggle
+
+## 3.5 Team Collaboration
+
+### Team Assignment Interface:
+- Team member table with roles and permissions
+- Add member interface with role selection
+- Invitation system with email templates
+- Workload visibility for assignment decisions
+- Skill matching suggestions
+- Permission level configuration
+- Temporary access management
+- Activity metrics per team member
+
+### Team Communication Hub:
+- Project-specific message board
+- Topic organization with pinning capability
+- Rich media embedding (images, videos, links)
+- Unread indicators and catch-up functionality
+- Direct message initiation
+- @team mention capability
+- Integration with notification system
+- Search functionality for past communications
+
+### Meeting Management:
+- Meeting scheduler with team availability checking
+- Agenda builder with topic time allocation
+- Minutes recording interface
+- Action item assignment during meetings
+- Automatic task creation from action items
+- Attendance tracking
+- Recurring meeting templates
+- Integration with video conferencing tools

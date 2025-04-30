@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="400" height="120" viewBox="0 0 400 120" xmlns="http://www.w3.org/2000/svg">
+  <!-- Logo Icon -->
+  <g transform="translate(20, 10)">
+    <!-- Rounded square background -->
+    <rect x="0" y="0" width="100" height="100" rx="20" fill="rgb(24,62,105)"/>
+    
+    <!-- Grid lines -->
+    <line x1="20" y1="0" x2="20" y2="100" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+    <line x1="40" y1="0" x2="40" y2="100" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+    <line x1="60" y1="0" x2="60" y2="100" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+    <line x1="80" y1="0" x2="80" y2="100" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+    
+    <line x1="0" y1="20" x2="100" y2="20" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+    <line x1="0" y1="40" x2="100" y2="40" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+    <line x1="0" y1="60" x2="100" y2="60" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+    <line x1="0" y1="80" x2="100" y2="80" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+    
+    <!-- Orange bar charts -->
+    <rect x="20" y="65" width="15" height="25" rx="5" fill="rgb(236,107,44)"/>
+    <rect x="45" y="50" width="15" height="40" rx="5" fill="rgb(236,107,44)"/>
+    <rect x="70" y="30" width="15" height="60" rx="5" fill="rgb(236,107,44)"/>
+  </g>
+  
+  <!-- BuildTrack Pro Text -->
+  <text x="140" y="50" font-family="Arial, sans-serif" font-size="36" font-weight="bold" fill="rgb(24,62,105)">BuildTrack</text>
+  <text x="140" y="90" font-family="Arial, sans-serif" font-size="36" font-weight="bold" fill="rgb(236,107,44)">Pro</text>
+</svg>

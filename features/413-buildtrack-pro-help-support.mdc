@@ -1,0 +1,102 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+ # BuildTrack Pro: Help & Support System
+
+## 13.1 In-App Support
+
+### Help Center:
+- Searchable knowledge base
+- Topic categorization system
+- Step-by-step guides with screenshots
+- Video tutorial library
+- Frequently asked questions
+- Latest feature updates
+- Community forum access
+- Direct support request option
+
+### Contextual Help:
+- Page-specific help resources
+- Feature tooltips and hints
+- Walkthrough guides for complex workflows
+- "What's this?" hover functionality
+- First-time use guidance
+- Feature discovery suggestions
+- Progressive disclosure of advanced features
+- Related help content recommendations
+
+### Support Ticket System:
+- Issue reporting interface
+- Category and priority selection
+- Screenshot attachment capability
+- Reproduction steps template
+- System information automatic collection
+- Ticket status tracking
+- Communication thread on tickets
+- Resolution satisfaction rating
+
+## 13.2 Interactive Guidance
+
+### Product Tours:
+- Feature-specific interactive tours
+- Step-by-step guidance with highlights
+- Progress tracking through tours
+- Skip and resume capabilities
+- Branching paths based on user choices
+- Completion recognition and rewards
+- Recommended next tours
+- Custom tour creation for teams
+
+### Training Modules:
+- Role-based learning paths
+- Bite-sized tutorial lessons
+- Interactive exercises with validation
+- Knowledge check quizzes
+- Completion certificates
+- Progress tracking dashboard
+- Skill gap identification
+- Manager visibility into team training
+
+### Simulated Environments:
+- Sandbox projects for practice
+- Pre-populated demo data
+- Consequence-free experimentation
+- Guided scenario challenges
+- Feature-specific playgrounds
+- Reset capabilities for fresh starts
+- Performance feedback on completion
+- Template generation from sandbox
+
+## 13.3 Feedback & Improvement
+
+### Feedback Collection:
+- In-context feedback buttons
+- Feature suggestion portal
+- Satisfaction surveys
+- Net Promoter Score tracking
+- Usage feedback collection
+- Pain point identification
+- Exit surveys for unused features
+- Beta feature opt-in program
+
+### Bug Reporting:
+- Error submission workflow
+- Reproduction step documentation
+- Severity and impact indication
+- Automatic diagnostic information
+- Similar issue suggestion
+- Status notification system
+- Reporter communication channel
+- Resolution verification request
+
+### Feature Request System:
+- Idea submission interface
+- Community voting on suggestions
+- Status tracking through development
+- Similar request consolidation
+- Implementation announcement notifications
+- Use case documentation
+- Business impact assessment
+- Requester recognition program

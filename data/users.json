@@ -1,0 +1,65 @@
+[
+  {
+    "id": "58a49abc-e149-4c39-8a77-9d6913d76fd8",
+    "email": "admin@buildtrackpro.com",
+    "name": "Admin User",
+    "password": "$2b$10$Dso7QsvtTfGC5CNjeotXx.uqouRYASE9PvFdZtW7aIOZKpjS.yjRO",
+    "authProvider": "email",
+    "isEmailVerified": true,
+    "createdAt": "2025-04-25T12:59:42.297Z",
+    "updatedAt": "2025-04-25T12:59:42.297Z",
+    "lastLoginAt": "2025-04-25T12:59:42.297Z",
+    "role": "admin",
+    "organizationId": "8d1ce7fc-9bb2-457b-8443-99a11397c0d0",
+    "preferences": {
+      "theme": "light",
+      "notifications": {
+        "email": true,
+        "push": true,
+        "sms": false
+      }
+    }
+  },
+  {
+    "id": "7aee788e-1d79-4aa0-accd-9e333df155d4",
+    "email": "pm@buildtrackpro.com",
+    "name": "Project Manager",
+    "password": "$2b$10$Dso7QsvtTfGC5CNjeotXx.uqouRYASE9PvFdZtW7aIOZKpjS.yjRO",
+    "authProvider": "email",
+    "isEmailVerified": true,
+    "createdAt": "2025-04-25T12:59:42.297Z",
+    "updatedAt": "2025-04-25T12:59:42.297Z",
+    "lastLoginAt": "2025-04-25T12:59:42.297Z",
+    "role": "project_manager",
+    "organizationId": "8d1ce7fc-9bb2-457b-8443-99a11397c0d0",
+    "preferences": {
+      "theme": "light",
+      "notifications": {
+        "email": true,
+        "push": true,
+        "sms": false
+      }
+    }
+  },
+  {
+    "id": "dc57e0cb-1b5f-48f9-ae17-8b4931d78587",
+    "email": "user@buildtrackpro.com",
+    "name": "Regular User",
+    "password": "$2b$10$Dso7QsvtTfGC5CNjeotXx.uqouRYASE9PvFdZtW7aIOZKpjS.yjRO",
+    "authProvider": "email",
+    "isEmailVerified": true,
+    "createdAt": "2025-04-25T12:59:42.297Z",
+    "updatedAt": "2025-04-25T12:59:42.297Z",
+    "lastLoginAt": "2025-04-25T12:59:42.297Z",
+    "role": "user",
+    "organizationId": "8d1ce7fc-9bb2-457b-8443-99a11397c0d0",
+    "preferences": {
+      "theme": "light",
+      "notifications": {
+        "email": true,
+        "push": true,
+        "sms": false
+      }
+    }
+  }
+]

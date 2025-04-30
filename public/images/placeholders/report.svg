@@ -1,0 +1,11 @@
+<svg width="400" height="300" xmlns="http://www.w3.org/2000/svg">
+  <rect width="400" height="300" fill="rgb(24,62,105)" />
+  <rect x="100" y="50" width="200" height="30" fill="rgb(236,107,44)" opacity="0.8" />
+  <rect x="100" y="90" width="200" height="20" fill="white" opacity="0.6" />
+  <rect x="100" y="120" width="180" height="20" fill="white" opacity="0.6" />
+  <rect x="100" y="150" width="160" height="20" fill="white" opacity="0.6" />
+  <rect x="100" y="180" width="200" height="20" fill="white" opacity="0.6" />
+  <rect x="100" y="210" width="140" height="20" fill="white" opacity="0.6" />
+  <text x="200" y="70" font-family="Arial, sans-serif" font-size="20" fill="white" text-anchor="middle" dominant-baseline="middle">Project Report</text>
+  <text x="200" y="250" font-family="Arial, sans-serif" font-size="18" fill="rgb(236,107,44)" text-anchor="middle" dominant-baseline="middle">BuildTrack Pro</text>
+</svg>

@@ -1,0 +1,139 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+ ---
+description: Technical implementation specifications for marketing website
+globs: app/(marketing)/**/*
+alwaysApply: false
+---
+# BuildTrack Pro Marketing Website: Technical Implementation
+
+## 9.1 CMS Integration
+
+### Sanity.io Implementation:
+- Content type schema definition
+- Custom field type creation
+- Relationship mapping between content
+- Editor role and permission configuration
+- Preview environment configuration
+- Publishing workflow definition
+- Content versioning system
+- Localization structure setup
+
+### Content Modeling:
+- Page component architecture
+- Reusable block definition
+- Field validation rules
+- Required vs. optional field designation
+- Default value configuration
+- Rich text editor customization
+- Media handling optimization
+- Cross-content reference system
+
+### Editorial Workflow:
+- Draft and publish separation
+- Review and approval process
+- Scheduled publishing configuration
+- Content status visualization
+- Edit history and rollback
+- Multi-user collaboration tools
+- Comment and feedback system
+- Publication checklist automation
+
+## 9.2 Performance Optimization
+
+### Core Web Vitals Optimization:
+- Largest Contentful Paint (LCP) optimization
+- First Input Delay (FID) improvement
+- Cumulative Layout Shift (CLS) minimization
+- Server response time optimization
+- Resource prioritization configuration
+- Critical rendering path optimization
+- Image loading strategy
+- Font display optimization
+
+### Caching Strategy:
+- Browser cache configuration
+- CDN cache policy setup
+- Server-side caching implementation
+- Cache invalidation strategy
+- Dynamic vs. static content caching
+- Personalized content handling
+- Service worker implementation
+- Memory cache for frequent operations
+
+### Asset Optimization:
+- Image format selection (WebP, AVIF)
+- Responsive image implementation
+- SVG optimization for icons
+- JavaScript bundling and code splitting
+- CSS optimization and minification
+- Font subsetting and loading strategy
+- Video delivery optimization
+- Third-party script management
+
+## 9.3 Integration Points
+
+### Marketing Automation:
+- CRM data integration
+- Lead capture form connection
+- Email marketing platform hooks
+- User behavior tracking
+- Campaign attribution modeling
+- A/B testing infrastructure
+- Personalization token mapping
+- Conversion goal tracking
+
+### Analytics Implementation:
+- Google Analytics 4 configuration
+- Event tracking setup
+- Custom dimension definition
+- Goal and conversion tracking
+- Enhanced ecommerce for purchases
+- User journey mapping
+- Funnel visualization setup
+- Tag manager implementation
+
+### Third-party Services:
+- Cookie consent management
+- Social media integration
+- Video hosting service connection
+- Chat widget implementation
+- Payment processor integration
+- Calendar booking service
+- Feedback collection tools
+- Survey platform integration
+
+## 9.4 Security & Compliance
+
+### Security Implementation:
+- SSL/TLS configuration
+- HTTP security headers
+- Content Security Policy setup
+- Cross-Site Scripting protection
+- CSRF token implementation
+- Resource access control
+- Secure form handling
+- Security update process
+
+### Privacy Compliance:
+- GDPR-compliant consent management
+- CCPA compliance implementation
+- Privacy policy versioning
+- Data collection transparency
+- Cookie categorization and control
+- Data subject request handling
+- Privacy preference persistence
+- Third-party data sharing disclosure
+
+### Accessibility Standards:
+- WCAG 2.1 AA compliance implementation
+- Screen reader compatibility
+- Keyboard navigation support
+- Proper heading hierarchy
+- Accessible color contrast
+- Form label association
+- ARIA attribute implementation
+- Accessibility testing workflow

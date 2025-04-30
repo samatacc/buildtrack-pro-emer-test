@@ -1,0 +1,134 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+ # BuildTrack Pro Admin Console: Customer & Organization Management
+
+## 2.1 Organization Directory
+
+### Organization Listing:
+- Searchable organization database
+- Filtering by plan type, size, industry, status
+- Sortable columns (name, creation date, plan, users)
+- Quick stats display (users, projects, storage)
+- Status indicators (active, suspended, trial, delinquent)
+- Quick action buttons (view, edit, impersonate)
+- Bulk operation capabilities
+- Export organization data functionality
+
+### Organization Profile View:
+- Complete organization details and metadata
+- Billing information and payment history
+- Subscription plan and feature access
+- Custom feature configurations
+- User count and license utilization
+- Storage allocation and usage
+- Creation date and account lifecycle
+- Special terms or arrangements
+
+### Health Score System:
+- Algorithmic health scoring (0-100)
+- Risk indicators with detail expansion
+- Engagement trend visualization
+- Churn probability calculation
+- Feature utilization metrics
+- Support ticket history summary
+- Payment reliability score
+- Suggested intervention actions
+
+## 2.2 Customer Insights
+
+### Usage Analytics:
+- Active user trends over time
+- Feature engagement breakdown
+- Session duration and frequency
+- Mobile vs. desktop usage
+- Peak usage time identification
+- Project creation and completion rates
+- Document storage growth rate
+- API request volume tracking
+
+### Adoption Metrics:
+- Feature discovery percentage
+- Workflow completion rates
+- Abandonment point identification
+- Time-to-value tracking
+- Advanced feature adoption
+- User role engagement comparison
+- Onboarding completion metrics
+- Feature usage depth analysis
+
+### Customer Journey Visualization:
+- Visual funnel from signup to active usage
+- Milestone achievement tracking
+- Engagement drop-off points
+- Reactivation pattern analysis
+- Expansion opportunity indicators
+- Role-specific journey mapping
+- Comparison to ideal customer journey
+- Intervention point recommendations
+
+## 2.3 Account Management
+
+### Organization Creation:
+- Multi-step organization setup wizard
+- Plan selection with feature explanation
+- User allocation configuration
+- Billing information collection
+- Payment processing integration
+- Welcome email customization
+- Initial admin user creation
+- Default permission template application
+
+### Subscription Management:
+- Plan change interface (upgrade/downgrade)
+- Billing cycle modification
+- Price adjustment capabilities
+- Custom feature bundle creation
+- Additional user license management
+- Storage capacity modification
+- Contract term adjustment
+- Renewal management options
+
+### Billing Operations:
+- Invoice generation and management
+- Payment processing and recording
+- Credit/refund issuance controls
+- Payment method update interface
+- Tax configuration settings
+- Currency handling options
+- Billing cycle synchronization
+- Revenue recognition rules
+
+## 2.4 Support Operations
+
+### Support Ticket Management:
+- Centralized ticket inbox across organizations
+- Priority-based sorting and assignment
+- Status tracking and SLA monitoring
+- Response template management
+- Ticket categorization system
+- Internal notes and collaboration
+- Customer communication history
+- Resolution tracking and satisfaction
+
+### Customer Communication:
+- Direct messaging interface to organizations
+- Bulk announcement creation
+- Email template management
+- Scheduled communication planning
+- Read receipt tracking
+- Response monitoring tools
+- Communication effectiveness metrics
+- Multi-channel outreach coordination
+
+### Onboarding Management:
+- Custom onboarding path creation
+- Progress tracking by organization
+- Intervention trigger configuration
+- Milestone completion monitoring
+- Training resource assignment
+- Customer success scheduling
+- Onboarding staff assignment
+- Success metrics definition and tracking

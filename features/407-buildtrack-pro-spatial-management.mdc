@@ -1,0 +1,156 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+ # BuildTrack Pro: Floorplan & Spatial Management
+
+## 7.1 Floorplan Dashboard
+
+### Floorplan Overview:
+- Thumbnail gallery of all project plans
+- Status indicators for each floorplan
+- Filter options by building/level/area
+- Recent activity on floorplans
+- Progress coloration preview
+- Quick navigation to detailed view
+- Upload/manage button prominence
+- Version indicators for multiple revisions
+
+### Progress Visualization Map:
+- Color-coded zones showing completion percentage
+- Interactive legend explaining color scheme
+- Filtering by trade/task category
+- Timeline slider showing progress over time
+- Threshold highlighting for problem areas
+- Schedule comparison overlay option
+- Click behavior navigating to zone details
+- Export to PDF/image for reporting
+
+### Zone Management Interface:
+- List view of all defined zones
+- Creation/edit tools for zone definitions
+- Bulk operations for similar zones
+- Assignment of teams to zones
+- Priority setting for zone completion
+- Dependency mapping between zones
+- Custom attribute definition per zone
+- Import/export zone definitions
+
+## 7.2 Interactive Floorplan Viewer
+
+### Main Viewer Interface:
+- High-performance canvas rendering
+- Smooth zoom/pan controls with pinch support
+- Layer toggling for different systems
+- Measurement tools with scale accuracy
+- Rotation and orientation controls
+- Mini-map for navigation assistance
+- Full-screen mode toggle
+- Reference grid optional overlay
+
+### Zone Interaction:
+- Polygon definition tools for new zones
+- Click selection of existing zones
+- Property panel for selected zone
+- Visual highlighting of active zone
+- Overlapping zone resolution
+- Snap-to features for accuracy
+- Copy/paste zone definitions
+- Bulk editing capabilities
+
+### Information Overlay System:
+- Toggleable information layers (tasks, issues, photos)
+- Icon-based indicators with count badges
+- Density control for busy areas
+- Filtering system for overlay types
+- Timeline control for historical view
+- Custom overlay creation
+- Color coding by status/priority
+- Legend explanation panel
+
+## 7.3 Hotspot & Annotation System
+
+### Hotspot Creation:
+- Add hotspot button with type selection
+- Placement tools with precise positioning
+- Association with tasks/materials/photos
+- Custom icon selection by type
+- Visibility control based on user role
+- Grouping capabilities for related hotspots
+- Automatic hotspot generation from data
+- Batch creation interface
+
+### Hotspot Interaction:
+- Click/tap behavior opening detail panel
+- Hover preview with key information
+- Status update capability from popup
+- Photo carousel within hotspot detail
+- Related items list with links
+- Comment thread specific to hotspot
+- Historical activity log
+- Update subscription toggle
+
+### Drawing Annotation:
+- Drawing tools directly on floorplan
+- Text annotations with formatting
+- Measurement annotations with dimensions
+- Revision clouding capabilities
+- User attribution for annotations
+- Annotation layers by purpose/user
+- Visibility toggling by layer
+- Export with/without annotations
+
+## 7.4 360° Photo Integration
+
+### 360° Photo Viewer:
+- Immersive spherical photo display
+- Navigation controls (pan/tilt/zoom)
+- Hotspot placement within 360° environment
+- Orientation indicator showing view direction
+- Transition links between connected locations
+- Measurement capability within photo
+- Annotation tools for 360° context
+- Share view with exact orientation
+
+### 360° Capture Workflow:
+- Camera guidance for proper capture
+- Position marking on floorplan
+- Automatic stitching support
+- Orientation calibration tools
+- Sequence creation for virtual walkthrough
+- Processing status tracking
+- Quality verification tools
+- Publication workflow to project
+
+### Time-based Comparison:
+- Before/after slider within 360° view
+- Date selection for historical views
+- Progress visualization within 360° environment
+- Consistent hotspot persistence across dates
+- Animation option through time sequence
+- Side-by-side comparison mode
+- Difference highlighting option
+- Timeline scrubber for progression
+
+## 7.5 Proximity & Location Features
+
+### Mobile Location Services:
+- GPS positioning on outdoor sites
+- Indoor positioning options (QR, Bluetooth)
+- Current location indicator on floorplan
+- Geofence notifications for zone entry/exit
+- Location history tracking option
+- Privacy controls for location sharing
+- Battery optimization settings
+- Manual location override
+
+### Proximity-Based Content:
+- Nearby task notification system
+- Location-filtered task list
+- Zone-specific material requirements
+- Recent photos from current location
+- Issues/notes proximity filter
+- Quick actions based on location context
+- Proximity search radius adjustment
+- Audio announcements option for hands-free

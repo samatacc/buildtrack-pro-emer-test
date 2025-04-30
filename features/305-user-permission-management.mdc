@@ -1,0 +1,102 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+ # BuildTrack Pro CMS: User & Permission Management
+
+## 5.1 User Administration
+
+### User Account Management:
+- User creation and invitation
+- Profile information management
+- Authentication method configuration
+- Password policy enforcement
+- Session management controls
+- Login history tracking
+- Account deactivation workflow
+- User export and reporting
+
+### Team Organization:
+- Team and group creation
+- User assignment to groups
+- Hierarchical team structure
+- Department organization
+- Team permission inheritance
+- Team activity dashboards
+- Workload distribution view
+- Team communication tools
+
+### User Onboarding:
+- Welcome sequence configuration
+- Guided tutorial creation
+- Role-based training assignment
+- Feature discovery assistance
+- Progress tracking for training
+- Knowledge base integration
+- Mentor assignment options
+- Competency certification
+
+## 5.2 Role-Based Permissions
+
+### Role Definition:
+- Role creation and configuration
+- Permission bundle assignment
+- Role hierarchy establishment
+- Role cloning for similar profiles
+- Role scope limitation
+- Temporary role assignment
+- Role-based interface customization
+- Role analytics and audit
+
+### Granular Permissions:
+- Action-based permission control
+- Content type access restrictions
+- Field-level permission control
+- Workflow state permissions
+- API access permission
+- Asset usage permission
+- Geographic content restrictions
+- Time-based permission constraints
+
+### Permission Policies:
+- Policy template creation
+- Compliance requirement mapping
+- Global permission rule sets
+- Exception handling workflow
+- Temporary access grants
+- Emergency access protocol
+- Least privilege enforcement
+- Permission review scheduling
+
+## 5.3 Activity & Audit
+
+### User Activity Monitoring:
+- Comprehensive action logging
+- User session tracking
+- Content modification history
+- Export and report generation
+- Activity filtering and search
+- Unusual activity alerting
+- Performance metrics by user
+- Activity visualization tools
+
+### Audit Trail System:
+- Immutable change recording
+- Before/after state capture
+- Actor identification with context
+- Timestamp with timezone
+- Action categorization
+- System vs. user action distinction
+- Related content identification
+- Compliance status tagging
+
+### Security Monitoring:
+- Failed login attempt tracking
+- Suspicious activity detection
+- Permission change auditing
+- Sensitive data access logging
+- API usage monitoring
+- Rate limiting configuration
+- IP restriction capabilities
+- Security alert configuration

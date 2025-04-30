@@ -1,0 +1,107 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+ ---
+description: Industry-specific solutions for marketing website
+globs: app/(marketing)/industries/**/*
+alwaysApply: false
+---
+# BuildTrack Pro Marketing Website: Industry Solutions Pages
+
+## 3.1 Industry Vertical Landing Pages
+
+### Industry-Specific Hero:
+- Industry name and tailored headline
+- Relevant imagery for specific construction type
+- Industry statistics and market challenges
+- Value proposition customized to segment
+- Industry expert testimonial feature
+- Regulatory/compliance advantage mention
+- Mobile-optimized industry identifier
+- Geographic relevance indicators if applicable
+
+### Industry Challenge Blocks:
+- Common pain points in industry segment
+- How BuildTrack addresses each challenge
+- Industry-specific metrics and KPIs
+- Regulatory compliance advantages
+- Competitive differentiation for segment
+- Case study snippets with industry focus
+- Mobile accordion for challenge exploration
+- Expert quote supporting solutions
+
+### Specialized Features Highlight:
+- Features with particular industry relevance
+- Industry-specific customizations
+- Specialized workflow demonstrations
+- Integration with industry-specific tools
+- Compliance and reporting capabilities
+- Mobile-responsive feature carousel
+- Industry terminology utilization
+- Demo request with industry preset
+
+## 3.2 Case Study Showcase
+
+### Featured Case Study Hero:
+- Client name and project overview
+- Compelling result statistic as headline
+- Project image or company logo prominence
+- Challenge-solution-result summary
+- Video testimonial if available
+- Industry and project scope indicators
+- Mobile-optimized case layout
+- Social sharing functionality
+
+### Case Study Detail Components:
+- Project scope and objectives section
+- Challenges faced with specific examples
+- Solution implementation process
+- Measurable results with before/after
+- ROI calculation and payback period
+- Client testimonial quote
+- Future plans and expansion
+- Similar case study recommendations
+
+### Case Study Filter System:
+- Industry category filtering
+- Project size/type selectors
+- Challenge type categorization
+- Feature utilization filters
+- Geographic region selection
+- Sort by results/date options
+- Mobile-friendly filter collapse
+- Filter combination preservation in URL
+
+## 3.3 Industry Resources
+
+### Regulation & Compliance Guide:
+- Industry-specific regulatory information
+- Compliance requirement explanation
+- How BuildTrack ensures compliance
+- Reporting and documentation capabilities
+- Regulatory update monitoring
+- Jurisdiction-specific information
+- Expert advice from industry consultants
+- Downloadable compliance checklist
+
+### Industry Benchmark Reports:
+- Performance metrics for industry
+- Efficiency comparison tools
+- Cost analysis by project type
+- Time-to-completion standards
+- Quality and safety statistics
+- Data source and methodology transparency
+- Interactive benchmark calculator
+- Report download with lead capture
+
+### Industry Trend Analysis:
+- Current market condition overview
+- Technology adoption trends
+- Future projection for industry
+- Impact analysis on operations
+- Strategy recommendations
+- Expert interviews and insights
+- Regular update scheduling
+- Subscription option for updates

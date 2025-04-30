@@ -1,0 +1,102 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+ # BuildTrack Pro CMS: Security & Compliance
+
+## 10.1 Authentication Security
+
+### Authentication Methods:
+- Password-based authentication
+- SSO integration (SAML, OAuth)
+- Multi-factor authentication
+- API key management
+- JWT token configuration
+- Session management
+- Remember me functionality
+- Social login integration
+
+### Password Policy:
+- Password complexity requirements
+- Password rotation enforcement
+- Previous password restriction
+- Password strength visualization
+- Secure password storage
+- Reset process security
+- Account lockout configuration
+- Brute force protection
+
+### Session Management:
+- Session timeout configuration
+- Concurrent session control
+- IP restriction capabilities
+- Device tracking and management
+- Session revocation capabilities
+- Remember device functionality
+- Secure cookie configuration
+- Idle session handling
+
+## 10.2 Data Protection
+
+### Access Controls:
+- Role-based access control
+- Attribute-based permissions
+- Field-level security
+- Document-level permissions
+- Temporal access constraints
+- IP-based restrictions
+- Environment-specific permissions
+- Emergency access protocol
+
+### Data Encryption:
+- At-rest encryption configuration
+- In-transit encryption (TLS/SSL)
+- Field-level encryption options
+- Encryption key management
+- Key rotation procedures
+- Encrypted backup configuration
+- PII data special handling
+- Encryption algorithm selection
+
+### Data Privacy:
+- GDPR compliance tools
+- CCPA compliance features
+- Data minimization controls
+- Consent management integration
+- Right to be forgotten workflows
+- Data subject request handling
+- Privacy impact assessment
+- Data processing documentation
+
+## 10.3 Audit & Compliance
+
+### Security Auditing:
+- Comprehensive action logging
+- Login attempt tracking
+- Permission change recording
+- Sensitive operation logging
+- Administrator action tracking
+- API usage auditing
+- Unusual activity detection
+- Export control for audit logs
+
+### Compliance Reporting:
+- Compliance status dashboard
+- Control implementation evidence
+- Automated compliance checks
+- Remediation tracking
+- Policy enforcement verification
+- Certification preparation tools
+- Regulatory requirement mapping
+- Vendor security assessment
+
+### Vulnerability Management:
+- Security patch deployment
+- Dependency vulnerability scanning
+- Code security analysis
+- Penetration testing framework
+- Security advisory tracking
+- Remediation prioritization
+- CVE database integration
+- Security incident response

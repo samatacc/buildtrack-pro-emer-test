@@ -1,0 +1,134 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+ # BuildTrack Pro: Settings & User Preferences
+
+## 12.1 User Profile Management
+
+### Profile Information:
+- Personal details editing interface
+- Profile photo upload/management
+- Contact information maintenance
+- Professional credentials and certifications
+- Skills and expertise selection
+- Role and responsibility definition
+- Emergency contact information
+- Biography and introduction field
+
+### Account Settings:
+- Password management with strength meter
+- Two-factor authentication setup
+- Login history and active sessions
+- Connected applications management
+- API access token generation
+- Session timeout configuration
+- Account recovery options
+- Data export request capabilities
+
+### Personal Preferences:
+- Theme selection (light/dark/system)
+- Color blindness accommodation
+- Text size adjustment
+- Notification preferences by type
+- Default views configuration
+- Start page selection
+- Language preference
+- Date/time format settings
+
+## 12.2 Workspace Customization
+
+### Dashboard Configuration:
+- Widget selection and placement
+- Dashboard layout customization
+- Default filters and sort options
+- Saved views management
+- Favorite items pinning
+- Quick access shortcuts
+- Personal vs. shared dashboard settings
+- Data refresh rate settings
+
+### Navigation Preferences:
+- Menu customization options
+- Frequently used item promotion
+- Recent items history control
+- Navigation style selection
+- Keyboard shortcut configuration
+- Touch gesture customization
+- Mouse behavior settings
+- Tab behavior preferences
+
+### Accessibility Settings:
+- Screen reader optimization
+- Keyboard navigation enhancements
+- Motion reduction options
+- Contrast adjustment controls
+- Focus indicator customization
+- Audio cues configuration
+- Input method adaptations
+- Time extension for interactions
+
+## 12.3 Organization Settings
+
+### Company Profile:
+- Organization details management
+- Logo and branding customization
+- Office locations management
+- Business hours definition
+- Industry classification
+- Company size and founding date
+- Mission statement and values
+- Social media and website links
+
+### Team Structure:
+- Department/division definition
+- Reporting hierarchy visualization
+- Role creation and permission mapping
+- Team creation and management
+- Position title standardization
+- Skill matrix maintenance
+- Capacity planning tools
+- Organizational chart generation
+
+### System Defaults:
+- Default project templates
+- Standard cost codes and categories
+- Document naming conventions
+- Approval workflow templates
+- Notification default settings
+- System measurement units
+- Calendar working days/hours
+- Currency and numerical formats
+
+## 12.4 Subscription & Billing
+
+### Plan Management:
+- Current plan display with features
+- User seat allocation and management
+- Storage usage monitoring
+- Feature availability by plan level
+- Upgrade/downgrade options
+- Billing cycle information
+- Payment method management
+- Special feature add-ons
+
+### Billing History:
+- Invoice listing with status
+- Payment receipt access
+- Subscription change history
+- Proration calculations explanation
+- Tax documentation
+- Billing contact management
+- Payment failure notifications
+- Credit application tracking
+
+### Usage Monitoring:
+- User license utilization
+- Storage consumption by category
+- API request volume tracking
+- Feature usage analytics
+- Peak usage periods
+- Trend analysis for planning
+- Limit notification thresholds
+- Optimization recommendations

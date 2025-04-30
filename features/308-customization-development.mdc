@@ -1,0 +1,102 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+ # BuildTrack Pro CMS: Customization & Development
+
+## 8.1 Studio Customization
+
+### Interface Customization:
+- Dashboard widget configuration
+- Custom panel development
+- Tool pane arrangement
+- Brand theming capabilities
+- Icon and logo customization
+- Custom font integration
+- Layout template modification
+- Responsive design adaptation
+
+### Custom Input Components:
+- Field input component creation
+- Custom validation implementation
+- Specialized editor development
+- Complex data visualization
+- Preview component customization
+- Reference selection customization
+- Array input management
+- Conditional field display
+
+### Workflow Customization:
+- Custom workflow state definition
+- Transition rule implementation
+- Approval path configuration
+- Automated action triggers
+- Status-based UI adaptation
+- Role-specific workflow views
+- Deadline and reminder integration
+- Workflow visualization customization
+
+## 8.2 Content Customization
+
+### Custom Document Types:
+- Schema definition interface
+- Field type selection and configuration
+- Validation rule implementation
+- Reference type configuration
+- Preview template association
+- Default value specification
+- Field dependency rules
+- Document lifecycle configuration
+
+### Custom Field Types:
+- Simple field type creation
+- Complex data structure definition
+- Custom validation implementation
+- Specialized input component
+- Default value generation
+- Array and object type management
+- Reference field customization
+- Conditional field behavior
+
+### Custom Block Types:
+- Block schema definition
+- Nested block capability
+- Block preview rendering
+- Child block containment
+- Block validation rules
+- Block transformation options
+- Default block parameters
+- Block library organization
+
+## 8.3 Plugin System
+
+### Plugin Architecture:
+- Plugin registration framework
+- Lifecycle hook implementation
+- Event subscription system
+- Configuration parameter handling
+- Dependency management
+- Version compatibility checking
+- Resource loading optimization
+- Conflict detection and resolution
+
+### Core Plugin Types:
+- Field input plugins
+- Tool plugins for editing
+- Asset transformation plugins
+- Import/export plugins
+- Workflow enhancement plugins
+- Dashboard widget plugins
+- Authentication plugins
+- API extension plugins
+
+### Plugin Management:
+- Plugin installation interface
+- Version management
+- Configuration panel
+- Enable/disable functionality
+- Usage analytics by plugin
+- Error isolation and reporting
+- Performance impact monitoring
+- Plugin marketplace integration
