@@ -235,11 +235,11 @@ export default function TaskList({
                 </div>
                 <div className="flex flex-col sm:flex-row items-end sm:items-center space-y-1 sm:space-y-0 sm:space-x-2">
                   <span className={`text-xs px-2 py-1 rounded-full ${getPriorityColor(task.priority)}`}>
-                    {t(`priority.${task.priority.toLowerCase()}`)}
+                    {t(`tasks.priority.${task.priority.toLowerCase()}`)}
                   </span>
                   {variant === 'detailed' && (
                     <span className={`text-xs px-2 py-1 rounded-full ${getStatusColor(task.status)}`}>
-                      {t(`status.${task.status.toLowerCase().replace(' ', '')}`)}
+                      {t(`tasks.status.${task.status.toLowerCase().replace(' ', '')}`)}
                     </span>
                   )}
                 </div>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { useTranslation } from 'next-intl';
+import { useTranslations } from '@/app/hooks/useTranslations';
 import { QuestionMarkCircleIcon } from '@heroicons/react/24/outline';
 import { WidgetProps } from '@/lib/types/widget';
 
@@ -8,7 +8,7 @@ interface UnknownWidgetProps extends WidgetProps {
 }
 
 const UnknownWidget: React.FC<UnknownWidgetProps> = ({ id, title, widgetType }) => {
-  const { t } = useTranslation('dashboard');
+  const { t } = useTranslations('dashboard');
   
   return (
     <div className="h-full flex flex-col items-center justify-center text-gray-500 dark:text-gray-400">

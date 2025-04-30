@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useTranslation } from 'next-intl';
+import { useTranslations } from '@/app/hooks/useTranslations';
 import Link from 'next/link';
 import { ProjectStatus, ProjectHealth } from '@/lib/types/project';
 import { WidgetProps } from '@/lib/types/widget';
@@ -92,7 +92,7 @@ type SortType = 'alphabetical' | 'due-date' | 'creation-date' | 'status';
 type ViewType = 'list' | 'grid';
 
 const ProjectHealthWidget: React.FC<WidgetProps> = ({ id, title, settings }) => {
-  const { t } = useTranslation('dashboard');
+  const { t } = useTranslations('dashboard');
   const [healthData, setHealthData] = useState<any | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<Error | null>(null);

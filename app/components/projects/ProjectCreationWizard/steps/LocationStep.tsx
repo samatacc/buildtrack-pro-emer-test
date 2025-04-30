@@ -1,9 +1,12 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
-import { MapPin, Building, Info } from 'lucide-react';
+import React, { useState, useEffect, useCallback } from 'react';
+import { MapPin, Building, Info, AlertTriangle } from 'lucide-react';
 import { useNamespacedTranslations } from '@/app/hooks/useNamespacedTranslations';
 import { Project, ProjectLocation } from '@/lib/types/project';
+import AutocompleteInput, { AutocompleteOption } from '@/app/components/shared/AutocompleteInput';
+import { getAddressSuggestions, getAddressDetails, getWeatherImpact, WeatherImpact } from '@/lib/services/geocodingService';
+import { debounce } from 'lodash';
 
 /**
  * LocationStep Component
@@ -49,41 +52,175 @@ export default function LocationStep({
   // Form validation
   const [errors, setErrors] = useState<Record<string, string>>({});
   
+  // Address autocomplete state
+  const [addressInput, setAddressInput] = useState(location.address);
+  const [addressSuggestions, setAddressSuggestions] = useState<AutocompleteOption[]>([]);
+  const [isLoadingSuggestions, setIsLoadingSuggestions] = useState(false);
+  const [showSuggestions, setShowSuggestions] = useState(false);
+  
+  // Weather impact state
+  const [weatherImpact, setWeatherImpact] = useState<WeatherImpact | null>(null);
+  const [isLoadingWeather, setIsLoadingWeather] = useState(false);
+  const [showWeatherAnalysis, setShowWeatherAnalysis] = useState(false);
+  
   // Handle input changes
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
   ) => {
     const { name, value } = e.target;
     
+    if (name === 'address') {
+      setAddressInput(value);
+      fetchAddressSuggestions(value);
+    }
+    
     if (name.includes('.')) {
       // Handle nested properties (e.g., siteDetails.siteArea)
       const [parent, child] = name.split('.');
-      setLocation(prev => ({
-        ...prev,
-        [parent]: {
-          ...prev[parent as keyof ProjectLocation],
-          [child]: value
+      setLocation(prev => {
+        // Create a copy of the previous state
+        const updatedLocation = { ...prev };
+        
+        // Handle different parent properties
+        if (parent === 'siteDetails') {
+          // Create a copy of the nested object
+          updatedLocation.siteDetails = {
+            ...prev.siteDetails,
+            [child]: value
+          };
+        } else if (parent === 'coordinates') {
+          updatedLocation.coordinates = {
+            ...prev.coordinates,
+            [child]: value
+          };
         }
-      }));
+        
+        return updatedLocation;
+      });
     } else {
       // Handle top-level properties
-      setLocation(prev => ({
-        ...prev,
-        [name]: value
-      }));
+      setLocation(prev => {
+        const updatedLocation = { ...prev };
+        // Type assertion to ensure the property exists on the object
+        (updatedLocation as any)[name] = value;
+        return updatedLocation;
+      });
+    }
+  };
+  
+  // Fetch address suggestions with debouncing
+  const fetchAddressSuggestions = useCallback(
+    debounce(async (input: string) => {
+      if (input.length < 3) {
+        setAddressSuggestions([]);
+        return;
+      }
+      
+      setIsLoadingSuggestions(true);
+      try {
+        const suggestions = await getAddressSuggestions(input);
+        const options: AutocompleteOption[] = suggestions.map(suggestion => ({
+          id: suggestion.placeId,
+          label: suggestion.mainText,
+          value: suggestion.description,
+          secondaryText: suggestion.secondaryText
+        }));
+        
+        setAddressSuggestions(options);
+        setShowSuggestions(options.length > 0);
+      } catch (error) {
+        console.error('Error fetching address suggestions:', error);
+      } finally {
+        setIsLoadingSuggestions(false);
+      }
+    }, 300),
+    []
+  );
+  
+  // Handle address selection
+  const handleAddressSelect = async (option: AutocompleteOption) => {
+    setAddressInput(option.value);
+    setShowSuggestions(false);
+    
+    try {
+      const addressDetails = await getAddressDetails(option.id);
+      if (addressDetails) {
+        setLocation(prev => {
+          // Create a copy of the previous state
+          const updatedLocation = { ...prev };
+          
+          // Update address details
+          updatedLocation.address = addressDetails.formattedAddress;
+          updatedLocation.city = addressDetails.city || prev.city;
+          updatedLocation.state = addressDetails.state || prev.state;
+          updatedLocation.zipCode = addressDetails.postalCode || prev.zipCode;
+          updatedLocation.country = addressDetails.country || prev.country;
+          
+          // Copy the coordinates to avoid reference issues
+          updatedLocation.coordinates = { 
+            latitude: addressDetails.coordinates.latitude,
+            longitude: addressDetails.coordinates.longitude
+          };
+          
+          return updatedLocation;
+        });
+        
+        // If project has start and end dates, fetch weather impact
+        if (formData.startDate && formData.targetEndDate) {
+          fetchWeatherImpact(
+            addressDetails.coordinates.latitude,
+            addressDetails.coordinates.longitude,
+            new Date(formData.startDate),
+            new Date(formData.targetEndDate)
+          );
+        }
+      }
+    } catch (error) {
+      console.error('Error fetching address details:', error);
+    }
+  };
+  
+  // Fetch weather impact analysis
+  const fetchWeatherImpact = async (
+    latitude: number,
+    longitude: number,
+    startDate: Date,
+    endDate: Date
+  ) => {
+    if (latitude === 0 && longitude === 0) return;
+    
+    setIsLoadingWeather(true);
+    try {
+      const impact = await getWeatherImpact(latitude, longitude, startDate, endDate);
+      setWeatherImpact(impact);
+      setShowWeatherAnalysis(true);
+    } catch (error) {
+      console.error('Error fetching weather impact:', error);
+    } finally {
+      setIsLoadingWeather(false);
     }
   };
   
   // Toggle existing structures
   const toggleExistingStructures = () => {
-    setLocation(prev => ({
-      ...prev,
-      siteDetails: {
+    setLocation(prev => {
+      // Create a proper copy of the previous state to avoid spread type issues
+      const updatedLocation = { ...prev };
+      
+      // Update the specific nested property
+      updatedLocation.siteDetails = {
         ...prev.siteDetails,
         existingStructures: !prev.siteDetails.existingStructures
-      }
-    }));
+      };
+      
+      return updatedLocation;
+    });
   };
+  
+  // Sync address input with location state
+  useEffect(() => {
+    setAddressInput(location.address);
+  }, [location.address]);
   
   // Validate inputs and update parent form
   useEffect(() => {
@@ -127,6 +264,23 @@ export default function LocationStep({
     }
   }, [location, updateFormData, updateStepValidation, t]);
   
+  // Trigger weather impact analysis when coordinates change
+  useEffect(() => {
+    if (
+      location.coordinates.latitude !== 0 &&
+      location.coordinates.longitude !== 0 &&
+      formData.startDate &&
+      formData.targetEndDate
+    ) {
+      fetchWeatherImpact(
+        location.coordinates.latitude,
+        location.coordinates.longitude,
+        new Date(formData.startDate),
+        new Date(formData.targetEndDate)
+      );
+    }
+  }, [location.coordinates, formData.startDate, formData.targetEndDate]);
+  
   return (
     <div className="space-y-6">
       <div>
@@ -138,30 +292,26 @@ export default function LocationStep({
       <div className="space-y-4">
         <h3 className="text-lg font-medium text-gray-900">{t('basicLocationInfo')}</h3>
         
-        {/* Address Line 1 */}
+        {/* Address Line 1 with Autocomplete */}
         <div>
-          <label htmlFor="address" className="block text-sm font-medium text-gray-700 mb-1">
-            {t('address')} <span className="text-red-500">*</span>
-          </label>
-          <div className="relative">
-            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-              <MapPin className="h-5 w-5 text-gray-400" />
-            </div>
-            <input
-              type="text"
-              id="address"
-              name="address"
-              value={location.address}
-              onChange={handleInputChange}
-              className={`w-full pl-10 pr-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-[rgb(24,62,105)] ${
-                errors.address ? 'border-red-300' : 'border-gray-300'
-              }`}
-              placeholder={t('addressPlaceholder')}
-            />
-          </div>
-          {errors.address && (
-            <p className="mt-1 text-sm text-red-600">{errors.address}</p>
-          )}
+          <AutocompleteInput
+            id="address"
+            name="address"
+            value={addressInput}
+            onChange={handleInputChange}
+            onSelect={handleAddressSelect}
+            placeholder={t('addressSearchPlaceholder')}
+            className={errors.address ? 'border-red-300' : ''}
+            options={addressSuggestions}
+            loading={isLoadingSuggestions}
+            error={errors.address}
+            required={true}
+            label={t('address')}
+            icon={<MapPin className="h-5 w-5 text-gray-400" />}
+            showSuggestions={showSuggestions}
+            setSuggestionVisibility={setShowSuggestions}
+          />
+          <p className="mt-1 text-xs text-gray-500">{t('addressTip')}</p>
         </div>
         
         {/* Address Line 2 */}
@@ -272,6 +422,91 @@ export default function LocationStep({
           )}
         </div>
       </div>
+      
+      {/* Weather Impact Analysis */}
+      {showWeatherAnalysis && weatherImpact && (
+        <div className="mt-6 p-4 border rounded-lg bg-gray-50">
+          <div className="flex items-start space-x-2">
+            <div className="flex-shrink-0 mt-0.5">
+              <AlertTriangle 
+                className={`h-5 w-5 ${
+                  weatherImpact.riskLevel === 'high' ? 'text-red-500' :
+                  weatherImpact.riskLevel === 'medium' ? 'text-yellow-500' :
+                  'text-green-500'
+                }`} 
+              />
+            </div>
+            <div className="flex-1">
+              <h4 className="text-md font-medium text-gray-900">{t('weatherImpactAnalysis')}</h4>
+              <p className="text-sm text-gray-600 mt-1">{weatherImpact.summary}</p>
+              
+              {/* Weather impact details */}
+              <div className="mt-3 space-y-2">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                  {/* Precipitation */}
+                  <div className="bg-white p-3 rounded border">
+                    <h5 className="font-medium text-gray-800">{t('precipitation')}</h5>
+                    <div className="flex items-center mt-1">
+                      <div 
+                        className={`w-2 h-2 rounded-full mr-2 ${
+                          weatherImpact.details.precipitation.risk === 'high' ? 'bg-red-500' :
+                          weatherImpact.details.precipitation.risk === 'medium' ? 'bg-yellow-500' :
+                          'bg-green-500'
+                        }`}
+                      ></div>
+                      <span className="text-sm">
+                        {weatherImpact.details.precipitation.average} mm
+                      </span>
+                    </div>
+                    <p className="text-xs text-gray-600 mt-1">
+                      {weatherImpact.details.precipitation.impact}
+                    </p>
+                  </div>
+                  
+                  {/* Temperature */}
+                  <div className="bg-white p-3 rounded border">
+                    <h5 className="font-medium text-gray-800">{t('temperature')}</h5>
+                    <div className="flex items-center mt-1">
+                      <div 
+                        className={`w-2 h-2 rounded-full mr-2 ${
+                          weatherImpact.details.temperature.risk === 'high' ? 'bg-red-500' :
+                          weatherImpact.details.temperature.risk === 'medium' ? 'bg-yellow-500' :
+                          'bg-green-500'
+                        }`}
+                      ></div>
+                      <span className="text-sm">
+                        {weatherImpact.details.temperature.average}°C (Range: {weatherImpact.details.temperature.extremes.low}°C to {weatherImpact.details.temperature.extremes.high}°C)
+                      </span>
+                    </div>
+                    <p className="text-xs text-gray-600 mt-1">
+                      {weatherImpact.details.temperature.impact}
+                    </p>
+                  </div>
+                </div>
+                
+                {/* Seasonal risks */}
+                {weatherImpact.details.seasonalRisks.length > 0 && (
+                  <div className="bg-white p-3 rounded border">
+                    <h5 className="font-medium text-gray-800">{t('seasonalRisks')}</h5>
+                    <ul className="mt-1 space-y-1">
+                      {weatherImpact.details.seasonalRisks.map((risk, index) => (
+                        <li key={index} className="text-sm flex items-start">
+                          <span className="inline-block w-2 h-2 rounded-full bg-gray-400 mt-1.5 mr-2"></span>
+                          {risk}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+              </div>
+              
+              <p className="text-xs text-gray-500 mt-3">
+                {t('weatherImpactDisclaimer')}
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
       
       {/* Site Details */}
       <div className="space-y-4 pt-4 border-t border-gray-200">

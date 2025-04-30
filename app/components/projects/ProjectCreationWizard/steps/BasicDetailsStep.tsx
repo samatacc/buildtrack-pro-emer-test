@@ -1,9 +1,10 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
-import { Calendar, Info } from 'lucide-react';
+import React, { useState, useEffect, useCallback } from 'react';
+import { Calendar, Info, Lightbulb, CheckCircle } from 'lucide-react';
 import { useNamespacedTranslations } from '@/app/hooks/useNamespacedTranslations';
 import { Project, ProjectType, ProjectPriority } from '@/lib/types/project';
+import { suggestProjectType, shouldSuggestProjectType } from '@/lib/services/aiSuggestionService';
 
 /**
  * BasicDetailsStep Component
@@ -39,6 +40,53 @@ export default function BasicDetailsStep({
   
   // Form validation
   const [errors, setErrors] = useState<Record<string, string>>({});
+  
+  // AI suggestion states
+  const [typeSuggestions, setTypeSuggestions] = useState<Array<{
+    type: ProjectType;
+    confidence: number;
+    reason: string;
+  }>>([]);
+  const [showSuggestions, setShowSuggestions] = useState(false);
+  const [suggestionsAnalyzed, setSuggestionsAnalyzed] = useState(false);
+  const [selectedSuggestion, setSelectedSuggestion] = useState<ProjectType | null>(null);
+  
+  // Debounced function to generate project type suggestions
+  const analyzeSuggestions = useCallback(() => {
+    if (shouldSuggestProjectType(name, description) && !suggestionsAnalyzed) {
+      const suggestions = suggestProjectType(name, description);
+      setTypeSuggestions(suggestions);
+      
+      if (suggestions.length > 0 && suggestions[0].confidence > 0.6) {
+        setShowSuggestions(true);
+      }
+      
+      setSuggestionsAnalyzed(true);
+    }
+  }, [name, description, suggestionsAnalyzed]);
+  
+  // Trigger suggestion analysis when name or description changes
+  useEffect(() => {
+    if (name || description) {
+      const timer = setTimeout(() => {
+        analyzeSuggestions();
+      }, 1000); // 1 second debounce
+      
+      return () => clearTimeout(timer);
+    }
+  }, [name, description, analyzeSuggestions]);
+  
+  // Reset suggestions when type is manually changed
+  useEffect(() => {
+    setSelectedSuggestion(null);
+  }, [type]);
+  
+  // Apply suggestion when selected
+  const applySuggestion = (suggestedType: ProjectType) => {
+    setType(suggestedType);
+    setSelectedSuggestion(suggestedType);
+    setShowSuggestions(false);
+  };
   
   // Validate inputs and update parent form
   useEffect(() => {
@@ -150,6 +198,44 @@ export default function BasicDetailsStep({
               </option>
             ))}
           </select>
+          
+          {/* AI Type Suggestions */}
+          {showSuggestions && typeSuggestions.length > 0 && (
+            <div className="mt-2 border border-amber-200 bg-amber-50 rounded-md p-3 shadow-sm">
+              <div className="flex items-start mb-2">
+                <Lightbulb className="h-5 w-5 text-amber-500 mt-0.5 mr-2 flex-shrink-0" />
+                <div>
+                  <h4 className="text-sm font-medium text-amber-800">{t('aiSuggestion')}</h4>
+                  <p className="text-xs text-amber-700">
+                    {t('aiProjectTypeSuggestion')}
+                  </p>
+                </div>
+              </div>
+              <div className="space-y-2">
+                {typeSuggestions.slice(0, 2).map((suggestion) => (
+                  <button
+                    key={suggestion.type}
+                    type="button"
+                    onClick={() => applySuggestion(suggestion.type)}
+                    className={`w-full text-left flex items-center justify-between px-3 py-2 text-sm rounded-md ${selectedSuggestion === suggestion.type 
+                      ? 'bg-green-100 border border-green-200 text-green-800' 
+                      : 'bg-white border border-gray-200 hover:bg-gray-50'}`}
+                  >
+                    <span className="font-medium">{t(`projectTypes.${suggestion.type.toLowerCase()}`)}</span>
+                    <div className="flex items-center">
+                      <span className="text-xs text-gray-500 mr-2">{`${Math.round(suggestion.confidence * 100)}%`}</span>
+                      {selectedSuggestion === suggestion.type && (
+                        <CheckCircle className="h-4 w-4 text-green-600" />
+                      )}
+                    </div>
+                  </button>
+                ))}
+              </div>
+              <div className="mt-2 text-xs text-amber-600">
+                <p>{typeSuggestions[0].reason}</p>
+              </div>
+            </div>
+          )}
         </div>
         
         {/* Project Priority */}
@@ -238,6 +324,19 @@ export default function BasicDetailsStep({
         <div>
           <h4 className="text-sm font-medium text-blue-800">{t('tip')}</h4>
           <p className="text-sm text-blue-700 mt-1">{t('basicDetailsTip')}</p>
+          {!showSuggestions && name.length > 3 && description.length > 10 && (
+            <p className="text-sm text-blue-700 mt-1">
+              <span className="flex items-center gap-1 mt-2">
+                <Lightbulb className="h-4 w-4 text-amber-500" />
+                <button 
+                  onClick={analyzeSuggestions} 
+                  className="underline text-amber-600 hover:text-amber-700"
+                >
+                  {t('getProjectTypeRecommendation')}
+                </button>
+              </span>
+            </p>
+          )}
         </div>
       </div>
     </div>

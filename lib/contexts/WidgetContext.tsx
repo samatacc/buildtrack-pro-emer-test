@@ -2,13 +2,14 @@ import React, { createContext, useContext, useState, useEffect, ReactNode } from
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
 import { Layout } from 'react-grid-layout';
 import { WidgetSize, WidgetType } from '@/lib/types/widget';
+import { WidgetSettings } from '@/lib/types/widgetSettings';
 
 export interface Widget {
   id: string;
   type: WidgetType;
   size: WidgetSize;
   title: string;
-  settings?: Record<string, any>;
+  settings?: WidgetSettings;
   layout?: Layout;
   isVisible: boolean;
 }
@@ -23,6 +24,7 @@ export interface DashboardConfig {
     tablet: Layout[];
     mobile: Layout[];
   };
+  lastUpdated?: string;
 }
 
 interface WidgetContextProps {
@@ -33,13 +35,14 @@ interface WidgetContextProps {
   isLoading: boolean;
   error: Error | null;
   loadDashboard: (dashboardId?: string) => Promise<void>;
-  saveDashboard: () => Promise<void>;
-  addWidget: (widgetType: WidgetType) => void;
-  removeWidget: (widgetId: string) => void;
+  saveDashboard: () => Promise<boolean>; // Returns success status
+  addWidget: (widgetType: WidgetType) => Promise<boolean>; // Returns success status
+  removeWidget: (widgetId: string) => Promise<boolean>; // Returns success status
   updateWidgetLayout: (layouts: Layout[]) => void;
-  updateWidgetSettings: (widgetId: string, settings: Record<string, any>) => void;
+  updateWidgetSettings: (widgetId: string, settings: Record<string, any>) => Promise<boolean>;
+  updateWidgetSize: (widgetId: string, size: WidgetSize) => Promise<boolean>;
   toggleEditMode: () => void;
-  toggleWidgetVisibility: (widgetId: string) => void;
+  toggleWidgetVisibility: (widgetId: string) => Promise<boolean>;
   createDashboard: (name: string) => Promise<string>;
 }
 
@@ -105,9 +108,16 @@ export const WidgetProvider: React.FC<WidgetProviderProps> = ({ children }) => {
         isVisible: true 
       },
       { 
+        id: 'analytics', 
+        type: WidgetType.ANALYTICS, 
+        size: WidgetSize.MEDIUM, 
+        title: 'Analytics & Reporting',
+        isVisible: true 
+      },
+      { 
         id: 'my-tasks', 
         type: WidgetType.MY_TASKS, 
-        size: WidgetSize.MEDIUM, 
+        size: WidgetSize.SMALL, 
         title: 'My Tasks',
         isVisible: true 
       },
@@ -118,44 +128,12 @@ export const WidgetProvider: React.FC<WidgetProviderProps> = ({ children }) => {
         title: 'Team Tasks',
         isVisible: true 
       },
-      { 
-        id: 'critical-path', 
-        type: WidgetType.CRITICAL_PATH, 
-        size: WidgetSize.SMALL, 
-        title: 'Critical Path Tasks',
-        isVisible: true 
-      },
-      { 
-        id: 'progress-reports', 
-        type: WidgetType.PROGRESS_REPORTS, 
-        size: WidgetSize.MEDIUM, 
-        title: 'Progress Reports',
-        isVisible: true 
-      },
-      { 
-        id: 'financial-dashboard', 
-        type: WidgetType.FINANCIAL_DASHBOARD, 
-        size: WidgetSize.MEDIUM, 
-        title: 'Financial Dashboard',
-        isVisible: true 
-      },
-      { 
-        id: 'team-performance', 
-        type: WidgetType.TEAM_PERFORMANCE, 
-        size: WidgetSize.SMALL, 
-        title: 'Team Performance',
-        isVisible: true 
-      },
-      { 
-        id: 'notification-center', 
-        type: WidgetType.NOTIFICATION_CENTER, 
-        size: WidgetSize.SMALL, 
-        title: 'Notifications',
-        isVisible: true 
-      },
     ];
     
     setAvailableWidgets(defaultWidgets);
+    
+    // Load dashboard config
+    loadDashboard();
   }, []);
 
   // Load dashboard configuration
@@ -164,33 +142,38 @@ export const WidgetProvider: React.FC<WidgetProviderProps> = ({ children }) => {
       setIsLoading(true);
       setError(null);
       
-      // Get user ID for personalized dashboards
-      const { data: { user } } = await supabase.auth.getUser();
+      // Get user info for dashboard loading
+      const { data: userInfo } = await supabase.auth.getUser();
       
-      if (!user) {
-        throw new Error('User not authenticated');
+      if (!userInfo?.user) {
+        throw new Error('Authentication required');
       }
       
-      // In a production app, we'd fetch from Supabase
-      // For now, we'll use localStorage as a placeholder for development
-      const savedDashboard = localStorage.getItem(`dashboard_${dashboardId || 'default'}_${user.id}`);
+      // Get dashboard from API
+      const response = await fetch(`/api/dashboard?id=${dashboardId || 'default'}`);
       
-      if (savedDashboard) {
-        const parsedDashboard = JSON.parse(savedDashboard) as DashboardConfig;
-        setDashboardConfig(parsedDashboard);
-        setCurrentLayout(parsedDashboard.layouts.desktop);
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || 'Failed to load dashboard');
+      }
+      
+      const { dashboard } = await response.json();
+      
+      if (dashboard) {
+        setDashboardConfig(dashboard);
+        setCurrentLayout(dashboard.layouts.desktop);
       } else {
         // Create a new dashboard with default widgets if none exists
         const newDashboard = { 
           ...defaultDashboardConfig,
-          widgets: availableWidgets.slice(0, 4), // Start with a few widgets
+          widgets: availableWidgets.slice(0, 4), // Start with first 4 widgets
           layouts: {
             desktop: availableWidgets.slice(0, 4).map((widget, index) => ({
               i: widget.id,
               x: (index % 2) * 6,
               y: Math.floor(index / 2) * 4,
               w: widget.size === WidgetSize.SMALL ? 3 : widget.size === WidgetSize.MEDIUM ? 6 : 12,
-              h: 4,
+              h: widget.size === WidgetSize.SMALL ? 3 : 4,
               minW: 3,
               minH: 2,
             })),
@@ -202,8 +185,8 @@ export const WidgetProvider: React.FC<WidgetProviderProps> = ({ children }) => {
         setDashboardConfig(newDashboard);
         setCurrentLayout(newDashboard.layouts.desktop);
         
-        // Save the default dashboard
-        localStorage.setItem(`dashboard_${dashboardId || 'default'}_${user.id}`, JSON.stringify(newDashboard));
+        // Save the default dashboard to API
+        await saveDashboardToApi(newDashboard);
       }
     } catch (err) {
       console.error('Error loading dashboard:', err);
@@ -212,17 +195,37 @@ export const WidgetProvider: React.FC<WidgetProviderProps> = ({ children }) => {
       setIsLoading(false);
     }
   };
+  
+  // Helper to save dashboard to API
+  const saveDashboardToApi = async (dashboard: DashboardConfig) => {
+    try {
+      const response = await fetch('/api/dashboard', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ dashboard }),
+      });
+      
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || 'Failed to save dashboard');
+      }
+      
+      return true;
+    } catch (error) {
+      console.error('Error saving dashboard to API:', error);
+      return false;
+    }
+  };
 
-  // Save dashboard configuration
+  // Save dashboard configuration with optimistic updates
   const saveDashboard = async () => {
     try {
-      if (!dashboardConfig) return;
+      if (!dashboardConfig) return false;
       
-      const { data: { user } } = await supabase.auth.getUser();
-      
-      if (!user) {
-        throw new Error('User not authenticated');
-      }
+      // Store previous state for rollback if needed
+      const previousDashboard = { ...dashboardConfig };
       
       // Update the layouts based on current layout
       const updatedDashboard = {
@@ -231,180 +234,367 @@ export const WidgetProvider: React.FC<WidgetProviderProps> = ({ children }) => {
           ...dashboardConfig.layouts,
           desktop: currentLayout,
         },
+        lastUpdated: new Date().toISOString(), // Add timestamp for tracking changes
       };
       
-      // For now, save to localStorage - in production, save to Supabase
-      localStorage.setItem(`dashboard_${dashboardConfig.id}_${user.id}`, JSON.stringify(updatedDashboard));
-      
+      // Optimistically update the UI first
       setDashboardConfig(updatedDashboard);
+      
+      // Then save to the API endpoint
+      const success = await saveDashboardToApi(updatedDashboard);
+      
+      if (!success) {
+        // Rollback if save fails
+        setDashboardConfig(previousDashboard);
+        setCurrentLayout(previousDashboard.layouts.desktop);
+        throw new Error('Failed to save dashboard configuration. Changes have been reverted.');
+      }
+      
+      return true;
     } catch (err) {
       console.error('Error saving dashboard:', err);
       setError(err instanceof Error ? err : new Error('Failed to save dashboard'));
+      return false;
     }
   };
 
-  // Add a new widget to the dashboard
-  const addWidget = (widgetType: WidgetType) => {
-    if (!dashboardConfig) return;
+  // Add a new widget to the dashboard with optimistic updates
+  const addWidget = async (widgetType: WidgetType) => {
+    if (!dashboardConfig) return false;
     
+    // Find widget definition for the requested type
     const widgetToAdd = availableWidgets.find(w => w.type === widgetType);
+    if (!widgetToAdd) return false;
     
-    if (!widgetToAdd) return;
+    // Store previous state for rollback if needed
+    const previousDashboard = { ...dashboardConfig };
+    const previousLayout = [...currentLayout];
     
-    // Create a new widget instance with a unique ID
-    const newWidget: Widget = {
-      ...widgetToAdd,
-      id: `${widgetType.toLowerCase()}-${Date.now()}`,
-      isVisible: true,
-    };
-    
-    // Find a suitable position for the new widget
-    const newWidgetLayout: Layout = {
-      i: newWidget.id,
-      x: 0,
-      y: Infinity, // Place at the bottom
-      w: newWidget.size === WidgetSize.SMALL ? 3 : newWidget.size === WidgetSize.MEDIUM ? 6 : 12,
-      h: 4,
-      minW: 3,
-      minH: 2,
-    };
-    
-    const updatedWidgets = [...dashboardConfig.widgets, newWidget];
-    const updatedLayout = [...currentLayout, newWidgetLayout];
-    
-    setDashboardConfig({
-      ...dashboardConfig,
-      widgets: updatedWidgets,
-    });
-    
-    setCurrentLayout(updatedLayout);
+    try {
+      // Create a new widget instance with a unique ID
+      const newWidget: Widget = {
+        ...widgetToAdd,
+        id: `${widgetType.toLowerCase()}-${Date.now()}`,
+        isVisible: true,
+        size: widgetToAdd.size || WidgetSize.MEDIUM,
+      };
+      
+      // Get default settings from registry if available
+      try {
+        const widgetRegistry = await import('@/lib/registry/WidgetRegistry')
+          .then(module => module.default)
+          .catch(() => null);
+        
+        if (widgetRegistry && widgetRegistry[widgetType]) {
+          newWidget.settings = widgetRegistry[widgetType].defaultSettings || {};
+        }
+      } catch (error) {
+        console.warn('Could not load widget registry for default settings', error);
+        // Continue without default settings
+      }
+      
+      // Find a suitable position for the new widget
+      const newWidgetLayout: Layout = {
+        i: newWidget.id,
+        x: 0,
+        y: Infinity, // Place at the bottom
+        w: newWidget.size === WidgetSize.SMALL ? 3 : newWidget.size === WidgetSize.MEDIUM ? 6 : 12,
+        h: newWidget.size === WidgetSize.SMALL ? 3 : newWidget.size === WidgetSize.MEDIUM ? 4 : 8,
+        minW: 3,
+        minH: 2,
+      };
+      
+      const updatedWidgets = [...dashboardConfig.widgets, newWidget];
+      const updatedLayout = [...currentLayout, newWidgetLayout];
+      
+      // Optimistically update the UI
+      setDashboardConfig({
+        ...dashboardConfig,
+        widgets: updatedWidgets,
+      });
+      
+      setCurrentLayout(updatedLayout);
+      
+      // Save changes to API
+      const saveSuccess = await saveDashboard();
+      
+      if (!saveSuccess) {
+        // If saving failed, roll back to previous state
+        setDashboardConfig(previousDashboard);
+        setCurrentLayout(previousLayout);
+        throw new Error('Failed to add widget. Changes reverted.');
+      }
+      
+      return true;
+    } catch (error) {
+      console.error('Error adding widget:', error);
+      
+      // Ensure UI is reverted on error
+      setDashboardConfig(previousDashboard);
+      setCurrentLayout(previousLayout);
+      setError(error instanceof Error ? error : new Error('Failed to add widget'));
+      
+      return false;
+    }
   };
 
-  // Remove a widget from the dashboard
-  const removeWidget = (widgetId: string) => {
-    if (!dashboardConfig) return;
+  // Remove a widget from the dashboard with optimistic updates
+  const removeWidget = async (widgetId: string) => {
+    if (!dashboardConfig) return false;
     
-    const updatedWidgets = dashboardConfig.widgets.filter(w => w.id !== widgetId);
-    const updatedLayout = currentLayout.filter(l => l.i !== widgetId);
+    // Store previous state for rollback if needed
+    const previousDashboard = { ...dashboardConfig };
+    const previousLayout = [...currentLayout];
     
-    setDashboardConfig({
-      ...dashboardConfig,
-      widgets: updatedWidgets,
-    });
-    
-    setCurrentLayout(updatedLayout);
+    try {
+      const updatedWidgets = dashboardConfig.widgets.filter(w => w.id !== widgetId);
+      const updatedLayout = currentLayout.filter(l => l.i !== widgetId);
+      
+      // Optimistically update the UI
+      setDashboardConfig({
+        ...dashboardConfig,
+        widgets: updatedWidgets,
+      });
+      
+      setCurrentLayout(updatedLayout);
+      
+      // Save changes to API
+      const saveSuccess = await saveDashboard();
+      
+      if (!saveSuccess) {
+        // If saving failed, roll back to previous state
+        setDashboardConfig(previousDashboard);
+        setCurrentLayout(previousLayout);
+        throw new Error('Failed to remove widget. Changes reverted.');
+      }
+      
+      return true;
+    } catch (error) {
+      console.error('Error removing widget:', error);
+      
+      // Ensure UI is reverted on error
+      setDashboardConfig(previousDashboard);
+      setCurrentLayout(previousLayout);
+      setError(error instanceof Error ? error : new Error('Failed to remove widget'));
+      
+      return false;
+    }
   };
 
-  // Update widget layout when repositioned or resized
+  // Update widget layout
   const updateWidgetLayout = (layouts: Layout[]) => {
     setCurrentLayout(layouts);
   };
 
-  // Update widget settings
-  const updateWidgetSettings = (widgetId: string, settings: Record<string, any>) => {
-    if (!dashboardConfig) return;
+  // Update widget settings with optimistic updates
+  const updateWidgetSettings = async (widgetId: string, settings: Record<string, any>) => {
+    if (!dashboardConfig) return false;
     
-    const updatedWidgets = dashboardConfig.widgets.map(widget => {
-      if (widget.id === widgetId) {
-        return {
-          ...widget,
-          settings: { ...(widget.settings || {}), ...settings },
-        };
+    // Store previous state for rollback if needed
+    const previousDashboard = { ...dashboardConfig };
+    
+    try {
+      const updatedWidgets = dashboardConfig.widgets.map(widget => {
+        if (widget.id === widgetId) {
+          return {
+            ...widget,
+            settings: {
+              ...widget.settings,
+              ...settings,
+            },
+          };
+        }
+        return widget;
+      });
+      
+      // Optimistically update the UI
+      setDashboardConfig({
+        ...dashboardConfig,
+        widgets: updatedWidgets,
+      });
+      
+      // Save changes to API
+      const saveSuccess = await saveDashboard();
+      
+      if (!saveSuccess) {
+        // If saving failed, roll back to previous state
+        setDashboardConfig(previousDashboard);
+        throw new Error('Failed to update widget settings. Changes reverted.');
       }
-      return widget;
-    });
-    
-    setDashboardConfig({
-      ...dashboardConfig,
-      widgets: updatedWidgets,
-    });
+      
+      return true;
+    } catch (error) {
+      console.error('Error updating widget settings:', error);
+      
+      // Ensure UI is reverted on error
+      setDashboardConfig(previousDashboard);
+      setError(error instanceof Error ? error : new Error('Failed to update widget settings'));
+      
+      return false;
+    }
   };
 
-  // Toggle dashboard edit mode
+  // Update widget size with optimistic updates
+  const updateWidgetSize = async (widgetId: string, size: WidgetSize) => {
+    if (!dashboardConfig) return false;
+    
+    // Store previous state for rollback if needed
+    const previousDashboard = { ...dashboardConfig };
+    const previousLayout = [...currentLayout];
+    
+    try {
+      // Update widget size
+      const updatedWidgets = dashboardConfig.widgets.map(widget => {
+        if (widget.id === widgetId) {
+          return {
+            ...widget,
+            size,
+          };
+        }
+        return widget;
+      });
+      
+      // Update layout dimensions based on new size
+      const updatedLayout = currentLayout.map(layout => {
+        if (layout.i === widgetId) {
+          return {
+            ...layout,
+            w: size === WidgetSize.SMALL ? 3 : size === WidgetSize.MEDIUM ? 6 : 12,
+            h: size === WidgetSize.SMALL ? 3 : size === WidgetSize.MEDIUM ? 4 : 8,
+          };
+        }
+        return layout;
+      });
+      
+      // Optimistically update the UI
+      setDashboardConfig({
+        ...dashboardConfig,
+        widgets: updatedWidgets,
+      });
+      
+      setCurrentLayout(updatedLayout);
+      
+      // Save changes to API
+      const saveSuccess = await saveDashboard();
+      
+      if (!saveSuccess) {
+        // If saving failed, roll back to previous state
+        setDashboardConfig(previousDashboard);
+        setCurrentLayout(previousLayout);
+        throw new Error('Failed to update widget size. Changes reverted.');
+      }
+      
+      return true;
+    } catch (error) {
+      console.error('Error updating widget size:', error);
+      
+      // Ensure UI is reverted on error
+      setDashboardConfig(previousDashboard);
+      setCurrentLayout(previousLayout);
+      setError(error instanceof Error ? error : new Error('Failed to update widget size'));
+      
+      return false;
+    }
+  };
+
+  // Toggle edit mode
   const toggleEditMode = () => {
-    setIsEditMode(prev => !prev);
+    setIsEditMode(!isEditMode);
   };
 
-  // Toggle widget visibility
-  const toggleWidgetVisibility = (widgetId: string) => {
-    if (!dashboardConfig) return;
+  // Toggle widget visibility with optimistic updates
+  const toggleWidgetVisibility = async (widgetId: string) => {
+    if (!dashboardConfig) return false;
     
-    const updatedWidgets = dashboardConfig.widgets.map(widget => {
-      if (widget.id === widgetId) {
-        return {
-          ...widget,
-          isVisible: !widget.isVisible,
-        };
+    // Store previous state for rollback if needed
+    const previousDashboard = { ...dashboardConfig };
+    
+    try {
+      const updatedWidgets = dashboardConfig.widgets.map(widget => {
+        if (widget.id === widgetId) {
+          return {
+            ...widget,
+            isVisible: !widget.isVisible,
+          };
+        }
+        return widget;
+      });
+      
+      // Optimistically update the UI
+      setDashboardConfig({
+        ...dashboardConfig,
+        widgets: updatedWidgets,
+      });
+      
+      // Save changes to API
+      const saveSuccess = await saveDashboard();
+      
+      if (!saveSuccess) {
+        // If saving failed, roll back to previous state
+        setDashboardConfig(previousDashboard);
+        throw new Error('Failed to toggle widget visibility. Changes reverted.');
       }
-      return widget;
-    });
-    
-    setDashboardConfig({
-      ...dashboardConfig,
-      widgets: updatedWidgets,
-    });
+      
+      return true;
+    } catch (error) {
+      console.error('Error toggling widget visibility:', error);
+      
+      // Ensure UI is reverted on error
+      setDashboardConfig(previousDashboard);
+      setError(error instanceof Error ? error : new Error('Failed to toggle widget visibility'));
+      
+      return false;
+    }
   };
 
   // Create a new dashboard
   const createDashboard = async (name: string) => {
     try {
-      const { data: { user } } = await supabase.auth.getUser();
-      
-      if (!user) {
-        throw new Error('User not authenticated');
-      }
-      
-      const newDashboardId = `dashboard-${Date.now()}`;
-      
       const newDashboard: DashboardConfig = {
-        id: newDashboardId,
+        ...defaultDashboardConfig,
+        id: `dashboard-${Date.now()}`,
         name,
         isDefault: false,
-        widgets: [],
-        layouts: {
-          desktop: [],
-          tablet: [],
-          mobile: [],
-        },
       };
       
-      // Save to localStorage - in production, save to Supabase
-      localStorage.setItem(`dashboard_${newDashboardId}_${user.id}`, JSON.stringify(newDashboard));
+      const success = await saveDashboardToApi(newDashboard);
       
-      return newDashboardId;
+      if (!success) {
+        throw new Error('Failed to create dashboard');
+      }
+      
+      return newDashboard.id;
     } catch (err) {
       console.error('Error creating dashboard:', err);
       setError(err instanceof Error ? err : new Error('Failed to create dashboard'));
-      return null;
+      throw err;
     }
   };
 
-  // Initialize dashboard on mount
-  useEffect(() => {
-    loadDashboard();
-  }, [availableWidgets]);
-
-  const value: WidgetContextProps = {
-    availableWidgets,
-    dashboardConfig,
-    currentLayout,
-    isEditMode,
-    isLoading,
-    error,
-    loadDashboard,
-    saveDashboard,
-    addWidget,
-    removeWidget,
-    updateWidgetLayout,
-    updateWidgetSettings,
-    toggleEditMode,
-    toggleWidgetVisibility,
-    createDashboard,
-  };
-
   return (
-    <WidgetContext.Provider value={value}>
+    <WidgetContext.Provider
+      value={{
+        availableWidgets,
+        dashboardConfig,
+        currentLayout,
+        isEditMode,
+        isLoading,
+        error,
+        loadDashboard,
+        saveDashboard,
+        addWidget,
+        removeWidget,
+        updateWidgetLayout,
+        updateWidgetSettings,
+        updateWidgetSize,
+        toggleEditMode,
+        toggleWidgetVisibility,
+        createDashboard,
+      }}
+    >
       {children}
     </WidgetContext.Provider>
   );
 };
+
+export default WidgetContext;

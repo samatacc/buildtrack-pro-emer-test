@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { useTranslation } from 'next-intl';
+import { useTranslations } from '@/app/hooks/useTranslations';
 import { ChartOptions } from 'chart.js';
 import { Line } from 'react-chartjs-2';
 import { ArrowDownTrayIcon, CalendarIcon } from '@heroicons/react/24/outline';

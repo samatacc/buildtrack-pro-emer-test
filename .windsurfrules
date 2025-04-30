@@ -1,35 +1,40 @@
 # BuildTrack Pro Windsurf Rules (.windsurfrules)
 
 ## Last Updated
-- **Date**: April 25, 2025
+- **Date**: April 30, 2025
 
 ## Overview
-This `.windsurfrules` file governs how Windsurf operates as a multi-agent system coordinator for the BuildTrack Pro project. Windsurf will reference project documentation (e.g., `project-overview.md`, 74 feature files in `features/`), create and update notes in `scratchpad.md`, and operate in two modes—Planner and Executor—to build BuildTrack Pro’s construction management platform, ensuring features align with the project’s guiding principles of user-centric design, accessibility, and scalability.
+This `.windsurfrules` file governs how Windsurf operates as a multi-agent system coordinator for the BuildTrack Pro project. Windsurf will reference project documentation (e.g., `project-overview.md`, 74 feature files in `features/`), create and update notes in `scratchpad.md`, and operate in two modes—Planner and Executor—to build BuildTrack Pro’s construction management platform, ensuring features align with the project’s guiding principles of user-centric design, accessibility, and scalability. A sequential file processing workflow is included to handle feature files individually, completing each with planning, execution, testing, and pushing before moving to the next.
 
 ## Role Definitions
 Windsurf operates in two distinct modes: Planner and Executor. Windsurf will switch between these modes based on user instructions or prompt for clarification if the mode is unspecified.
 
 1. **Planner Mode**:
    - **Responsibilities**: Perform high-level analysis, break down tasks into phases, define success criteria, and evaluate progress. The Planner ensures tasks align with BuildTrack Pro’s guiding principles (e.g., user-centric design, accessibility).
-   - **Actions**: Update `scratchpad.md` with the plan, including sections like Background and Motivation, Key Challenges and Analysis, and High-level Task Breakdown.
+   - **Actions**: Update `scratchpad.md` with the plan, including sections like Background and Motivation, Key Challenges and Analysis, and High-level Task Breakdown. For sequential file processing, generate a plan for each feature file.
 
 2. **Executor Mode**:
-   - **Responsibilities**: Implement tasks outlined in `scratchpad.md`, such as coding features, integrating APIs, and testing functionality. The Executor ensures implementation reflects BuildTrack Pro’s focus on usability and performance.
+   - **Responsibilities**: Implement tasks outlined in `scratchpad.md` or feature-specific plans, such as coding features, integrating APIs, and testing functionality. The Executor ensures implementation reflects BuildTrack Pro’s focus on usability and performance.
    - **Actions**: Complete one task at a time, update `scratchpad.md` with progress (e.g., Current Status / Progress Tracking, Executor’s Feedback or Assistance Requests), and document lessons in the Lessons section.
 
 ## Workflow Guidelines
 - **Initial Prompt Handling**: Upon receiving a new task prompt, Windsurf will:
   1. Reference `project-overview.md` and the 74 feature files in `features/` to understand BuildTrack Pro’s goals, components, and feature requirements.
   2. Update the `scratchpad.md` file’s Background and Motivation section with the task context.
-  3. Invoke Planner Mode to create a detailed plan, unless specified otherwise.
+  3. Determine the workflow based on the prompt:
+     - If the prompt specifies sequential file processing (e.g., “Start processing 101_login.md”), invoke the Sequential File Processing Workflow.
+     - Otherwise, invoke Planner Mode to create a detailed plan for the task, unless specified otherwise.
+  4. Work on each specific feature referenced in the `features/` folder to completion by making a plan and executing (e.g., `401_dashboard.md`).
+
 - **Planner Mode**:
   - Document the plan in `scratchpad.md`, including:
     - **Background and Motivation**: Task context and alignment with BuildTrack Pro’s goals (e.g., improving construction project management).
     - **Key Challenges and Analysis**: Potential obstacles (e.g., ensuring accessibility for diverse users) and mitigation strategies.
     - **High-level Task Breakdown**: Step-by-step tasks with success criteria (e.g., “Implement Dashboard Home; success criteria: widgets are draggable and persist state”).
   - Ensure tasks reflect BuildTrack Pro’s guiding principles (e.g., user-centric design with intuitive UI, scalability with optimized performance).
+
 - **Executor Mode**:
-  - Execute one task at a time from the `scratchpad.md` Project Status Board.
+  - Execute one task at a time from the `scratchpad.md` Project Status Board or feature-specific plans.
   - Use tools specified in `features/tech-stack.md` (e.g., Next.js, TypeScript, Supabase, TailwindCSS).
   - Adopt Test-Driven Development (TDD): Write tests first (e.g., unit tests for API routes, accessibility tests for UI), then code, ensuring functionality meets success criteria.
   - Update `scratchpad.md` after each task:
@@ -37,9 +42,53 @@ Windsurf operates in two distinct modes: Planner and Executor. Windsurf will swi
     - Log progress in Current Status / Progress Tracking.
     - Document issues or questions in Executor’s Feedback or Assistance Requests.
   - Notify the user after completing a task, providing evidence of success (e.g., test results, UI screenshots) and requesting manual verification.
+
+- **Sequential File Processing Workflow**:
+  - **Purpose**: Process each feature file in `features/` (e.g., `101_login.md`, `201_dashboard.md`) sequentially, completing all tasks within one file (planning, execution, testing, pushing) before moving to the next. Files are themed with numeric prefixes (100s, 200s, 300s, 400s).
+  - **Steps**:
+    1. **Identify File or Group**:
+       - Select the file specified in the prompt (e.g., `101_login.md`) or the first file in the specified group (e.g., `100s` starts with `101_login.md`).
+       - Files are processed in numeric order within groups (100s, 200s, 300s, 400s, as defined in File Grouping).
+    2. **Planner Mode - Scan and Plan**:
+       - Scan the feature file to identify requirements (e.g., for `101_login.md`, requirements like “Implement login form with Supabase auth”).
+       - Break down the feature into consumable tasks (e.g., “Create LoginForm component”, “Set up Supabase auth”, “Write unit tests”).
+       - Document the plan in `scratchpad.md` under a new section, `Feature Plan: <file_name>`, including:
+         - **Task Breakdown**: List of tasks with success criteria (e.g., “LoginForm renders without errors”).
+         - **Dependencies**: Task dependencies (e.g., “Supabase auth setup depends on LoginForm”).
+         - **Estimated Effort**: Approximate time per task (e.g., “1 hour for LoginForm”).
+       - Alternatively, create a dedicated plan file (e.g., `features/plans/101_login_plan.md`) if `scratchpad.md` becomes cluttered (see Documentation Conventions).
+    3. **Executor Mode - Execute Plan**:
+       - Execute tasks in the order specified in the `Feature Plan: <file_name>` section or dedicated plan file.
+       - Implement each task using the tech stack (Next.js, TypeScript, Supabase, TailwindCSS) and coding standards (e.g., TDD, WCAG 2.1 AA accessibility).
+       - Update `scratchpad.md` after each task:
+         - Mark tasks as complete in the Project Status Board under `Feature Plan: <file_name>`.
+         - Log progress in Current Status / Progress Tracking.
+         - Document issues in Executor’s Feedback or Assistance Requests.
+    4. **Testing**:
+       - Run tests for the feature using Vitest (unit tests) and Playwright (end-to-end and accessibility tests).
+       - Execute commands like `npm run test -- --file <related_code_file>` (e.g., `components/login/LoginForm.tsx` for `101_login.md`).
+       - Ensure at least 80% test coverage and WCAG 2.1 AA compliance.
+       - If tests fail, log issues in `scratchpad.md` and pause for user intervention.
+    5. **Pushing**:
+       - Commit changes (code, tests, and plan file if separate) using Conventional Commits (e.g., `feat(login): implement login form with Supabase auth`).
+       - Commands:
+         - `git add <related_files> features/plans/<file_name>_plan.md` (if using separate plan files).
+         - `git commit -m 'feat(<feature>): complete <file_name> with plan'`.
+         - `git push origin feature/<file_name>`.
+         - `gh pr create --title 'Feature: <file_name>' --body 'Auto-generated PR for <file_name>' --base main`.
+       - Ensure pre-push checks (no merge conflicts, tests pass).
+       - If pushing fails, log in `scratchpad.md` and pause.
+    6. **Completion and Next File**:
+       - The Planner confirms completion by verifying test results and success criteria in `scratchpad.md`.
+       - Move to the next file in numeric order within the group or as specified (e.g., `102_next_feature.md`).
+  - **Error Handling**:
+    - If planning fails (e.g., unclear requirements), retry twice, then pause and log in `scratchpad.md` under Executor’s Feedback or Assistance Requests.
+    - If execution or testing fails, log the specific task or test, pause, and request user intervention.
+    - If pushing fails, log and pause, ensuring no forced pushes without user approval (`git -force`).
+
 - **Task Completion**:
   - Only the Planner can confirm task completion after cross-checking Executor outputs against success criteria.
-  - If the Executor believes a task is complete, it must request Planner confirmation.
+  - If the Executor believes a task is complete, it must request Planner confirmation in `scratchpad.md`.
 
 ## Documentation Conventions
 - **Scratchpad Structure**:
@@ -48,20 +97,43 @@ Windsurf operates in two distinct modes: Planner and Executor. Windsurf will swi
     - **Key Challenges and Analysis**: Potential issues and solutions.
     - **High-level Task Breakdown**: Step-by-step tasks with success criteria.
     - **Project Status Board**: Markdown todo list (e.g., `- [ ] Task 1`, `- [x] Task 2`).
+    - **Feature Plan: <file_name>**: Plan for each feature file in the Sequential File Processing Workflow, including Task Breakdown, Dependencies, and Estimated Effort (e.g., `Feature Plan: 101_login.md`).
     - **Current Status / Progress Tracking**: Executor’s progress updates.
     - **Executor’s Feedback or Assistance Requests**: Questions or blockers.
     - **Lessons**: Documented solutions to errors or reusable information.
   - Do not arbitrarily change section titles to maintain consistency.
+- **Feature Plan Files (Optional)**:
+  - To avoid cluttering `scratchpad.md`, create dedicated plan files in `features/plans/` (e.g., `features/plans/101_login_plan.md`) for each feature’s plan.
+  - Structure:
+    ```markdown
+    # Plan for <file_name>
+    ## Task Breakdown
+    - [ ] Task 1: <description> (Success: <criteria>, Effort: <time>)
+    - [ ] Task 2: <description> (Success: <criteria>, Effort: <time>, Depends: Task 1)
+    ## Dependencies
+    - Task 2 depends on Task 1
+    ## Notes
+    - Align with BuildTrack Pro’s guiding principles
+    ```
+  - Reference these plans in `scratchpad.md` (e.g., “See `features/plans/101_login_plan.md` for details”).
 - **Documentation Practices**:
   - Avoid rewriting the entire `scratchpad.md` unless necessary; append or mark sections as outdated.
   - When external information is needed (e.g., API docs for Supabase), use the `@web` tag to fetch up-to-date documentation, then create `.md` files for reference (e.g., `docs/supabase-api.md`).
   - Document reusable information (e.g., library versions, fixes) in the Lessons section.
+  - For Sequential File Processing, commit plan files (e.g., `features/plans/101_login_plan.md`) to Git for traceability.
 
 ## Project-Specific Instructions
 - **Reference Materials**:
   - Always consult `project-overview.md` (updated April 25, 2025) for project goals, components (Dashboard, Admin Console, Marketing Website, CMS), and guiding principles (e.g., user-centric design, accessibility, scalability).
   - Use the 74 feature files in `features/` for detailed requirements (e.g., `features/dashboard-home.md`: “Customizable dashboard with widgets for projects, tasks, analytics, and notifications, supporting drag-and-drop functionality”).
   - Follow the technical stack in `features/tech-stack.md` (e.g., Next.js, TypeScript, Supabase, TailwindCSS).
+- **File Grouping** (for Sequential File Processing):
+  - Files in `features/` are themed with numeric prefixes:
+    - **100s**: Core features (e.g., `101_login.md`, `102_signup.md`)
+    - **200s**: Dashboard features (e.g., `201_dashboard-home.md`, `202_project-view.md`)
+    - **300s**: Admin Console features (e.g., `301_user-management.md`)
+    - **400s**: CMS and Marketing Website features (e.g., `401_cms-editor.md`)
+  - Process in numeric order within groups, prioritizing 100s, then 200s, 300s, 400s.
 - **Coding Standards**:
   - **General**:
     - Adhere to the summarized Coding Standards in `project-overview.md` and the detailed guidelines below.
@@ -76,7 +148,7 @@ Windsurf operates in two distinct modes: Planner and Executor. Windsurf will swi
     - Use 2-space indentation for all code files.
   - **TypeScript**:
     - Use TypeScript in strict mode to catch errors early (`"strict": true` in `tsconfig.json`).
-    - Prefer interfaces over types for defining object shapes (e.g., `interface Project { id: string; name: string; }`).
+    - Prefer interfaces over types for defining object shapes (e.g., `interface Project { id: string; name: string; }').
     - Always define explicit return types for functions (e.g., `function getProject(id: string): Promise<Project>`).
     - Avoid using `any` unless absolutely necessary; prefer `unknown` and type guards for safer type handling.
     - Use type inference where possible to reduce boilerplate (e.g., `const projectId = "123";` instead of `const projectId: string = "123";`).
@@ -123,11 +195,7 @@ Windsurf operates in two distinct modes: Planner and Executor. Windsurf will swi
     - Write descriptive commit messages following the Conventional Commits format (e.g., `feat(dashboard): add project widget drag-and-drop`).
     - Use feature branches for development (e.g., `feature/dashboard-widget`).
     - Create pull requests for code reviews, ensuring at least one approval before merging to `main`.
-- **Best Practices**:
-  - Prioritize the Dashboard, then Admin Console, Marketing Website, and CMS, as outlined in `project-overview.md`.
-  - Optimize for Core Web Vitals (e.g., use Next.js image optimization, lazy load components).
-  - Ensure WCAG 2.1 AA accessibility (e.g., use semantic HTML, provide alt text for images).
-  - Use testing tools from `features/tech-stack.md` (e.g., Vitest, Playwright) and adopt TDD.
+    - For Sequential File Processing, commit feature code and plan files with each push.
 
 ## Implementation Phases
 - **Phase 1: Core Features** (Dashboard, Authentication, Basic Admin Console):
@@ -136,7 +204,7 @@ Windsurf operates in two distinct modes: Planner and Executor. Windsurf will swi
 - **Phase 2: Secondary Features** (Marketing Website, CMS, Advanced Admin Console):
   - Enhance functionality with marketing pages, content management, and advanced admin tools.
   - Example task: “Implement CMS for Marketing Website; success criteria: users can edit and publish landing pages.”
-- **Phase 3: Integrations and Scalability** (Third-Party APIs, Performance Optimization):
+- **Phase 3: Integrations and Scalability** (Third-Party APIs, Performanceинь Optimization):
   - Add integrations (e.g., payment gateways, analytics) and optimize for scale.
   - Example task: “Integrate Stripe for payments; success criteria: users can subscribe to plans.”
 - **Phase 4: Future Expansions** (Mobile App Support, Advanced Analytics):
@@ -157,7 +225,7 @@ Windsurf operates in two distinct modes: Planner and Executor. Windsurf will swi
 
 ## Additional Guidelines
 - **Communication**:
-  - If unsure, prompt the user for clarification (e.g., “Do you want to invoke Planner Mode or Executor Mode?”).
+  - If unsure, prompt the user for clarification (e.g., “Do you want to invoke the Sequential File Processing Workflow or a general task?”).
   - Do not proceed with actions you’re not 100% confident about, as the user is non-technical.
 - **Large-Scale Changes**:
   - Before executing large-scale changes, the Executor must notify the Planner in `scratchpad.md` to ensure alignment.

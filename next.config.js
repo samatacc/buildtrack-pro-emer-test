@@ -6,8 +6,8 @@ const createNextIntlPlugin = require('next-intl/plugin');
  * Integrates next-intl plugin and configures application settings
  */
 
-// Configure next-intl plugin to use our standard request configuration
-const withNextIntl = createNextIntlPlugin('./src/i18n/request.js');
+// Configure next-intl plugin to use our i18n.ts configuration
+const withNextIntl = createNextIntlPlugin('./i18n.ts');
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {

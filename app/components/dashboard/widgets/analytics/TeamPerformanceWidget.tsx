@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useTranslation } from 'next-intl';
+import { useTranslations } from '@/app/hooks/useTranslations';
 import { Bar } from 'react-chartjs-2';
 import { ChartOptions } from 'chart.js';
 import { WidgetProps } from '@/lib/types/widget';
@@ -133,7 +133,7 @@ const t = (key: string): string => {
 };
 
 const TeamPerformanceWidget: React.FC<WidgetProps> = ({ id, title, settings }) => {
-  const { t } = useTranslation('dashboard');
+  const { t } = useTranslations('dashboard');
   const [performanceData, setPerformanceData] = useState<any | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<Error | null>(null);

@@ -14,7 +14,8 @@ export enum ProjectStatus {
   ON_HOLD = 'on-hold',
   DELAYED = 'delayed',
   COMPLETED = 'completed',
-  CANCELLED = 'cancelled'
+  CANCELLED = 'cancelled',
+  IN_PROGRESS = 'in-progress'
 }
 
 /**
@@ -22,6 +23,8 @@ export enum ProjectStatus {
  */
 export enum ProjectHealth {
   ON_TRACK = 'on-track',
+  AT_RISK = 'at-risk',
+  DELAYED = 'delayed'
 }
 
 /**

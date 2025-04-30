@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { useTranslation } from 'next-intl';
+import { useTranslations } from '@/app/hooks/useTranslations';
 import { TaskStatus, TaskPriority } from '@/lib/types/task';
 import { WidgetProps } from '@/lib/types/widget';
 
@@ -16,10 +16,10 @@ const fetchTeamTasks = async () => {
         role: 'Project Manager',
         avatar: '/images/avatars/alex.jpg',
         taskCount: {
-          [TaskStatus.TO_DO]: 4,
+          [TaskStatus.TODO]: 4,
           [TaskStatus.IN_PROGRESS]: 2,
           [TaskStatus.BLOCKED]: 1,
-          [TaskStatus.DONE]: 7
+          [TaskStatus.COMPLETED]: 7
         },
         tasks: [
           {
@@ -36,7 +36,7 @@ const fetchTeamTasks = async () => {
             title: 'Client progress meeting',
             projectId: 'proj-001',
             projectName: 'Downtown Office Renovation',
-            status: TaskStatus.TO_DO,
+            status: TaskStatus.TODO,
             priority: TaskPriority.MEDIUM,
             dueDate: new Date(2025, 4, 18)
           }
@@ -48,10 +48,10 @@ const fetchTeamTasks = async () => {
         role: 'Architect',
         avatar: '/images/avatars/sarah.jpg',
         taskCount: {
-          [TaskStatus.TO_DO]: 2,
+          [TaskStatus.TODO]: 2,
           [TaskStatus.IN_PROGRESS]: 3,
           [TaskStatus.BLOCKED]: 0,
-          [TaskStatus.DONE]: 5
+          [TaskStatus.COMPLETED]: 5
         },
         tasks: [
           {
@@ -80,10 +80,10 @@ const fetchTeamTasks = async () => {
         role: 'Construction Manager',
         avatar: '/images/avatars/carlos.jpg',
         taskCount: {
-          [TaskStatus.TO_DO]: 5,
+          [TaskStatus.TODO]: 5,
           [TaskStatus.IN_PROGRESS]: 1,
           [TaskStatus.BLOCKED]: 2,
-          [TaskStatus.DONE]: 3
+          [TaskStatus.COMPLETED]: 3
         },
         tasks: [
           {
@@ -92,7 +92,7 @@ const fetchTeamTasks = async () => {
             projectId: 'proj-002',
             projectName: 'Highland Park Residence',
             status: TaskStatus.BLOCKED,
-            priority: TaskPriority.URGENT,
+            priority: TaskPriority.CRITICAL,
             dueDate: new Date(2025, 4, 10),
             blockReason: 'Waiting for site clearance'
           },
@@ -101,7 +101,7 @@ const fetchTeamTasks = async () => {
             title: 'Equipment rental scheduling',
             projectId: 'proj-003',
             projectName: 'Riverside Mall Expansion',
-            status: TaskStatus.TO_DO,
+            status: TaskStatus.TODO,
             priority: TaskPriority.MEDIUM,
             dueDate: new Date(2025, 4, 19)
           }
@@ -113,10 +113,10 @@ const fetchTeamTasks = async () => {
         role: 'Interior Designer',
         avatar: '/images/avatars/diana.jpg',
         taskCount: {
-          [TaskStatus.TO_DO]: 3,
+          [TaskStatus.TODO]: 3,
           [TaskStatus.IN_PROGRESS]: 2,
           [TaskStatus.BLOCKED]: 0,
-          [TaskStatus.DONE]: 6
+          [TaskStatus.COMPLETED]: 6
         },
         tasks: [
           {
@@ -133,7 +133,7 @@ const fetchTeamTasks = async () => {
             title: 'Lighting plan finalization',
             projectId: 'proj-002',
             projectName: 'Highland Park Residence',
-            status: TaskStatus.TO_DO,
+            status: TaskStatus.TODO,
             priority: TaskPriority.HIGH,
             dueDate: new Date(2025, 4, 20)
           }
@@ -147,7 +147,7 @@ const fetchTeamTasks = async () => {
 const calculateCapacity = (taskCounts: Record<TaskStatus, number>) => {
   const total = Object.values(taskCounts).reduce((sum, count) => sum + count, 0);
   const active = taskCounts[TaskStatus.IN_PROGRESS] + taskCounts[TaskStatus.BLOCKED];
-  const completed = taskCounts[TaskStatus.DONE];
+  const completed = taskCounts[TaskStatus.COMPLETED];
   
   // Calculate capacity percentage (assuming 5 active tasks is 100% capacity)
   const capacityPercentage = Math.min((active / 5) * 100, 100);
@@ -184,10 +184,25 @@ const getCapacityColorClass = (capacityLevel: string) => {
   }
 };
 
+// Widget settings interface
+interface TeamTasksWidgetSettings {
+  displayCount?: number;
+  screenSize?: string;
+  refreshRate?: string | number;
+  showAllTeamMembers?: boolean;
+}
+
 const TeamTasksWidget: React.FC<WidgetProps> = ({ id, title, settings }) => {
-  const { t } = useTranslation('dashboard');
+  const { t } = useTranslations('dashboard');
   const dragItem = useRef<any>(null);
   const dragOverItem = useRef<any>(null);
+  
+  // Extract settings with defaults
+  const {
+    displayCount = 5,
+    screenSize = 'md',
+    showAllTeamMembers = true
+  } = settings as TeamTasksWidgetSettings || {};
   
   const [teamData, setTeamData] = useState<any | null>(null);
   const [expandedUsers, setExpandedUsers] = useState<Record<string, boolean>>({});
@@ -223,7 +238,8 @@ const TeamTasksWidget: React.FC<WidgetProps> = ({ id, title, settings }) => {
     loadTeamData();
     
     // Set up refresh interval if specified in settings
-    const refreshRate = settings?.refreshRate ? parseInt(settings.refreshRate) : null;
+    const refreshRate = settings?.refreshRate ? 
+      (typeof settings.refreshRate === 'string' ? parseInt(settings.refreshRate) : settings.refreshRate) : null;
     if (refreshRate && refreshRate !== 'auto') {
       const interval = setInterval(loadTeamData, refreshRate * 1000);
       return () => clearInterval(interval);
@@ -335,7 +351,7 @@ const TeamTasksWidget: React.FC<WidgetProps> = ({ id, title, settings }) => {
   if (isLoading) {
     return (
       <div className="h-full flex items-center justify-center">
-        <div className="animate-spin rounded-full h-6 w-6 border-t-2 border-b-2 border-blue-600"></div>
+        <div className={`animate-spin rounded-full ${screenSize === 'xxs' || screenSize === 'xs' ? 'h-4 w-4' : 'h-6 w-6'} border-t-2 border-b-2 border-blue-600`}></div>
       </div>
     );
   }
@@ -343,8 +359,8 @@ const TeamTasksWidget: React.FC<WidgetProps> = ({ id, title, settings }) => {
   if (error) {
     return (
       <div className="h-full flex flex-col items-center justify-center text-red-500">
-        <p>{t('widget.errorLoading')}</p>
-        <p className="text-sm mt-1">{error.message}</p>
+        <p className={`${screenSize === 'xxs' || screenSize === 'xs' ? 'text-xs' : 'text-sm'}`}>{t('widget.errorLoading')}</p>
+        <p className={`${screenSize === 'xxs' ? 'text-xs' : 'text-sm'} mt-1`}>{error.message}</p>
       </div>
     );
   }
@@ -352,19 +368,22 @@ const TeamTasksWidget: React.FC<WidgetProps> = ({ id, title, settings }) => {
   if (!teamData || teamData.users.length === 0) {
     return (
       <div className="h-full flex flex-col items-center justify-center text-gray-500">
-        <p>{t('task.noTeamMembers')}</p>
+        <p className={`${screenSize === 'xxs' || screenSize === 'xs' ? 'text-xs' : 'text-sm'}`}>{t('task.noTeamMembers')}</p>
       </div>
     );
   }
   
+  // Filter users to display based on settings
+  const displayedUsers = teamData.users.slice(0, showAllTeamMembers ? teamData.users.length : displayCount);
+  
   return (
     <div className="h-full flex flex-col">
-      <div className="text-xs text-gray-500 dark:text-gray-400 mb-2">
-        {t('task.dragTasksMessage')}
+      <div className={`${screenSize === 'xxs' ? 'text-2xs' : 'text-xs'} text-gray-500 dark:text-gray-400 mb-2`}>
+        {screenSize === 'xxs' || screenSize === 'xs' ? t('task.dragMobile') || 'Tap to expand' : t('task.dragTasksMessage')}
       </div>
       
-      <div className="flex-1 overflow-y-auto space-y-3">
-        {teamData.users.map((user: any) => {
+      <div className={`flex-1 overflow-y-auto ${screenSize === 'xxs' ? 'space-y-2' : 'space-y-3'}`}>
+        {displayedUsers.map((user: any) => {
           const { capacityPercentage, capacityLevel, percentComplete } = calculateCapacity(user.taskCount);
           
           return (
@@ -374,104 +393,94 @@ const TeamTasksWidget: React.FC<WidgetProps> = ({ id, title, settings }) => {
                 isDragging && dragOverItem.current === user.id
                   ? 'border-blue-500 dark:border-blue-400 bg-blue-50 dark:bg-blue-900/10'
                   : 'border-gray-200 dark:border-gray-700'
-              }`}
-              onDragOver={(e) => handleDragOver(e, user.id)}
-              onDrop={(e) => handleDrop(e, user.id)}
+              } ${screenSize === 'xxs' ? 'text-xs' : ''}`}
             >
-              {/* User Header */}
-              <div 
-                className="p-3 flex items-center justify-between cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-800 rounded-t-lg"
-                onClick={() => toggleUserExpanded(user.id)}
-              >
-                <div className="flex items-center">
-                  {/* User Avatar */}
-                  <div className="flex-shrink-0 h-10 w-10 rounded-full overflow-hidden bg-gray-200 dark:bg-gray-700">
-                    {user.avatar ? (
-                      <img 
-                        src={user.avatar} 
-                        alt={user.name}
-                        className="h-full w-full object-cover"
-                      />
-                    ) : (
-                      <div className="h-full w-full flex items-center justify-center text-gray-400">
-                        <svg className="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
-                          <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
-                        </svg>
-                      </div>
-                    )}
-                  </div>
-                  
-                  {/* User Info */}
-                  <div className="ml-3">
-                    <h3 className="text-sm font-medium text-gray-900 dark:text-white">
-                      {user.name}
-                    </h3>
-                    <p className="text-xs text-gray-500 dark:text-gray-400">
-                      {user.role}
-                    </p>
-                  </div>
-                </div>
-                
-                <div className="flex items-center space-x-3">
-                  {/* Task Count Pills */}
-                  <div className="flex items-center space-x-1">
-                    <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-300">
-                      {user.taskCount[TaskStatus.TO_DO]}
-                    </span>
-                    <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-300">
-                      {user.taskCount[TaskStatus.IN_PROGRESS]}
-                    </span>
-                    {user.taskCount[TaskStatus.BLOCKED] > 0 && (
-                      <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-300">
-                        {user.taskCount[TaskStatus.BLOCKED]}
-                      </span>
-                    )}
-                  </div>
-                  
-                  {/* Capacity Indicator */}
-                  <div className="flex items-center">
-                    <div className="w-16 h-2 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
-                      <div 
-                        className={`h-full ${getCapacityColorClass(capacityLevel)}`}
-                        style={{ width: `${capacityPercentage}%` }}
-                      ></div>
-                    </div>
-                    <svg 
-                      className={`w-4 h-4 ml-1 text-gray-500 dark:text-gray-400 transform ${expandedUsers[user.id] ? 'rotate-180' : ''}`} 
-                      fill="none" 
-                      stroke="currentColor" 
-                      viewBox="0 0 24 24"
-                    >
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+              {/* User Avatar */}
+              <div className="flex-shrink-0 h-10 w-10 rounded-full overflow-hidden bg-gray-200 dark:bg-gray-700">
+                {user.avatar ? (
+                  <img 
+                    src={user.avatar} 
+                    alt={user.name}
+                    className="h-full w-full object-cover"
+                  />
+                ) : (
+                  <div className="h-full w-full flex items-center justify-center text-gray-400">
+                    <svg className="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
                     </svg>
                   </div>
-                </div>
+                )}
               </div>
-              
-              {/* User Tasks */}
-              {expandedUsers[user.id] && (
-                <div className="p-3 pt-0 border-t border-gray-200 dark:border-gray-700">
-                  {user.tasks.length === 0 ? (
-                    <p className="text-sm text-gray-500 dark:text-gray-400 py-2">
-                      {t('task.noAssignedTasks')}
-                    </p>
-                  ) : (
-                    <div className="space-y-2 mt-2">
-                      {user.tasks.map((task: any) => (
-                        <div 
-                          key={task.id}
-                          className="p-2 rounded-md border border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800 cursor-move"
-                          draggable
-                          onDragStart={(e) => handleDragStart(e, task.id, user.id)}
-                        >
-                          <div className="flex items-start justify-between">
-                            <div>
-                              <h4 className="text-sm font-medium text-gray-900 dark:text-white">
-                                {task.title}
-                              </h4>
-                              <div className="mt-1 flex items-center text-xs text-gray-500 dark:text-gray-400">
-                                <span>{task.projectName}</span>
-                                <span className="mx-1">•</span>
+
+              {/* User Info */}
+              <div className="ml-3">
+                <h3 className="text-sm font-medium text-gray-900 dark:text-white">
+                  {user.name}
+                </h3>
+                <p className="text-xs text-gray-500 dark:text-gray-400">
+                  {user.role}
+                </p>
+              </div>
+
+              {/* Task Count Pills */}
+              <div className="flex items-center space-x-1">
+                <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-300">
+                  {user.taskCount[TaskStatus.TO_DO]}
+                </span>
+                <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-300">
+                  {user.taskCount[TaskStatus.IN_PROGRESS]}
+                </span>
+                {user.taskCount[TaskStatus.BLOCKED] > 0 && (
+                  <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-300">
+                    {user.taskCount[TaskStatus.BLOCKED]}
+                  </span>
+                )}
+              </div>
+
+              {/* Capacity Indicator */}
+              <div className="flex items-center">
+                <div className="w-16 h-2 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
+                  <div 
+                    className={`h-full ${getCapacityColorClass(capacityLevel)}`}
+                    style={{ width: `${capacityPercentage}%` }}
+                  ></div>
+                </div>
+                <svg 
+                  className={`w-4 h-4 ml-1 text-gray-500 dark:text-gray-400 transform ${expandedUsers[user.id] ? 'rotate-180' : ''}`} 
+                  fill="none" 
+                  stroke="currentColor" 
+                  viewBox="0 0 24 24"
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                </svg>
+              </div>
+            </div>
+
+            {/* User Tasks */}
+            {expandedUsers[user.id] && (
+              <div className="p-3 pt-0 border-t border-gray-200 dark:border-gray-700">
+                {user.tasks.length === 0 ? (
+                  <p className="text-sm text-gray-500 dark:text-gray-400 py-2">
+                    {t('task.noAssignedTasks')}
+                  </p>
+                ) : (
+                  <div className="space-y-2 mt-2">
+                    {user.tasks.map((task: any) => (
+                      <div 
+                        key={task.id}
+                        className="p-2 rounded-md border border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800 cursor-move"
+                        draggable
+                        onDragStart={(e) => handleDragStart(e, task.id, user.id)}
+                      >
+                        <div className={`flex items-center justify-between ${screenSize === 'xxs' || screenSize === 'xs' ? 'p-2' : 'p-3'} cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-800 rounded-t-lg`} onClick={() => toggleUserExpanded(user.id)}>
+                          <div>
+                            <h4 className="text-sm font-medium text-gray-900 dark:text-white">
+                              {task.title}
+                            </h4>
+                            <div className="mt-1 flex items-center text-xs text-gray-500 dark:text-gray-400">
+                              <span>{task.projectName}</span>
+                              <span className="mx-1">•</span>
+                              <span>{new Date(task.dueDate).toLocaleDateString()}</span>
                                 <span>{new Date(task.dueDate).toLocaleDateString()}</span>
                               </div>
                             </div>

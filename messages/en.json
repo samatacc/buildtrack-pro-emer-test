@@ -132,6 +132,12 @@
     "viewAll": "View All Tasks",
     "more": "more",
     "taskPriority": "Priority",
+    "priority": {
+      "label": "Priority",
+      "high": "High",
+      "medium": "Medium",
+      "low": "Low"
+    },
     "status": {
       "all": "All Statuses",
       "notstarted": "Not Started",

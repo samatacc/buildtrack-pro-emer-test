@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useTranslation } from 'next-intl';
+import { useTranslations } from '@/app/hooks/useTranslations';
 import Link from 'next/link';
 import { BellIcon, CheckIcon } from '@heroicons/react/24/outline';
 import { WidgetProps } from '@/lib/types/widget';
@@ -280,7 +280,7 @@ const filterOptions = [
 ];
 
 const NotificationCenterWidget: React.FC<WidgetProps> = ({ id, title, settings }) => {
-  const { t } = useTranslation('dashboard');
+  const { t } = useTranslations('dashboard');
   const [notificationsData, setNotificationsData] = useState<any | null>(null);
   const [filteredNotifications, setFilteredNotifications] = useState<Notification[]>([]);
   const [isLoading, setIsLoading] = useState(true);

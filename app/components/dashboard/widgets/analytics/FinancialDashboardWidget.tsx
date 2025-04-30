@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useTranslation } from 'next-intl';
+import { useTranslations } from '@/app/hooks/useTranslations';
 import { Doughnut, Bar } from 'react-chartjs-2';
 import { ChartOptions } from 'chart.js';
 import { WidgetProps } from '@/lib/types/widget';

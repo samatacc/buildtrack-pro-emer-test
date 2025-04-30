@@ -18,14 +18,30 @@ import { namespaces, loadNamespaceMessages } from '@/i18n';
  * @returns Translation function and loading metrics
  */
 export function useNamespacedTranslations(namespace: string, locale?: string) {
-  // Get the base translation function from next-intl
-  const baseTranslate = useNextIntlTranslations(namespace);
+  // Initialize with default metrics
   const [metrics, setMetrics] = useState({
     loadTime: 0,
     cacheHit: false,
     namespaceSize: 0,
-    loaded: false
+    loaded: false,
+    errors: 0
   });
+  
+  // Wrap the base translate function with error handling
+  let baseTranslate;
+  try {
+    baseTranslate = useNextIntlTranslations(namespace);
+  } catch (error) {
+    console.warn(`Error loading translations for namespace '${namespace}':`, error);
+    // Provide a fallback translation function that won't crash
+    baseTranslate = (key: string, params?: Record<string, any>) => {
+      console.warn(`Translation missing for key: ${namespace}.${key}`);
+      return key.split('.').pop() || key;
+    };
+    
+    // Update metrics to reflect the error
+    setMetrics(prev => ({ ...prev, errors: prev.errors + 1 }));
+  }
 
   useEffect(() => {
     // Skip in SSR context
@@ -45,7 +61,8 @@ export function useNamespacedTranslations(namespace: string, locale?: string) {
         loadTime: 0,
         cacheHit: true,
         namespaceSize: JSON.stringify(cachedData.data).length,
-        loaded: true
+        loaded: true,
+        errors: 0
       });
       return;
     }
@@ -74,7 +91,8 @@ export function useNamespacedTranslations(namespace: string, locale?: string) {
           loadTime,
           cacheHit: false,
           namespaceSize: JSON.stringify(messages).length,
-          loaded: true
+          loaded: true,
+          errors: 0
         });
         
         // Log performance data for analytics
@@ -88,7 +106,8 @@ export function useNamespacedTranslations(namespace: string, locale?: string) {
           loadTime: 0,
           cacheHit: false,
           namespaceSize: 0,
-          loaded: false
+          loaded: false,
+          errors: 1
         });
       });
   }, [namespace, locale]);

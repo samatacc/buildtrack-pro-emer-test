@@ -38,5 +38,86 @@
     "markAllAsRead": "Mark all as read",
     "viewAll": "View all notifications",
     "empty": "No new notifications"
+  },
+  "widgets": {
+    "title": "Dashboard Widgets",
+    "editMode": "Edit Dashboard",
+    "viewMode": "View Dashboard",
+    "saveLayout": "Save Layout",
+    "resetLayout": "Reset Layout",
+    "addWidget": "Add Widget",
+    "removeWidget": "Remove Widget",
+    "settingsLabel": "Widget Settings",
+    "dragHandle": "Drag to reposition",
+    "loadingState": "Loading widget data...",
+    "errorState": "Failed to load widget data",
+    "refreshData": "Refresh Data",
+    "expandWidget": "Expand",
+    "collapseWidget": "Collapse",
+    "details": "View Details",
+    "types": {
+      "ACTIVE_PROJECTS": {
+        "title": "Active Projects",
+        "description": "Overview of currently active projects"
+      },
+      "PROJECT_HEALTH": {
+        "title": "Project Health",
+        "description": "Health status of your active projects"
+      },
+      "MY_TASKS": {
+        "title": "My Tasks",
+        "description": "Tasks assigned to you"
+      },
+      "TEAM_TASKS": {
+        "title": "Team Workload",
+        "description": "Overview of team member workloads"
+      },
+      "PROJECT_TIMELINE": {
+        "title": "Project Timeline",
+        "description": "Timeline view of project schedules"
+      },
+      "CRITICAL_PATH": {
+        "title": "Critical Path",
+        "description": "Critical path analysis for active projects"
+      },
+      "FINANCIAL_DASHBOARD": {
+        "title": "Financial Overview",
+        "description": "Financial summary of projects"
+      },
+      "PROGRESS_REPORTS": {
+        "title": "Progress Reports",
+        "description": "Progress tracking for active projects"
+      },
+      "TEAM_PERFORMANCE": {
+        "title": "Team Performance",
+        "description": "Performance metrics for your team"
+      },
+      "NOTIFICATION_CENTER": {
+        "title": "Notifications",
+        "description": "Recent notifications and alerts"
+      }
+    },
+    "emptyState": {
+      "title": "No Widgets Found",
+      "description": "Your dashboard is empty. Add widgets to get started.",
+      "addWidgetButton": "Add Your First Widget"
+    },
+    "settings": {
+      "title": "Widget Settings",
+      "save": "Save Settings",
+      "cancel": "Cancel",
+      "refreshRate": "Refresh Rate (seconds)",
+      "limit": "Display Limit",
+      "defaultTimeframe": "Default Timeframe",
+      "showLegend": "Show Legend",
+      "defaultMetric": "Default Metric",
+      "currencyCode": "Currency"
+    },
+    "errors": {
+      "loadFailed": "Failed to load dashboard",
+      "saveFailed": "Failed to save dashboard layout",
+      "widgetLoadFailed": "Failed to load widget data",
+      "retry": "Retry"
+    }
   }
 }

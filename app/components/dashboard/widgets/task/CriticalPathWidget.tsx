@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useTranslation } from 'next-intl';
+import { useTranslations } from '@/app/hooks/useTranslations';
 import Link from 'next/link';
 import { TaskStatus, TaskPriority } from '@/lib/types/task';
 import { WidgetProps } from '@/lib/types/widget';
@@ -29,7 +29,7 @@ const fetchCriticalPathTasks = async () => {
         projectId: 'proj-002',
         projectName: 'Highland Park Residence',
         status: TaskStatus.BLOCKED,
-        priority: TaskPriority.URGENT,
+        priority: TaskPriority.CRITICAL,
         dueDate: new Date(2025, 4, 9),
         daysUntilDue: 0,
         dependentTaskCount: 8,
@@ -53,7 +53,7 @@ const fetchCriticalPathTasks = async () => {
         title: 'Vendor contract finalization',
         projectId: 'proj-004',
         projectName: 'Metro Transit Terminal',
-        status: TaskStatus.TO_DO,
+        status: TaskStatus.TODO,
         priority: TaskPriority.HIGH,
         dueDate: new Date(2025, 4, 16),
         daysUntilDue: 7,
@@ -65,7 +65,7 @@ const fetchCriticalPathTasks = async () => {
         title: 'Material delivery confirmation',
         projectId: 'proj-002',
         projectName: 'Highland Park Residence',
-        status: TaskStatus.TO_DO,
+        status: TaskStatus.TODO,
         priority: TaskPriority.MEDIUM,
         dueDate: new Date(2025, 4, 18),
         daysUntilDue: 9,
@@ -78,7 +78,7 @@ const fetchCriticalPathTasks = async () => {
 
 // Helper function to determine urgency color
 const getUrgencyColor = (daysUntilDue: number, status: TaskStatus) => {
-  if (status === TaskStatus.DONE) return 'text-green-600 dark:text-green-400';
+  if (status === TaskStatus.COMPLETED) return 'text-green-600 dark:text-green-400';
   
   if (daysUntilDue < 0) return 'text-red-600 dark:text-red-400';
   if (daysUntilDue === 0) return 'text-red-600 dark:text-red-400';
@@ -97,13 +97,13 @@ const formatDaysUntilDue = (days: number, t: any) => {
 // Helper function to get status badge class
 const getStatusBadgeClass = (status: TaskStatus) => {
   switch (status) {
-    case TaskStatus.TO_DO:
+    case TaskStatus.TODO:
       return 'bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-300';
     case TaskStatus.IN_PROGRESS:
       return 'bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-300';
     case TaskStatus.BLOCKED:
       return 'bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-300';
-    case TaskStatus.DONE:
+    case TaskStatus.COMPLETED:
       return 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-300';
     default:
       return 'bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-300';
@@ -119,15 +119,29 @@ const getPriorityBadgeClass = (priority: TaskPriority) => {
       return 'bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-300';
     case TaskPriority.HIGH:
       return 'bg-orange-100 text-orange-800 dark:bg-orange-900/30 dark:text-orange-300';
-    case TaskPriority.URGENT:
+    case TaskPriority.CRITICAL:
       return 'bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-300';
     default:
       return 'bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-300';
   }
 };
 
+// Interface for widget settings
+interface CriticalPathWidgetSettings {
+  refreshRate?: string | number;
+  limit?: number;
+  screenSize?: string; // Current screen size for responsive design
+}
+
 const CriticalPathWidget: React.FC<WidgetProps> = ({ id, title, settings }) => {
-  const { t } = useTranslation('dashboard');
+  const { t } = useTranslations('dashboard');
+  
+  // Extract settings with defaults
+  const { 
+    refreshRate,
+    limit = 5,
+    screenSize = 'lg' 
+  } = settings as CriticalPathWidgetSettings;
   const [criticalTasks, setCriticalTasks] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<Error | null>(null);
@@ -152,9 +166,12 @@ const CriticalPathWidget: React.FC<WidgetProps> = ({ id, title, settings }) => {
     loadCriticalTasks();
     
     // Set up refresh interval if specified in settings
-    const refreshRate = settings?.refreshRate ? parseInt(settings.refreshRate) : null;
-    if (refreshRate && refreshRate !== 'auto') {
-      const interval = setInterval(loadCriticalTasks, refreshRate * 1000);
+    if (refreshRate) {
+      const refreshRateMs = typeof refreshRate === 'string' ? 
+        (refreshRate === 'auto' ? 30000 : parseInt(refreshRate) * 1000) : 
+        refreshRate * 1000;
+        
+      const interval = setInterval(loadCriticalTasks, refreshRateMs);
       return () => clearInterval(interval);
     }
   }, [settings]);
@@ -234,11 +251,11 @@ const CriticalPathWidget: React.FC<WidgetProps> = ({ id, title, settings }) => {
       
       {/* Task List */}
       <div className="flex-1 overflow-auto space-y-3">
-        {sortedTasks.map((task) => (
+        {sortedTasks.slice(0, limit).map((task) => (
           <Link
             key={task.id}
             href={`/dashboard/tasks/${task.id}`}
-            className={`block p-3 rounded-lg border ${
+            className={`block ${screenSize === 'xs' ? 'p-2' : 'p-3'} rounded-lg border ${
               task.status === TaskStatus.BLOCKED
                 ? 'border-red-200 dark:border-red-900 bg-red-50 dark:bg-red-900/10'
                 : task.daysUntilDue <= 1
@@ -246,23 +263,23 @@ const CriticalPathWidget: React.FC<WidgetProps> = ({ id, title, settings }) => {
                   : 'border-gray-200 dark:border-gray-700'
             } hover:shadow-md transition-shadow`}
           >
-            <div className="flex items-start justify-between">
+            <div className={`${screenSize === 'xs' || screenSize === 'sm' ? 'flex-col space-y-2' : 'flex items-start justify-between'}`}>
               <div className="flex-1">
-                <h3 className="text-sm font-medium text-gray-900 dark:text-white">
+                <h3 className={`${screenSize === 'xs' ? 'text-xs' : 'text-sm'} font-medium text-gray-900 dark:text-white`}>
                   {task.title}
                 </h3>
-                <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+                <p className={`${screenSize === 'xs' ? 'text-2xs' : 'text-xs'} text-gray-500 dark:text-gray-400 mt-0.5`}>
                   {task.projectName}
                 </p>
               </div>
               
               {/* Priority & Status Badges */}
-              <div className="flex flex-col items-end gap-1">
-                <span className={`inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium ${getPriorityBadgeClass(task.priority)}`}>
-                  {t(`task.priority.${task.priority}`)}
+              <div className={`flex ${screenSize === 'xs' || screenSize === 'sm' ? 'flex-row justify-between' : 'flex-col items-end'} gap-1`}>
+                <span className={`inline-flex items-center ${screenSize === 'xs' ? 'px-1.5 py-0.5 text-2xs' : 'px-2 py-0.5 text-xs'} rounded-full font-medium ${getPriorityBadgeClass(task.priority)}`}>
+                  {t(`tasks.priority.${task.priority.toLowerCase()}`)}
                 </span>
                 
-                <span className={`inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium ${getStatusBadgeClass(task.status)}`}>
+                <span className={`inline-flex items-center ${screenSize === 'xs' ? 'px-1.5 py-0.5 text-2xs' : 'px-2 py-0.5 text-xs'} rounded-full font-medium ${getStatusBadgeClass(task.status)}`}>
                   {t(`task.status.${task.status}`)}
                 </span>
               </div>
@@ -276,23 +293,21 @@ const CriticalPathWidget: React.FC<WidgetProps> = ({ id, title, settings }) => {
             )}
             
             {/* Task Metrics */}
-            <div className="mt-2 flex flex-wrap justify-between items-center text-xs">
+            <div className={`mt-2 flex flex-wrap ${screenSize === 'xs' ? 'text-2xs' : 'text-xs'} justify-between items-center`}>
               {/* Due Date */}
               <div className={`flex items-center ${getUrgencyColor(task.daysUntilDue, task.status)}`}>
-                <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                <svg className={`${screenSize === 'xs' ? 'w-2.5 h-2.5' : 'w-3 h-3'} mr-1`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                 </svg>
-                <span>{formatDaysUntilDue(task.daysUntilDue, t)}</span>
+                {formatDaysUntilDue(task.daysUntilDue, t)}
               </div>
               
               {/* Dependent Tasks Count */}
-              <div className="flex items-center text-gray-600 dark:text-gray-400">
-                <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div className="flex items-center">
+                <svg className={`${screenSize === 'xs' ? 'w-2.5 h-2.5' : 'w-3 h-3'} mr-1`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
                 </svg>
-                <span>
-                  {t('task.dependentTasks', { count: task.dependentTaskCount })}
-                </span>
+                {t('task.dependents', { count: task.dependentTaskCount })}
               </div>
             </div>
             

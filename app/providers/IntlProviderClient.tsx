@@ -31,7 +31,6 @@ export default function IntlProviderClient({
           long: { day: 'numeric', month: 'long', year: 'numeric' }
         }
       }}
-      now={new Date()}
     >
       {children}
     </NextIntlClientProvider>

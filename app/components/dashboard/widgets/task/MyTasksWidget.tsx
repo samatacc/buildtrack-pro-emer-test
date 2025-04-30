@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useTranslation } from 'next-intl';
+import { useTranslations } from '@/app/hooks/useTranslations';
 import Link from 'next/link';
 import { TaskStatus, TaskPriority } from '@/lib/types/task';
 import { WidgetProps } from '@/lib/types/widget';
@@ -26,7 +26,7 @@ const fetchMyTasks = async () => {
         title: 'Approve contractor invoices',
         projectId: 'proj-001',
         projectName: 'Downtown Office Renovation',
-        status: TaskStatus.TO_DO,
+        status: TaskStatus.TODO,
         priority: TaskPriority.MEDIUM,
         dueDate: new Date(2025, 4, 18),
         isOverdue: false
@@ -36,8 +36,8 @@ const fetchMyTasks = async () => {
         title: 'Site inspection for foundation',
         projectId: 'proj-002',
         projectName: 'Highland Park Residence',
-        status: TaskStatus.TO_DO,
-        priority: TaskPriority.URGENT,
+        status: TaskStatus.TODO,
+        priority: TaskPriority.CRITICAL,
         dueDate: new Date(2025, 4, 10),
         isOverdue: true
       },
@@ -67,7 +67,7 @@ const fetchMyTasks = async () => {
         title: 'Environmental compliance review',
         projectId: 'proj-004',
         projectName: 'Metro Transit Terminal',
-        status: TaskStatus.DONE,
+        status: TaskStatus.COMPLETED,
         priority: TaskPriority.HIGH,
         dueDate: new Date(2025, 4, 5),
         isOverdue: false,
@@ -80,14 +80,14 @@ const fetchMyTasks = async () => {
 // Helper functions for UI
 const getStatusBadgeClasses = (status: TaskStatus) => {
   switch (status) {
-    case TaskStatus.TO_DO:
-      return 'bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-300';
+    case TaskStatus.COMPLETED:
+      return 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-300';
     case TaskStatus.IN_PROGRESS:
       return 'bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-300';
     case TaskStatus.BLOCKED:
       return 'bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-300';
-    case TaskStatus.DONE:
-      return 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-300';
+    case TaskStatus.TODO:
+      return 'bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-300';
     default:
       return 'bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-300';
   }
@@ -101,7 +101,7 @@ const getPriorityClasses = (priority: TaskPriority) => {
       return 'text-blue-600 dark:text-blue-400';
     case TaskPriority.HIGH:
       return 'text-orange-600 dark:text-orange-400';
-    case TaskPriority.URGENT:
+    case TaskPriority.CRITICAL:
       return 'text-red-600 dark:text-red-400';
     default:
       return 'text-gray-600 dark:text-gray-400';
@@ -128,7 +128,7 @@ const getPriorityIcon = (priority: TaskPriority) => {
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 10l7-7m0 0l7 7m-7-7v18" />
         </svg>
       );
-    case TaskPriority.URGENT:
+    case TaskPriority.CRITICAL:
       return (
         <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
@@ -154,8 +154,28 @@ const groupTasksByProject = (tasks: any[]) => {
   }, {});
 };
 
+// Interface for widget-specific settings
+interface TaskWidgetSettings {
+  displayCount?: number;
+  showCompleted?: boolean;
+  screenSize?: string; // Current screen size for responsive design
+  refreshRate?: string | number;
+  groupByProject?: boolean;
+}
+
 const MyTasksWidget: React.FC<WidgetProps> = ({ id, title, settings }) => {
-  const { t, locale } = useTranslation('dashboard');
+  const { t } = useTranslations('dashboard');
+  // Get the current locale for date formatting
+  const locale = typeof window !== 'undefined' ? navigator.language : 'en-US';
+  
+  // Extract settings with defaults
+  const {
+    displayCount = 10,
+    showCompleted = true, 
+    screenSize = 'lg',
+    groupByProject = true,
+    refreshRate
+  } = settings as TaskWidgetSettings;
   const [tasksData, setTasksData] = useState<any | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<Error | null>(null);
@@ -170,7 +190,7 @@ const MyTasksWidget: React.FC<WidgetProps> = ({ id, title, settings }) => {
         setTasksData(data);
         
         // Initialize all projects as expanded
-        const projectIds = [...new Set(data.tasks.map((task: any) => task.projectId))];
+        const projectIds = Array.from(new Set(data.tasks.map((task: any) => task.projectId)));
         const initialExpandedState = projectIds.reduce((acc, projectId) => {
           acc[projectId] = true;
           return acc;
@@ -190,9 +210,12 @@ const MyTasksWidget: React.FC<WidgetProps> = ({ id, title, settings }) => {
     loadTasks();
     
     // Set up refresh interval if specified in settings
-    const refreshRate = settings?.refreshRate ? parseInt(settings.refreshRate) : null;
-    if (refreshRate && refreshRate !== 'auto') {
-      const interval = setInterval(loadTasks, refreshRate * 1000);
+    if (refreshRate) {
+      const refreshRateMs = typeof refreshRate === 'string' ? 
+        (refreshRate === 'auto' ? 30000 : parseInt(refreshRate) * 1000) : 
+        refreshRate * 1000;
+        
+      const interval = setInterval(loadTasks, refreshRateMs);
       return () => clearInterval(interval);
     }
   }, [settings]);
@@ -225,7 +248,7 @@ const MyTasksWidget: React.FC<WidgetProps> = ({ id, title, settings }) => {
   const handleTaskCompletion = (taskId: string, isCompleted: boolean) => {
     if (!tasksData) return;
     
-    const newStatus = isCompleted ? TaskStatus.DONE : TaskStatus.TO_DO;
+    const newStatus = isCompleted ? TaskStatus.COMPLETED : TaskStatus.TODO;
     
     // Update local state
     setTasksData({
@@ -274,24 +297,113 @@ const MyTasksWidget: React.FC<WidgetProps> = ({ id, title, settings }) => {
     );
   }
   
-  const groupedTasks = groupTasksByProject(tasksData.tasks);
+  // Filter tasks based on settings
+  const filteredTasks = tasksData.tasks
+    .filter((task: any) => showCompleted || task.status !== TaskStatus.COMPLETED)
+    .slice(0, displayCount);
+  
+  // Group by project if setting is enabled, otherwise show flat list
+  const groupedTasks = groupByProject ? groupTasksByProject(filteredTasks) : {};
   
   return (
     <div className="h-full flex flex-col">
       <div className="flex-1 overflow-y-auto">
-        {Object.keys(groupedTasks).map(projectId => (
+        {/* Flat task list when not grouping by project */}
+        {!groupByProject && (
+          <div className="space-y-2 px-1">
+            {filteredTasks.map((task: any) => (
+              <div 
+                key={task.id} 
+                className={`rounded-md border ${
+                  task.isOverdue && task.status !== TaskStatus.COMPLETED 
+                    ? 'border-red-200 dark:border-red-900 bg-red-50 dark:bg-red-900/10' 
+                    : 'border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800'
+                }`}
+              >
+                <div className={`${screenSize === 'xxs' || screenSize === 'xs' ? 'p-2' : 'p-3'}`}>
+                  <div className="flex items-start">
+                    {/* Task Checkbox */}
+                    <div className="flex-shrink-0 mt-0.5">
+                      <input 
+                        type="checkbox"
+                        id={`task-flat-${task.id}`}
+                        checked={task.status === TaskStatus.COMPLETED}
+                        onChange={(e) => handleTaskCompletion(task.id, e.target.checked)}
+                        className="w-4 h-4 rounded text-blue-600 focus:ring-blue-500 border-gray-300 dark:border-gray-600 dark:bg-gray-700"
+                      />
+                    </div>
+                    
+                    {/* Task Content */}
+                    <div className="ml-3 flex-1">
+                      <div className="flex items-center justify-between">
+                        <div>
+                          <label 
+                            htmlFor={`task-flat-${task.id}`}
+                            className={`${screenSize === 'xxs' || screenSize === 'xs' ? 'text-xs' : 'text-sm'} font-medium ${
+                              task.status === TaskStatus.COMPLETED 
+                                ? 'text-gray-500 dark:text-gray-400 line-through' 
+                                : 'text-gray-900 dark:text-white'
+                            }`}
+                          >
+                            {task.title}
+                          </label>
+                          <div className={`${screenSize === 'xxs' ? 'text-2xs' : 'text-xs'} text-gray-500 dark:text-gray-400`}>
+                            {task.projectName}
+                          </div>
+                        </div>
+                        
+                        {/* Priority Icon */}
+                        <div className={`flex-shrink-0 ${getPriorityClasses(task.priority)}`}>
+                          {getPriorityIcon(task.priority)}
+                        </div>
+                      </div>
+                      
+                      {/* Task Meta */}
+                      <div className="mt-1 flex flex-wrap items-center gap-2 text-xs">
+                        {/* Due Date */}
+                        <span className={`${screenSize === 'xxs' ? 'text-2xs' : 'text-xs'} ${
+                          task.isOverdue && task.status !== TaskStatus.COMPLETED 
+                            ? 'text-red-600 dark:text-red-400' 
+                            : 'text-gray-500 dark:text-gray-400'
+                        }`}>
+                          {new Intl.DateTimeFormat(locale, { 
+                            month: 'short', 
+                            day: 'numeric' 
+                          }).format(task.dueDate)}
+                        </span>
+                        
+                        {/* Status Badge */}
+                        <span className={`inline-flex items-center px-1.5 py-0.5 rounded-full ${screenSize === 'xxs' ? 'text-2xs' : 'text-xs'} font-medium ${getStatusBadgeClasses(task.status)}`}>
+                          {t(`task.status.${task.status}`)}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+        
+        {/* Project grouped tasks */}
+        {groupByProject && (
+          Object.keys(groupedTasks).length === 0 ? (
+          <div className="h-full flex flex-col items-center justify-center text-gray-500">
+            <p className={`${screenSize === 'xxs' || screenSize === 'xs' ? 'text-xs' : 'text-sm'}`}>{t('task.noTasksInFilter')}</p>
+          </div>
+        ) : Object.keys(groupedTasks).map(projectId => (
           <div key={projectId} className="mb-4">
             {/* Project Header */}
             <div 
               className="flex items-center justify-between cursor-pointer py-2 px-1 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-md"
               onClick={() => toggleProjectExpanded(projectId)}
             >
-              <h3 className="text-sm font-medium text-gray-900 dark:text-white">
+              <h3 className={`${screenSize === 'xxs' || screenSize === 'xs' ? 'text-xs' : 'text-sm'} font-medium text-gray-900 dark:text-white`}>
                 {groupedTasks[projectId].projectName}
               </h3>
               
               <div className="flex items-center">
-                <span className="text-xs text-gray-500 dark:text-gray-400 mr-2">
+                <span className={`${screenSize === 'xxs' ? 'text-2xs' : 'text-xs'} text-gray-500 dark:text-gray-400 mr-2`}>
                   {groupedTasks[projectId].tasks.length} {t('task.tasks')}
                 </span>
                 
@@ -308,24 +420,24 @@ const MyTasksWidget: React.FC<WidgetProps> = ({ id, title, settings }) => {
             
             {/* Project Tasks */}
             {expandedProjects[projectId] && (
-              <div className="space-y-2 mt-2 pl-2">
+              <div className={`space-y-2 mt-2 ${screenSize === 'xxs' ? 'pl-1' : 'pl-2'}`}>
                 {groupedTasks[projectId].tasks.map((task: any) => (
                   <div 
                     key={task.id} 
                     className={`rounded-md border ${
-                      task.isOverdue && task.status !== TaskStatus.DONE 
+                      task.isOverdue && task.status !== TaskStatus.COMPLETED 
                         ? 'border-red-200 dark:border-red-900 bg-red-50 dark:bg-red-900/10' 
                         : 'border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800'
                     }`}
                   >
-                    <div className="p-3">
+                    <div className={`${screenSize === 'xxs' || screenSize === 'xs' ? 'p-2' : 'p-3'}`}>
                       <div className="flex items-start">
                         {/* Task Checkbox */}
                         <div className="flex-shrink-0 mt-0.5">
                           <input 
                             type="checkbox"
                             id={`task-${task.id}`}
-                            checked={task.status === TaskStatus.DONE}
+                            checked={task.status === TaskStatus.COMPLETED}
                             onChange={(e) => handleTaskCompletion(task.id, e.target.checked)}
                             className="w-4 h-4 rounded text-blue-600 focus:ring-blue-500 border-gray-300 dark:border-gray-600 dark:bg-gray-700"
                           />
@@ -336,8 +448,8 @@ const MyTasksWidget: React.FC<WidgetProps> = ({ id, title, settings }) => {
                           <div className="flex items-center justify-between">
                             <label 
                               htmlFor={`task-${task.id}`}
-                              className={`text-sm font-medium ${
-                                task.status === TaskStatus.DONE 
+                              className={`${screenSize === 'xxs' || screenSize === 'xs' ? 'text-xs' : 'text-sm'} font-medium ${
+                                task.status === TaskStatus.COMPLETED 
                                   ? 'text-gray-500 dark:text-gray-400 line-through' 
                                   : 'text-gray-900 dark:text-white'
                               }`}
@@ -354,8 +466,8 @@ const MyTasksWidget: React.FC<WidgetProps> = ({ id, title, settings }) => {
                           {/* Task Meta */}
                           <div className="mt-1 flex flex-wrap items-center gap-2 text-xs">
                             {/* Due Date */}
-                            <span className={`${
-                              task.isOverdue && task.status !== TaskStatus.DONE 
+                            <span className={`${screenSize === 'xxs' ? 'text-2xs' : 'text-xs'} ${
+                              task.isOverdue && task.status !== TaskStatus.COMPLETED 
                                 ? 'text-red-600 dark:text-red-400' 
                                 : 'text-gray-500 dark:text-gray-400'
                             }`}>
@@ -366,7 +478,7 @@ const MyTasksWidget: React.FC<WidgetProps> = ({ id, title, settings }) => {
                             </span>
                             
                             {/* Status Badge */}
-                            <span className={`inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium ${getStatusBadgeClasses(task.status)}`}>
+                            <span className={`inline-flex items-center ${screenSize === 'xxs' ? 'px-1 py-0.5 text-2xs' : screenSize === 'xs' ? 'px-1.5 py-0.5 text-xs' : 'px-2 py-0.5 text-xs'} rounded-full font-medium ${getStatusBadgeClasses(task.status)}`}>
                               {t(`task.status.${task.status}`)}
                             </span>
                             
@@ -388,17 +500,30 @@ const MyTasksWidget: React.FC<WidgetProps> = ({ id, title, settings }) => {
         ))}
       </div>
       
-      {/* Widget Footer */}
-      <div className="mt-3 pt-3 border-t border-gray-200 dark:border-gray-700">
+      {/* Widget Footer with view options for mobile */}
+      <div className="mt-2 pt-2 border-t border-gray-200 dark:border-gray-700 flex justify-between items-center">
         <Link 
           href="/dashboard/tasks"
-          className="text-sm text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 flex items-center"
+          className={`${screenSize === 'xxs' || screenSize === 'xs' ? 'text-xs' : 'text-sm'} text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 flex items-center`}
         >
           {t('task.viewAllTasks')} 
-          <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg className={`${screenSize === 'xxs' || screenSize === 'xs' ? 'w-3 h-3' : 'w-4 h-4'} ml-1`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
           </svg>
         </Link>
+        
+        {/* View toggle (only on wider screens) */}
+        {screenSize !== 'xxs' && screenSize !== 'xs' && (
+          <button
+            onClick={() => {
+              // In a real application, this would update the widget settings
+              console.log(`Toggling groupByProject from ${groupByProject} to ${!groupByProject}`);
+            }}
+            className="text-xs text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300"
+          >
+            {groupByProject ? t('task.viewList') : t('task.viewGroups')}
+          </button>
+        )}
       </div>
     </div>
   );

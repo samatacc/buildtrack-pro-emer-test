@@ -98,6 +98,22 @@
       "invalidPhone": "Please enter a valid phone number"
     }
   },
+  "languageSelector": {
+    "title": "Language",
+    "select": "Select language",
+    "languageSuggestion": {
+      "detected": "Language Detected",
+      "message": "We noticed you might prefer {detectedLanguage} instead of {currentLanguage}. Would you like to switch?",
+      "switchTo": "Switch to {language}",
+      "noThanks": "No, thanks"
+    },
+    "languages": {
+      "en": "English",
+      "es": "Español",
+      "fr": "Français",
+      "pt-BR": "Português (Brasil)"
+    }
+  },
   "connectionStatus": {
     "online": "Online",
     "offline": "Offline",

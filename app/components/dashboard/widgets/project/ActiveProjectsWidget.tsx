@@ -79,14 +79,29 @@ const formatDaysDeviation = (days: number, t: any) => {
   }
 };
 
+// Interface for widget-specific settings
+interface ProjectWidgetSettings {
+  displayMode?: 'detailed' | 'compact';
+  displayCount?: number;
+  filterStatus?: ProjectStatus;
+  filterHealth?: ProjectHealth;
+  screenSize?: string; // Current screen size for responsive design
+}
+
 const ActiveProjectsWidget: React.FC<WidgetProps> = ({ id, title, settings }) => {
   const { t, locale } = useTranslation('dashboard');
   const [projects, setProjects] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<Error | null>(null);
   
-  // Display mode from settings
-  const displayMode = settings?.displayMode || 'detailed';
+  // Extract settings with defaults
+  const { 
+    displayMode = 'detailed',
+    screenSize = 'lg',
+    displayCount = screenSize === 'xxs' ? 3 : (screenSize === 'xs' ? 4 : 5),
+    filterStatus,
+    filterHealth 
+  } = settings as ProjectWidgetSettings;
   
   // Load projects
   useEffect(() => {
@@ -115,9 +130,14 @@ const ActiveProjectsWidget: React.FC<WidgetProps> = ({ id, title, settings }) =>
   }, [settings]);
   
   if (isLoading) {
+    // Responsive loading indicator size
+    const spinnerSize = screenSize === 'xxs' || screenSize === 'xs' ? 'h-4 w-4' : 'h-6 w-6';
+    const loadingText = screenSize === 'xxs' ? '' : t('widget.loading');
+    
     return (
-      <div className="h-full flex items-center justify-center">
-        <div className="animate-spin rounded-full h-6 w-6 border-t-2 border-b-2 border-blue-600"></div>
+      <div className="h-full flex flex-col items-center justify-center">
+        <div className={`animate-spin rounded-full ${spinnerSize} border-t-2 border-b-2 border-blue-600`}></div>
+        {loadingText && <p className="mt-2 text-sm text-gray-500">{loadingText}</p>}
       </div>
     );
   }
@@ -145,18 +165,24 @@ const ActiveProjectsWidget: React.FC<WidgetProps> = ({ id, title, settings }) =>
     );
   }
   
+  // Adjust spacing between projects based on screen size
+  const projectSpacing = screenSize === 'xxs' ? 'space-y-2' : 
+                        screenSize === 'xs' || screenSize === 'sm' ? 'space-y-3' : 
+                        'space-y-4';
+  
   return (
     <div className="h-full flex flex-col">
-      <div className="flex-1 overflow-y-auto space-y-4">
+      <div className={`flex-1 overflow-y-auto ${projectSpacing}`}>
         {projects.map(project => (
           <div 
             key={project.id}
-            className="p-3 bg-white dark:bg-gray-800 rounded-lg shadow border border-gray-200 dark:border-gray-700 hover:shadow-md transition-shadow"
+            className={`${screenSize === 'xxs' ? 'p-2' : 'p-3'} bg-white dark:bg-gray-800 rounded-lg shadow border border-gray-200 dark:border-gray-700 hover:shadow-md transition-shadow`}
+            style={{ touchAction: 'manipulation' }} // Improve touch interactions on mobile
           >
-            <div className="flex items-start space-x-3">
-              {/* Project Thumbnail (only in detailed view) */}
-              {displayMode === 'detailed' && (
-                <div className="flex-shrink-0 w-16 h-16 rounded-md overflow-hidden bg-gray-200 dark:bg-gray-700">
+            <div className={`flex ${screenSize === 'xxs' || screenSize === 'sm' || screenSize === 'xs' ? 'flex-col' : 'items-start space-x-3'}`}>
+              {/* Project Thumbnail (only in detailed view and larger screens) */}
+              {displayMode === 'detailed' && !(screenSize === 'xs') && (
+                <div className={`flex-shrink-0 ${screenSize === 'xxs' ? 'w-10 h-10 mb-1.5' : screenSize === 'sm' ? 'w-12 h-12 mb-2' : 'w-16 h-16'} rounded-md overflow-hidden bg-gray-200 dark:bg-gray-700`}>
                   {project.thumbnail ? (
                     <img 
                       src={project.thumbnail} 
@@ -165,7 +191,7 @@ const ActiveProjectsWidget: React.FC<WidgetProps> = ({ id, title, settings }) =>
                     />
                   ) : (
                     <div className="w-full h-full flex items-center justify-center text-gray-400">
-                      <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <svg className={`${screenSize === 'sm' ? 'w-6 h-6' : 'w-8 h-8'}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
                       </svg>
                     </div>
@@ -174,51 +200,59 @@ const ActiveProjectsWidget: React.FC<WidgetProps> = ({ id, title, settings }) =>
               )}
               
               <div className="flex-1 min-w-0">
-                <div className="flex items-center justify-between">
-                  <h3 className="text-sm font-medium text-gray-900 dark:text-white truncate">
+                <div className={`flex ${screenSize === 'xs' || screenSize === 'sm' ? 'flex-col space-y-1' : 'items-center justify-between'}`}>
+                  <h3 className={`${screenSize === 'xxs' ? 'text-xs' : screenSize === 'xs' ? 'text-xs' : screenSize === 'sm' ? 'text-sm' : 'text-base'} font-medium text-gray-900 dark:text-white truncate`}>
                     {project.name}
                   </h3>
                   
                   {/* Health Indicator */}
                   <span 
-                    className={`inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium ${getHealthColor(project.health)} text-white`}
+                    className={`inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium ${getHealthColor(project.health)} text-white ${screenSize === 'xs' || screenSize === 'sm' ? 'self-start' : ''}`}
                   >
                     {t(`project.health.${project.health}`)}
                   </span>
                 </div>
                 
                 {/* Progress Bar */}
-                <div className="mt-2 w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5">
+                <div className={`${screenSize === 'xxs' ? 'mt-1.5' : 'mt-2'} w-full bg-gray-200 dark:bg-gray-700 rounded-full ${screenSize === 'xxs' ? 'h-1.5' : 'h-2.5'}`}>
                   <div 
-                    className={`h-2.5 rounded-full ${getHealthColor(project.health)}`}
+                    className={`${screenSize === 'xxs' ? 'h-1.5' : 'h-2.5'} rounded-full ${getHealthColor(project.health)}`}
                     style={{ width: `${project.progress}%` }}
                   ></div>
                 </div>
                 
-                <div className="mt-2 flex items-center justify-between text-xs text-gray-500 dark:text-gray-400">
+                <div className={`${screenSize === 'xxs' ? 'mt-1' : 'mt-2'} flex ${screenSize === 'xxs' || screenSize === 'xs' ? 'flex-col space-y-1' : 'items-center justify-between'} ${screenSize === 'xxs' ? 'text-[10px]' : 'text-xs'} text-gray-500 dark:text-gray-400`}>
                   <span>{t('project.progress', { percent: project.progress })}</span>
                   
                   {/* Days ahead/behind schedule */}
-                  <span>{formatDaysDeviation(project.daysAhead, t)}</span>
+                  <span className={project.daysAhead < 0 ? 'text-red-500' : project.daysAhead > 0 ? 'text-green-500' : ''}>
+                    {formatDaysDeviation(project.daysAhead, t)}
+                  </span>
                 </div>
                 
-                {/* Due Date (only in detailed view) */}
-                {displayMode === 'detailed' && (
-                  <div className="mt-2 text-xs text-gray-500 dark:text-gray-400">
-                    {t('project.dueDate')}: {new Intl.DateTimeFormat(locale, { 
-                      dateStyle: 'medium' 
-                    }).format(project.dueDate)}
+                <div className={`${screenSize === 'xs' || screenSize === 'sm' ? 'mt-1.5' : 'mt-2'}`}>
+                  {/* Due Date - more compact on mobile */}
+                  <div className="text-xs text-gray-500 dark:text-gray-400 flex flex-wrap items-center">
+                    <span className={screenSize === 'xs' ? 'mr-1' : ''}>{t('project.dueDate')}:</span>
+                    <span className="font-medium text-gray-700 dark:text-gray-300 ml-1">
+                      {new Date(project.dueDate).toLocaleDateString(locale, { 
+                        year: screenSize === 'xs' ? '2-digit' : 'numeric', 
+                        month: 'short', 
+                        day: 'numeric' 
+                      })}
+                    </span>
                   </div>
-                )}
+                </div>
                 
                 {/* Action buttons (only in detailed view) */}
                 {displayMode === 'detailed' && (
-                  <div className="mt-3 flex items-center space-x-2">
+                  <div className="mt-3 flex items-center justify-between">
                     <Link 
-                      href={`/dashboard/projects/${project.id}`}
-                      className="text-xs text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 flex items-center"
+                      href={`/projects/${project.id}`}
+                      className={`${screenSize === 'xs' ? 'text-xs' : 'text-sm'} text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 font-medium flex items-center`}
                     >
-                      {t('project.viewDetails')} <ArrowRightIcon className="w-3 h-3 ml-1" />
+                      {t('project.viewDetails')} 
+                      <ArrowRightIcon className={`ml-1 ${screenSize === 'xs' ? 'h-3 w-3' : 'h-4 w-4'}`} />
                     </Link>
                   </div>
                 )}
@@ -228,20 +262,20 @@ const ActiveProjectsWidget: React.FC<WidgetProps> = ({ id, title, settings }) =>
         ))}
       </div>
       
-      {/* Widget Footer */}
-      <div className="mt-3 pt-3 border-t border-gray-200 dark:border-gray-700 flex justify-between items-center">
+      {/* Widget Footer - adjust spacing based on screen size */}
+      <div className={`${screenSize === 'xxs' || screenSize === 'xs' ? 'mt-2 pt-2' : 'mt-3 pt-3'} border-t border-gray-200 dark:border-gray-700 flex ${screenSize === 'xxs' ? 'flex-col space-y-2' : 'justify-between items-center'}`}>
         <Link 
           href="/dashboard/projects"
-          className="text-sm text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 flex items-center"
+          className={`${screenSize === 'xxs' ? 'text-xs py-1.5' : 'text-sm'} text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 flex items-center ${screenSize === 'xxs' ? 'justify-center w-full rounded-md border border-blue-200 hover:bg-blue-50' : ''}`}
         >
-          {t('project.viewAllProjects')} <ArrowRightIcon className="w-4 h-4 ml-1" />
+          {t('project.viewAllProjects')} <ArrowRightIcon className={`${screenSize === 'xxs' ? 'w-3 h-3 ml-1' : 'w-4 h-4 ml-1'}`} />
         </Link>
         
         <Link 
           href="/dashboard/projects/create"
-          className="text-sm text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 flex items-center"
+          className={`${screenSize === 'xxs' ? 'text-xs py-1.5' : 'text-sm'} text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 flex items-center ${screenSize === 'xxs' ? 'justify-center w-full rounded-md border border-blue-200 hover:bg-blue-50' : ''}`}
         >
-          <PlusIcon className="w-4 h-4 mr-1" /> {t('project.createProject')}
+          <PlusIcon className={`${screenSize === 'xxs' ? 'w-3 h-3 mr-1' : 'w-4 h-4 mr-1'}`} /> {t('project.createProject')}
         </Link>
       </div>
     </div>

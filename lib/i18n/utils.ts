@@ -1,6 +1,10 @@
 'use client';
 
 import { locales, defaultLocale, localeNames, localeFlags } from '../../i18n';
+import { cookies } from 'next/headers';
+
+// This hybrid module is designed to support both client and server components
+// Some functions will be marked with client-only or server-only comments
 
 /**
  * BuildTrack Pro - Internationalization Utilities (Client Side)
