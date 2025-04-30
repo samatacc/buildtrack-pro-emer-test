@@ -1,0 +1,133 @@
+{
+  "hero": {
+    "title": "Build Better, Monitor Smarter",
+    "subtitle": "The complete construction management platform designed for builders who want to optimize their projects, reduce costs, and deliver exceptional results.",
+    "cta": {
+      "primary": "Start Free Trial",
+      "secondary": "Watch Demo"
+    }
+  },
+  "trustedBy": {
+    "heading": "Trusted by industry leaders"
+  },
+  "features": {
+    "heading": "Features That Transform Your Construction",
+    "subtitle": "Powerful tools designed specifically for the construction industry",
+    "projectManagement": "Project Management",
+    "projectManagementDesc": "Control every aspect of your project with customizable dashboards, interactive timelines, and real-time progress tracking.",
+    "resourceTracking": "Resource Tracking",
+    "resourceTrackingDesc": "Monitor materials, equipment, and labor with precision to optimize resource usage and prevent waste.",
+    "fieldMobileApp": "Field Mobile App",
+    "fieldMobileAppDesc": "Access critical project information anywhere, even without internet connection, perfect for remote construction sites.",
+    "documentManagement": "Document Management",
+    "documentManagementDesc": "Store, organize, and share blueprints, technical documents, and regulatory approvals with your team and clients.",
+    "financialTools": "Financial Tools",
+    "financialToolsDesc": "Manage budgets, control costs, and monitor expenses with detailed reports that make accounting easy.",
+    "teamCollaboration": "Team Collaboration",
+    "teamCollaborationDesc": "Communicate efficiently with your team through messaging, task assignments, and real-time notifications."
+  },
+  "benefits": {
+    "heading": "Benefits for Your Business",
+    "subtitle": "How BuildTrack Pro can transform your construction operation",
+    "timeEfficiency": "Time Efficiency",
+    "timeEfficiencyDesc": "Reduce administrative tasks by up to 35% and complete projects faster with streamlined processes.",
+    "costReduction": "Cost Reduction",
+    "costReductionDesc": "Cut project costs by up to 20% through better resource management and waste prevention.",
+    "qualityImprovement": "Quality Improvement",
+    "qualityImprovementDesc": "Ensure consistent quality standards through detailed checklists and quality control procedures.",
+    "riskManagement": "Risk Management",
+    "riskManagementDesc": "Identify and mitigate potential risks early, preventing costly surprises during construction.",
+    "clientSatisfaction": "Client Satisfaction",
+    "clientSatisfactionDesc": "Keep clients informed and happy with transparent communication and on-time, on-budget deliveries.",
+    "dataInsights": "Data Insights",
+    "dataInsightsDesc": "Make better decisions based on comprehensive analytics and performance data from all your projects."
+  },
+  "testimonials": {
+    "heading": "What Our Customers Say",
+    "subtitle": "Hear from construction professionals who have transformed their operations with BuildTrack Pro",
+    "testimonial1": {
+      "quote": "BuildTrack Pro has completely transformed how we manage our construction projects. We've reduced administrative overhead by 40% and improved our on-time completion rate.",
+      "author": "Sarah Johnson",
+      "position": "Project Manager",
+      "company": "Highland Construction"
+    },
+    "testimonial2": {
+      "quote": "The resource tracking feature alone saved us thousands in the first month. We now have complete visibility into our material usage and can prevent waste before it happens.",
+      "author": "Michael Rodriguez",
+      "position": "Operations Director",
+      "company": "Westfield Builders"
+    },
+    "testimonial3": {
+      "quote": "Our field teams love the mobile app. They can update progress, report issues, and access documents without returning to the office, saving hours each day.",
+      "author": "David Chen",
+      "position": "Site Supervisor",
+      "company": "Eastside Development"
+    }
+  },
+  "pricing": {
+    "heading": "Simple, Transparent Pricing",
+    "subtitle": "Choose the plan that's right for your business",
+    "monthly": "Monthly",
+    "annual": "Annual",
+    "starter": {
+      "name": "Starter",
+      "price": "$99",
+      "period": "/month",
+      "description": "Perfect for small construction businesses",
+      "features": [
+        "Up to 5 active projects",
+        "Basic project management tools",
+        "Document storage",
+        "Mobile app access",
+        "Email support"
+      ],
+      "cta": "Get Started"
+    },
+    "professional": {
+      "name": "Professional",
+      "price": "$199",
+      "period": "/month",
+      "description": "Ideal for growing construction companies",
+      "features": [
+        "Up to 15 active projects",
+        "Advanced project management",
+        "Financial tracking & reporting",
+        "Resource optimization tools",
+        "Team collaboration features",
+        "Priority support"
+      ],
+      "cta": "Get Started",
+      "popular": "Most Popular"
+    },
+    "enterprise": {
+      "name": "Enterprise",
+      "price": "Custom",
+      "period": "",
+      "description": "For large construction operations",
+      "features": [
+        "Unlimited projects",
+        "Enterprise-grade security",
+        "Advanced analytics & reporting",
+        "API access & integrations",
+        "Custom workflows",
+        "Dedicated account manager"
+      ],
+      "cta": "Contact Sales"
+    }
+  },
+  "cta": {
+    "heading": "Ready to Transform Your Construction Projects?",
+    "subtitle": "Join thousands of construction professionals already using BuildTrack Pro",
+    "primary": "Start Your Free Trial",
+    "secondary": "Schedule a Demo"
+  },
+  "industry": {
+    "residential": "Residential Construction",
+    "commercial": "Commercial Construction",
+    "infrastructure": "Infrastructure",
+    "industrial": "Industrial Construction",
+    "specialtyTrades": "Specialty Trades"
+  },
+  "login": "Login",
+  "signup": "Get Started"
+}
