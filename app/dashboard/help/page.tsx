@@ -1,7 +1,6 @@
 'use client';
 
 import React, { Suspense, useState, useEffect } from 'react';
-import { useTranslations } from '@/app/hooks/useTranslations';
 import dynamic from 'next/dynamic';
 
 // Dynamically import the HelpCenter component with loading fallback
@@ -53,10 +52,8 @@ function ErrorBoundary({ children }: { children: React.ReactNode }) {
 }
 
 export default function HelpPage() {
-  const { t } = useTranslations('common');
-
   return (
-    <div className="container mx-auto px-4 py-8">
+    <div className="container mx-auto px-4 py-6">
       <ErrorBoundary>
         <Suspense fallback={<LoadingFallback />}>
           <HelpCenter />

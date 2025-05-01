@@ -37,10 +37,27 @@ class HelpService {
   private supabase;
   
   constructor() {
-    this.supabase = createClient(
-      process.env.NEXT_PUBLIC_SUPABASE_URL || '',
-      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || ''
-    );
+    // Get environment variables with fallbacks for build process
+    const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || '';
+    const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || '';
+    
+    // Only create the client if we have the required configuration
+    if (supabaseUrl && supabaseKey) {
+      this.supabase = createClient(supabaseUrl, supabaseKey);
+    } else {
+      // During build, provide a mock client that doesn't make actual requests
+      console.warn('Supabase credentials not available. Using mock client.');
+      this.supabase = {
+        from: () => ({
+          select: () => Promise.resolve({ data: [], error: null }),
+          insert: () => Promise.resolve({ data: null, error: null }),
+          update: () => Promise.resolve({ data: null, error: null }),
+        }),
+        auth: {
+          getUser: () => Promise.resolve({ data: { user: null }, error: null }),
+        },
+      } as any;
+    }
   }
   
   // Get all help articles
