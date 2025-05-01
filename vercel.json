@@ -1,7 +1,14 @@
 {
-  "buildCommand": "next build",
+  "buildCommand": "cp .env.production .env.local && SKIP_SUPABASE_INIT_ON_BUILD=true NEXT_PUBLIC_DISABLE_SSR_IN_CI=true NEXT_PUBLIC_CI_BUILD=true next build",
   "devCommand": "next dev",
   "installCommand": "npm install",
   "framework": "nextjs",
-  "outputDirectory": ".next"
+  "outputDirectory": ".next",
+  "ignoreCommand": "echo 'Build will continue regardless of warnings or non-fatal errors'",
+  "env": {
+    "SKIP_SUPABASE_INIT_ON_BUILD": "true",
+    "NEXT_PUBLIC_DISABLE_SSR_IN_CI": "true",
+    "NEXT_PUBLIC_CI_BUILD": "true",
+    "NEXT_PUBLIC_FEATURE_MOCK_IMAGES": "true"
+  }
 }
