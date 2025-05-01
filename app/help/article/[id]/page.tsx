@@ -1,13 +1,18 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, Suspense } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import { useTranslations } from '@/app/hooks/useTranslations';
 import { useHelpSystem } from '@/app/hooks/useHelpSystem';
 import { HelpArticle as HelpArticleType } from '@/lib/services/helpService';
-import HelpArticle from '@/app/components/help/HelpArticle';
+import dynamic from 'next/dynamic';
 import { ArrowLeftIcon } from '@heroicons/react/24/outline';
 import { toast } from 'react-hot-toast';
+
+const HelpArticle = dynamic(() => import('@/app/components/help/HelpArticle'), {
+  loading: () => <div className="animate-pulse">Loading article...</div>,
+  ssr: true
+});
 
 export default function ArticleDetailPage() {
   const { t } = useTranslations('help');
@@ -16,6 +21,7 @@ export default function ArticleDetailPage() {
   const { fetchArticleById, submitArticleFeedback } = useHelpSystem();
   const [article, setArticle] = useState<HelpArticleType | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [isSubmittingFeedback, setIsSubmittingFeedback] = useState(false);
 
   useEffect(() => {
     const articleId = params?.id as string;
@@ -46,41 +52,48 @@ export default function ArticleDetailPage() {
 
   const handleHelpfulVote = async (isHelpful: boolean) => {
     if (article) {
+      setIsSubmittingFeedback(true);
       await submitArticleFeedback(article.id, isHelpful);
+      setIsSubmittingFeedback(false);
     }
   };
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
-        <div className="mb-6">
-          <button
-            onClick={handleBack}
-            className="inline-flex items-center text-[rgb(24,62,105)] hover:text-[rgb(18,46,79)] dark:text-blue-400 dark:hover:text-blue-300"
-          >
-            <ArrowLeftIcon className="h-4 w-4 mr-1" />
-            {t('backToHelp') || 'Back to Help Center'}
-          </button>
+      <button 
+        onClick={handleBack}
+        className="flex items-center text-blue-600 hover:text-blue-800 transition-colors mb-6"
+      >
+        <ArrowLeftIcon className="h-5 w-5 mr-2" />
+        {t('back')}
+      </button>
+      
+      {isLoading ? (
+        <div className="animate-pulse">
+          <div className="h-10 bg-gray-200 rounded-md w-3/4 mb-4"></div>
+          <div className="h-4 bg-gray-200 rounded-md w-1/2 mb-2"></div>
+          <div className="h-32 bg-gray-200 rounded-md w-full mt-6"></div>
         </div>
-
-        {isLoading ? (
-          <div className="flex justify-center items-center py-12">
-            <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-[rgb(24,62,105)]"></div>
-          </div>
-        ) : article ? (
+      ) : article ? (
+        <Suspense fallback={<div className="animate-pulse">Loading article content...</div>}>
           <HelpArticle 
-            article={article}
-            onBack={handleBack}
+            article={article} 
+            onBack={handleBack} 
             onHelpfulVote={handleHelpfulVote}
           />
-        ) : (
-          <div className="text-center py-12">
-            <p className="text-gray-500 dark:text-gray-400">
-              {t('articleNotFound') || 'Article not found'}
-            </p>
-          </div>
-        )}
-      </div>
+        </Suspense>
+      ) : (
+        <div className="text-center py-12">
+          <h2 className="text-2xl font-semibold text-gray-800 mb-4">{t('article_not_found') || 'Article not found'}</h2>
+          <p className="text-gray-600 mb-6">{t('article_not_found_desc') || 'The help article you are looking for could not be found.'}</p>
+          <button 
+            onClick={handleBack}
+            className="px-6 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors"
+          >
+            {t('back_to_help_center') || 'Back to Help Center'}
+          </button>
+        </div>
+      )}
     </div>
   );
 }
