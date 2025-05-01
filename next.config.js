@@ -1,26 +1,35 @@
 /** @type {import('next').NextConfig} */
 
-// Detect if we're in a CI environment
+// Detect environments
 const isCI = process.env.CI === 'true' || process.env.VERCEL === '1';
+const isBuild = process.env.npm_lifecycle_event === 'build';
 
+// Enhanced configuration for BuildTrack Pro Phase 1
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
-  // Set production build to be more lenient for CI environments
+  // Always be lenient with errors during builds
   typescript: {
-    // Don't fail the build on type errors
     ignoreBuildErrors: true,
   },
   eslint: {
-    // Don't fail the build on lint errors
     ignoreDuringBuilds: true,
   },
-  // Add more compiler options for CI builds
+  // Optimize for production builds
   compiler: {
-    // Eliminate React server components errors during build
+    // Remove console logs in production, keep errors
     removeConsole: isCI ? {
       exclude: ['error'],
     } : false,
+  },
+  // Make module resolution more lenient for builds
+  webpack: (config, { isServer }) => {
+    // Add fallback for missing modules during build
+    config.resolve.fallback = {
+      ...config.resolve.fallback,
+    };
+    
+    return config;
   },
   images: {
     domains: ['images.unsplash.com'],

@@ -1,0 +1,82 @@
+# BuildTrack Pro: Phase 2 - Core Operations
+
+## Overview
+Phase 2 builds on the foundation by adding critical operational modules for materials, documents, financials, floorplans, and mobile features. These enable core construction project execution and field operations, forming a robust operational system.
+
+## Dependencies
+- Phase 1: Authentication (user access), Project Management (project/task context), Dashboard (UI framework).
+
+## Key Features
+
+### 1. Materials Management
+- **Inventory Tracking**:
+  - Material list with customizable columns and status indicators.
+  - Inventory valuation (FIFO, average cost) and low stock alerts.
+- **Procurement**:
+  - Purchase order creation with vendor selection.
+  - Delivery tracking and receiving interface.
+- **Mobile Management**:
+  - QR/barcode scanning for inventory updates.
+  - Field usage logging and delivery verification with photo capture.
+
+### 2. Document Management
+- **Document Library**:
+  - Organized by categories with folder visualization.
+  - Search with content indexing and recent file access.
+- **Upload & Versioning**:
+  - Drag-and-drop upload with batch metadata.
+  - Version control with side-by-side comparison.
+- **Viewing & Markup**:
+  - Universal viewer (PDF, images, CAD) with zoom/pan.
+  - Basic markup tools (lines, text, stamps).
+- **Photo Documentation**:
+  - Photo grid with geotagging and album organization.
+  - In-app camera with project/task association.
+
+### 3. Financial Management
+- **Budget Dashboard**:
+  - Summary cards (total budget, spent, remaining).
+  - Variance analysis and cash flow projection.
+- **Expense Management**:
+  - Manual expense entry with receipt image upload.
+  - Approval workflow with multi-level checks.
+- **Invoicing**:
+  - Invoice creation wizard with line items and tax support.
+  - Status tracking (Draft, Sent, Paid).
+- **Reports**:
+  - Budget vs. actual and expense category reports.
+
+### 4. Floorplan & Spatial Management
+- **Floorplan Viewer**:
+  - Interactive canvas with zoom/pan and layer toggling.
+  - Zone creation with polygon tools.
+- **Hotspot Annotations**:
+  - Hotspot placement linked to tasks/materials.
+  - Clickable details with photo carousel.
+- **Progress Visualization**:
+  - Color-coded zones showing completion percentage.
+  - Timeline slider for progress tracking.
+
+### 5. Mobile Features
+- **Mobile Dashboard**:
+  - Task-focused home screen with project cards.
+  - Offline status indicator and sync status.
+- **Field Data Capture**:
+  - Photo capture with annotations and geotagging.
+  - Form-based data collection with offline support.
+- **Offline Capabilities**:
+  - Task updates and photo capture in offline mode.
+  - Background sync with conflict resolution.
+
+## Development Notes
+- **Backend**: Extend data models for materials, documents, financials, and floorplans. Implement APIs for mobile sync.
+- **Frontend**: Enhance dashboard with material and financial widgets. Build mobile app (iOS/Android) with offline capabilities.
+- **Database**: Add tables for inventory, documents, budgets, and spatial data, ensuring referential integrity with projects.
+- **Testing**: Validate material tracking, document versioning, expense workflows, and offline mobile functionality.
+
+## Original Sections Reference
+- Section 4: Materials Management Module
+- Section 5: Document & File Management
+- Section 6: Financial Management Module
+- Section 7: Floorplan & Spatial Management
+- Section 10: Mobile & Field Features (core features)
