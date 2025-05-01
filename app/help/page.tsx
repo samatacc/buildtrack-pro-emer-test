@@ -4,10 +4,14 @@ import React, { Suspense, useState, useEffect } from 'react';
 import { useTranslations } from '@/app/hooks/useTranslations';
 import dynamic from 'next/dynamic';
 
+// Check if we should disable SSR in CI environment
+const disableSsrInCi = process.env.NEXT_PUBLIC_DISABLE_SSR_IN_CI === 'true';
+const isCiBuild = process.env.NEXT_PUBLIC_CI_BUILD === 'true';
+
 // Dynamically import the HelpCenter component with loading fallback
 const HelpCenter = dynamic(() => import('@/app/components/help/HelpCenter'), {
   loading: () => <LoadingFallback />,
-  ssr: false // Disable SSR for this component to avoid build issues
+  ssr: false // Consistently disable SSR for help components to avoid build issues
 });
 
 // Loading fallback component
