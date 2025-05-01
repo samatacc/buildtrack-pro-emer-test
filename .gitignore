@@ -27,7 +27,7 @@ yarn-error.log*
 .env
 .env.development
 .env.test
-.env.production
+# .env.production - Keep this file in version control for CI/CD builds
 
 # vercel
 .vercel
