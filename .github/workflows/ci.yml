@@ -35,8 +35,17 @@ jobs:
     - name: Run tests
       run: npm run test || true
 
+    - name: Setup CI environment
+      run: |
+        cp .env.ci .env.production
+        echo "Using CI-specific environment configuration"
+        
     - name: Build
-      run: npm run build
+      run: |
+        export SKIP_SUPABASE_INIT_ON_BUILD=true
+        export NEXT_PUBLIC_DISABLE_SSR_IN_CI=true
+        export NEXT_PUBLIC_CI_BUILD=true
+        npm run build
 
   deploy-preview:
     needs: build-and-test
@@ -49,9 +58,18 @@ jobs:
     steps:
     - uses: actions/checkout@v3
 
+    - name: Setup CI environment for preview
+      run: |
+        cp .env.ci .env.production
+        echo "Using CI-specific environment configuration for preview deployment"
+        
     - name: Deploy to Vercel (Preview)
       id: deploy-preview
       uses: amondnet/vercel-action@v20
+      env:
+        SKIP_SUPABASE_INIT_ON_BUILD: true
+        NEXT_PUBLIC_DISABLE_SSR_IN_CI: true
+        NEXT_PUBLIC_CI_BUILD: true
       with:
         vercel-token: ${{ secrets.VERCEL_TOKEN }}
         vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
@@ -69,9 +87,18 @@ jobs:
     steps:
     - uses: actions/checkout@v3
 
+    - name: Setup CI environment for production
+      run: |
+        cp .env.ci .env.production
+        echo "Using CI-specific environment configuration for production deployment"
+        
     - name: Deploy to Vercel (Production)
       id: deploy-production
       uses: amondnet/vercel-action@v20
+      env:
+        SKIP_SUPABASE_INIT_ON_BUILD: true
+        NEXT_PUBLIC_DISABLE_SSR_IN_CI: true
+        NEXT_PUBLIC_CI_BUILD: true
       with:
         vercel-token: ${{ secrets.VERCEL_TOKEN }}
         vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
