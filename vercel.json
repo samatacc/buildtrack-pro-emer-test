@@ -1,5 +1,5 @@
 {
-  "buildCommand": "next build",
+  "buildCommand": "cp .env.vercel .env.production && next build",
   "devCommand": "next dev",
   "installCommand": "npm install",
   "framework": "nextjs",
