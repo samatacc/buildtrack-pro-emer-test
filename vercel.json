@@ -1,10 +1,9 @@
 {
-  "buildCommand": "cp .env.vercel .env.production && next build",
+  "buildCommand": "next build",
   "devCommand": "next dev",
   "installCommand": "npm install",
   "framework": "nextjs",
   "outputDirectory": ".next",
-  "ignoreCommand": "echo 'Build will continue regardless of warnings or non-fatal errors'",
   "env": {
     "SKIP_SUPABASE_INIT_ON_BUILD": "true",
     "NEXT_PUBLIC_DISABLE_SSR_IN_CI": "true",
